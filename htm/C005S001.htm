@@ -1,5 +1,5 @@
 <html><head><title>[CRISP] 5.1 Creating Fitting classes</title></head>
-<body bgcolor="ffffff">
+<body text="#000000" bgcolor="#ffffff">
 <a name = "I1"></a>
 <h1>5.1 Creating Fitting classes</h1><p>
 <p>
@@ -14,12 +14,14 @@ to normal subgroups and joins of subnormal subgroups.
 returns the Fitting class <var>fitclass</var> defined by the entries of the record
 <var>rec</var>. Note that it is the user's responsibility to ensure that <var>rec</var> really
 defines a Fitting class.
-<var>rec</var> may have components <code>\in</code>, <code>inj</code>, <code>rad</code>, and <code>name</code>. The
+<var>rec</var> may have components <code>\in</code>, <code>inj</code>, <code>rad</code>, <code>char</code>, and <code>name</code>. The
 functions assigned to the components are stored in the attributes
-<code>MemberFunction</code> (see <a href="C002S002.htm">MemberFunction</a>), <code>InjectorFunction</code>,
-<code>RadicalFunction</code>, and <code>Name</code>, of <var>fitclass</var>. The functions bound to <code>inj</code> and
-<code>rad</code> must have one argument, <var>H</var>, and return a <var>fitclass</var>-injector and the
-<var>fitclass</var>-radical of <var>H</var>, respectively. The third example shows how to construct
+<code>MemberFunction</code>, <code>InjectorFunction</code>,
+<code>RadicalFunction</code>, <code>Characteristic</code>, and <code>Name</code>, of <var>fitclass</var>. Please refer
+to <a href="C002S002.htm">MemberFunction</a>,  <a href="C005S004.htm">InjectorFunction</a>, <a href="C005S004.htm">RadicalFunction</a>,
+<a href="C003S004.htm">Characteristic</a>, and <a href="../../../doc/htm/ref/C012S008.htm">Name</a> for the meaning of these attributes.
+<p>
+ The third example below shows how to construct
 the Fitting class <font size="+1"><i>L</i><sub>2</sub>(<font face="helvetica"><i>N</i></font>)</font> (see <a href="biblio.htm#DH92"><cite>DH92</cite></a>, IX, 1.14 and 1.15), where
 <font size="+1"><font face="helvetica"><i>N</i></font></font> is the class of all finite nilpotent groups.
 <p>

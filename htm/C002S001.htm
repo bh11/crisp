@@ -1,5 +1,5 @@
 <html><head><title>[CRISP] 2.1 Creating set theoretical classes</title></head>
-<body bgcolor="ffffff">
+<body text="#000000" bgcolor="#ffffff">
 <a name = "I1"></a>
 <h1>2.1 Creating set theoretical classes</h1><p>
 <p>
@@ -18,11 +18,11 @@ subcategory of the category <code>IsListOrCollection</code>.
 returns a class <var>C</var>. In the first form, <var>rec</var> must be a record having a
 component <code>\in</code> and an optional component <code>name</code>. The values of these
 components, if present, are bound to the attributes <code>MemberFunction</code> and
-<code>Name</code> of the class created. The value bound to <code>\in</code> must be a function
+<code>Name</code>(see <a href="../../../doc/htm/ref/C012S008.htm">Name</a>) of the class created. The value bound to <code>\in</code> must be a function
 <var>func</var> which returns <code>true</code> if a <font face="helvetica,arial">GAP</font> object belongs to <var>C</var>, and <code>false</code>
-otherwise. The second form is equivalent to <code>Class(rec(\in := </code><var>func</var><code>))</code>. It
-is the user's responsibility to ensure that <var>func</var> returns the same result
-for different <font face="helvetica,arial">GAP</font> objects representing the same mathematical object (or
+otherwise; cf. <a href="C002S002.htm">MemberFunction</a> below. The second form is equivalent to <code>Class(rec(\in
+:= </code><var>func</var><code>))</code>. It is the user's responsibility to ensure that <var>func</var> returns the same
+result for different <font face="helvetica,arial">GAP</font> objects representing the same mathematical object (or
 element, in the <font face="helvetica,arial">GAP</font> sense; see <a href="../../../doc/htm/ref/C012S000.htm">objects and elements</a> in the <font face="helvetica,arial">GAP</font>
 reference manual).
 <p>

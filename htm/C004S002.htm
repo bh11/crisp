@@ -1,5 +1,5 @@
 <html><head><title>[CRISP] 4.2 Attributes and operations for Schunck classes</title></head>
-<body bgcolor="ffffff">
+<body text="#000000" bgcolor="#ffffff">
 <a name = "I4"></a>
 <h1>4.2 Attributes and operations for Schunck classes</h1><p>
 <p>
@@ -90,9 +90,11 @@ belongs to the boundary of <var>grpclass</var>. <code>Boundary</code> and/or <co
 <a name = "I14"></a>
 <li><code>ProjectorFunction(</code><var>grpclass</var><code>) A</code>
 <p>
-If bound, <code>ProjectorFunction</code> stores a function taking a group <font size="+1"><i>G</i></font> as the
-only argument, and returns a <var>grpclass</var>-projector of <font size="+1"><i>G</i></font>.  Note that <code>Projector</code>
-(see <a href="C004S002.htm">Projector</a>),
+If bound, <code>ProjectorFunction</code> stores a function <var>func</var> supplied by the
+user as part of the definition of <var>grpclass</var>. <var>func</var> must be a function
+taking a group
+<font size="+1"><i>G</i></font> as the only argument, and returns a <var>grpclass</var>-projector of <font size="+1"><i>G</i></font>.  Note that
+<code>Projector</code> (see <a href="C004S002.htm">Projector</a>),
 rather than <code>ProjectorFunction</code>, should be used by the user to compute
 <var>grpclass</var>-projectors.
 <p>

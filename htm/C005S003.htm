@@ -1,5 +1,5 @@
 <html><head><title>[CRISP] 5.3 Creating Fitting sets</title></head>
-<body bgcolor="ffffff">
+<body text="#000000" bgcolor="#ffffff">
 <a name = "I11"></a>
 <h1>5.3 Creating Fitting sets</h1><p>
 <p>
@@ -47,10 +47,9 @@ small groups.
 <p>
 <var>rec</var> may have components <code>\in</code>, <code>inj</code>, <code>rad</code>, and <code>name</code>. The
 functions assigned to the components are stored in the attributes
-<code>MemberFunction</code> (see <a href="C002S002.htm">MemberFunction</a>), <code>InjectorFunction</code>, 
-<code>RadicalFunction</code>, and <code>Name</code>, of <var>fitset</var>. The latter functions must have one
-argument, <var>H</var>, which will be a subgroup of <var>G</var>, and return a
-<var>fitset</var>-injector and the <var>fitset</var>-radical of <var>H</var>, respectively. 
+<code>MemberFunction</code>, <code>InjectorFunction</code>, 
+<code>RadicalFunction</code>, and <code>Name</code>, of <var>fitset</var>. Please see <a href="C002S002.htm">MemberFunction</a>,
+<a href="C005S004.htm">InjectorFunction</a> and <a href="C005S004.htm">RadicalFunction</a> for the meaning of these arguments.
 <p>
 Note that at present, every Fitting set has to be a class (see <a href="C002S000.htm">Set theoretical classes</a>). The second example below shows how to define a Fitting set from 
 a list of subgroups.
@@ -116,8 +115,8 @@ Group([ (1,4)(2,3), (1,2)(3,4), (2,3,4) ])
 <p>
 Let <var>fitset1</var> and <var>fitset2</var> be Fitting sets of the groups <var>G1</var> and <var>G2</var>. 
 Then the intersection of <var>fitset1</var> and <var>fitset2</var> will be a Fitting set of the 
-intersection of <var>G1</var> and <var>G2</var>, provided that <var>G1</var> and <var>G2</var> lie in some 
-common supergroup.
+intersection of <var>G1</var> and <var>G2</var>. You will run into an error if
+<font face="helvetica,arial">GAP</font> cannot compute the intersection of <var>G1</var> and <var>G2</var>.
 <p>
 <pre>
 gap&gt; F1 := FittingSet (SymmetricGroup (3),
