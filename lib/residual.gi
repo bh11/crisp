@@ -220,6 +220,30 @@ RedispatchOnCondition (OneInvariantSubgroupMinWrtQProperty, true,
    
 #############################################################################
 ##
+#M  AllNormalSubgroupsWithQProperty
+##
+InstallMethod (AllNormalSubgroupsWithQProperty, 
+	"try AllInvariantSubgroupsWithQProperty", true,
+	[IsGroup, IsFunction, IsFunction, IsObject], 0,
+	function (G, pretest, test, data)
+		return AllInvariantSubgroupsWithQProperty (G, G, pretest, test, data);
+	end);
+	
+	
+#############################################################################
+##
+#M  OneNormalSubgroupMinWrtQProperty
+##
+InstallMethod (OneNormalSubgroupMinWrtQProperty, 
+	"try OneInvariantSubgroupMinWrtQProperty", true,
+	[IsGroup, IsFunction, IsFunction, IsObject], 0,
+	function (G, pretest, test, data)
+		return OneInvariantSubgroupMinWrtQProperty (G, G, pretest, test, data);
+	end);
+	
+	
+#############################################################################
+##
 #M  ResidualOp (<grp>, <class>)
 ##
 InstallMethod (ResidualOp, "for group and formation with ResidualFunction", true, 

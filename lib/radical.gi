@@ -187,6 +187,30 @@ RedispatchOnCondition (OneInvariantSubgroupMaxWrtNProperty, true,
    
 #############################################################################
 ##
+#M  AllNormalSubgroupsWithNProperty
+##
+InstallMethod (AllNormalSubgroupsWithNProperty, 
+	"try AllInvariantSubgroupsWithNProperty", true,
+	[IsGroup, IsFunction, IsFunction, IsObject], 0,
+	function (G, pretest, test, data)
+		return AllInvariantSubgroupsWithNProperty (G, G, pretest, test, data);
+	end);
+	
+	
+#############################################################################
+##
+#M  OneNormalSubgroupMaxWrtNProperty
+##
+InstallMethod (OneNormalSubgroupMaxWrtNProperty, 
+	"try OneInvariantSubgroupMaxWrtNProperty", true,
+	[IsGroup, IsFunction, IsFunction, IsObject], 0,
+	function (G, pretest, test, data)
+		return OneInvariantSubgroupMaxWrtNProperty (G, G, pretest, test, data);
+	end);
+	
+	
+#############################################################################
+##
 #M  RadicalOp
 ##
 InstallMethod (RadicalOp, "if only in is known", true, 
