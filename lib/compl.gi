@@ -156,8 +156,24 @@ InstallGlobalFunction ("COMPLEMENT_SOLUTION_FUNCTION",
 
 #############################################################################
 ##
+#F  EnumeratorOfTriangle (<k>)
+##  
+##  enumerates pairs [1,1], [2,1], [2,2], [3,1], [3,2], [3,3], ...
+##
+EnumeratorOfTriangle := function (k)
+
+	local i, j;
+	
+	i := QuoInt (1 + RootInt (8*k-1), 2);
+	j := k - i* (i-1)/2;
+	return [i,j];
+end;
+
+
+#############################################################################
+##
 #F  ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction (
-##      <aut>, <pcgs>, <gpcgs>, <npcgs>, <kpcgs>, <all>)
+##      <act>, <pcgs>, <gpcgs>, <npcgs>, <kpcgs>, <all>)
 ##
 InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
    function (act, pcgs, gpcgs, npcgs, kpcgs, all)
@@ -173,6 +189,11 @@ InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
                       # of factor grp. represented by npcgs
          sys,         # system of linear equations
          row,         # row to be added to sys
+         nreq,        # number of equations to be solved
+         perm,        # random permutation of the equations
+         count,       # loop variable
+         eq,          # number of equation to add
+         eqind,       # pair of indices specifying equation
          bas,         # basis of solution space of linear system
          i, j, k, l,  # loop variables
          r,           # length of act
@@ -184,11 +205,12 @@ InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
          t;           # for measuring the running time
       
       t := Runtime();
-            
-      r := Length (act);
       
-      s := Length (gpcgs);
-            
+      if IsGroup (act) then
+         act := SmallGeneratingSet (act);
+      fi;
+      r := Length (act);
+      s := Length (gpcgs);   
       n := Length (npcgs);
       
       Info (InfoComplement, 1, "complementing (bot =", n, ", top = ", s,
@@ -240,64 +262,20 @@ InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
       field := GF(RelativeOrderOfPcElement (npcgs, npcgs[1]));
       sys:= LinearSystem (n*s, 1, field, n*s > 20, false);
          
-      Info (InfoComplement, 2, "computing action on N");
+      Info (InfoComplement, 2, "computing linear action on N");
       
       e := [];
+      nreq := s*(s+1)/2 + r*s;
+      perm := Random (SymmetricGroup (nreq));
       
-      for i in [1..s] do
-   
-         p := RelativeOrderOfPcElement (gpcgs, gpcgs[i]);
-         # evaluate power relation
-         # express gpcgs[i]^p mod kpcgs as a product of elements in gpcgs and npcgs
-         y := gpcgs[i]^p;
-         exp := ExponentsOfPcElement (gpcgs, y);
-         y := LeftQuotient (PcElementByExponents (gpcgs, exp), y);
+      for count in [1..nreq] do
+         eq := count^perm;
          
-         Assert (1, y in Group (NumeratorOfModuloPcgs(npcgs)), 
-            "gpcgs[i]^p/... must be in N");
-            
-         exp[i] := - p;
-         gamma := exp * One (field);
-         c := ExponentsOfPcElement (npcgs, y) * One(field);
-         
-         # translate into a linear equation
-         for k in [1..n] do
-            row := ShallowCopy (sys.nullrow);
-            row{[(k-1)*s+1..k*s]} := gamma;
-            if not AddEquation (sys, row, [c[k]]) then
-               Info (InfoComplement, 2, "no solution");
-               Info (InfoComplement, 3, "time = ", Runtime() - t);
-               return complements;
-            fi;
-         od;
-         
-         for j in [1..i-1] do
-            # evaluate conjugation relation
-            # express gpcgs[i]^gpcgs[j] mod kpcgs as a product of elements 
-            # in gpcgs and npcgs
-            y := gpcgs[i]^gpcgs[j]; 
-            exp := ExponentsOfPcElement (gpcgs, y);
-            y := LeftQuotient (PcElementByExponents (gpcgs, exp), y);
-            Assert (1, y in Group (Concatenation (npcgs, kpcgs)), 
-               "Comm (gpcgs[i], gpcgs[j])/... must be in N");
-            exp[i] := exp[i]-1;
-            gamma := exp * One (field);
-            c := ExponentsOfPcElement (npcgs, y) * One(field);
-
-            # translate into an equation
-            for k in [1..n] do
-               row := ShallowCopy (sys.nullrow);
-               row{[(k-1)*s+1..k*s]} := gamma;
-               if not AddEquation (sys, row, [c[k]]) then
-                  Info (InfoComplement, 2, "no solution");
-                  Info (InfoComplement, 3, "time = ", Runtime() - t);
-                  return complements;
-               fi;
-            od;
-         od;
-            
-         # add equations to ensure invariance of the complement under <act>
-         for j in [1..r] do
+         if eq <= r * s then
+         	i := QuoInt (eq-1, r) + 1;
+         	j := eq - r * (i - 1);
+         	
+            # add equations to ensure invariance of the complement under <act>
             if not IsBound (e[j]) then
                e[j] := [];
                for l in [1..n] do
@@ -333,7 +311,60 @@ InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
                   return complements;
                fi;
             od;
-         od;
+         else # power or conjugate relations of factor group
+            eqind := EnumeratorOfTriangle (eq - r*s);
+            i := eqind[1];
+            j := eqind[2];
+            if i = j then
+               # evaluate power relation
+               # express gpcgs[i]^p mod kpcgs as a product of elements in gpcgs and npcgs
+               p := RelativeOrderOfPcElement (gpcgs, gpcgs[i]);
+               y := gpcgs[i]^p;
+               exp := ExponentsOfPcElement (gpcgs, y);
+               y := LeftQuotient (PcElementByExponents (gpcgs, exp), y);
+        
+               Assert (1, y in Group (NumeratorOfModuloPcgs(npcgs)), 
+                  "gpcgs[i]^p/... must be in N");
+	           
+	           exp[i] := - p;
+	           gamma := exp * One (field);
+	           c := ExponentsOfPcElement (npcgs, y) * One(field);
+	     
+	           # translate into a linear equation
+               for k in [1..n] do
+                  row := ShallowCopy (sys.nullrow);
+                  row{[(k-1)*s+1..k*s]} := gamma;
+                  if not AddEquation (sys, row, [c[k]]) then
+                     Info (InfoComplement, 2, "no solution");
+                     Info (InfoComplement, 3, "time = ", Runtime() - t);
+                     return complements;
+                  fi;
+               od;
+            else
+               # evaluate conjugation relation
+               # express gpcgs[i]^gpcgs[j] mod kpcgs as a product of elements 
+               # in gpcgs and npcgs
+               y := gpcgs[i]^gpcgs[j]; 
+               exp := ExponentsOfPcElement (gpcgs, y);
+               y := LeftQuotient (PcElementByExponents (gpcgs, exp), y);
+               Assert (1, y in Group (Concatenation (npcgs, kpcgs)), 
+                  "Comm (gpcgs[i], gpcgs[j])/... must be in N");
+               exp[i] := exp[i]-1;
+               gamma := exp * One (field);
+               c := ExponentsOfPcElement (npcgs, y) * One(field);
+
+               # translate into an equation
+               for k in [1..n] do
+                  row := ShallowCopy (sys.nullrow);
+                  row{[(k-1)*s+1..k*s]} := gamma;
+                  if not AddEquation (sys, row, [c[k]]) then
+                     Info (InfoComplement, 2, "no solution");
+                     Info (InfoComplement, 3, "time = ", Runtime() - t);
+                     return complements;
+                  fi;
+               od;
+            fi;
+         fi; 
       od;
       
       # now compute a solution of the system
@@ -363,7 +394,7 @@ InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
 #############################################################################
 ##
 #F  PcgsComplementsOfCentralModuloPcgsUnderActionNC (
-##      <aut>, <pcgsnum>, <pcgs>, <mpcgs>, <pcgsdenum>, <all>)
+##      <act>, <pcgsnum>, <pcgs>, <mpcgs>, <pcgsdenum>, <all>)
 ##
 InstallGlobalFunction (PcgsComplementsOfCentralModuloPcgsUnderActionNC,
    function (act, pcgs, gpcgs, npcgs, kpcgs, all)
@@ -377,10 +408,10 @@ InstallGlobalFunction (PcgsComplementsOfCentralModuloPcgsUnderActionNC,
    
 #############################################################################
 ##
-#F  PcgsNormalComplementsOfElAbModuloPcgsUnderAction (
-##      <aut>, <pcgsnum>, <pcgs>, <mpcgs>, <pcgsdenum>, <all>)
+#F  PcgsInvariantComplementsOfElAbModuloPcgsUnderAction (
+##      <act>, <pcgsnum>, <pcgs>, <mpcgs>, <pcgsdenum>, <all>)
 ##
-InstallGlobalFunction ("PcgsNormalComplementsOfElAbModuloPcgsUnderAction",
+InstallGlobalFunction ("PcgsInvariantComplementsOfElAbModuloPcgsUnderAction",
    function (act, pcgs, gpcgs, npcgs, kpcgs, all)
 
       if CentralizesLayer (gpcgs, npcgs) then
@@ -394,17 +425,18 @@ InstallGlobalFunction ("PcgsNormalComplementsOfElAbModuloPcgsUnderAction",
 
 #############################################################################
 ##
-#M  ComplementsOfCentralSectionUnderActionNC (<aut>,<G>,<N>,<L>,<all>)
+#M  ComplementsOfCentralSectionUnderActionNC (<act>,<G>,<N>,<L>,<all>)
 ##
-##  version where <aut> is a list of maps G -> G (which are supposed to
+##  version where <act> is a list of maps G -> G (which are supposed to
 ##  induce automorphisms on G/L)
 ##
 InstallMethod (ComplementsOfCentralSectionUnderActionNC,
-    "for section and list of objects acting via ^",
+    "for section of solvable group",
    function (famact, famG, famN, famL, famall)
       return IsIdenticalObj (famG, famN) and IsIdenticalObj (famN, famL) ;
    end,
-   [IsList, IsGroup, IsGroup, IsGroup, IsBool], 0,
+   [IsListOrCollection, IsSolvableGroup and IsFinite, IsSolvableGroup and IsFinite, 
+      IsSolvableGroup and IsFinite, IsBool], 0,
    function (act, G, N, L, all)
 
       local cpcgs, complements, pcgs, pcgsL;
@@ -421,7 +453,7 @@ InstallMethod (ComplementsOfCentralSectionUnderActionNC,
             and NormalIntersection (C, N) = L 
             and Index (G, C) * Index (G, N) = Index (G, L)
             and ForAll (act, a -> Image (a, C) = C)),
-         Error ("wrong normal complement(s)"));
+         Error ("wrong invariant complement(s)"));
       if all then
          return complements;
       else
@@ -431,22 +463,6 @@ InstallMethod (ComplementsOfCentralSectionUnderActionNC,
             return fail;
          fi;
       fi;
-   end);
-
-
-#############################################################################
-##
-#M  ComplementsOfCentralSectionUnderActionNC (<act>, <G>, <N>, <L>, <all>)
-##
-InstallMethod (ComplementsOfCentralSectionUnderActionNC,
-   "group acts on section",
-   function (famact, famG, famN, famL, famall)
-      return IsIdenticalObj (famG, famN) and IsIdenticalObj (famN, famL);
-   end,
-   [IsGroup, IsGroup, IsGroup, IsGroup, IsBool], 0,
-   function (act, G, N, L, all)
-      return ComplementsOfCentralSectionUnderActionNC (
-         GeneratorsOfGroup (act), G, N, L, all);
    end);
 
 
@@ -469,17 +485,18 @@ InstallGlobalFunction ("ComplementsOfCentralSectionUnderAction",
    
 #############################################################################
 ##
-#M  NormalComplementsOfElAbSectionUnderAction (<aut>,<G>,<N>,<L>,<all>)
+#M  InvariantComplementsOfElAbSectionUnderAction (<act>,<G>,<N>,<L>,<all>)
 ##
-##  version where <aut> is a list of maps G -> G (which are supposed to
+##  version where <act> is a list of maps G -> G (which are supposed to
 ##  induce automorphisms on G/L)
 ##
-InstallMethod (NormalComplementsOfElAbSectionUnderAction,
-    "for section and list of automorphisms",
+InstallMethod (InvariantComplementsOfElAbSectionUnderAction,
+    "for section of finite solvable group",
    function (famact, famG, famN, famL, famall)
       return IsIdenticalObj (famG, famN) and IsIdenticalObj (famN, famL);
    end,
-   [IsList, IsGroup, IsGroup, IsGroup, IsBool], 0,
+   [IsListOrCollection, IsSolvableGroup and IsFinite, IsSolvableGroup and IsFinite, 
+      IsSolvableGroup and IsFinite, IsBool], 0,
    function (act, G, N, L, all)
 
       local cpcgs, complements, pcgs, pcgsL;
@@ -487,7 +504,7 @@ InstallMethod (NormalComplementsOfElAbSectionUnderAction,
       pcgs := ParentPcgs (Pcgs(G));
       pcgsL := InducedPcgs (pcgs, L);
       
-      cpcgs := PcgsNormalComplementsOfElAbModuloPcgsUnderAction (
+      cpcgs := PcgsInvariantComplementsOfElAbModuloPcgsUnderAction (
          act, pcgs, ModuloPcgs (G, N), ModuloPcgs (N, L), pcgsL, all);
       
       complements := List (cpcgs, c -> SubgroupByPcgs (G, c));
@@ -518,26 +535,10 @@ InstallMethod (NormalComplementsOfElAbSectionUnderAction,
 
 #############################################################################
 ##
-#M  NormalComplementsOfElAbSectionUnderAction (<act>, <G>, <N>, <L>, <all>)
-##
-InstallMethod (NormalComplementsOfElAbSectionUnderAction,
-   "group acts on section",
-   function (famact, famG, famN, famL, famall)
-      return IsIdenticalObj (famG, famN) and IsIdenticalObj (famN, famL);
-   end,
-   [IsGroup, IsGroup, IsGroup, IsGroup, IsBool], 0,
-   function (act, G, N, L, all)
-      return NormalComplementsOfElAbSectionUnderAction (
-         GeneratorsOfGroup (act), G, N, L, all);
-   end);
-
-
-#############################################################################
-##
-#F  ComplementsMaximalUnderAction (<G>, <ser>, <i>, <j>, <k>, <all>) 
+#F  ComplementsMaximalUnderAction (<act>, <ser>, <i>, <j>, <k>, <all>) 
 ## 
 InstallGlobalFunction ("ComplementsMaximalUnderAction",
-   function (G, ser, i, j, k, all)
+   function (act, ser, i, j, k, all)
 
       local p, complements, newser, l, pcgs;
       
@@ -552,7 +553,7 @@ InstallGlobalFunction ("ComplementsMaximalUnderAction",
       od;
       
       complements := PcgsComplementsMaximalUnderAction (
-         List (SmallGeneratingSet (G), x -> InnerAutomorphismNC (G,x)), 
+         act, 
          pcgs, newser[1], newser, j-i+1, k-i+1, all);
       
       if all then
@@ -567,7 +568,7 @@ InstallGlobalFunction ("ComplementsMaximalUnderAction",
       
 ###################################################################################
 ##
-#F  PcgsComplementsMaximalUnderAction (<G>, <U>, <ser>,  <j>, <k>, <all>) 
+#F  PcgsComplementsMaximalUnderAction (<act>, <U>, <ser>,  <j>, <k>, <all>) 
 ##
 InstallGlobalFunction ("PcgsComplementsMaximalUnderAction",
    function (act, pcgs, upcgs, ser, j, k, all)

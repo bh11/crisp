@@ -513,7 +513,14 @@ InstallGlobalFunction ("PROJECTOR_FROM_BOUNDARY",
        id,         # a suitable identity matrix
        bool;       # result returned by the boundary function, or false if no complement
            
-      
+   if Length (pcgs) = 0 then
+      if inonly then
+         return true;
+      else
+         return pcgs;
+      fi;
+   fi;
+   
    inds := IndicesNormalSteps (pcgs);
    if inds = fail then
       Error ("pcgs must refine an elementary abelian series");
@@ -575,7 +582,7 @@ InstallGlobalFunction ("PROJECTOR_FROM_BOUNDARY",
             
       p := RelativeOrderOfPcElement (ppcgs, mpcgs[1]); # exp. of mpcgs
       
-      ser := PcgsChiefSeriesElAbModuloPcgsUnderAction (
+      ser := PcgsCompositionSeriesElAbModuloPcgsUnderAction (
          upcgs{[1,2..userinds[Length(userinds)]-1]}, mpcgs);
          
       Info(InfoProjector, 2, Length (ser)-1, " composition factors");

@@ -376,20 +376,19 @@ InstallMethod (SocleComplement, "for primitive solvable group", true,
 
 ###################################################################################
 ##
-#F  ChiefSeriesElAbFactorUnderAction (<grp>, <M>, <N>)
+#F  CompositionSeriesElAbFactorUnderAction (<act>, <M>, <N>)
 ##
-##  computes a <grp>-chief series of the elementary abelian normal section M/N,
+##  computes a <act>-composition series of the elementary abelian normal section M/N,
 ##  i.e. a list M = N_0 > N_1 > ... > N_r = N of subgroups of <grp> such that 
-##  each N_i is normal in M and there is no <grp>-invariant subgroup between 
-##  N_i and N_{i+1}.
+##  there is no <grp>-invariant subgroup between N_i and N_{i+1}.
 ##
-InstallGlobalFunction ("ChiefSeriesElAbFactorUnderAction",
+InstallGlobalFunction ("CompositionSeriesElAbFactorUnderAction",
    function (act, M, N)
 
       local m;
       
       m := Pcgs (M) mod InducedPcgs (Pcgs (M), N);
-      return List (PcgsChiefSeriesElAbModuloPcgsUnderAction (act, m),
+      return List (PcgsCompositionSeriesElAbModuloPcgsUnderAction (act, m),
          s -> SubgroupByPcgs (M, s));
    end);
    
@@ -397,15 +396,14 @@ InstallGlobalFunction ("ChiefSeriesElAbFactorUnderAction",
       
 ###################################################################################
 ##
-#F  PcgsChiefSeriesElAbModuloPcgsUnderAction (<grp>, <sec>)
+#F  PcgsCompositionSeriesElAbModuloPcgsUnderAction (<act>, <sec>)
 ##
-##  computes a series of pcgs representing a <grp>-chief series of the elementary 
-##  abelian normal section M/N,
-##  i.e. a list M = N_0 > N_1 > ... > N_r = N of subgroups of <grp> such that 
-##  each N_i is normal in M and there is no <grp>-invariant subgroup between 
-##  N_i and N_{i+1}.
+##  computes a series of pcgs representing a <act>-composition series of the elementary 
+##  abelian normal section M/N, represented by the modulo pcgs <sec>.
+## i.e. a list M = N_0 > N_1 > ... > N_r = N of subgroups of N such that 
+##  there is no <grp>-invariant subgroup between N_i and N_{i+1}.
 ##
-InstallGlobalFunction ("PcgsChiefSeriesElAbModuloPcgsUnderAction",
+InstallGlobalFunction ("PcgsCompositionSeriesElAbModuloPcgsUnderAction",
    function (act, pcgs)
 
       local ppcgs, bas, bases, mats, p, one, new, ser, b, v, gens, num, 
@@ -422,19 +420,18 @@ InstallGlobalFunction ("PcgsChiefSeriesElAbModuloPcgsUnderAction",
       ppcgs := ParentPcgs (num);
       p := RelativeOrderOfPcElement (pcgs, pcgs[1]);
          
+      if IsGroup (act) then
+         act := SmallGeneratingSet (act);
+      fi;
+      
       if Length (act) = 0 then
          bases := IdentityMat (Length (pcgs), GF(p));
          bas := List ([1..Length (bases)], i -> bases{[i..Length (bases)]});   
          Add (bas, []);
       else
-         if ForAll (act, IsGeneralMapping) then
-         	one := Z(p)^0;
-            mats := List (act, a ->
-			   List (pcgs, x -> ExponentsOfPcElement (pcgs, Image (a,x))*one));
-         else
-         	mats := LinearActionLayer (act, pcgs);
-         fi;
-         
+         one := One(GF(p));
+         mats := List (act, a ->
+			   List (pcgs, x -> ExponentsOfPcElement (pcgs, x^a)*one));         
          bas := [];
       
          t0 := Runtime();
@@ -504,7 +501,7 @@ InstallMethod (ChiefSeries,
       ser := [];
       for i in [1..Length (elabser)-1] do
          Append (ser, 
-            PcgsChiefSeriesElAbModuloPcgsUnderAction (
+            PcgsCompositionSeriesElAbModuloPcgsUnderAction (
                pcgs{[1..inds[i]-1]}, elabser[i] mod elabser[i+1]));
          Unbind (ser[Length (ser)]);
       od;
@@ -517,21 +514,19 @@ InstallMethod (ChiefSeries,
 
 ###################################################################################
 ##
-#M  CompositionSeriesUnderAction (<grp>, <act>)
+#M  CompositionSeriesUnderAction (<act>, <grp>)
 ##
-InstallMethod (CompositionSeriesUnderAction, "for solvable group and list of homomorphisms", 
-   function (famG, famact)
-       return HasFamilySource (ElementsFamily (famact)) and
-           FamilySource(ElementsFamily (famact)) = ElementsFamily (famG);
-   end,
-   [IsGroup and IsSolvableGroup, IsHomogeneousList], 0,
-   function (G, act)
+InstallMethod (CompositionSeriesUnderAction, "for solvable group", 
+   true,
+   [IsListOrCollection, IsGroup and IsSolvableGroup], 0,
+   function (act, G)
    
       local gens, pcgs, inds, elabser, i, ser;
       
       if IsGroup (act) then
          act := GeneratorsOfGroup (act);
       fi;
+      
       if not ForAll (act, IsGeneralMapping) then
          act := List (act, a -> ConjugatorAutomorphism (G, a));
       fi;
@@ -547,7 +542,7 @@ InstallMethod (CompositionSeriesUnderAction, "for solvable group and list of hom
       ser := [];
       for i in [1..Length (elabser)-1] do
          Append (ser, 
-            PcgsChiefSeriesElAbModuloPcgsUnderAction (
+            PcgsCompositionSeriesElAbModuloPcgsUnderAction (
                act, elabser[i] mod elabser[i+1]));
          Unbind (ser[Length (ser)]);
       od;
@@ -560,44 +555,12 @@ InstallMethod (CompositionSeriesUnderAction, "for solvable group and list of hom
 
 ###################################################################################
 ##
-#M  CompositionSeriesUnderAction (<grp>, <act>)
-##
-InstallMethod (CompositionSeriesUnderAction, "for solvable group and group of automorphisms", 
-   function (famG, famact)
-       return HasFamilySource (ElementsFamily (famact)) and
-           FamilySource(ElementsFamily (famact)) = ElementsFamily (famG);
-   end,
-   [IsGroup, IsGroup], 0,
-   function (G, act)
-      return CompositionSeriesUnderAction (G, SmallGeneratingSet (act));
-   end);
-   
-
-###################################################################################
-##
-#M  CompositionSeriesUnderAction (<grp>, <act>)
+#M  CompositionSeriesUnderAction (<act>, <grp>)
 ##
 RedispatchOnCondition (CompositionSeriesUnderAction,    
-   function (famG, famact)
-       return HasFamilySource (ElementsFamily (famact)) and
-           FamilySource(ElementsFamily (famact)) = ElementsFamily (famG);
-   end,
-   [IsGroup, IsGroup], 
-   [IsFinite and IsSolvableGroup], # no conditions on other arguments
-   0);
-
-
-###################################################################################
-##
-#M  CompositionSeriesUnderAction (<grp>, <act>)
-##
-RedispatchOnCondition (CompositionSeriesUnderAction,    
-   function (famG, famact)
-       return HasFamilySource (ElementsFamily (famact)) and
-           FamilySource(ElementsFamily (famact)) = ElementsFamily (famG);
-   end,
-   [IsGroup, IsHomogeneousList], 
-   [IsFinite and IsSolvableGroup], # no conditions on other arguments
+   true,
+   [IsListOrCollection, IsGroup], 
+   [, IsFinite and IsSolvableGroup], # no conditions on first argument
    0);
 
 

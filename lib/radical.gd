@@ -22,7 +22,30 @@ KeyDependentOperation ("Radical", IsGroup, IsClass, ReturnTrue);
 
 #############################################################################
 ##
-#O  OneNormalSubgroupMaxWrtNProperty (<grp>, <pretest>, <test>, <data>)
+#O  OneInvariantSubgroupMaxWrtNPropertyUnderAction
+#O                           (<act>, <grp>, <pretest>, <test>, <data>)
+##
+##  See the manual.
+##
+DeclareOperation ("OneInvariantSubgroupMaxWrtNPropertyUnderAction", 
+   [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject]);
+
+
+#############################################################################
+##
+#O  AllInvariantSubgroupsWithNPropertyUnderAction 
+#O                           (<act>, <grp>, <pretest>, <test>, <data>)
+##
+##  See the manual.
+##
+DeclareOperation ("AllInvariantSubgroupsWithNPropertyUnderAction",
+    [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject]);
+   
+
+#############################################################################
+##
+#O  OneNormalSubgroupMaxWrtNProperty
+#O                           (<act>, <grp>, <pretest>, <test>, <data>)
 ##
 ##  See the manual.
 ##
@@ -32,7 +55,8 @@ DeclareOperation ("OneNormalSubgroupMaxWrtNProperty",
 
 #############################################################################
 ##
-#O  AllNormalSubgroupsWithNProperty (<grp>, <pretest>, <test>, <data>)
+#O  AllNormalSubgroupsWithNProperty
+#O                           (<grp>, <pretest>, <test>, <data>)
 ##
 ##  See the manual.
 ##
@@ -42,17 +66,22 @@ DeclareOperation ("AllNormalSubgroupsWithNProperty",
 
 #############################################################################
 ##
-#F  GInvariantSubgroupsCA (G, ser, avoid, cover, property, max) . . . local
+#F  InvariantSubgroupsCAUnderAction (
+#F                          act, ser, avoid, cover, property, max) . . . local
 ##
-##  if all is true, GInvariantSubgroupsCA computes the G-invariant normal
+##  ser must be a series invariant under act, and act must generate the full 
+##  inner automorphism group on ser[1].
+##  if all is true, InvariantSubgroupsCAUnderAction computes the act-invariant 
 ##  subgroups N of ser[1] such that ser[cover] equals the intersection of N
 ##  and ser[avoid], N contains ser[cover] properly, and property(N) returns 
-##  true. If all is false, GInvariantSubgroupsCA only returns the subgroups N
+##  true. 
+##  If all is false, InvariantSubgroupsCAUnderAction only returns the 
+##  subgroups N
 ##  which are maximal subject to the above conditions. property must be
-##  inherited by G-invariant subgroups, and property(ser[cover])
+##  inherited by act-invariant subgroups, and property(ser[cover])
 ##  is assumed to be true
 ##
-DeclareGlobalFunction ("GInvariantSubgroupsCA");
+DeclareGlobalFunction ("InvariantSubgroupsCAUnderAction");
 
 
 ############################################################################

@@ -76,14 +76,18 @@ InstallGlobalFunction (AddEquation,
                fi;
             elif coeff = sys.one then
                sys.equations[i] := row;
-               sys.solutions[i] := sol;
+               if sys.nrsolutions > 0 then
+                  sys.solutions[i] := sol;
+               fi;
                sys.nrequations := sys.nrequations + 1;
                return true;
             else
                sys.equations[i] := row / coeff;
-               sys.solutions[i] := sol / coeff;
+               if sys.nrsolutions > 0 then
+                  sys.solutions[i] := sol / coeff;
+               fi;
                sys.nrequations := sys.nrequations + 1;
-              return true;
+               return true;
             fi;
          fi;
          i := i + 1;

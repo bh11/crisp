@@ -23,27 +23,25 @@ DeclareAttribute ("NormalGeneratorsOfNilpotentResidual", IsGroup);
 
 #############################################################################
 ##
-#F  ChiefSeriesElAbFactorUnderAction (<grp>, <M>, <N>)
+#F  CompositionSeriesElAbFactorUnderAction (<act>, <M>, <N>)
 ##
-##  computes a <grp>-chief series of the elementary abelian normal section M/N,
+##  computes a <act>-composition series of the elementary abelian normal section M/N,
 ##  i.e. a list M = N_0 > N_1 > ... > N_r = N of subgroups of <grp> such that 
-##  each N_i is normal in M and there is no <grp>-invariant subgroup between 
-##  N_i and N_{i+1}.
+##  there is no <grp>-invariant subgroup between N_i and N_{i+1}.
 ##
-DeclareGlobalFunction ("ChiefSeriesElAbFactorUnderAction");
+DeclareGlobalFunction ("CompositionSeriesElAbFactorUnderAction");
 
 
 #############################################################################
 ##
-#F  PcgsChiefSeriesElAbModuloPcgsUnderAction (<grp>, <sec>)
+#F  PcgsCompositionSeriesElAbModuloPcgsUnderAction (<act>, <sec>)
 ##
-##  computes a series of pcgs representing a <grp>-chief series of the  
+##  computes a series of pcgs representing a <grp>-composition series of the  
 ##  elementary abelian normal section M/N,
 ##  i.e. a list M = N_0 > N_1 > ... > N_r = N of subgroups of <grp> such that 
-##  each N_i is normal in M and there is no <grp>-invariant subgroup between 
-##  N_i and N_{i+1}.
+##  there is no <grp>-invariant subgroup between N_i and N_{i+1}.
 ##
-DeclareGlobalFunction ("PcgsChiefSeriesElAbModuloPcgsUnderAction");
+DeclareGlobalFunction ("PcgsCompositionSeriesElAbModuloPcgsUnderAction");
 
 
 #############################################################################
@@ -64,10 +62,10 @@ DeclareOperation ("CentralizesLayer", [IsListOrCollection, IsModuloPcgs]);
 
 #############################################################################
 ##
-#O  CompositionSeriesUnderAction (<grp>, <act>)
+#O  CompositionSeriesUnderAction (<act>, <grp>)
 ##
 DeclareOperation ("CompositionSeriesUnderAction", 
-	[IsGroup, IsListOrCollection]);
+	[IsListOrCollection, IsGroup]);
 
 
 #############################################################################

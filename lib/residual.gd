@@ -30,6 +30,28 @@ DeclareAttribute ("CharacteristicSubgroups", IsGroup);
 
 #############################################################################
 ##
+#O  OneInvariantSubgroupMinWrtQPropertyUnderAction 
+#O                                  (<act>, <grp>, <pretest>, <test>, <data>)
+##
+##  See the manual.
+##
+DeclareOperation ("OneInvariantSubgroupMinWrtQPropertyUnderAction", 
+   [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject]);
+
+
+############################################################################
+##
+#O  AllInvariantSubgroupsWithQPropertyUnderAction 
+#O                                 (<act>, <grp>, <pretest>, <test>, <data>)
+##
+##  See the manual.
+##
+DeclareOperation ("AllInvariantSubgroupsWithQPropertyUnderAction", 
+   [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject]);
+
+
+#############################################################################
+##
 #O  OneNormalSubgroupMinWrtQProperty (<grp>, <pretest>, <test>, <data>)
 ##
 ##  See the manual.
@@ -38,36 +60,14 @@ DeclareOperation ("OneNormalSubgroupMinWrtQProperty",
    [IsGroup, IsFunction, IsFunction, IsObject]);
 
 
-#############################################################################
+############################################################################
 ##
-#O  OneNormalSubgroupMinWrtQPropertyUnderAction 
-#O                                  (<grp>, <act>, <pretest>, <test>, <data>)
-##
-##  See the manual.
-##
-DeclareOperation ("OneNormalSubgroupMinWrtQPropertyUnderAction", 
-   [IsGroup, IsListOrCollection, IsFunction, IsFunction, IsObject]);
-
-
-#############################################################################
-##
-#O  AllNormalSubgroupsWithQProperty (<grp>, <pretest>, <test>, <data>)
+#O  AllNormalSubgroupsWithQPropertyUnderAction <grp>, <pretest>, <test>, <data>)
 ##
 ##  See the manual.
 ##
 DeclareOperation ("AllNormalSubgroupsWithQProperty", 
    [IsGroup, IsFunction, IsFunction, IsObject]);
-
-
-############################################################################
-##
-#O  AllNormalSubgroupsWithQPropertyUnderAction 
-#O                                 (<grp>, <act>, <pretest>, <test>, <data>)
-##
-##  See the manual.
-##
-DeclareOperation ("AllNormalSubgroupsWithQPropertyUnderAction", 
-   [IsGroup, IsListOrCollection, IsFunction, IsFunction, IsObject]);
 
 
 ############################################################################
