@@ -118,6 +118,9 @@ O235hypercentralWithRad := FittingClass ( rec (
 			local C, ser, comp, i, j, M, N, F, nat;
 			C := G;
 			M := Core (G, HallSubgroup (G,[2,3,5]));
+			if IsTrivial (M) then
+			   return G;
+			fi;
 			comp := ChiefSeriesUnderAction (G, M);
 			for j in [2..Length (comp)] do
 				nat:= NaturalHomomorphismByNormalSubgroup (C, comp[j]);
