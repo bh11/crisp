@@ -8,38 +8,38 @@
 <a name = "I36"></a>
 <li><code>OneNormalSubgroupMinWrtQProperty(</code><var>grp</var><code>, </code><var>pretest</var><code>, </code><var>test</var><code>, </code><var>data</var><code>) O</code>
 <p>
-Let <var>cal X</var> be a set of normal subgroups of <var>grp</var> containing <var>grp</var>, and
+Let <font size="+1"><font face="helvetica"><i>X</i></font></font> be a set of normal subgroups of <var>grp</var> containing <var>grp</var>, and
 assume that whenever
-<var>M</var> and <var>N</var> are normal subgroups with <var>M  in  cal X</var> and <var>M</var>
-contained in <var>N</var>, then also <var>N  in  cal X</var>. Then
-<code>OneNormalSubgroupMinWrtQProperty</code> computes a normal subgroup <var>M  in  cal X</var>
-such that no normal subgroup of <var>grp</var> contained in <var>M</var> belongs to <var>cal X</var>. 
+<font size="+1"><i>M</i></font> and <font size="+1"><i>N</i></font> are normal subgroups with <font size="+1"><i>M</i>  <font face="symbol">ë</font> <font face="helvetica"><i>X</i></font></font> and <font size="+1"><i>M</i></font>
+contained in <font size="+1"><i>N</i></font>, then also <font size="+1"><i>N</i>  <font face="symbol">ë</font> <font face="helvetica"><i>X</i></font></font>. Then
+<code>OneNormalSubgroupMinWrtQProperty</code> computes a normal subgroup <font size="+1"><i>M</i>  <font face="symbol">ë</font> <font face="helvetica"><i>X</i></font></font>
+such that no normal subgroup of <var>grp</var> contained in <font size="+1"><i>M</i></font> belongs to <font size="+1"><font face="helvetica"><i>X</i></font></font>. 
 At present, there exist only methods for finite solvable groups <var>grp</var>.
 <p>
-The class <var>cal X</var> is described by two functions, <var>pretest</var> and <var>test</var>. 
+The class <font size="+1"><font face="helvetica"><i>X</i></font></font> is described by two functions, <var>pretest</var> and <var>test</var>. 
 <p>
 <var>pretest</var> is a function taking four arguments, <var>U</var>, <var>V</var>, <var>R</var>, and <var>data</var>,
 where <var>data</var> is just the argument passed to
-<code>OneNormalSubgroupMinWrtQProperty</code> (see below for examples). <var><var>U</var>/<var>V</var></var> is a
+<code>OneNormalSubgroupMinWrtQProperty</code> (see below for examples). <font size="+1"><i>U</i> /<i>V</i> </font> is a
 chief factor of <var>grp</var>, and  <var>R</var> is a normal subgroup of <var>grp</var> containing <var>U</var>
 which is known to belong to
-<var>cal X</var>.
+<font size="+1"><font face="helvetica"><i>X</i></font></font>.
 <p>
 <var>pretest</var> may return the values <code>true</code>, <code>false</code>, or <code>fail</code>. If it returns 
 <code>true</code>, every normal subgroup <var>N</var> of <var>grp</var> such that <var>V</var> is
-contained in <var>N</var> and <var><var>R</var>/<var>N</var></var> is
-<var>G</var>-isomorphic with <var><var>U</var>/<var>V</var></var> must belong to <var>cal X</var>. If it returns
-<code>false</code>, no such normal subgroup&nbsp;<var>N</var> may belong to <var>cal X</var>. 
+contained in <font size="+1"><i>N</i></font> and <font size="+1"><i>R</i> /<i>N</i> </font> is
+<font size="+1"><i>G</i></font>-isomorphic with <font size="+1"><i>U</i> /<i>V</i> </font> must belong to <font size="+1"><font face="helvetica"><i>X</i></font></font>. If it returns
+<code>false</code>, no such normal subgroup&nbsp;<font size="+1"><i>N</i></font> may belong to <font size="+1"><font face="helvetica"><i>X</i></font></font>. 
 <p>
 <var>test</var> is a function taking three arguments, <var>S</var>, <var>R</var>, and <var>data</var>, where
 data has been described above. <var>R</var> is a normal subgroup of <var>grp</var> belonging to
-<var>cal X</var>, and <var><var>R</var>/<var>S</var></var> is a chief factor of <var>grp</var>. The function must return
-true if <var>S</var> belongs to <var>cal X</var>, and false otherwise. 
+<font size="+1"><font face="helvetica"><i>X</i></font></font>, and <font size="+1"><i>R</i> /<i>S</i> </font> is a chief factor of <var>grp</var>. The function must return
+true if <var>S</var> belongs to <font size="+1"><font face="helvetica"><i>X</i></font></font>, and false otherwise. 
 <p>
 Note that whenever <code></code><var>test</var><code>(</code><var>S</var><code>, </code><var>R</var><code>, </code><var>data</var><code>)</code> is called, 
 <code></code><var>pretest</var><code>(</code><var>U</var><code>, </code><var>V</var><code>, </code><var>R</var><code>, </code><var>data</var><code>)</code> has been called before, and has returned
-<code>fail</code>, where  <var><var>U</var>/<var>V</var></var> is a  chief factor which is <var>G</var>-isomorphic with
-<var><var>R</var>/<var>S</var></var>. Thus <var>test</var> need not repeat tests which have been performed by
+<code>fail</code>, where  <font size="+1"><i>U</i> /<i>V</i> </font> is a  chief factor which is <var>G</var>-isomorphic with
+<font size="+1"><i>R</i> /<i>S</i> </font>. Thus <var>test</var> need not repeat tests which have been performed by
 <var>pretest</var>. In particular, if <var>pretest</var> always returns <code>true</code> or <code>false</code>,
 <var>test</var> will never be called.
 <p>
@@ -47,15 +47,15 @@ Note that whenever <code></code><var>test</var><code>(</code><var>S</var><code>,
 exists only as a means for passing additional information to or between
 the functions <var>pretest</var> and <var>test</var>.
 <p>
-For example, if <var>cal C</var> is a group class which is closed with respect to
-factor groups and <var>cal X</var> is the set of all normal subgroups <var>N</var> of <var>grp</var>
-with <var><var>grp</var>/N  in  cal C</var>, then <var>cal X</var> satisfies the above properties. In
-particular, if <var>cal C</var> is a formation, then
-<code>OneNormalSubgroupMinWrtQProperty</code> will return the <var>cal C</var>-residual of
+For example, if <font size="+1"><font face="helvetica"><i>C</i></font></font> is a group class which is closed with respect to
+factor groups and <font size="+1"><font face="helvetica"><i>X</i></font></font> is the set of all normal subgroups <font size="+1"><i>N</i></font> of <var>grp</var>
+with <font size="+1"><i>grp</i> /<i>N</i>  <font face="symbol">ë</font> <font face="helvetica"><i>C</i></font></font>, then <font size="+1"><font face="helvetica"><i>X</i></font></font> satisfies the above properties. In
+particular, if <font size="+1"><font face="helvetica"><i>C</i></font></font> is a formation, then
+<code>OneNormalSubgroupMinWrtQProperty</code> will return the <font size="+1"><font face="helvetica"><i>C</i></font></font>-residual of
 <var>grp</var>.
 <p>
 The following example shows how to use <code>OneNormalSubgroupMinWrtQProperty</code> to
-compute the derived subgroup of a group <var>G</var>. (Note that in practise, this 
+compute the derived subgroup of a group <font size="+1"><i>G</i></font>. (Note that in practise, this 
 is not a particularly efficient way of computing the derived subgroup.)
 <p>
 <pre>
@@ -84,7 +84,7 @@ true
 <li><code>AllNormalSubgroupsWithQProperty(</code><var>grp</var><code>, </code><var>pretest</var><code>, </code><var>test</var><code>, </code><var>data</var><code>) O</code>
 <p>
 <code>AllNormalSubgroupsWithQProperty</code> returns a list consisting of all normal
-subgroups in <var>cal X</var>, where <var>cal X</var> is the class defined by <var>pretest</var>,
+subgroups in <font size="+1"><font face="helvetica"><i>X</i></font></font>, where <font size="+1"><font face="helvetica"><i>X</i></font></font> is the class defined by <var>pretest</var>,
 <var>test</var>, and <var>data</var>, as described for <code>OneNormalSubgroupMaxWrtNProperty</code>. 
 At present, there exist only methods for finite solvable groups <var>grp</var>.
 <p>
@@ -115,7 +115,7 @@ as <var>pretest</var> and <code>ReturnFail</code> as <var>test</var>). Note that
 <var>pretest</var> always returns <code>true</code>, <var>test</var> is never actually called.
 This is usually significantly faster than the methods in the <font face="helvetica,arial">GAP</font> library.
 <p>
-[<a href ="C004S005.htm">Previous</a>] [<a href = "C004S000.htm">Up</a>] [<a href = "theindex.htm">Index</a>]
+[<a href="index.htm">Top</a>] [<a href ="C004S005.htm">Previous</a>] [<a href = "C004S000.htm">Up</a>] [<a href = "theindex.htm">Index</a>]
 <P>
-<address>GAP 4 manual<br>November 2000
+<address>CRISP manual<br>November 2000
 </address></body></html>

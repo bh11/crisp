@@ -19,7 +19,7 @@ formations.
 <li><code>Residual(</code><var>grp</var><code>, </code><var>form</var><code>) O</code>
 <p>
 returns the <var>form</var>-residual of the group <var>grp</var>, i.&nbsp;e., the smallest
-normal subgroup <var>res</var> of <var>grp</var> such that <var><var>grp</var>/<var>res</var></var> belongs to <var>form</var>.
+normal subgroup <var>res</var> of <var>grp</var> such that <font size="+1"><i>grp</i> /<i>res</i> </font> belongs to <var>form</var>.
 Note that, unless <var>form</var>
 has an attribute <code>ResidualFunction</code>, there are presently only methods
 available for finite solvable groups.
@@ -36,15 +36,15 @@ rather than <code>ResidualFunction</code>, should be used by the user to compute
 <a name = "I33"></a>
 <li><code>LocalDefinitionFunction(</code><var>form</var><code>) A</code>
 <p>
-For a saturated formation <var>form</var> with local function&nbsp;<var>f</var>, this attribute
+For a saturated formation <var>form</var> with local function&nbsp;<font size="+1"><i>f</i></font>, this attribute
 stores a function <var>func</var> taking two parameters, a group
-<var>G</var> and a prime <var>p</var>. If <var>p</var> is in the characteristic of <var>form</var>, this
+<font size="+1"><i>G</i></font> and a prime <font size="+1"><i>p</i></font>. If <font size="+1"><i>p</i></font> is in the characteristic of <var>form</var>, this
 function must return a list <var>list</var> of elements of
-<var>G</var>, such that the smallest normal subgroup of <var>G</var> containing <var>list</var> is the
-<var>f(p)</var>-residual of <var>G</var>. If <var>p</var> is not in the characteristic of <var>form</var>, 
-then <code></code><var>func</var><code>(</code><var>G</var><code>, </code><var>p</var><code>)</code> must return <code>fail</code> for any group <var>G</var>. 
+<font size="+1"><i>G</i></font>, such that the smallest normal subgroup of <font size="+1"><i>G</i></font> containing <var>list</var> is the
+<font size="+1"><i>f</i>(<i>p</i>)</font>-residual of <font size="+1"><i>G</i></font>. If <font size="+1"><i>p</i></font> is not in the characteristic of <var>form</var>, 
+then <code></code><var>func</var><code>(<font size="+1"><i>G</i></font>, <font size="+1"><i>p</i></font>)</code> must return <code>fail</code> for any group <font size="+1"><i>G</i></font>. 
 <p>
-[<a href ="C004S004.htm">Previous</a>] [<a href = "C004S000.htm">Up</a>] [<a href ="C004S006.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
+[<a href="index.htm">Top</a>] [<a href ="C004S004.htm">Previous</a>] [<a href = "C004S000.htm">Up</a>] [<a href ="C004S006.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
 <P>
-<address>GAP 4 manual<br>November 2000
+<address>CRISP manual<br>November 2000
 </address></body></html>

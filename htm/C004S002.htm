@@ -35,14 +35,14 @@ Note that, at present, methods are only available for finite
 solvable groups <var>grp</var>, or when <var>class</var> has an attribute <code>ProjectorFunction</code>.
 <p>
 A subgroup 
-<var>H</var> of the group <var>G</var> is a <var>class</var>-projector of <var>G</var> if <var>H N/N</var> is
-<var>class</var>-maximal in <var>G/N</var> for all normal subgroups <var>N</var> of&nbsp;<var>G</var>. A subgroup <var>H</var>
-of <var>G</var> is <var>class</var>-maximal in <var>G</var> if <var>H</var> belongs to <var>class</var>, and there is no
-subgroup <var>L</var> of <var>G</var> which contains <var>H</var> and lies in <var>class</var>. Note that if
+<font size="+1"><i>H</i></font> of the group <font size="+1"><i>G</i></font> is a <var>class</var>-projector of <font size="+1"><i>G</i></font> if <font size="+1"><i>H</i> <i>N</i>/<i>N</i></font> is
+<var>class</var>-maximal in <font size="+1"><i>G</i>/<i>N</i></font> for all normal subgroups <font size="+1"><i>N</i></font> of&nbsp;<font size="+1"><i>G</i></font>. A subgroup <font size="+1"><i>H</i></font>
+of <font size="+1"><i>G</i></font> is <var>class</var>-maximal in <font size="+1"><i>G</i></font> if <font size="+1"><i>H</i></font> belongs to <var>class</var>, and there is no
+subgroup <font size="+1"><i>L</i></font> of <font size="+1"><i>G</i></font> which contains <font size="+1"><i>H</i></font> and lies in <var>class</var>. Note that if
 <var>class</var> consists of finite solvable groups, then <var>class</var>-projectors exist in
 every finite solvable group if and only if <var>class</var> is a Schunck class, and in
 this case all <var>class</var>-projectors of
-<var>G</var> are conjugate. See <a href="biblio.htm#DH92"><cite>DH92</cite></a>, III,&nbsp;3.21.
+<font size="+1"><i>G</i></font> are conjugate. See <a href="biblio.htm#DH92"><cite>DH92</cite></a>, III,&nbsp;3.21.
 <p>
 <pre>
 gap&gt; H := SchunckClass (rec (bound := G -&gt; Size (G) = 6));
@@ -62,8 +62,8 @@ gap&gt; # the projectors are the point stabilizers
 <a name = "I12"></a>
 <li><code>CoveringSubgroup(</code><var>grp</var><code>, </code><var>class</var><code>) O</code>
 <p>
-A subgroup <var>H</var> of <var>G</var> is a <var>class</var>-covering subgroup of <var>G</var> if <var>H</var> is a
-<var>class</var>-projector of <var>L</var> for every subgroup <var>L</var> with <var>H leq L leq G</var>.
+A subgroup <font size="+1"><i>H</i></font> of <font size="+1"><i>G</i></font> is a <var>class</var>-covering subgroup of <font size="+1"><i>G</i></font> if <font size="+1"><i>H</i></font> is a
+<var>class</var>-projector of <font size="+1"><i>L</i></font> for every subgroup <font size="+1"><i>L</i></font> with <font size="+1"><i>H</i>  <font face="symbol">£</font> <i>L</i>  <font face="symbol">£</font> <i>G</i></font>.
 Note that projectors and covering subgroups coincide for Schunck classes of
 finite solvable groups. At present, methods are only available for finite
 solvable groups <var>grp</var>.
@@ -76,9 +76,9 @@ user to define <var>grpclass</var>, either as an argument to <code>SchunckClass<
 <code>SaturatedFormation</code>, or <code>FittingFormation</code> (see <a href="C004S001.htm">SchunckClass</a>, 
 <a href="C004S004.htm">SaturatedFormation</a>, or <a href="C005S002.htm">FittingFormation</a>), or has been set directly
 (see <a href="../../../doc/htm/ref/C013S006.htm">Setter</a>). <var>func</var> must be a function taking one argument.
-If the argument is a finite solvable group <var>G</var> having attributes 
-<code>Socle</code> and <code>SocleComplement</code> (see Section <a href="C004S003.htm">Additional attributes for  primitive solvable groups</a> below), <var>func</var> must  return <code>true</code> if <var>G</var> 
-is in the boundary of <var>grpclass</var>, and <code>false</code> if <var>G</var> belongs to 
+If the argument is a finite solvable group <font size="+1"><i>G</i></font> having attributes 
+<code>Socle</code> and <code>SocleComplement</code> (see Section <a href="C004S003.htm">Additional attributes for  primitive solvable groups</a> below), <var>func</var> must  return <code>true</code> if <font size="+1"><i>G</i></font> 
+is in the boundary of <var>grpclass</var>, and <code>false</code> if <font size="+1"><i>G</i></font> belongs to 
 <var>grpclass</var>. The behaviour for arguments which are not primitive 
 solvable groups, or which  belong neither to <var>grpclass</var> nor to the 
 boundary of <var>grpclass</var> need not be defined. Note that 
@@ -90,13 +90,13 @@ belongs to the boundary of <var>grpclass</var>. <code>Boundary</code> and/or <co
 <a name = "I14"></a>
 <li><code>ProjectorFunction(</code><var>grpclass</var><code>) A</code>
 <p>
-If bound, <code>ProjectorFunction</code> stores a function taking a group <var>G</var> as the
-only argument, and returns a <var>grpclass</var>-projector of <var>G</var>.  Note that <code>Projector</code>
+If bound, <code>ProjectorFunction</code> stores a function taking a group <font size="+1"><i>G</i></font> as the
+only argument, and returns a <var>grpclass</var>-projector of <font size="+1"><i>G</i></font>.  Note that <code>Projector</code>
 (see <a href="C004S002.htm">Projector</a>),
 rather than <code>ProjectorFunction</code>, should be used by the user to compute
 <var>grpclass</var>-projectors.
 <p>
-[<a href ="C004S001.htm">Previous</a>] [<a href = "C004S000.htm">Up</a>] [<a href ="C004S003.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
+[<a href="index.htm">Top</a>] [<a href ="C004S001.htm">Previous</a>] [<a href = "C004S000.htm">Up</a>] [<a href ="C004S003.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
 <P>
-<address>GAP 4 manual<br>November 2000
+<address>CRISP manual<br>November 2000
 </address></body></html>

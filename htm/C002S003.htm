@@ -1,11 +1,11 @@
 <html><head><title>[CRISP] 2.3 Lattice operations for classes</title></head>
 <body bgcolor="ffffff">
-<a name = "I18"></a>
+<a name = "I19"></a>
 <h1>2.3 Lattice operations for classes</h1><p>
 <p>
-<a name = "I19"></a>
-
 <a name = "I20"></a>
+
+<a name = "I21"></a>
 <li><code>Complement(</code><var>C</var><code>) O</code>
 <p>
 returns the unary complement of the class <var>C</var>, that is, the class consisting
@@ -18,9 +18,11 @@ gap&gt; Complement (cmpl);
 [ 1, 2 ]
 </pre>
 <p>
-<a name = "I21"></a>
+<a name = "I22"></a>
 <li><code>Intersection(</code><var>list</var><code>)</code>
 <li><code>Intersection(</code><var>C1</var><code>, </code><var>C2</var><code>, ...)</code>
+<a name = "I24"></a>
+
 <p>
 returns the intersection of the groups in <var>list</var>, resp. of the classes
 <var>C1</var>, <var>C2</var>, .... If one of the classes is a list with fewer than
@@ -35,7 +37,7 @@ Intersection ([ Class (in:=function( n ) ... end),
   Class (in:=function( n ) ... end) ])
 </pre>
 <p>
-<a name = "I23"></a>
+<a name = "I25"></a>
 <li><code>Union(</code><var>C</var><code>, </code><var>D</var><code>) F</code>
 <p>
 returns the union of <var>C</var> and <var>D</var>.  
@@ -46,7 +48,7 @@ Union ([ Class (in:=function( n ) ... end), Class (in:=function( n ) ... end)
  ])
 </pre>
 <p>
-<a name = "I24"></a>
+<a name = "I26"></a>
 <li><code>Difference(</code><var>C</var><code>, </code><var>D</var><code>) O</code>
 <p>
 returns the difference of <var>C</var> and <var>D</var>. If <var>C</var> is a list, then the
@@ -60,7 +62,7 @@ gap&gt; Difference ([1..10], Class (IsPrimeInt));
 [ 1, 4, 6, 8, 9, 10 ]
 </pre>
 <p>
-[<a href ="C002S002.htm">Previous</a>] [<a href = "C002S000.htm">Up</a>] [<a href = "theindex.htm">Index</a>]
+[<a href="index.htm">Top</a>] [<a href ="C002S002.htm">Previous</a>] [<a href = "C002S000.htm">Up</a>] [<a href = "theindex.htm">Index</a>]
 <P>
-<address>GAP 4 manual<br>November 2000
+<address>CRISP manual<br>November 2000
 </address></body></html>

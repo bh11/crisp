@@ -20,8 +20,8 @@ functions assigned to the components are stored in the attributes
 <code>RadicalFunction</code>, and <code>Name</code>, of <var>fitclass</var>. The functions bound to <code>inj</code> and
 <code>rad</code> must have one argument, <var>H</var>, and return a <var>fitclass</var>-injector and the
 <var>fitclass</var>-radical of <var>H</var>, respectively. The third example shows how to construct
-the Fitting class <var>L<sub>2</sub>(cal N)</var> (see <a href="biblio.htm#DH92"><cite>DH92</cite></a>, IX, 1.14 and 1.15), where
-<var>cal N</var> is the class of all finite nilpotent groups.
+the Fitting class <font size="+1"><i>L</i><sub>2</sub>(<font face="helvetica"><i>N</i></font>)</font> (see <a href="biblio.htm#DH92"><cite>DH92</cite></a>, IX, 1.14 and 1.15), where
+<font size="+1"><font face="helvetica"><i>N</i></font></font> is the class of all finite nilpotent groups.
 <p>
 <pre>
 gap&gt; myNilpotentGroups := FittingClass(rec(\in := IsNilpotent,
@@ -48,8 +48,8 @@ true   # thus myL2_Nilp is not closed with respect to factor groups
 <li><code>FittingProduct(</code><var>fit1</var><code>, </code><var>fit2</var><code>) O</code>
 <p>
 returns the Fitting product <var>prod</var> of the Fitting classes <var>fit1</var> and <var>fit2</var>,
-i.&nbsp;e., the class of all groups <var>G</var> such that <var>G/R</var> is  a <var>fit2</var>-group, where
-<var>R</var> is the <var>fit1</var>-radical of <var>G</var>.  <var>prod</var> is again a Fitting class.
+i.&nbsp;e., the class of all groups <font size="+1"><i>G</i></font> such that <font size="+1"><i>G</i>/<i>R</i></font> is  a <var>fit2</var>-group, where
+<font size="+1"><i>R</i></font> is the <var>fit1</var>-radical of <font size="+1"><i>G</i></font>.  <var>prod</var> is again a Fitting class.
 Note that if <var>fit1</var> and <var>fit2</var> are also
 formations, then <var>prod</var> equals the
 formation product of <var>fit1</var> and <var>fit2</var>; see <a href="C004S004.htm">FormationProduct</a> 
@@ -66,7 +66,7 @@ FittingProduct (FittingClass (in:=&lt;Operation "IsNilpotent"&gt;, rad:=&lt;Oper
 FittingSubgroup"&gt;), FittingClass (in:=function( G ) ... end))
 </pre>
 <p>
-[<a href = "C005S000.htm">Up</a>] [<a href ="C005S002.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
+[<a href="index.htm">Top</a>] [<a href = "C005S000.htm">Up</a>] [<a href ="C005S002.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
 <P>
-<address>GAP 4 manual<br>November 2000
+<address>CRISP manual<br>November 2000
 </address></body></html>

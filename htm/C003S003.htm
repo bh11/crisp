@@ -44,80 +44,86 @@ FittingClass (in:=&lt;Operation "IsNilpotent"&gt;)
 <a name = "I28"></a>
 <li><code>HasIsOrdinaryFormation(</code><var>obj</var><code>) F</code>
 <p>
+<a name = "I29"></a>
+
 is true if <var>obj</var> <strong>knows</strong> if it is a formation, that is, if it lies in the filters
 <code>HasIsGroupClass</code>, <code>HasContainsTrivialGroup</code>, <code>HasIsQuotientClosed</code> and 
 <code>HasIsResiduallyClosed</code>.
 <p>
-<a name = "I29"></a>
+<a name = "I30"></a>
 <li><code>IsOrdinaryFormation(</code><var>obj</var><code>) F</code>
 <p>
+<a name = "I31"></a>
+
 is true if <var>obj</var> is a formation, that is, if it has the properties
 <code>IsGroupClass</code>, <code>ContainsTrivialGroup</code>, <code>IsQuotientClosed</code> and <code>IsResiduallyClosed</code>.
 <p>
-<a name = "I30"></a>
+<a name = "I32"></a>
 <li><code>SetIsOrdinaryFormation(</code><var>class</var><code>, </code><var>bool</var><code>) F</code>
 <p>
+<a name = "I33"></a>
+
 If <var>bool</var> is <code>true</code>, this sets the attributes <code>IsQuotientClosed</code>,
 <code>ContainsTrivialGroup</code>, and <code>IsResiduallyClosed</code> of <var>class</var>, making it a formation.
 <p>
-<a name = "I31"></a>
+<a name = "I34"></a>
 <li><code>HasIsSaturatedFormation(</code><var>obj</var><code>) F</code>
 <p>
 returns true if <var>obj</var> <strong>knows</strong> if it is a saturated formation, that is, if it
 lies in the filters <code>HasIsOrdinaryFormation</code> and <code>HasIsSaturated</code>.
 <p>
-<a name = "I32"></a>
+<a name = "I35"></a>
 <li><code>IsSaturatedFormation(</code><var>obj</var><code>) F</code>
 <p>
 returns true if <var>obj</var> is a saturated formation, that is, if it has the
 properties <code>IsOrdinaryFormation</code> and <code>IsSaturated</code>
 <p>
-<a name = "I33"></a>
+<a name = "I36"></a>
 <li><code>SetIsSaturatedFormation(</code><var>class</var><code>, </code><var>bool</var><code>) F</code>
 <p>
 If <var>bool</var> is <code>true</code>, this sets the attributes <code>IsQuotientClosed</code>,
 <code>ContainsTrivialGroup</code>, and <code>IsResiduallyClosed</code> and <code>IsSaturated</code>
 of <var>class</var>, making it a saturated formation.
 <p>
-<a name = "I34"></a>
+<a name = "I37"></a>
 <li><code>HasIsFittingFormation(</code><var>obj</var><code>) F</code>
 <p>
-returns true if <var>obj</var> <strong>knows</strong> that it is a Fitting formation, that is, if it lies in the filters
-<code>HasIsOrdinaryFormation</code> and  <code>HasIsFittingClass</code> (see <a href="C003S003.htm">HasIsOrdinaryFormation</a> and
+returns true if <var>obj</var> <strong>knows</strong> whether it is a Fitting formation, that is, if it lies in the
+filters <code>HasIsOrdinaryFormation</code> and  <code>HasIsFittingClass</code> (see <a href="C003S003.htm">HasIsOrdinaryFormation</a> and
 <a href="C003S003.htm">HasIsFittingClass</a>).
 <p>
-<a name = "I35"></a>
+<a name = "I38"></a>
 <li><code>IsFittingFormation(</code><var>obj</var><code>) F</code>
 <p>
 returns true if <var>obj</var> is both a formation and a Fitting class.
 <p>
-<a name = "I36"></a>
+<a name = "I39"></a>
 <li><code>SetIsFittingFormation(</code><var>class</var><code>, </code><var>bool</var><code>) F</code>
 <p>
 If <var>bool</var> is <code>true</code>, this function sets the attributes of <var>class</var> to indicate
 that it is a Fitting formation.
 <p>
-<a name = "I37"></a>
+<a name = "I40"></a>
 <li><code>HasIsSaturatedFittingFormation(</code><var>obj</var><code>)  F</code>
 <p>
-returns true if <var>obj</var>  <strong>knows</strong> that it is a Fitting formation, that is, if it lies in the
-filters <code>HasIsSaturatedFormation</code> and  <code>HasIsFittingClass</code> (see <a href="C003S003.htm">HasIsSaturatedFormation</a> and
-<a href="C003S003.htm">HasIsFittingClass</a>).
+returns true if <var>obj</var>  <strong>knows</strong> whether it is a saturated Fitting formation, that is, if it lies
+in the filters <code>HasIsSaturatedFormation</code> and  <code>HasIsFittingClass</code> (see <a href="C003S003.htm">HasIsSaturatedFormation</a>
+and <a href="C003S003.htm">HasIsFittingClass</a>).
 <p>
-<a name = "I38"></a>
+<a name = "I41"></a>
 <li><code>IsSaturatedFittingFormation(</code><var>obj</var><code>) F</code>
 <p>
 returns true if <var>obj</var> is both a saturated formation and a Fitting class, that is, if it lies 
 in the filters <code>IsSaturatedFormation</code> and  <code>IsFittingClass</code> (see <a href="C003S003.htm">IsSaturatedFormation</a>
 and <a href="C003S003.htm">IsFittingClass</a>).
 <p>
-<a name = "I39"></a>
+<a name = "I42"></a>
 <li><code>SetIsSaturatedFittingFormation(</code><var>class</var><code>, </code><var>bool</var><code>) F</code>
 <p>
 If <var>bool</var> is <code>true</code>, this sets the attributes of <var>class</var> to indicate that it
 is a saturated Fitting formation.
 <p>
-[<a href ="C003S002.htm">Previous</a>] [<a href = "C003S000.htm">Up</a>] [<a href ="C003S004.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
+[<a href="index.htm">Top</a>] [<a href ="C003S002.htm">Previous</a>] [<a href = "C003S000.htm">Up</a>] [<a href ="C003S004.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
 <P>
-<address>GAP 4 manual<br>November 2000
+<address>CRISP manual<br>November 2000
 </address></body></html>
