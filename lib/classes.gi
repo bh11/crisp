@@ -582,9 +582,9 @@ InstallMethod (Intersection2, "of two classes", true,
 
 #############################################################################
 ##
-#M  Intersection2 (<class>, <obj>)
+#M  Intersection2 (<list/coll>, <ist/coll>)
 ##
-InstallMethod (Intersection2, "of class and list/collection", true, 
+InstallMethod (Intersection2, "of list/collection and list/collection", true, 
    [IsListOrCollection, IsListOrCollection], 0, 
    function (C, D)
       return NewClass ("class intersection fam", IsClassByIntersectionRep,
