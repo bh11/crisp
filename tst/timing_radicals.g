@@ -62,7 +62,7 @@ fit := function (G)
    pcser := [];
    depths := [];
    for p in Set (Factors (Size (G))) do
-      newpcgs := Pcgs (OneInvariantSubgroupMaxWrtNPropertyUnderAction (G, G, 
+      newpcgs := Pcgs (OneInvariantSubgroupMaxWrtNProperty (G, G, 
            function (U, V, R, data) 
               return Index (U, V) mod data = 0;
            end, 
@@ -115,7 +115,7 @@ DoTests (groups, tests);
 tests := 
 [ [tmp -> Radical (tmp, 2groups2), Size, "in", []],
   [tmp -> Radical (tmp, 2groups),  Size, "core", []],
-  [tmp -> OneInvariantSubgroupMaxWrtNPropertyUnderAction (tmp, tmp, 
+  [tmp -> OneInvariantSubgroupMaxWrtNProperty (tmp, tmp, 
      function (U, V, R, data) 
         return Index (U, V) mod 2 = 0;
      end, 
@@ -132,7 +132,7 @@ DoTests (groups, tests);
 tests := 
 [ [tmp -> Radical (tmp, 5groups5), Size, "in", []],
   [tmp -> Radical (tmp, 5groups),  Size, "core", []],
-  [tmp -> OneInvariantSubgroupMaxWrtNPropertyUnderAction (tmp, tmp, 
+  [tmp -> OneInvariantSubgroupMaxWrtNProperty (tmp, tmp, 
      function (U, V, R, data) 
         return Index (U, V) mod 5 = 0;
      end, 

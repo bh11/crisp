@@ -9,8 +9,10 @@
 ##
 RequirePackage ("crisp");
 
-PRINT_METHODS := false;
-   
+if not IsBound (PRINT_METHODS) then
+	PRINT_METHODS := false;
+fi;
+
 ReadPkg ("crisp", "tst/classes.g");
 ReadPkg ("crisp", "tst/basis.g");
 ReadPkg ("crisp", "tst/boundary.g");
