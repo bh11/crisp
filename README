@@ -1,15 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%%  README                   CRISP documentation           Burkhard H\"ofling
-%%
-%%  @(#)$Id$
-%%
-%%  Copyright (C) 2000, Burkhard H\"ofling, Mathematisches Institut,
-%%  Friedrich Schiller-Universit\"at Jena, Germany
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The share package CRISP provides algorithms for computing subgroups of
+The package CRISP provides algorithms for computing subgroups of
 finite solvable groups related to a group class C. In particular, it
 allows to compute C-radicals and C-injectors for Fitting classes (and
 Fitting sets) C, C-residuals for formations C, and C-projectors for
@@ -20,8 +9,49 @@ computation of normal subgroups belonging to a given group class,
 including an improved method to compute the set of all normal subgroups
 of a finite solvable group.
 
+In order to install CRISP, you have to get the archive file `crisp.zoo'.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%E
-%%
+You can download `crisp.zoo' from the same places as GAP. The main FTP 
+servers are:
+
+ftp://ftp-gap.dcs.st-and.ac.uk/pub/gap/gap4/share/
+ftp://ftp.math.rwth-aachen.de/pub/gap4/share/
+ftp://ftp.ccs.neu.edu/pub/mirrors/ftp-gap.dcs.st-and.ac.uk/pub/gap/gap4/share/
+ftp://pell.anu.edu.au/pub/algebra/gap4/share/
+
+`crisp.zoo' is also available via the GAP www page at
+
+http://www-gap.dcs.st-and.ac.uk/~gap/Info4/share.html
+http://aldebaran.math.rwth-aachen.de/~GAP/Info4/share.html
+http://mirrors.ccs.neu.edu/GAP/NEU/Info4/share.html
+http://wwwmaths.anu.edu.au/research.groups/algebra/GAP/www/Info4/share.html
+
+or, alternatively, from the author's home page at
+
+http://www.minet.uni-jena.de/~hoefling/crisp/htm/index.htm
+
+To install CRISP, move the file `crisp.zoo' into the `pkg' directory in 
+which you plan to install CRISP. Usually, this will be the directory `pkg'
+in the GAP directory. 
+
+Then unzoo `crisp.zoo' by 
+
+   unzoo -x crisp
+
+That's all. Now start GAP and type
+
+   RequirePackage ("crisp");
+
+The CRISP banner should appear on the screen.
+
+
+Please do not hesitate to report any bugs or other problems to the author:
+
+Burkhard H\"ofling
+Mathematisches Institut
+Friedrich Schiller-Universit\"at
+07745 Jena
+Germany
+e-mail: hoefling@minet.uni-jena.de
+www:    www.minet.uni-jena.de/~hoefling
+
