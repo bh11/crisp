@@ -1,8 +1,8 @@
 #############################################################################
 ##  
-##  Packageinfo.g for CRISP package                            (Burkhard Höfling)
+##  Packageinfo.g for CRISP package                       (Burkhard Hoefling)
 ##
-##  adapted from PackageInfo.g template by Frank Lübeck
+##  adapted from PackageInfo.g template by Frank Luebeck
 ##  
 
 SetPackageInfo( rec(
@@ -70,7 +70,7 @@ ArchiveFormats := ".zoo",
 ##     rec(
 ##     # these are compulsory, characters are interpreted as latin-1, so
 ##     # German umlauts and other western European special characters are ok:
-##     LastName := "Müller",
+##     LastName := "Mueller",
 ##     FirstNames := "Fritz Eduard",
 ##  
 ##     # At least one of the following two entries must be given and set 
@@ -86,7 +86,7 @@ ArchiveFormats := ".zoo",
 ##     # complete URL, starting with protocol
 ##     WWWHome := "http://www.no.org/~Mueller",
 ##     # separate lines by '\n' (*optional*)
-##     PostalAddress := "Dr. F. Müller\nNo Org Institute\nNo Place 13\n\
+##     PostalAddress := "Dr. F. Mueller\nNo Org Institute\nNo Place 13\n\
 ##     12345 Notown\nNocountry"
 ##     
 ##     # If you want, add one or both of the following entries (*optional*)
@@ -96,7 +96,7 @@ ArchiveFormats := ".zoo",
 ##  
 Persons := [
   rec(
-  LastName := "Höfling",
+  LastName := "Hoefling",
   FirstNames := "Burkhard",
   IsAuthor := true,
   IsMaintainer := true,
@@ -122,7 +122,7 @@ Status := "accepted",
 ##  You must provide the next two entries if and only if the status is 
 ##  "accepted":
 # format: 'name (place)'
-CommunicatedBy := "Joachim Neubüser (Aachen)",
+CommunicatedBy := "Joachim Neubueser (Aachen)",
 # format: mm/yyyy
 AcceptDate := "12/2000",
 
