@@ -36,7 +36,7 @@ functions assigned to the components are stored in the attributes
 `RadicalFunction', and `Name', of <fitclass>. The functions bound to `inj' and
 `rad' must have one argument, <H>, and return a <fitclass>-injector and the
 <fitclass>-radical of <H>, respectively. The third example shows how to construct
-the Fitting class $L_2({\cal N})$ (see \cite{DH1992}, IX, 1.14 and 1.15), where
+the Fitting class $L_2({\cal N})$ (see \cite{DH92}, IX, 1.14 and 1.15), where
 $\cal N$ is the class of all finite nilpotent groups.
 
 \beginexample
@@ -216,7 +216,7 @@ not a Fitting class.
 Moreover, `ImageFittingSet(PreImageFittingSet(<fitset>, <alpha>),
 <alpha>)' equals <fitset> but in general, <fitset> is not contained in
 `PreImageFittingSet(ImageFittingSet(<fitset>, <alpha>), <alpha>)'; see
-e.g. Example VIII,~2.16 of~\cite{DH1992}.
+e.g. Example VIII,~2.16 of~\cite{DH92}.
 
 \beginexample
 gap> pre := PreImageFittingSet (alpha, NilpotentGroups);
@@ -268,18 +268,6 @@ Fitting classes admit the following attributes and operations. Of course,
 Fitting classes, being group classes, also admit all properties and
 attributes for group classes.
 
-\>RadicalFunction(<class>) A
-
-This attribute stores a function which computes the <grpclass>-radical of a
-given group. In general, such a radical only exists if <grpclass> is closed
-with respect to products of normal subgroups; cf. `IsNormalProductClosed'.
-
-\>InjectorFunction(<class>) A
-
-If bound, `InjectorFunction' stores a function taking a group $G$ as the
-only argument and returning a <grpclass>-injector of $G$.
-
-
 \>Radical(<G>,  <fitset>) O
 
 returns the <grpclass>-radical of the group <G>, where
@@ -304,17 +292,35 @@ returns a <fitset>-injector of the group <G>, where <fitset> is a
 Fitting set of <G> (or a group containing <G>), or a Fitting class. A
 subgroup $H$ of $G$ is a <fitset>-injector of <G> if $S \cap H$ is
 <fitset>-maximal in $S$ for every subnormal subgroup $S$ of $G$. Note that by 
-\cite{DH1992}, VIII,~2.9, all <fitset>-injectors of <G> are conjugate in $G$,
+\cite{DH92}, VIII,~2.9, all <fitset>-injectors of <G> are conjugate in $G$,
 and it is not hard to see that every subgroup of <G> has <fitset>-injectors
 if and only if <fitset> is a Fitting set of <G>. In particular, if <fitset>
 is a group class, then every finite
 solvable group has <fitset>-injectors if and only if <fitset> is a Fitting
-class; see \cite{DH1992}, IX,~1.4.
+class; see \cite{DH92}, IX,~1.4.
 
 \beginexample
 gap> Injector (SymmetricGroup (4), FittingClass (rec(\in := IsNilpotentGroup)));
 Group([ (1,3)(2,4), (1,4)(2,3), (3,4) ])
 \endexample
+
+\>RadicalFunction(<class>) A
+
+This attribute stores a function which computes the <grpclass>-radical of a
+given group. In general, such a radical only exists if <grpclass> is closed
+with respect to products of normal subgroups; cf. `IsNormalProductClosed'.
+Note that `Radical' (see "Radical") , which is guaranteed to work for arbitrary 
+Fitting classes <class>, should be used by the user to compute
+<grpclass>-radicals.
+
+\>InjectorFunction(<class>) A
+
+If bound, `InjectorFunction' stores a function taking a group $G$ as the
+only argument and returning a <grpclass>-injector of $G$. Note that `Injector'
+(see "Injector") should be used by the user to compute
+<grpclass>-injectors.
+
+
 
 
 

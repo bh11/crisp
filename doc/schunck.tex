@@ -64,21 +64,6 @@ false
 In addition to the attributes and operations for generic group classes,
 for Schunck classes also the following are available:
 
-\>BoundaryFunction(<grpclass>) A
-
-This attribute stores a function <func>. This function takes one argument,
-which must be a finite solvable group $G$ having attributes `Socle' and
-`SocleComplement'. See Section"Additional attributes for primitive solvable
-groups" below. <func> must  return `true' if $G$ is in the boundary of
-<grpclass>, and `false' if $G$ belongs to <grpclass>. The behaviour for
-arguments which are not primitive, or which do neither belong to <grpclass>
-nor to the boundary of <grpclass> need not be defined. 
-
-\>ProjectorFunction(<grpclass>) A
-
-If bound, `ProjectorFunction' stores a function taking a group $G$ as the
-only argument, and returns a <grpclass>-projector of $G$. 
-
 \>Boundary(<class>) A
 
 computes the boundary of <class>, i.~e., the class of all
@@ -104,7 +89,7 @@ subgroup $L$ of $G$ which contains $H$ and lies in <class>. Note that if
 <class> consists of finite solvable groups, then <class>-projectors exist in
 every finite solvable group if and only if <class> is a Schunck class, and in
 this case all <class>-projectors of
-$G$ are conjugate. See \cite{DH1992}, III,~3.21.
+$G$ are conjugate. See \cite{DH92}, III,~3.21.
 
 \beginexample
 gap> H := SchunckClass (rec (bound := G -> Size (G) = 6));
@@ -129,6 +114,33 @@ Note that projectors and covering subgroups coincide for Schunck classes of
 finite solvable groups. At present, methods are only available for finite
 solvable groups <grp>.
 
+\>BoundaryFunction(<grpclass>)                                  A
+
+This attribute stores a function <func> which has been set by the 
+user to define <grpclass>, either as an argument to `SchunckClass', 
+`SaturatedFormation', or `FittingFormation' (see "SchunckClass", 
+"SaturatedFormation", or "FittingFormation"), or has been set directly
+(see "ref:Setter"). <func> must be a function taking one argument.
+If the argument is a finite solvable group $G$ having attributes 
+`Socle' and `SocleComplement' (see Section "Additional attributes for 
+primitive solvable groups" below), <func> must  return `true' if $G$ 
+is in the boundary of <grpclass>, and `false' if $G$ belongs to 
+<grpclass>. The behaviour for arguments which are not primitive 
+solvable groups, or which  belong neither to <grpclass> nor to the 
+boundary of <grpclass> need not be defined. Note that 
+`BoundaryFunction' should *not* be used to test whether a given group 
+belongs to the boundary of <grpclass>. `Boundary' and/or `Basis' (see 
+"Boundary" and "Basis"), which are defined independently of the way 
+<grpclass> is defined.
+
+
+\>ProjectorFunction(<grpclass>) A
+
+If bound, `ProjectorFunction' stores a function taking a group $G$ as the
+only argument, and returns a <grpclass>-projector of $G$.  Note that `Projector'
+(see "Projector"),
+rather than `ProjectorFunction', should be used by the user to compute
+<grpclass>-projectors.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -152,6 +164,8 @@ returns true if <grp> is primitive and solvable, and false otherwise.
 \>SocleComplement(<grp>) A
 
 If present, this attribute stores a complement of the socle of <grp>.
+Currently, there is only a method available for `SocleComplement'
+if <grp> has the property `IsPrimitiveSolvable'.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -162,7 +176,7 @@ If present, this attribute stores a complement of the socle of <grp>.
 A nonempty group class is a  formation if it is closed with respect to factor
 groups and residually closed. A saturated formation is, of course, a
 formation which is saturated. Note that by the
-Gasch\accent127utz-Lubeseder-Schmid theorem (see e.~g. \cite{DH1992}, IV,
+Gasch\accent127utz-Lubeseder-Schmid theorem (see e.~g. \cite{DH92}, IV,
 4.6), every saturated formation is a local formation. Moreover, every
 saturated formation is a Schunck class. Therefore a saturated formation
 admits the operations `Boundary', `Basis', and `Projector'.
@@ -326,7 +340,9 @@ available for finite solvable groups.
 
 This attribute stores a function which computes the <form>-residual of a
 given group. In general, such a residual only exists if <form> is
-residually closed; cf. "IsResiduallyClosed". 
+residually closed; cf. "IsResiduallyClosed". Note that `Residual' (see "Residual"),
+rather than `ResidualFunction', should be used by the user to compute
+<grpclass>-projectos.
 
 \>LocalDefinitionFunction(<form>) A
 
