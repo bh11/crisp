@@ -393,6 +393,7 @@ InstallGlobalFunction ("ChiefSeriesElAbFactorUnderAction",
          s -> SubgroupByPcgs (M, s));
    end);
    
+
       
 ###################################################################################
 ##
@@ -407,7 +408,7 @@ InstallGlobalFunction ("ChiefSeriesElAbFactorUnderAction",
 InstallGlobalFunction ("PcgsChiefSeriesElAbModuloPcgsUnderAction",
    function (act, pcgs)
 
-      local ppcgs, bas, bases, mats, p, new, ser, b, v, gens, num, 
+      local ppcgs, bas, bases, mats, p, one, new, ser, b, v, gens, num, 
          y, len, depth, ddepth, pos, dp, t0, t;
       
       num := NumeratorOfModuloPcgs (pcgs);
@@ -426,8 +427,14 @@ InstallGlobalFunction ("PcgsChiefSeriesElAbModuloPcgsUnderAction",
          bas := List ([1..Length (bases)], i -> bases{[i..Length (bases)]});   
          Add (bas, []);
       else
-         mats := LinearActionLayer (act, pcgs);
-      
+         if ForAll (act, IsGeneralMapping) then
+         	one := Z(p)^0;
+            mats := List (act, a ->
+			   List (pcgs, x -> ExponentsOfPcElement (pcgs, Image (a,x))*one));
+         else
+         	mats := LinearActionLayer (act, pcgs);
+         fi;
+         
          bas := [];
       
          t0 := Runtime();
@@ -510,9 +517,94 @@ InstallMethod (ChiefSeries,
 
 ###################################################################################
 ##
+#M  CompositionSeriesUnderAction (<grp>, <act>)
+##
+InstallMethod (CompositionSeriesUnderAction, "for solvable group and list of homomorphisms", 
+   function (famG, famact)
+       return HasFamilySource (ElementsFamily (famact)) and
+           FamilySource(ElementsFamily (famact)) = ElementsFamily (famG);
+   end,
+   [IsGroup and IsSolvableGroup, IsHomogeneousList], 0,
+   function (G, act)
+   
+      local gens, pcgs, inds, elabser, i, ser;
+      
+      if IsGroup (act) then
+         act := GeneratorsOfGroup (act);
+      fi;
+      if not ForAll (act, IsGeneralMapping) then
+         act := List (act, a -> ConjugatorAutomorphism (G, a));
+      fi;
+      
+      pcgs := PcgsElementaryAbelianSeries (G);
+      if pcgs = fail then
+         TryNextMethod();
+      fi;
+      
+      elabser := List (InvariantElementaryAbelianSeries (G, act, TrivialSubgroup (G), true),
+         S -> InducedPcgs (pcgs, S));
+
+      ser := [];
+      for i in [1..Length (elabser)-1] do
+         Append (ser, 
+            PcgsChiefSeriesElAbModuloPcgsUnderAction (
+               act, elabser[i] mod elabser[i+1]));
+         Unbind (ser[Length (ser)]);
+      od;
+      
+      ser := List (ser, p -> SubgroupByPcgs (G, p));
+      Add (ser, TrivialSubgroup (G));
+      return ser;
+   end);
+   
+
+###################################################################################
+##
+#M  CompositionSeriesUnderAction (<grp>, <act>)
+##
+InstallMethod (CompositionSeriesUnderAction, "for solvable group and group of automorphisms", 
+   function (famG, famact)
+       return HasFamilySource (ElementsFamily (famact)) and
+           FamilySource(ElementsFamily (famact)) = ElementsFamily (famG);
+   end,
+   [IsGroup, IsGroup], 0,
+   function (G, act)
+      return CompositionSeriesUnderAction (G, SmallGeneratingSet (act));
+   end);
+   
+
+###################################################################################
+##
+#M  CompositionSeriesUnderAction (<grp>, <act>)
+##
+RedispatchOnCondition (CompositionSeriesUnderAction,    
+   function (famG, famact)
+       return HasFamilySource (ElementsFamily (famact)) and
+           FamilySource(ElementsFamily (famact)) = ElementsFamily (famG);
+   end,
+   [IsGroup, IsGroup], 
+   [IsFinite and IsSolvableGroup], # no conditions on other arguments
+   0);
+
+
+###################################################################################
+##
+#M  CompositionSeriesUnderAction (<grp>, <act>)
+##
+RedispatchOnCondition (CompositionSeriesUnderAction,    
+   function (famG, famact)
+       return HasFamilySource (ElementsFamily (famact)) and
+           FamilySource(ElementsFamily (famact)) = ElementsFamily (famG);
+   end,
+   [IsGroup, IsHomogeneousList], 
+   [IsFinite and IsSolvableGroup], # no conditions on other arguments
+   0);
+
+
+###################################################################################
+##
 #F  PcgsElementaryAbelianSeriesFromGenericPcgs
 ##
-
 InstallGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs",
    function (pcgs)
    

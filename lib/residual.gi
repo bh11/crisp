@@ -39,6 +39,32 @@ RedispatchOnCondition (NormalSubgroups,
 
 #############################################################################
 ##
+#M  CharacteristicSubgroups (<grp>)
+##
+InstallMethod (CharacteristicSubgroups, 
+   "normal complement method for finite solvable groups",
+   true,
+   [IsGroup and IsFinite and IsSolvableGroup], 
+   RankFilter (IsPcGroup and IsPermGroup), # use for pc groups and perm groups 
+   function (G) 
+      return AllNormalSubgroupsWithQPropertyUnderAction (G, AutomorphismGroup (G), 
+         ReturnTrue, ReturnTrue, rec());
+   end);
+
+
+#############################################################################
+##
+#M  CharacteristicSubgroups (<grp>)
+##
+RedispatchOnCondition (CharacteristicSubgroups, 
+   true, [IsGroup],  [IsFinite and IsSolvableGroup], 
+   # rank this method fairly high - presumably all fast methods for computing
+   # the normal subgroups need to know if the group is finite and solvable
+   RankFilter (IsPcGroup and IsPermGroup));
+   
+
+#############################################################################
+##
 #M  AllNormalSubgroupsWithQProperty (<grp>, <pretest>, <test>, <data>)
 ##
 InstallMethod (AllNormalSubgroupsWithQProperty, 
@@ -185,10 +211,205 @@ RedispatchOnCondition (OneNormalSubgroupMinWrtQProperty, true,
    
 #############################################################################
 ##
+#M  AllNormalSubgroupsWithQPropertyUnderAction (<grp>, <act>, <pretest>, <test>, <data>)
+##
+InstallMethod (AllNormalSubgroupsWithQPropertyUnderAction, 
+   "for solvable group and list of automorphisms",
+   function (famG, famact, fama, famb, famc)
+       return HasFamilySource (ElementsFamily (famact)) and
+           FamilySource(ElementsFamily (famact)) = ElementsFamily (famG);
+   end,
+   [IsGroup and IsSolvableGroup and IsFinite, IsHomogeneousList, IsFunction, IsFunction, IsObject], 
+   RankFilter (IsPcGroup), 
+   function (G, act, pretest, test, data)
+
+      local i, norms, ser, gens, new, N, cmpl, bool, testser;
+      
+      norms := [G];
+      testser := true;
+      
+      ser := CompositionSeriesUnderAction (G, act);
+      gens := SmallGeneratingSet (G);
+         
+      for i in [3..Length (ser)] do
+         new := [];
+         for N in norms do
+            bool := pretest (ser[i-1], ser[i], N, data);
+            if bool <> false then
+               cmpl := NormalComplementsOfElAbSectionUnderAction (
+                  act, N, ser[i-1], ser[i], true);
+               if bool = true then
+                  Append (new, cmpl);
+               else
+                  Append (new, Filtered (cmpl, C -> test (C, N, data)));
+               fi;
+            fi;
+         od;
+         
+         Append (norms, new);
+         
+         if testser then # ser[i-2] has passed the test
+            bool := pretest (ser[i-2], ser[i-1], ser[i-2], data);
+            if bool = fail then
+               bool := test (ser[i-1], ser[i-2], data);
+            fi;
+            if bool then
+               Add (norms, ser[i-1]);
+            else
+               testser := false;
+            fi;
+         fi;
+         Info (InfoLattice, 1, "Step ",i,", ",Length (norms)," normal subgroups");
+      od;
+         
+      if testser then # ser[i-2] has passed the test
+         bool := pretest (ser[Length (ser)-1], 
+            ser[Length (ser)], ser[Length (ser)-1], data);
+         if bool = fail then
+            bool := test (ser[Length (ser)], ser[Length (ser)-1], data);
+         fi;
+         if bool then
+            Add (norms, ser[Length (ser)]);
+         fi;
+      fi;
+      return norms;
+   end);
+
+
+#############################################################################
+##
+#M  AllNormalSubgroupsWithQPropertyUnderAction (<grp>, <act>, <pretest>, <test>, <data>)
+##
+InstallMethod (AllNormalSubgroupsWithQPropertyUnderAction, 
+   "group and group of automorphisms",
+   function (famG, famact, fama, famb, famc)
+       return HasFamilySource (ElementsFamily (famact)) and
+           FamilySource(ElementsFamily (famact)) = ElementsFamily (famG);
+   end,
+   [IsGroup, IsGroup, IsFunction, IsFunction, IsObject], 0,
+   function (G, act, pretest, test, data)
+       return AllNormalSubgroupsWithQPropertyUnderAction (
+          G, SmallGeneratingSet (act), pretest, test, data);
+   end);
+   
+   
+#############################################################################
+##
+#M  AllNormalSubgroupsWithQPropertyUnderActio (<grp>, <act>, <pretest>, <test>, <data>)
+##
+RedispatchOnCondition (AllNormalSubgroupsWithQPropertyUnderAction,
+   function (famG, famact, fama, famb, famc)
+       return HasFamilySource (ElementsFamily (famact)) and
+           FamilySource(ElementsFamily (famact)) = ElementsFamily (famG);
+   end,
+   [IsGroup, IsHomogeneousList, IsFunction, IsFunction, IsObject], 
+   [IsFinite and IsSolvableGroup], # no conditions on other arguments
+   RankFilter (IsGroup) + 2*RankFilter (IsFunction) + RankFilter (IsObject));
+   
+   
+#############################################################################
+##
+#M  OneNormalSubgroupMinWrtQPropertyUnderAction (<grp>, <act>, <pretest>, <test>, <data>)
+##
+InstallMethod (OneNormalSubgroupMinWrtQPropertyUnderAction, 
+   "for solvable group and list of group actions",
+    function (famG, famact, fama, famb, famc)
+       return HasFamilySource (ElementsFamily (famact)) and
+           FamilySource(ElementsFamily (famact)) = ElementsFamily (famG);
+   end,
+   [IsGroup and IsSolvableGroup and IsFinite, IsHomogeneousList, IsFunction, IsFunction, IsObject], 
+   0, 
+   function (G, act, pretest, test, data)
+
+      local i, k, M, ser, gens, new, N, cmpl, bool, R;
+
+      if IsTrivial (G) then
+         return [G];
+      fi;
+      
+       ser := CompositionSeriesUnderAction (G, act);
+
+      for k in [2..Length (ser)] do
+         bool := pretest (ser[k-1], ser[k], ser[k-1], data);
+         if bool = fail then
+            bool := test (ser[k], ser[k-1], data);
+         fi;
+         if not bool then
+            break;
+         fi;
+      od;
+      
+      if bool then
+         return TrivialSubgroup (G);
+      fi;
+      
+      M := ser[k-1];
+      
+      gens := SmallGeneratingSet (G);
+         
+      for i in [k..Length (ser)-1] do
+         bool := pretest (ser[i], ser[i+1], M, data);
+         if bool <> false then
+            cmpl := NormalComplementsOfElAbSectionUnderAction (
+               act, M, ser[i], ser[i+1], bool <> true);
+            if bool = true then
+               if cmpl <> fail then
+                  M := cmpl;
+               fi;
+            else
+               for R in cmpl do
+                  if test (R, M, data) then
+                     M := R;
+                     break;
+                  fi;
+               od;
+            fi;
+         fi;
+         Info (InfoLattice, 1, "Step ",i,"done");
+      od;
+               
+      return M;
+   end);
+
+
+#############################################################################
+##
+#M  OneNormalSubgroupMinWrtQPropertyUnderAction (<grp>, <act>, <pretest>, <test>, <data>)
+##
+InstallMethod (OneNormalSubgroupMinWrtQPropertyUnderAction, 
+   "group and group of automorphisms",
+   function (famG, famact, fama, famb, famc)
+       return HasFamilySource (ElementsFamily (famact)) and
+           FamilySource(ElementsFamily (famact)) = ElementsFamily (famG);
+   end,
+   [IsGroup, IsGroup, IsFunction, IsFunction, IsObject], 0,
+   function (G, act, pretest, test, data)
+       return AllNormalSubgroupsWithQPropertyUnderAction (
+          G, SmallGeneratingSet (act), pretest, test, data);
+   end);
+   
+############################################################################
+##
+#M  OneNormalSubgroupMinWrtQPropertyUnderAction 
+#M                                   (<grp>, <act>, <pretest>, <test>, <data>)
+##
+RedispatchOnCondition (OneNormalSubgroupMinWrtQPropertyUnderAction, 
+   function (famG, famact, fama, famb, famc)
+       return HasFamilySource (ElementsFamily (famact)) and
+           FamilySource(ElementsFamily (famact)) = ElementsFamily (famG);
+   end,
+   [IsGroup, IsHomogeneousList, IsFunction, IsFunction, IsObject], 
+   [IsFinite and IsSolvableGroup], # no conditions on other arguments
+   RankFilter (IsGroup) + 2*RankFilter (IsFunction) + RankFilter (IsObject));
+   
+   
+#############################################################################
+##
 #M  ResidualOp (<grp>, <class>)
 ##
 InstallMethod (ResidualOp, "for group and formation with ResidualFunction", true, 
-   [IsGroup and IsFinite and IsSolvableGroup, IsOrdinaryFormation and HasResidualFunction], 
+   [IsGroup and IsFinite and IsSolvableGroup, 
+       IsOrdinaryFormation and HasResidualFunction], 
    SUM_FLAGS, # highly preferable
    function (G, C)
        return ResidualFunction(C) (G);

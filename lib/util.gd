@@ -64,6 +64,14 @@ DeclareOperation ("CentralizesLayer", [IsListOrCollection, IsModuloPcgs]);
 
 #############################################################################
 ##
+#O  CompositionSeriesUnderAction (<grp>, <act>)
+##
+DeclareOperation ("CompositionSeriesUnderAction", 
+	[IsGroup, IsListOrCollection]);
+
+
+#############################################################################
+##
 #F  PcgsElementaryAbelianSeriesFromGenericPcgs (<G>)
 ##
 ##  computes a pcgs exhibiting an elementary abelian series of G

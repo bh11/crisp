@@ -18,6 +18,16 @@ Revision.residual_gd :=
 KeyDependentOperation ("Residual", IsGroup, IsGroupClass, ReturnTrue);
 
 
+
+#############################################################################
+##
+#A  CharacteristicSubgroups (<grp>)
+##
+##  See the manual.
+##
+DeclareAttribute ("CharacteristicSubgroups", IsGroup);
+
+
 #############################################################################
 ##
 #O  OneNormalSubgroupMinWrtQProperty (<grp>, <pretest>, <test>, <data>)
@@ -30,12 +40,34 @@ DeclareOperation ("OneNormalSubgroupMinWrtQProperty",
 
 #############################################################################
 ##
+#O  OneNormalSubgroupMinWrtQPropertyUnderAction 
+#O                                  (<grp>, <act>, <pretest>, <test>, <data>)
+##
+##  See the manual.
+##
+DeclareOperation ("OneNormalSubgroupMinWrtQPropertyUnderAction", 
+   [IsGroup, IsListOrCollection, IsFunction, IsFunction, IsObject]);
+
+
+#############################################################################
+##
 #O  AllNormalSubgroupsWithQProperty (<grp>, <pretest>, <test>, <data>)
 ##
 ##  See the manual.
 ##
 DeclareOperation ("AllNormalSubgroupsWithQProperty", 
    [IsGroup, IsFunction, IsFunction, IsObject]);
+
+
+############################################################################
+##
+#O  AllNormalSubgroupsWithQPropertyUnderAction 
+#O                                 (<grp>, <act>, <pretest>, <test>, <data>)
+##
+##  See the manual.
+##
+DeclareOperation ("AllNormalSubgroupsWithQPropertyUnderAction", 
+   [IsGroup, IsListOrCollection, IsFunction, IsFunction, IsObject]);
 
 
 ############################################################################
