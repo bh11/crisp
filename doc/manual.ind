@@ -8,8 +8,8 @@
   attributes, of Fitting classes, 22
     \sub of Fitting sets, 22
     \sub of formation, 16
-    \sub of group classes, 11
-    \sub of primitive solvable group, 14
+    \sub of group classes, 10
+    \sub of primitive solvable group, 13
     \sub of Schunck class, 12
 \letter B
   `Basis', 12
@@ -17,7 +17,7 @@
   `BoundaryFunction', 13
 \letter C
   Carter subgroup, 24
-  `Characteristic', 11
+  `Characteristic', 10
   class, of all $p$-groups, 24
     \sub of all $\pi $-groups, 24
     \sub of all abelian groups, 24
@@ -31,7 +31,7 @@
   closure properties, of group classes, 8
   comparison, for classes, 5
   `Complement', 5
-  `ContainsTrivialGroup', 9
+  `ContainsTrivialGroup', 8
   `CoveringSubgroup', 13
   CRISP, 3
 \letter D
@@ -54,14 +54,14 @@
   `FittingFormationProduct', 15, 19
   `FittingProduct', 19
   `FittingSet', 20
-  FORMAT share package, 3
+  FORMAT package, 3
   `FormationProduct', 15
   formations, attributes for, 16
     \sub creating, 14
     \sub creating Fitting formations, 20
     \sub operations for, 16
 \letter G
-  group classes, attributes for, 11
+  group classes, attributes for, 10
     \sub closure properties of, 8
     \sub creation, 7
     \sub properties of, 9
@@ -69,15 +69,15 @@
 \letter H
   `HasIsFittingClass', 9
   `HasIsFittingFormation', 10
-  `HasIsFormation', 10
-  `HasIsOrdinaryFormation', 10
+  `HasIsFormation', 9
+  `HasIsOrdinaryFormation', 9
   `HasIsSaturatedFittingFormation', 10
   `HasIsSaturatedFormation', 10
 \letter I
   `ImageFittingSet', 21
   `in', 5
   `Injector', 22
-  `InjectorFunction', 23
+  `InjectorFunction', 22
   `Intersection', of classes, 5
     \sub of Fitting sets, 21
     \sub of group classes, 8
@@ -93,14 +93,14 @@
   `IsNormalProductClosed', 9
   `IsNormalSubgroupClosed', 9
   `IsOrdinaryFormation', 10
-  `IsPrimitiveSolvable', 14
+  `IsPrimitiveSolvable', 13
   `IsQuotientClosed', 9
   `IsResiduallyClosed', 9
   `IsSaturated', 9
   `IsSaturatedFittingFormation', 10
   `IsSaturatedFormation', 10
   `IsSchunckClass', 9
-  `IsSubgroupClosed', 9
+  `IsSubgroupClosed', 8
 \letter L
   lattice operations, for classes, 5
   `LocalDefinitionFunction', 16
@@ -125,10 +125,10 @@
   `PGroups', 24
   `PiGroups', 24
   `PreImageFittingSet', 21
-  primes, set of all, 25
-  primitive solvable group, attributes of, 14
+  primes, set of all, 24
+  primitive solvable group, attributes of, 13
   `Print', for classes, 5
-  `Projector', 13
+  `Projector', 12
   `ProjectorFunction', 13
   properties, of classes, 5
     \sub of group classes, 9
@@ -144,14 +144,15 @@
     \sub creating, 12
     \sub operations for, 12
   `SchunckClass', 12
-  set, of all primes, 25
+  set, of all primes, 24
   `SetIsFittingClass', 9
   `SetIsFittingFormation', 10
   `SetIsFormation', 10
   `SetIsOrdinaryFormation', 10
   `SetIsSaturatedFittingFormation', 10
   `SetIsSaturatedFormation', 10
-  `SocleComplement', 14
+  `Socle', 23
+  `SocleComplement', 13
   supersolvable groups, class of, 24
   `SupersolvableProjector', 24
 \letter T
