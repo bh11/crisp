@@ -18,7 +18,6 @@ zoo ach crisp crisp/doc/manual.six <crisp/text_comment
 zoo ach crisp crisp/doc/manual.tex <crisp/text_comment
 zoo ach crisp crisp/doc/manual.tst <crisp/text_comment
 zoo ach crisp crisp/doc/schunck.tex <crisp/text_comment
-zoo ach crisp crisp/lib/banner.g <crisp/text_comment
 zoo ach crisp crisp/lib/classes.gd <crisp/text_comment
 zoo ach crisp crisp/lib/classes.gi <crisp/text_comment
 zoo ach crisp crisp/lib/compl.gd <crisp/text_comment
