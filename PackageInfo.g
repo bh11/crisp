@@ -1,22 +1,23 @@
 #############################################################################
 ##  
-##  Pkginfo.g for CRISP package                            (Burkhard Hšfling)
+##  Packageinfo.g for CRISP package                            (Burkhard Hšfling)
 ##
-##  adapted from PkgInfo.g template by Frank LŸbeck
+##  adapted from PackageInfo.g template by Frank LŸbeck
 ##  
 
 SetPackageInfo( rec(
 
 ##  This is case sensitive, use your preferred spelling.
 
-PkgName := "CRISP",
+PackageName := "CRISP",
+Subtitle := "Computing with Radicals, Injectors, Schunck classes and Projectors",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers.
 Version := "1.2",
 
 ##  Release date of the current version in dd/mm/yyyy format.
-Date := "??/??/????",
+Date := "23/06/2003",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -136,7 +137,7 @@ AcceptDate := "12/2000",
 ##  and updating of the package in the GAP distribution.
 ##  
 README_URL := "http://www.tu-bs.de/~bhoeflin/crisp/README.crisp-1r2",
-PkgInfoURL := "http://www.tu-bs.de/~bhoeflin/crisp/PkgInfo.g",
+PackageInfoURL := "http://www.tu-bs.de/~bhoeflin/crisp/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -187,8 +188,8 @@ PackageDoc := rec(
   BookName := "CRISP",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   # Archive := "http://www.math.rwth-aachen.de/~Frank.Luebeck/EDIM/edimdoc-1p1.tar.bz2",
-  Archive := "http://www.tu-bs.de/~bhoefling/crisp/crisp-1r2",
-  HTMLStart := "htm/chapters.html",
+  ArchiveURLSubset := ["doc", "htm"],
+  HTMLStart := "htm/index.html",
   PDFFile := "doc/manual.pdf",
   # the path to the .six file used by GAP's help system
   SixFile := "doc/manual.six",
@@ -197,7 +198,7 @@ PackageDoc := rec(
   LongTitle := "Computing Radicals, Injectors, Projectors of solvable groups",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
-  AutoLoad := true
+  Autoload := true
 ),
 
 
