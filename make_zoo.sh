@@ -62,6 +62,7 @@ zoo ach crisp crisp/tst/radicals.g <crisp/text_comment
 zoo ach crisp crisp/tst/Readme-Tests.txt <crisp/text_comment
 zoo ach crisp crisp/tst/residuals.g <crisp/text_comment
 zoo ach crisp crisp/tst/samples.g <crisp/text_comment
+zoo ach crisp crisp/tst/socle.g <crisp/text_comment
 zoo ach crisp crisp/tst/timing_injectors.g <crisp/text_comment
 zoo ach crisp crisp/tst/timing_normals.g <crisp/text_comment
 zoo ach crisp crisp/tst/timing_normpro.g <crisp/text_comment
@@ -69,6 +70,7 @@ zoo ach crisp crisp/tst/timing_projectors.g <crisp/text_comment
 zoo ach crisp crisp/tst/timing_radicals.g <crisp/text_comment
 zoo ach crisp crisp/tst/timing_residuals.g <crisp/text_comment
 zoo ach crisp crisp/tst/timing_samples.g <crisp/text_comment
+zoo ach crisp crisp/tst/timing_socle.g <crisp/text_comment
 zoo ach crisp crisp/tst/timing_test.g <crisp/text_comment
 zoo ach crisp crisp/htm/biblio.htm <crisp/text_comment
 zoo ach crisp crisp/htm/CHAP001.htm <crisp/text_comment
