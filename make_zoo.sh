@@ -1,5 +1,6 @@
 #! /bin/sh
 cd ../
+rm crisp.zoo
 zoo ach crisp crisp/init.g <crisp/text_comment
 zoo ach crisp crisp/read.g <crisp/text_comment
 zoo ach crisp crisp/doc/classes.tex <crisp/text_comment
@@ -70,33 +71,12 @@ zoo ach crisp crisp/tst/timing_residuals.g <crisp/text_comment
 zoo ach crisp crisp/tst/timing_samples.g <crisp/text_comment
 zoo ach crisp crisp/tst/timing_test.g <crisp/text_comment
 zoo ach crisp crisp/htm/biblio.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C001S000.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C002S000.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C002S001.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C002S002.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C002S003.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C003S000.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C003S001.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C003S002.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C003S003.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C003S004.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C004S000.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C004S001.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C004S002.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C004S003.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C004S004.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C004S005.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C004S006.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C005S000.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C005S001.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C005S002.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C005S003.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C005S004.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C005S005.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C006S000.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C006S001.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C006S002.htm <crisp/text_comment
-zoo ach crisp crisp/htm/C006S003.htm <crisp/text_comment
+zoo ach crisp crisp/htm/CHAP001.htm <crisp/text_comment
+zoo ach crisp crisp/htm/CHAP002.htm <crisp/text_comment
+zoo ach crisp crisp/htm/CHAP003.htm <crisp/text_comment
+zoo ach crisp crisp/htm/CHAP004.htm <crisp/text_comment
+zoo ach crisp crisp/htm/CHAP005.htm <crisp/text_comment
+zoo ach crisp crisp/htm/CHAP006.htm <crisp/text_comment
 zoo ach crisp crisp/htm/chapters.htm <crisp/text_comment
 zoo ach crisp crisp/htm/theindex.htm <crisp/text_comment
 zoo ach crisp crisp/htm/index.htm <crisp/text_comment
