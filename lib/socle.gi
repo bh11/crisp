@@ -21,7 +21,7 @@ RequirePackage ("crisp");
 InstallMethod (Socle, 
    "for solvable group", true, 
    [IsGroup and IsSolvableGroup and IsFinite], 
-   RankFilter (IsPermGroup),
+   0,
    function( G )
 
       local i, pcgs, pcgssoc, socdepths, L, x, ser, n;
@@ -56,18 +56,56 @@ InstallMethod (Socle,
 
 #############################################################################
 ##
-#M  Socle
+#M  Socle (<G>) 
+##
+InstallMethod (Socle, 
+   "for solvable group with known Fitting subgroup", true, 
+   [IsGroup and IsSolvableGroup and IsFinite and HasFittingSubgroup], 
+   0,
+   function( G )
+
+      local i, pcgs, pcgssoc, socdepths, L, x, ser, n;
+      
+      pcgs := ParentPcgs (Pcgs (G));
+      
+      if IsTrivial (G) then
+         return G;
+      fi;
+
+      pcgssoc := [];
+      socdepths := [];
+      
+      ser := ChiefSeriesUnderAction (G, FittingSubgroup (G));
+      n := Length (ser);
+
+      for i in [n-1, n-2..1] do
+         Info (InfoComplement, 1, "starting step ",i);
+         L := ComplementsMaximalUnderAction (G, ser, i, i+1, n, false);
+         if L <> fail then
+            for x in Pcgs (L) do
+                if not AddPcElementToPcSequence (pcgs, pcgssoc, socdepths, x) then
+                   Error ("Internal error in method for `Socle' for soluble gorups");
+                fi;
+            od;
+         fi;
+      od;
+      pcgssoc := InducedPcgsByPcSequenceNC (pcgs, pcgssoc);
+      return GroupOfPcgs (pcgssoc);
+   end);
+
+
+#############################################################################
+##
+#M  Socle (<G>) 
 ##
 RedispatchOnCondition (Socle, true, 
    [IsGroup], 
-   [IsFinite and IsSolvableGroup], 
-   RankFilter (IsPermGroup)+1); # the perm group method produces warnings
-      # or even errors when it cannot compute the socle
+   [IsFinite and IsSolvableGroup], 0);
    
    
 #############################################################################
 ##
-#M  Socle
+#M  Socle (<G>) 
 ##
 InstallMethod (Socle,
    "handled by nice monomorphism",
