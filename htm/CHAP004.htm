@@ -1,0 +1,532 @@
+<html><head><title>[CRISP] 4 Schunck classes and formations</title></head>
+<body text="#000000" bgcolor="#ffffff">
+[<a href="index.htm">Top</a>] [<a href = "chapters.htm">Up</a>] [<a href ="CHAP003.htm">Previous</a>] [<a href ="CHAP005.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
+<h1>4 Schunck classes and formations</h1><p>
+<P>
+<H3>Sections</H3>
+<oL>
+<li> <A HREF="CHAP004.htm#SECT001">Creating Schunck classes</a>
+<li> <A HREF="CHAP004.htm#SECT002">Attributes and operations for Schunck classes</a>
+<li> <A HREF="CHAP004.htm#SECT003">Additional attributes for primitive solvable groups</a>
+<li> <A HREF="CHAP004.htm#SECT004">Creating formations</a>
+<li> <A HREF="CHAP004.htm#SECT005">Attributes and operations for formations</a>
+<li> <A HREF="CHAP004.htm#SECT006">Functions for normal and characteristic subgroups</a>
+<li> <A HREF="CHAP004.htm#SECT007">Low level functions for normal subgroups related to residuals</a>
+</ol><p>
+<p>
+In principle, any group class can be created as generic (group) class,
+followed by setting the required properties and attributes described in the
+preceding chapters. For certain standard kinds of group classes, there are additional
+functions available to accomplish this task, which are described in this and the
+following chapter.
+<p>
+<p>
+<a name="SECT001"><h2>4.1 Creating Schunck classes</h2></a>
+<p><p>
+<a name = "I0"></a>
+
+A class <font face="helvetica"><i>C</i></font> of finite groups is a <strong>Schunck class</strong> if a finite group
+<i>G</i> belongs to <font face="helvetica"><i>C</i></font> if and only if all its primitive factor groups
+belong to <font face="helvetica"><i>C</i></font>. In particular, a Schunck class is nonempty and closed
+with respect to factor groups. By definition, a Schunck class <font face="helvetica"><i>C</i></font> is
+determined by the primitive groups which it contains (the basis of <font face="helvetica"><i>C</i></font>),
+or by the primitive groups not in <font face="helvetica"><i>C</i></font> but all of whose proper factor
+groups belong to <font face="helvetica"><i>C</i></font> (the boundary of <font face="helvetica"><i>C</i></font>).
+<p>
+<a name = "SSEC001.1"></a>
+<li><code>SchunckClass(</code><var>rec</var><code>) O</code>
+<p>
+returns a Schunck class defined by the information stored in the record
+<var>rec</var>. Note that it is the user's responsibility to ensure that <var>rec</var> really
+defines a Schunck class. <var>rec</var> may have the following components: <code>\in</code>,
+<code>proj</code>, <code>bound</code>, <code>char</code>, and <code>name</code>. The values bound to these entries, if
+present, are stored, respectively, in the attributes <code>MemberFunction</code>, 
+<code>ProjectorFunction</code>, <code>BoundaryFunction</code>, <code>Characteristic</code>, and <code>Name</code>.
+Please refer to <a href="CHAP002.htm#SSEC002.2">MemberFunction</a>, 
+<a href="CHAP004.htm#SSEC002.6">ProjectorFunction</a>, <a href="CHAP004.htm#SSEC002.5">BoundaryFunction</a>, <a href="CHAP003.htm#SSEC004.1">Characteristic</a>, and <a href="../../../doc/htm/ref/CHAP012.htm#SSEC008.2">Name</a>
+for the meaning of these attributes.
+<p>
+At least one of the attributes <code>MemberFunction</code>, <code>ProjectorFunction</code>, or
+<code>BoundaryFunction</code> must be present in order to be able to compute
+with a Schunck class. 
+<p>
+<pre>
+gap&gt; nilp := SchunckClass (rec (bound := G -&gt; not IsCyclic (G),
+&gt;        name := "class of all nilpotent groups"));
+class of all nilpotent groups
+gap&gt; DihedralGroup (8) in nilp;
+true
+gap&gt; SymmetricGroup (3) in nilp;
+false
+</pre>
+<p>
+<p>
+<a name="SECT002"><h2>4.2 Attributes and operations for Schunck classes</h2></a>
+<p><p>
+<a name = "I1"></a>
+
+<a name = "I2"></a>
+
+<a name = "I3"></a>
+
+<a name = "I4"></a>
+
+In addition to the attributes and operations for generic group classes,
+for Schunck classes also the following are available:
+<p>
+<a name = "SSEC002.1"></a>
+<li><code>Boundary(</code><var>class</var><code>) A</code>
+<p>
+computes the boundary of <var>class</var>, i.&nbsp;e., the class of all
+primitive groups which do not belong to <var>class</var> but whose proper
+factor groups do. The result is a group class. 
+<p>
+<a name = "SSEC002.2"></a>
+<li><code>Basis(</code><var>class</var><code>) A</code>
+<p>
+The basis of <var>class</var> consists of the primitive solvable 
+groups in <var>class</var>. The result is a group class. 
+<p>
+<a name = "SSEC002.3"></a>
+<li><code>Projector(</code><var>grp</var><code>, </code><var>class</var><code>) O</code>
+<p>
+This function returns a <var>class</var>-projector of <var>grp</var>.
+Note that, at present, methods are only available for finite
+solvable groups <var>grp</var>, or when <var>class</var> has an attribute <code>ProjectorFunction</code>.
+<p>
+A subgroup 
+<i>H</i> of the group <i>G</i> is a <var>class</var>-projector of <i>G</i> if <i>H</i> <i>N</i>/<i>N</i> is
+<var>class</var>-maximal in <i>G</i>/<i>N</i> for all normal subgroups <i>N</i> of&nbsp;<i>G</i>. A subgroup <i>H</i>
+of <i>G</i> is <var>class</var>-maximal in <i>G</i> if <i>H</i> belongs to <var>class</var>, and there is no
+subgroup <i>L</i> of <i>G</i> which contains <i>H</i> and lies in <var>class</var>. Note that if
+<var>class</var> consists of finite solvable groups, then <var>class</var>-projectors exist in
+every finite solvable group if and only if <var>class</var> is a Schunck class, and in
+this case all <var>class</var>-projectors of
+<i>G</i> are conjugate. See <a href="biblio.htm#DH92"><cite>DH92</cite></a>, III,&nbsp;3.21.
+<p>
+<pre>
+gap&gt; H := SchunckClass (rec (bound := G -&gt; Size (G) = 6));
+SchunckClass (bound:=function( G ) ... end)
+gap&gt; Size (Projector (GL(2,3), H)); 
+16 
+gap&gt; # H-projectors coincide with Sylow subgroups
+gap&gt; U := SchunckClass (rec ( # class of all supersolvable groups
+&gt;    bound := G -&gt; not IsPrimeInt ( Size (Socle (G)))
+&gt; )); 
+SchunckClass (bound:=function( G ) ... end)
+gap&gt; Size (Projector (SymmetricGroup (4), U));
+6 
+gap&gt; # the projectors are the point stabilizers
+</pre>
+<p>
+<a name = "SSEC002.4"></a>
+<li><code>CoveringSubgroup(</code><var>grp</var><code>, </code><var>class</var><code>) O</code>
+<p>
+A subgroup <i>H</i> of <i>G</i> is a <var>class</var>-covering subgroup of <i>G</i> if <i>H</i> is a
+<var>class</var>-projector of <i>L</i> for every subgroup <i>L</i> with <i>H</i>  <font face="symbol">£</font> <i>L</i>  <font face="symbol">£</font> <i>G</i>.
+Note that projectors and covering subgroups coincide for Schunck classes of
+finite solvable groups. At present, methods are only available for finite
+solvable groups <var>grp</var>.
+<p>
+<a name = "SSEC002.5"></a>
+<li><code>BoundaryFunction(</code><var>grpclass</var><code>) A</code>
+<p>
+This attribute stores a function <var>func</var> which has been set by the 
+user to define <var>grpclass</var>, either as an argument to <code>SchunckClass</code>, 
+<code>SaturatedFormation</code>, or <code>FittingFormation</code> (see <a href="CHAP004.htm#SSEC001.1">SchunckClass</a>, 
+<a href="CHAP004.htm#SSEC004.2">SaturatedFormation</a>, or <a href="CHAP005.htm#SSEC002.1">FittingFormation</a>), or has been set directly
+(see <a href="../../../doc/htm/ref/CHAP013.htm#SSEC006.2">Setter</a>). <var>func</var> must be a function taking one argument.
+If the argument is a finite solvable group <i>G</i> having attributes 
+<code>Socle</code> and <code>SocleComplement</code> (see Section <a href="CHAP004.htm#SECT003">Additional attributes for  primitive solvable groups</a> below), <var>func</var> must  return <code>true</code> if <i>G</i> 
+is in the boundary of <var>grpclass</var>, and <code>false</code> if <i>G</i> belongs to 
+<var>grpclass</var>. The behaviour for arguments which are not primitive 
+solvable groups, or which  belong neither to <var>grpclass</var> nor to the 
+boundary of <var>grpclass</var> need not be defined. Note that 
+<code>BoundaryFunction</code> should <strong>not</strong> be used to test whether a given group 
+belongs to the boundary of <var>grpclass</var>. <code>Boundary</code> and/or <code>Basis</code> (see 
+<a href="CHAP004.htm#SSEC002.1">Boundary</a> and <a href="CHAP004.htm#SSEC002.2">Basis</a>), which are defined independently of the way 
+<var>grpclass</var> is defined.
+<p>
+<a name = "SSEC002.6"></a>
+<li><code>ProjectorFunction(</code><var>grpclass</var><code>) A</code>
+<p>
+If bound, <code>ProjectorFunction</code> stores a function <var>func</var> supplied by the
+user as part of the definition of <var>grpclass</var>. <var>func</var> must be a function
+taking a group
+<i>G</i> as the only argument, and returns a <var>grpclass</var>-projector of <i>G</i>.  Note that
+<code>Projector</code> (see <a href="CHAP004.htm#SSEC002.3">Projector</a>),
+rather than <code>ProjectorFunction</code>, should be used by the user to compute
+<var>grpclass</var>-projectors.
+<p>
+<p>
+<a name="SECT003"><h2>4.3 Additional attributes for primitive solvable groups</h2></a>
+<p><p>
+<a name = "I5"></a>
+
+<a name = "I6"></a>
+
+A finite group <i>G</i> is <strong>primitive</strong> if it has a faithful primitive permutation 
+representation, or equivalently, if it has a maximal subgroup <i>M</i> with trivial 
+core. If <i>G</i> is solvable, <i>M</i> complements the unique minimal normal subgroup
+<i>N</i> of <i>G</i>. Therefore <i>N</i> is the socle as well as the Fitting subgroup of
+<var>grp</var>.
+<p>
+<a name = "SSEC003.1"></a>
+<li><code>IsPrimitiveSolvable(</code><var>grp</var><code>) P</code>
+<p>
+returns true if <var>grp</var> is primitive and solvable, and false otherwise.
+<p>
+<a name = "SSEC003.2"></a>
+<li><code>SocleComplement(</code><var>grp</var><code>) A</code>
+<p>
+If present, this attribute stores a complement of the socle of <var>grp</var>.
+Currently, there is only a method available for <code>SocleComplement</code>
+if <var>grp</var> has the property <code>IsPrimitiveSolvable</code>.
+<p>
+<p>
+<a name="SECT004"><h2>4.4 Creating formations</h2></a>
+<p><p>
+<a name = "I7"></a>
+
+A nonempty group class is a  formation if it is closed with respect to factor
+groups and residually closed. A saturated formation is, of course, a
+formation which is saturated. Note that by the
+Gasch&uuml;tz-Lubeseder-Schmid theorem (see e.&nbsp;g. <a href="biblio.htm#DH92"><cite>DH92</cite></a>, IV,
+4.6), every saturated formation is a local formation. Moreover, every
+saturated formation is a Schunck class. Therefore a saturated formation
+admits the operations <code>Boundary</code>, <code>Basis</code>, and <code>Projector</code>.
+<p>
+<a name = "SSEC004.1"></a>
+<li><code>OrdinaryFormation(</code><var>rec</var><code>) O</code>
+<p>
+creates a formation from the record <var>rec</var>. Note that it is the user's responsibility to ensure that <var>rec</var> really
+defines a formation. <var>rec</var> may have components <code>\in</code>,
+<code>res</code>, <code>char</code>, and <code>name</code>, whose values are stored in the attributes
+<code>MemberFunction</code>, <code>ResidualFunction</code>, <code>Characteristic</code>, and
+<code>Name</code>, respectively, of the new formation. See <a href="CHAP002.htm#SSEC002.2">MemberFunction</a>, <a href="CHAP004.htm#SSEC005.2">ResidualFunction</a>,
+<a href="CHAP003.htm#SSEC004.1">Characteristic</a>, and <a href="../../../doc/htm/ref/CHAP012.htm#SSEC008.2">Name</a>, respectively, for the meaning of these attributes.
+<p>
+The following example shows how to construct the formations of all groups of 
+derived length at most 3 and of all groups of exponent dividing 6.
+<p>
+<pre>
+gap&gt; der3 := OrdinaryFormation (rec (
+&gt;    res := G -&gt; DerivedSubgroup (DerivedSubgroup (DerivedSubgroup (G)))
+&gt; ));
+OrdinaryFormation (res:=function( G ) ... end)
+gap&gt; SymmetricGroup (4) in der3;
+true
+gap&gt; GL (2,3) in der3;
+false
+gap&gt; exp6 := OrdinaryFormation (rec (
+&gt;    \in := G -&gt; 6 mod Exponent (G) = 0,
+&gt;    char := [2,3]));
+OrdinaryFormation (in:=function( G ) ... end)
+</pre>
+<p>
+<a name = "SSEC004.2"></a>
+<li><code>SaturatedFormation(</code><var>rec</var><code>) O</code>
+<p>
+creates a saturated formation from the record <var>rec</var>. Note that it is the user's
+responsibility to ensure that <var>rec</var> really defines a saturated formation. <var>rec</var> may have
+any components admissible for formations (see <a href="CHAP004.htm#SSEC004.1">OrdinaryFormation</a>) or Schunck classes
+(see <a href="CHAP004.htm#SSEC001.1">SchunckClass</a>), that is, <code>\in</code>, <code>res</code>, <code>char</code>, <code>proj</code>, <code>bound</code>, <code>locdef</code>, and
+<code>name</code>,  whose values, if bound, are stored in the attributes <code>MemberFunction</code>,
+<code>ResidualFunction</code>, <code>Characteristic</code>,  <code>ProjectorFunction</code>, <code>BoundaryFunction</code>,
+<code>LocalDefinitionFunction</code>, and <code>Name</code>, respectively.  Please refer to <a href="CHAP002.htm#SSEC002.2">MemberFunction</a>, 
+<a href="CHAP004.htm#SSEC005.2">ResidualFunction</a>, <a href="CHAP003.htm#SSEC004.1">Characteristic</a>,  <a href="CHAP004.htm#SSEC002.6">ProjectorFunction</a>, <a href="CHAP004.htm#SSEC002.5">BoundaryFunction</a>,
+<a href="CHAP004.htm#SSEC005.3">LocalDefinitionFunction</a>,  and <a href="../../../doc/htm/ref/CHAP012.htm#SSEC008.2">Name</a> for the meaning of these attributes.
+<p>
+There are also functions <code>FittingFormation</code> and <code>SaturatedFittingFormation</code> to create
+Fitting formations and saturated Fitting formations; see
+ <a href="CHAP005.htm#SSEC002.1">FittingFormation</a> and <a href="CHAP005.htm#SSEC002.2">SaturatedFittingFormation</a> below for details. 
+<p>
+The following example shows how to construct the saturated formations of all finite
+nilpotent groups and of all nilpotent-by-abelian groups whose order is not divisible by a
+prime congruent 3 mod 4, and whose 2-chief factors are central. In the first case, we
+choose <i>f</i>(<i>p</i>) = (1) for all primes <i>p</i>, so that the <i>f</i>(<i>p</i>)-residual of <i>G</i> is generated
+by a generating set of <i>G</i> (see <a href="CHAP004.htm#SSEC005.3">LocalDefinitionFunction</a> below). In the second example,
+we let <i>f</i>(2) = 1, if <i>p</i>  <font face="symbol">º</font> 3  mod  4, we define <i>f</i>(<i>p</i>) = <font face="helvetica"><i>A</i></font>, the class of
+all finite abelian groups, and set
+<i>f</i>(<i>p</i>) = <font face="symbol">Æ</font> otherwise.
+<p>
+<pre>
+gap&gt; nilp := SaturatedFormation (rec (
+&gt;      locdef := function (G, p)
+&gt;          return SmallGeneratingSet (G);
+&gt;      end));
+SaturatedFormation (locdef:=function( G, p ) ... end)
+gap&gt; form := SaturatedFormation (rec (
+&gt;    locdef := function (G, p)
+&gt;        if p = 2 then
+&gt;           return SmallGeneratingSet (G);
+&gt;        elif p mod 4 = 3 then
+&gt;           return SmallGeneratingSet (DerivedSubgroup (G));
+&gt;        else
+&gt;           return fail;
+&gt;        fi;
+&gt;     end));
+SaturatedFormation (locdef:=function( G, p ) ... end)
+gap&gt; Projector (GL(2,3), form);
+Group([ [ [ Z(3), 0*Z(3) ], [ 0*Z(3), Z(3)^0 ] ], 
+  [ [ Z(3)^0, Z(3) ], [ 0*Z(3), Z(3)^0 ] ], 
+  [ [ Z(3), 0*Z(3) ], [ 0*Z(3), Z(3) ] ] ])
+</pre>
+<p>
+<a name = "SSEC004.3"></a>
+<li><code>FormationProduct(</code><var>form1</var><code>, </code><var>form2</var><code>) O</code>
+<p>
+The formation product <var>prod</var> of two formations <var>form1</var> and <var>form2</var> 
+consists  of the groups <i>G</i> such that the <var>form2</var>-residual of <i>G</i> belongs to
+<var>form1</var>. The product <var>prod</var> is again a formation. If <var>form1</var>
+and <var>form2</var> are saturated formations, the result is a saturated
+formation. The same is true if the characteristic of <var>form2</var> is contained in
+that of <var>form1</var>. This is automatically recognised if the characteristic of
+<var>form1</var> is <code>AllPrimes</code> (see <a href="CHAP006.htm#SSEC003.1">AllPrimes</a>). In all other cases, you
+will have to set the attribute <code>IsSaturated</code> manually, if applicable. Note
+that in general it is not possible for <font face="Gill Sans,Helvetica,Arial">CRISP</font> to determine if two classes
+are contained in each other.
+<p>
+<pre>
+gap&gt; nilp := SaturatedFormation (rec (\in := IsNilpotent, name := "nilp"));
+nilp
+gap&gt; FormationProduct (nilp, der3); # no characteristic known
+FormationProduct (nilp, OrdinaryFormation (res:=function( G ) ... end))
+gap&gt; HasIsSaturated (last);HasCharacteristic (nilp);
+false
+false
+gap&gt; SetCharacteristic (nilp, AllPrimes);
+gap&gt; FormationProduct (nilp, der3); # try with characteristic
+FormationProduct (nilp, OrdinaryFormation (res:=function( G ) ... end))
+gap&gt; IsSaturated (last);
+true
+</pre>
+<p>
+<a name = "SSEC004.4"></a>
+<li><code>FittingFormationProduct(</code><var>fitform1</var><code>, </code><var>fitform2</var><code>) O</code>
+<p>
+If <var>fitform1</var> and <var>fitform2</var>  are Fitting formations, the formation product
+equals the Fitting product (see <a href="CHAP005.htm#SSEC001.2">FittingProduct</a>) of <var>fitform1</var> and
+<var>fitform2</var>, which, in turn, equals the class product of <var>fitform1</var> and
+<var>fitform2</var>. The latter consists of all groups <var>G</var> having a  normal subgroup
+<var>N</var> in <var>fitform1</var> such that <i>G</i> /<i>N</i>  belongs to <var>fitform2</var>.
+<p>
+Note that if <var>fitform1</var> and <var>fitform2</var> are Fitting formations, then 
+<code>FormationProduct(</code><var>fitform1</var><code>, </code><var>fitform2</var><code>)</code>, <code>FittingProduct(</code><var>fitform1</var><code>,
+</code><var>fitform2</var><code>)</code> and <code>FittingFormationProduct(</code><var>fitform1</var><code>, </code><var>fitform2</var><code>)</code> all
+return the same mathematical object (but distinct GAP objects), which is,
+again, a Fitting formation.
+<p>
+<pre>
+gap&gt; nilp := FittingFormation (rec (\in := IsNilpotent, name := "nilp"));;
+gap&gt; FormationProduct (nilp, nilp);
+FittingFormationProduct (nilp, nilp)
+gap&gt; FittingProduct (nilp, nilp);
+FittingFormationProduct (nilp, nilp)
+gap&gt; FittingFormationProduct (nilp, nilp);
+FittingFormationProduct (nilp, nilp)
+</pre>
+<p>
+<p>
+<a name="SECT005"><h2>4.5 Attributes and operations for formations</h2></a>
+<p><p>
+<a name = "I8"></a>
+
+<a name = "I9"></a>
+
+<a name = "I10"></a>
+
+<a name = "I11"></a>
+
+In addition to those available for generic group classes, formations also
+admit the following attributes and operations. See also <a href="CHAP004.htm#SECT002">Attributes and operations for Schunck classes</a> for additional operations for saturated
+formations. 
+<p>
+<a name = "SSEC005.1"></a>
+<li><code>Residual(</code><var>grp</var><code>, </code><var>form</var><code>) O</code>
+<p>
+returns the <var>form</var>-residual of the group <var>grp</var>, i.&nbsp;e., the smallest
+normal subgroup <var>res</var> of <var>grp</var> such that <i>grp</i> /<i>res</i>  belongs to <var>form</var>.
+Note that, unless <var>form</var>
+has an attribute <code>ResidualFunction</code>, there are presently only methods
+available for finite solvable groups.
+<p>
+<a name = "SSEC005.2"></a>
+<li><code>ResidualFunction(</code><var>form</var><code>) A</code>
+<p>
+This attribute is part of the definition of <var>form</var> supplied by the user. If
+present, it must contain a function which computes the <var>form</var>-residual of a given group.
+In general, such a residual only exists if <var>form</var> is residually closed; cf.
+<a href="CHAP003.htm#SSEC002.6">IsResiduallyClosed</a>. Note that <code>ResidualFunction</code>, if present, is called by <code>Residual</code>
+(see <a href="CHAP004.htm#SSEC005.1">Residual</a>). Therefore <code>Residual</code>, which also works for formations without
+<code>ResidualFunction</code>, should be used by the user to compute <var>form</var>-residuals.
+<p>
+<a name = "SSEC005.3"></a>
+<li><code>LocalDefinitionFunction(</code><var>form</var><code>) A</code>
+<p>
+Let <var>form</var> be a saturated formation with local function&nbsp;<i>f</i>. This attribute,
+if present, stores a function <var>func</var> supplied by the user as part of the
+definition of <var>form</var>. <var>func</var> must be a function taking two parameters, a group
+<i>G</i> and a prime <i>p</i>. If <i>p</i> is in the characteristic of <var>form</var>, this
+function must return a list <var>list</var> of elements of
+<i>G</i>, such that the smallest normal subgroup of <i>G</i> containing <var>list</var> is the
+<i>f</i>(<i>p</i>)-residual of <i>G</i>. If <i>p</i> is not in the characteristic of <var>form</var>, 
+then <code></code><var>func</var><code>(<i>G</i>, <i>p</i>)</code> must return <code>fail</code> for any group <i>G</i>.
+<code>LocalDefinitionFunction</code> is part of the definition of <var>form</var> and should not
+be called by the user. 
+<p>
+<p>
+<a name="SECT006"><h2>4.6 Functions for normal and characteristic subgroups</h2></a>
+<p><p>
+<a name = "SSEC006.1"></a>
+<li><code>NormalSubgroups(</code><var>grp</var><code>) A</code>
+<p>
+<font face="Gill Sans,Helvetica,Arial">CRISP</font> provides an improved method for <code>NormalSubgroups</code> (see
+<a href="../../../doc/htm/ref/CHAP037.htm#SSEC018.7">NormalSubgroups</a>) for groups <var>grp</var> which are finite and  solvable.
+This method simply calls <code>AllInvSgrsWithQPropUnderAction</code> with
+<i>act</i>  = <i>grp</i> , <code>ReturnTrue</code>
+as <var>pretest</var> and <code>ReturnFail</code> as <var>test</var>. Note that, since
+<var>pretest</var> always returns <code>true</code>, <var>test</var> is never actually called.
+This is usually significantly faster than the methods in the <font face="Gill Sans,Helvetica,Arial">GAP</font> library.
+<p>
+<a name = "SSEC006.2"></a>
+<li><code>CharacteristicSubgroups(</code><var>grp</var><code>) A</code>
+<p>
+returns a list containing all characteristic subgroups of <var>grp</var>. 
+<code>CharacteristicSubgroups</code> calls <code>AllInvSgrsWithQPropUnderAction</code>.
+<p>
+<p>
+<a name="SECT007"><h2>4.7 Low level functions for normal subgroups related to residuals</h2></a>
+<p><p>
+<a name = "I12"></a>
+
+<a name = "I13"></a>
+
+<a name = "I14"></a>
+
+<a name = "I15"></a>
+
+<a name = "SSEC007.1"></a>
+<li><code>OneInvariantSubgroupMinWrtQProperty(</code><var>act</var><code>, </code><var>grp</var><code>, </code><var>pretest</var><code>, </code><var>test</var><code>, </code><var>data</var><code>) O</code>
+<p>
+Let <var>act</var> be a list or group whose elements act on <var>grp</var> via the caret operator,
+such that every subgroup of <var>grp</var> invariant under <var>act</var> is normal in <var>grp</var>. 
+Assume that <font face="helvetica"><i>X</i></font> is a set of <var>act</var>-invariant subgroups of <var>grp</var> containing <var>grp</var>, and
+such that whenever
+<i>M</i> and <i>N</i> are <var>act</var>-invariant subgroups with <i>M</i>  <font face="symbol">Î</font> <font face="helvetica"><i>X</i></font> and <i>M</i>
+contained in <i>N</i>, then also <i>N</i>  <font face="symbol">Î</font> <font face="helvetica"><i>X</i></font>. Then
+<code>OneInvariantSubgroupMinWrtQProperty</code> computes an <var>act</var>-invariant subgroup <i>M</i>  <font face="symbol">Î</font> <font face="helvetica"><i>X</i></font>
+such that no <var>act</var>-invariant subgroup of <var>grp</var> contained in <i>M</i> belongs to <font face="helvetica"><i>X</i></font>. 
+At present, there exist only methods for finite solvable groups <var>grp</var>.
+<p>
+The class <font face="helvetica"><i>X</i></font> is described by two functions, <var>pretest</var> and <var>test</var>. 
+<p>
+<var>pretest</var> is a function taking four arguments, <var>U</var>, <var>V</var>, <var>R</var>, and <var>data</var>,
+where <var>data</var> is just the argument passed to
+<code>OneInvariantSubgroupMinWrtQProperty</code> (see below for examples). <i>U</i> /<i>V</i>  is a
+chief factor of <var>grp</var>, and  <var>R</var> is an <var>act</var>-invariant subgroup of <var>grp</var> containing <var>U</var>
+which is known to belong to
+<font face="helvetica"><i>X</i></font>.
+<p>
+<var>pretest</var> may return the values <code>true</code>, <code>false</code>, or <code>fail</code>. If it returns 
+<code>true</code>, every <var>act</var>-invariant subgroup <var>N</var> of <var>grp</var> such that <var>V</var> is
+contained in <i>N</i> and <i>R</i> /<i>N</i>  is
+<i>G</i>-isomorphic with <i>U</i> /<i>V</i>  must belong to <font face="helvetica"><i>X</i></font>. If it returns
+<code>false</code>, no such <var>act</var>-invariant subgroup&nbsp;<i>N</i> may belong to <font face="helvetica"><i>X</i></font>. 
+<p>
+<var>test</var> is a function taking three arguments, <var>S</var>, <var>R</var>, and <var>data</var>, where
+data has been described above. <var>R</var> is a <var>act</var>-invariant subgroup of <var>grp</var> belonging to
+<font face="helvetica"><i>X</i></font>, and <i>R</i> /<i>S</i>  is a chief factor of <var>grp</var>. The function must return
+true if <var>S</var> belongs to <font face="helvetica"><i>X</i></font>, and false otherwise. 
+<p>
+Note that whenever <code></code><var>test</var><code>(</code><var>S</var><code>, </code><var>R</var><code>, </code><var>data</var><code>)</code> is called, 
+<code></code><var>pretest</var><code>(</code><var>U</var><code>, </code><var>V</var><code>, </code><var>R</var><code>, </code><var>data</var><code>)</code> has been called before, and has returned
+<code>fail</code>, where  <i>U</i> /<i>V</i>  is a  chief factor which is <var>G</var>-isomorphic with
+<i>R</i> /<i>S</i> . Thus <var>test</var> need not repeat tests which have been performed by
+<var>pretest</var>. In particular, if <var>pretest</var> always returns <code>true</code> or <code>false</code>,
+<var>test</var> will never be called.
+<p>
+<var>data</var> is never used or changed by <code>OneInvariantSubgroupMinWrtQProperty</code>, but
+exists only as a means for passing additional information to or between
+the functions <var>pretest</var> and <var>test</var>.
+<p>
+For example, if <font face="helvetica"><i>C</i></font> is a group class which is closed with respect to
+factor groups and <font face="helvetica"><i>X</i></font> is the set of all <var>act</var>-invariant subgroups <i>N</i> of <var>grp</var>
+with <i>grp</i> /<i>N</i>  <font face="symbol">Î</font> <font face="helvetica"><i>C</i></font>, then <font face="helvetica"><i>X</i></font> satisfies the above properties. In
+particular, if <font face="helvetica"><i>C</i></font> is a formation, then
+<code>OneInvariantSubgroupMinWrtQProperty</code> will return the <font face="helvetica"><i>C</i></font>-residual of
+<var>grp</var>.
+<p>
+The following example shows how to use <code>OneInvariantSubgroupMinWrtQProperty</code> to
+compute the derived subgroup of a group <i>G</i>. (Note that in practise, this 
+is not a particularly efficient way of computing the derived subgroup.)
+<p>
+<pre>
+gap&gt; G := DirectProduct (SL(2,3), CyclicGroup (2));;
+gap&gt; data := rec (gens := SmallGeneratingSet (G),
+&gt;    comms := List (Combinations (SmallGeneratingSet (G), 2), 
+&gt;       x -&gt; Comm (x[1],x[2])));;
+gap&gt; OneInvariantSubgroupMinWrtQProperty (
+&gt;    G, G,
+&gt;    function (U, V, R, data) # test if U/V is central in G
+&gt;        if ForAny (ModuloPcgs (U, V), y -&gt;
+&gt;           ForAny (data.gens, x -&gt; not Comm (x, y) in V)) then 
+&gt;           return false;
+&gt;        else
+&gt;           return fail;
+&gt;        fi;
+&gt;     end,
+&gt;     function (S, R, data)
+&gt;        return ForAll (data.comms, x -&gt; x in S);
+&gt;     end,
+&gt;     data) = DerivedSubgroup (G); # compare results
+true
+</pre>
+<p>
+<a name = "SSEC007.2"></a>
+<li><code>AllInvariantSubgroupsWithQProperty(</code><var>act</var><code>, </code><var>grp</var><code>, </code><var>pretest</var><code>, </code><var>test</var><code>, </code><var>data</var><code>) O</code>
+<p>
+<code>AllInvariantSubgroupsWithQProperty</code> returns a list consisting of all 
+<var>act</var>-invariant subgroups in <font face="helvetica"><i>X</i></font>, where <font face="helvetica"><i>X</i></font> is the class defined by <var>pretest</var>,
+<var>test</var>, and <var>data</var>, as described for <code>OneInvariantSubgroupMinWrtQProperty</code> (see
+<a href="CHAP004.htm#SSEC007.1">OneInvariantSubgroupMinWrtQProperty</a>). 
+At present, there exist only methods for finite solvable groups <var>grp</var>.
+<p>
+<pre>
+gap&gt; G := GL(2,3);
+GL(2,3)
+gap&gt; normsWithSupersolvableFactorGroups :=
+&gt; AllInvSgrsWithQPropUnderAction (G, G, 
+&gt;    function (U, V, R, data)
+&gt;       return IsPrimeInt (Index (U, V));
+&gt;    end,
+&gt;    ReturnFail, # pretest is sufficient
+&gt;    fail); # no data required
+[ GL(2,3), 
+  Group([ [ [ Z(3)^0, Z(3) ], [ 0*Z(3), Z(3)^0 ] ], [ [ Z(3), Z(3)^0 ], 
+          [ Z(3)^0, Z(3)^0 ] ], [ [ 0*Z(3), Z(3)^0 ], [ Z(3), 0*Z(3) ] ], 
+      [ [ Z(3), 0*Z(3) ], [ 0*Z(3), Z(3) ] ] ]), 
+  Group([ [ [ Z(3), Z(3)^0 ], [ Z(3)^0, Z(3)^0 ] ], 
+      [ [ 0*Z(3), Z(3)^0 ], [ Z(3), 0*Z(3) ] ], 
+      [ [ Z(3), 0*Z(3) ], [ 0*Z(3), Z(3) ] ] ]) ]
+</pre>
+<p>
+<a name = "SSEC007.3"></a>
+<li><code>OneNormalSubgroupMinWrtQProperty(</code><var>grp</var><code>, </code><var>pretest</var><code>, </code><var>test</var><code>, </code><var>data</var><code>) O</code>
+<p>
+<code>OneNormalSubgroupMinWrtQProperty</code> is the same as 
+<code>OneInvariantSubgroupMinWrtQProperty</code> (see
+<a href="CHAP004.htm#SSEC007.1">OneInvariantSubgroupMinWrtQProperty</a>), where <i>act</i>  = <i>grp</i> . 
+<p>
+<a name = "SSEC007.4"></a>
+<li><code>AllNormalSubgroupsWithQProperty(</code><var>grp</var><code>, </code><var>pretest</var><code>, </code><var>test</var><code>, </code><var>data</var><code>) O</code>
+<p>
+<code>AllNormalSubgroupsWithQProperty</code> is the same as 
+<code>AllInvariantSubgroupsWithQProperty</code> (see
+<a href="CHAP004.htm#SSEC007.2">AllInvariantSubgroupsWithQProperty</a>), where <i>act</i>  = <i>grp</i> . 
+<p>
+<p>
+[<a href="index.htm">Top</a>] [<a href = "chapters.htm">Up</a>] [<a href ="CHAP003.htm">Previous</a>] [<a href ="CHAP005.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
+<P>
+<address>CRISP manual<br>March 2002
+</address></body></html>
