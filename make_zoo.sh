@@ -3,13 +3,13 @@ cd ../
 zoo ach crisp crisp/init.g <crisp/text_comment
 zoo ach crisp crisp/read.g <crisp/text_comment
 zoo ach crisp crisp/doc/classes.tex <crisp/text_comment
-zoo ah crisp crisp/doc/crisp.dvi
 zoo ach crisp crisp/doc/examples.tex <crisp/text_comment
 zoo ach crisp crisp/doc/fitting.tex <crisp/text_comment
 zoo ach crisp crisp/doc/grpclass.tex <crisp/text_comment
 zoo ach crisp crisp/doc/intro.tex <crisp/text_comment
 zoo ach crisp crisp/doc/manual.bbl <crisp/text_comment
 zoo ah crisp crisp/doc/manual.dvi
+zoo ah crisp crisp/doc/manual.pdf
 zoo ach crisp crisp/doc/manual.idx <crisp/text_comment
 zoo ach crisp crisp/doc/manual.ind <crisp/text_comment
 zoo ach crisp crisp/doc/manual.six <crisp/text_comment
