@@ -364,38 +364,57 @@ be called by the user.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Functions for normal subgroups related to residuals}\null
+\Section{Functions for normal and characteristic subgroups}\null
+
+\>NormalSubgroups(<grp>) A
+
+{\CRISP} provides an improved method for `NormalSubgroups' (see
+"ref:NormalSubgroups") for groups <grp> which are finite and  solvable.
+This method simply calls `AllInvariantSubgroupsWithQPropertyUnderAction' with
+$<act> = <grp>$, `ReturnTrue'
+as <pretest> and `ReturnFail' as <test>. Note that, since
+<pretest> always returns `true', <test> is never actually called.
+This is usually significantly faster than the methods in the {\GAP} library.
+
+\>CharacteristicSubgroups(<grp>) A
+
+returns a list containing all characteristic subgroups of <grp>. 
+`CharacteristicSubgroups' calls `AllInvariantSubgroupsWithQPropertyUnderAction'.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Low level functions for normal subgroups related to residuals}\null
 
 \index{normal subgroups!related to residuals}
 
-\>OneNormalSubgroupMinWrtQProperty(<grp>, <pretest>, <test>, <data>) O
+\>OneInvariantSubgroupMinWrtQPropertyUnderAction(<act>, <grp>, <pretest>, <test>, <data>) O
 
-Let $\cal X$ be a set of normal subgroups of <grp> containing <grp>, and
-assume that whenever
-$M$ and $N$ are normal subgroups with $M \in \cal X$ and $M$
+Let <act> be a list or group whose elements act on <grp> via the caret operator,
+such that every subgroup of <grp> invariant under <act> is normal in <grp>. 
+Assume that $\cal X$ is a set of <act>-invariant subgroups of <grp> containing <grp>, and
+such that whenever
+$M$ and $N$ are <act>-invariant subgroups with $M \in \cal X$ and $M$
 contained in $N$, then also $N \in \cal X$. Then
-`OneNormalSubgroupMinWrtQProperty' computes a normal subgroup $M \in \cal X$
-such that no normal subgroup of <grp> contained in $M$ belongs to $\cal X$. 
+`OneInvariantSubgroupMinWrtQProperty' computes an <act>-invariant subgroup $M \in \cal X$
+such that no <act>-invariant subgroup of <grp> contained in $M$ belongs to $\cal X$. 
 At present, there exist only methods for finite solvable groups <grp>.
-
 
 The class $\cal X$ is described by two functions, <pretest> and <test>. 
 
 <pretest> is a function taking four arguments, <U>, <V>, <R>, and <data>,
 where <data> is just the argument passed to
-`OneNormalSubgroupMinWrtQProperty' (see below for examples). $<U>/<V>$ is a
-chief factor of <grp>, and  <R> is a normal subgroup of <grp> containing <U>
+`OneInvariantSubgroupMinWrtQProperty' (see below for examples). $<U>/<V>$ is a
+chief factor of <grp>, and  <R> is an <act>-invariant subgroup of <grp> containing <U>
 which is known to belong to
 $\cal X$.
 
 <pretest> may return the values `true', `false', or `fail'. If it returns 
-`true', every normal subgroup <N> of <grp> such that <V> is
+`true', every <act>-invariant subgroup <N> of <grp> such that <V> is
 contained in $N$ and $<R>/<N>$ is
 $G$-isomorphic with $<U>/<V>$ must belong to $\cal X$. If it returns
-`false', no such normal subgroup~$N$ may belong to $\cal X$. 
+`false', no such <act>-invariant subgroup~$N$ may belong to $\cal X$. 
 
 <test> is a function taking three arguments, <S>, <R>, and <data>, where
-data has been described above. <R> is a normal subgroup of <grp> belonging to
+data has been described above. <R> is a <act>-invariant subgroup of <grp> belonging to
 $\cal X$, and $<R>/<S>$ is a chief factor of <grp>. The function must return
 true if <S> belongs to $\cal X$, and false otherwise. 
 
@@ -406,18 +425,18 @@ $<R>/<S>$. Thus <test> need not repeat tests which have been performed by
 <pretest>. In particular, if <pretest> always returns `true' or `false',
 <test> will never be called.
 
-<data> is never used or changed by `OneNormalSubgroupMinWrtQProperty', but
+<data> is never used or changed by `OneInvariantSubgroupMinWrtQPropertyUnderAction', but
 exists only as a means for passing additional information to or between
 the functions <pretest> and <test>.
 
 For example, if $\cal C$ is a group class which is closed with respect to
-factor groups and $\cal X$ is the set of all normal subgroups $N$ of <grp>
+factor groups and $\cal X$ is the set of all <act>-invariant subgroups $N$ of <grp>
 with $<grp>/N \in \cal C$, then $\cal X$ satisfies the above properties. In
 particular, if $\cal C$ is a formation, then
-`OneNormalSubgroupMinWrtQProperty' will return the $\cal C$-residual of
+`OneInvariantSubgroupMinWrtQPropertyUnderAction' will return the $\cal C$-residual of
 <grp>.
 
-The following example shows how to use `OneNormalSubgroupMinWrtQProperty' to
+The following example shows how to use `OneInvariantSubgroupMinWrtQPropertyUnderAction' to
 compute the derived subgroup of a group $G$. (Note that in practise, this 
 is not a particularly efficient way of computing the derived subgroup.)
 
@@ -426,8 +445,8 @@ gap> G := DirectProduct (SL(2,3), CyclicGroup (2));;
 gap> data := rec (gens := SmallGeneratingSet (G),
 >    comms := List (Combinations (SmallGeneratingSet (G), 2), 
 >       x -> Comm (x[1],x[2])));;
-gap> OneNormalSubgroupMinWrtQProperty (
->    G,
+gap> OneInvariantSubgroupMinWrtQPropertyUnderAction (
+>    G, G,
 >    function (U, V, R, data) # test if U/V is central in G
 >        if ForAny (ModuloPcgs (U, V), y ->
 >           ForAny (data.gens, x -> not Comm (x, y) in V)) then 
@@ -443,16 +462,20 @@ gap> OneNormalSubgroupMinWrtQProperty (
 true
 \endexample       
 
-\>AllNormalSubgroupsWithQProperty(<grp>, <pretest>, <test>, <data>) O
 
-`AllNormalSubgroupsWithQProperty' returns a list consisting of all normal
-subgroups in $\cal X$, where $\cal X$ is the class defined by <pretest>,
-<test>, and <data>, as described for `OneNormalSubgroupMaxWrtNProperty'. 
+\>AllInvariantSubgroupsWithQPropertyUnderAction(<act>, <grp>, <pretest>, <test>, <data>) O
+
+`AllInvariantSubgroupsWithQPropertyUnderAction' returns a list consisting of all 
+<act>-invariant subgroups in $\cal X$, where $\cal X$ is the class defined by <pretest>,
+<test>, and <data>, as described for `OneInvariantSubgroupMinWrtQPropertyUnderAction' (see
+"OneInvariantSubgroupMinWrtQPropertyUnderAction"). 
 At present, there exist only methods for finite solvable groups <grp>.
 
 \beginexample
+gap> G := GL(2,3);
+GL(2,3)
 gap> normsWithSupersolvableFactorGroups :=
-> AllNormalSubgroupsWithQProperty (GL(2,3),
+> AllInvariantSubgroupsWithQPropertyUnderAction (G, G, 
 >    function (U, V, R, data)
 >       return IsPrimeInt (Index (U, V));
 >    end,
@@ -467,14 +490,18 @@ gap> normsWithSupersolvableFactorGroups :=
       [ [ Z(3), 0*Z(3) ], [ 0*Z(3), Z(3) ] ] ]) ]
 \endexample
 
-\>NormalSubgroups(<grp>) A
 
-{\CRISP} also provides an improved method for `NormalSubgroups' (see
-"ref:NormalSubgroups") for groups <grp> which are finite and  solvable.
-This method simply calls `AllNormalSubgroupsWithQProperty' (with `ReturnTrue'
-as <pretest> and `ReturnFail' as <test>). Note that, since
-<pretest> always returns `true', <test> is never actually called.
-This is usually significantly faster than the methods in the {\GAP} library.
+\>OneNormalSubgroupMinWrtQProperty(<grp>, <pretest>, <test>, <data>) O
+
+`OneNormalSubgroupMinWrtQProperty' is the same as 
+`OneInvariantSubgroupMinWrtQPropertyUnderAction' (see
+"OneInvariantSubgroupMinWrtQPropertyUnderAction"), where $<act> = <grp>$. 
+
+\>AllNormalSubgroupsWithQProperty(<grp>, <pretest>, <test>, <data>) O
+
+`AllNormalSubgroupsWithQProperty' is the same as 
+`AllInvariantSubgroupsWithQPropertyUnderAction' (see
+"AllInvariantSubgroupsWithQPropertyUnderAction"), where $<act> = <grp>$. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
