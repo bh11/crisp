@@ -82,17 +82,6 @@ DeclareProperty ("IsPrimitiveSolvable", IsGroup);
 
 #############################################################################
 ##
-#A  IndicesElementaryAbelianSteps (<pcgs>)
-##
-##  if the pc series defined by <pcgs> refines an elementary abelian series,
-##  then IndicesElementaryAbelianSteps contains a list of the elements of
-##  the pc series forming such an elementary abelian normal series
-##
-DeclareAttribute ("IndicesElementaryAbelianSteps", IsPcgs);
-
-
-#############################################################################
-##
 #O  SiftedPcElementWrtPcSequence (<pcgs>, <seq>, <depths>, <x>)
 ##
 ##  sifts an element x through a pc sequence <seq> (that is, a plain list

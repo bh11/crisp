@@ -484,7 +484,7 @@ InstallMethod (ChiefSeries,
          TryNextMethod();
       fi;
       
-      inds := IndicesElementaryAbelianSteps (pcgs);
+      inds := IndicesNormalSteps (pcgs);
       elabser := List (inds, 
          i -> InducedPcgsByPcSequence (pcgs, pcgs{[i..Length (pcgs)]}));
       
@@ -513,10 +513,6 @@ InstallGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs",
       local ro, p, new, i, nsteps, j, k,  n, d, 
          npcgs, dpcgs, der, depths, x, m;
       
-      if not IsPrimeOrdersPcgs (pcgs) then
-         TryNextMethod();
-      fi;
-               
       ro := RelativeOrders( pcgs );
       
       i := 1;
@@ -594,7 +590,7 @@ InstallGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs",
          Add (nsteps, n);
          i := n;
       od;
-      SetIndicesElementaryAbelianSteps (pcgs, nsteps);
+      SetIndicesNormalSteps (pcgs, nsteps);
       SetIsPcgsElementaryAbelianSeries (pcgs, true);
       return pcgs;
    end);
@@ -608,8 +604,14 @@ InstallMethod (PcgsElementaryAbelianSeries, "for pc group",
    true,
    [IsPcGroup and IsFinite],
    1, # this makes the priority higher than the (slow) library method which uses SpecialPcgs
-   G  -> PcgsElementaryAbelianSeriesFromGenericPcgs (InducedPcgsWrtFamilyPcgs(G)));
-   
+   function (G)
+      local pcgs;
+      pcgs := Pcgs (G);
+      if not IsPrimeOrdersPcgs (pcgs) then
+	 TryNextMethod();
+      fi;
+      return PcgsElementaryAbelianSeriesFromGenericPcgs (pcgs);
+   end);
 
 ###################################################################################
 ##
@@ -625,23 +627,21 @@ InstallMethod (PcgsElementaryAbelianSeries, "for pc group with parent group", tr
       if HasPcgsElementaryAbelianSeries (P) then
          ppcgs := PcgsElementaryAbelianSeries (P);
          pcgs := CanonicalPcgs (InducedPcgs (ppcgs, G));
-         if HasIndicesElementaryAbelianSteps (ppcgs) then
-            # now find an elementary abelian series
-            depths := List (pcgs, x -> DepthOfPcElement (ppcgs, x));
-            pinds := IndicesElementaryAbelianSteps (ppcgs);
-            inds := [];
-            i := 1;
-            for j in [1..Length(depths)] do
-               if depths[j] >= pinds[i] then
-                  Add (inds, j);
-                  repeat
-                     i := i + 1;
-                  until depths[j] < pinds[i];
-               fi;
-            od;
-            Add (inds, Length (pcgs)+1);
-            SetIndicesElementaryAbelianSteps (pcgs, inds);
-         fi;
+         # now find an elementary abelian series
+         depths := List (pcgs, x -> DepthOfPcElement (ppcgs, x));
+         pinds := IndicesNormalSteps (ppcgs);
+         inds := [];
+         i := 1;
+         for j in [1..Length(depths)] do
+            if depths[j] >= pinds[i] then
+               Add (inds, j);
+               repeat
+                  i := i + 1;
+               until depths[j] < pinds[i];
+            fi;
+         od;
+         Add (inds, Length (pcgs)+1);
+         SetIndicesNormalSteps (pcgs, inds);
          return pcgs;
       else
          TryNextMethod();
@@ -658,8 +658,10 @@ InstallMethod (PcgsElementaryAbelianSeries, "generic method", true,
    function (G) 
       if not IsSolvable (G) then
          Error ("The group <G> must be solvable");
-      else
+      elif IsPrimeOrdersPcgs (Pcgs(G)) then
          return PcgsElementaryAbelianSeriesFromGenericPcgs (Pcgs(G));
+      else
+         TryNextMethod();
       fi;
    end);
 
@@ -677,24 +679,22 @@ InstallMethod (PcgsElementaryAbelianSeries, "for group with parent group", true,
       if HasPcgsElementaryAbelianSeries (P) then
          ppcgs := PcgsElementaryAbelianSeries (P);
          pcgs := CanonicalPcgs (InducedPcgs (ppcgs, G));
-         if HasIndicesElementaryAbelianSteps (ppcgs) then
-            # now find an elementary abelian series
-            depths := List (pcgs, x -> DepthOfPcElement (ppcgs, x));
-            pinds := IndicesElementaryAbelianSteps (ppcgs);
-            inds := [];
-            i := 1;
-            for j in [1..Length(depths)] do
-               if depths[j] >= pinds[i] then
-                  Add (inds, j);
-                  repeat
-                     i := i + 1;
-                  until depths[j] < pinds[i];
-               fi;
-            od;
-            Add (inds, Length (pcgs)+1);
-            SetIndicesElementaryAbelianSteps (pcgs, inds);
-         fi;
-         return pcgs;
+
+         depths := List (pcgs, x -> DepthOfPcElement (ppcgs, x));
+         pinds := IndicesNormalSteps (ppcgs);
+         inds := [];
+         i := 1;
+         for j in [1..Length(depths)] do
+            if depths[j] >= pinds[i] then
+               Add (inds, j);
+               repeat
+                  i := i + 1;
+               until depths[j] < pinds[i];
+            fi;
+         od;
+         Add (inds, Length (pcgs)+1);
+            SetIndicesNormalSteps (pcgs, inds);
+          return pcgs;
       else
          TryNextMethod();
       fi;
@@ -703,15 +703,16 @@ InstallMethod (PcgsElementaryAbelianSeries, "for group with parent group", true,
    
 ###################################################################################
 ##
-#M  IndicesElementaryAbelianSteps
+#M  IndicesNormalSteps
 ##
-InstallMethod (IndicesElementaryAbelianSteps, "for generic pcgs", true,
+InstallMethod (IndicesNormalSteps, "for generic pcgs", true,
    [IsPcgs],0, 
    function (pcgs)
    
       local ro, p, new, i, nsteps, j, k,  n, d, npcgs, dpcgs, der, m;
       
       if not IsPrimeOrdersPcgs (pcgs) then
+	 Print ("not a prime power pcgs\n");
          return fail;
       fi;
                
@@ -767,11 +768,15 @@ InstallMethod (IndicesElementaryAbelianSteps, "for generic pcgs", true,
          if n < i then 
             Error ("internal error!");
          elif n = i then 
+            Print ("fails at step ", n, "\n");
             return fail;
          fi;
          Add (nsteps, n);
          i := n;
       od;
+      Print ("indices: ", nsteps,"\n");
+      Assert (0, nsteps = Filtered ([1..Length (pcgs)+1], 
+	     k -> IsNormal (GroupOfPcgs (pcgs), PcSeries (pcgs)[k])));
       SetIsPcgsElementaryAbelianSeries (pcgs, true);
       return nsteps;
    end);
@@ -779,38 +784,12 @@ InstallMethod (IndicesElementaryAbelianSteps, "for generic pcgs", true,
 
 ###################################################################################
 ##
-#M  IndicesElementaryAbelianSteps
-##
-##  for a special pcgs, we may simply use LGFirst
-##
-InstallMethod (IndicesElementaryAbelianSteps, "for special pcgs", true,
-   [IsSpecialPcgs],0, 
-   LGFirst);
-   
-   
-###################################################################################
-##
-#M  IndicesNormalSteps (<pcgs>)
-##
-##  WARNING: Manual specification and implementation in the GAP library
-##  do not agree for this function: e.g, 
-##  IndicesNormalSteps (SpecialPcgs (AbelianGroup ([2,2])))
-##  should return [1,2,3], according to the manual, but presently returns [1,3]
-##  which agrees with IndicesElementaryAbelianSteps.
-##  The manual spec seems to be wrong.
-##
-InstallMethod (IndicesNormalSteps, "for generic pcgs", true, [IsPcgs], 0,
-   IndicesElementaryAbelianSteps);
-   
-   
-###################################################################################
-##
 #M  IsPcgsElementaryAbelianSeries
 ##
 InstallMethod (IsPcgsElementaryAbelianSeries, "for generic pcgs", true,
    [IsPcgs],1, # give this a higher priority than library method
    function (pcgs)
-      return IndicesElementaryAbelianSteps (pcgs) <> fail;
+      return IndicesNormalSteps (pcgs) <> fail;
    end);
 
 
