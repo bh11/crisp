@@ -1,0 +1,72 @@
+<html><head><title>[crisp] 5.1 Creating Fitting classes</title></head>
+<body bgcolor="ffffff">
+<a name = "I1"></a>
+<h1>5.1 Creating Fitting classes</h1><p>
+<p>
+<a name = "I2"></a>
+
+Recall that a Fitting class is a nonempty group class which is closed with respect
+to normal subgroups and joins of subnormal subgroups.
+<p>
+<a name = "I3"></a>
+<li><code>FittingClass(</code><var>rec</var><code>) O</code>
+<p>
+returns the Fitting class <var>fitclass</var> defined by the entries of the record
+<var>rec</var>. Note that it is the user's responsibility to ensure that <var>rec</var> really
+defines a Fitting class.
+<var>rec</var> may have components <code>\in</code>, <code>inj</code>, <code>rad</code>, and <code>name</code>. The
+functions assigned to the components are stored in the attributes
+<code>MemberFunction</code> (see <a href="C002S002.htm">MemberFunction</a>), <code>InjectorFunction</code>,
+<code>RadicalFunction</code>, and <code>Name</code>, of <var>fitclass</var>. The functions bound to <code>inj</code> and
+<code>rad</code> must have one argument, <var>H</var>, and return a <var>fitclass</var>-injector and the
+<var>fitclass</var>-radical of <var>H</var>, respectively. The third example shows how to construct
+the Fitting class <var>L<sub>2</sub>(cal N)</var> (see <a href="biblio.htm#DH1992"><cite>DH1992</cite></a>, IX, 1.14 and 1.15), where
+<var>cal N</var> is the class of all finite nilpotent groups.
+<p>
+<pre>
+gap&gt; myNilpotentGroups := FittingClass(rec(\in := IsNilpotent,
+&gt;    rad := FittingSubgroup));
+FittingClass (in:=&lt;Operation "IsNilpotent"&gt;, rad:=&lt;Operation "FittingSubgroup"\
+&gt;)
+gap&gt; myTwoGroups := FittingClass(rec(
+&gt;    \in := G -&gt; IsSubset([2], Set(Factors(Size(G)))), 
+&gt;    rad :=  G -&gt; PCore(G,2),
+&gt;    inj := G -&gt; SylowSubgroup(G,2)));
+FittingClass (in:=function( G ) ... end, rad:=function( G ) ... end, inj:=func\
+tion( G ) ... end)
+gap&gt; myL2_Nilp := FittingClass (rec (\in := 
+&gt;     G -&gt; IsSolvableGroup (G) 
+&gt;          and Index (G, Injector (G, myNilpotentGroups)) mod 2 &lt;&gt; 0));
+FittingClass (in:=function( G ) ... end)
+gap&gt; SymmetricGroup (3) in myL2_Nilp;
+false
+gap&gt; SymmetricGroup (4) in myL2_Nilp;
+true   # thus myL2_Nilp is not closed with respect to factor groups
+</pre>
+<p>
+<a name = "I4"></a>
+<li><code>FittingProduct(</code><var>fit1</var><code>, </code><var>fit2</var><code>) O</code>
+<p>
+returns the Fitting product <var>prod</var> of the Fitting classes <var>fit1</var> and <var>fit2</var>,
+i.&nbsp;e., the class of all groups <var>G</var> such that <var>G/R</var> is  a <var>fit2</var>-group, where
+<var>R</var> is the <var>fit1</var>-radical of <var>G</var>.  <var>prod</var> is again a Fitting class.
+Note that if <var>fit1</var> and <var>fit2</var> are also
+formations, then <var>prod</var> equals the
+formation product of <var>fit1</var> and <var>fit2</var>; see <a href="C004S004.htm">FormationProduct</a> 
+andindexttFittingFormationProduct
+<a href="C004S004.htm">FittingFormationProduct</a>.
+<p>
+<pre>
+gap&gt; FittingProduct (myNilpotentGroups, myTwoGroups);
+FittingProduct (FittingClass (in:=&lt;Operation "IsNilpotent"&gt;, rad:=&lt;Operation "\
+FittingSubgroup"&gt;), FittingClass (in:=function( G ) ... end, rad:=function( G \
+) ... end, inj:=function( G ) ... end))
+gap&gt; FittingProduct (myNilpotentGroups, myL2_Nilp);
+FittingProduct (FittingClass (in:=&lt;Operation "IsNilpotent"&gt;, rad:=&lt;Operation "\
+FittingSubgroup"&gt;), FittingClass (in:=function( G ) ... end))
+</pre>
+<p>
+[<a href = "C005S000.htm">Up</a>] [<a href ="C005S002.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
+<P>
+<address>GAP 4 manual<br>November 2000
+</address></body></html>

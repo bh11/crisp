@@ -1,0 +1,75 @@
+<html><head><title>[crisp] 5.5 Functions for normal subgroups related to radicals</title></head>
+<body bgcolor="ffffff">
+<a name = "I31"></a>
+<h1>5.5 Functions for normal subgroups related to radicals</h1><p>
+<p>
+<a name = "I32"></a>
+
+<a name = "I33"></a>
+<li><code>OneNormalSubgroupMaxWrtNProperty(</code><var>grp</var><code>, </code><var>pretest</var><code>, </code><var>test</var><code>, </code><var>data</var><code>) O</code>
+<p>
+Let <var>cal X</var> be a set of normal subgroups of <var>grp</var> containing the trivial
+subgroup of <var>grp</var>, and assume that whenever
+<var>M</var> and <var>N</var> are normal subgroups with <var>M  in  cal X</var> and <var>M</var>
+containing <var>N</var>, then also <var>N  in  cal X</var>. Then
+<code>OneNormalSubgroupMaxWrtNProperty</code> computes a normal subgroup <var>M  in  cal X</var>
+such that no normal subgroup of <var>grp</var> properly containing <var>M</var> belongs to <var>cal
+X</var>. 
+<p>
+For example, every Fitting set <var>cal X</var> satisfies the above properties. In
+this case, <code>OneNormalSubgroupMaxWrtNProperty</code> will return the <var>cal
+X</var>-radical of <var>grp</var>.
+<p>
+The class <var>cal X</var> is described by two functions, <var>pretest</var> and <var>test</var>. 
+<p>
+<var>pretest</var> is a function taking four arguments, <var>U</var>, <var>V</var>, <var>R</var>, and <var>data</var>,
+where <var>data</var> is just the argument passed to
+<code>OneNormalSubgroupMaxWrtNProperty</code>. <var><var>U</var>/<var>V</var></var> is a chief factor of <var>grp</var>,
+and  <var>R</var> is a normal subgroup of <var>grp</var> contained in <var>V</var> which is known to
+belong to
+<var>cal X</var>.
+<p>
+<var>pretest</var> may return the values <code>true</code>, <code>false</code>, or <code>fail</code>. If it returns 
+<code>true</code>, every normal subgroup <var>N</var> of <var>grp</var> contained in <var>U</var> such that
+<var><var>N</var>/<var>R</var></var> is 
+<var>G</var>-isomorphic with <var><var>U</var>/<var>V</var></var> must belong to <var>cal X</var>. If it returns <code>false</code>,
+no such <var>N</var> may belong to <var>cal X</var>. 
+<p>
+<var>test</var> is a function taking three arguments, <var>S</var>, <var>R</var>, and <var>data</var>, where
+data has been described above. <var>R</var> is a normal subgroup of <var>grp</var> belonging to
+<var>cal X</var>, and <var><var>S</var>/<var>R</var></var> is a chief factor of <var>grp</var>. The function must return
+true if <var>S</var> belongs to <var>cal X</var>, and false otherwise. 
+<p>
+Note that <code></code><var>test</var><code>(</code><var>S</var><code>, </code><var>R</var><code>, </code><var>data</var><code>)</code> is only called if <code>pretest(</code><var>U</var><code>, </code><var>V</var><code>,
+</code><var>R</var><code>, </code><var>data</var><code>)</code> has returned <code>fail</code> for a chief factor <var><var>U</var>/<var>V</var></var> which is
+<var>G</var>-isomorphic with <var><var>S</var>/<var>R</var></var>. Therefore <var>test</var> need not repeat tests
+already performed by <var>pretest</var>. In particular, if <var>pretest</var> always returns
+<code>true</code> or <code>false</code>, <var>test</var> will not be called at all.
+<p>
+<var>data</var> is never used or changed by <code>OneNormalSubgroupMaxWrtNProperty</code>, but
+exists only as a means for passing additional information to or between
+the functions <var>pretest</var> and <var>test</var>.
+<p>
+<a name = "I34"></a>
+<li><code>AllNormalSubgroupsWithNProperty(</code><var>grp</var><code>, </code><var>pretest</var><code>, </code><var>test</var><code>, </code><var>data</var><code>) O</code>
+<p>
+returns a list consisting of all normal subgroups of <var>grp</var> belonging 
+to the class <var>cal X</var> described by <var>pretest</var>, <var>test</var>, and <var>data</var>. See
+the documentation of <code>OneNormalSubgroupMaxWrtNProperty</code> above for details.
+<p>
+<pre>
+gap&gt; AllNormalSubgroupsWithNProperty (
+&gt; DihedralGroup (8),
+&gt;     ReturnFail,
+&gt;     function (R, S, data)
+&gt;         return IsAbelian (R);
+&gt;     end,
+&gt;     fail);
+[ Group([ f3 ]), &lt;pc group with 2 generators&gt;, &lt;pc group with 2 generators&gt;,
+  Group([ f2, f3 ]), Group([  ]) ]
+</pre>
+<p>
+[<a href ="C005S004.htm">Previous</a>] [<a href = "C005S000.htm">Up</a>] [<a href = "theindex.htm">Index</a>]
+<P>
+<address>GAP 4 manual<br>November 2000
+</address></body></html>

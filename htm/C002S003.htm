@@ -1,0 +1,66 @@
+<html><head><title>[crisp] 2.3 Lattice operations for classes</title></head>
+<body bgcolor="ffffff">
+<a name = "I18"></a>
+<h1>2.3 Lattice operations for classes</h1><p>
+<p>
+<a name = "I19"></a>
+
+<a name = "I20"></a>
+<li><code>Complement(</code><var>C</var><code>) O</code>
+<p>
+returns the unary complement of the class <var>C</var>, that is, the class consisting
+of all objects not in <var>C</var>. <var>C</var> may also be a set.
+<p>
+<pre>
+gap&gt; cmpl := Complement([1,2]);
+Complement ([ 1, 2 ])
+gap&gt; Complement (cmpl);
+[ 1, 2 ]
+</pre>
+<p>
+<a name = "I21"></a>
+<li><code>Intersection(</code><var>list</var><code>)</code>
+<li><code>Intersection(</code><var>C1</var><code>, </code><var>C2</var><code>, ...)</code>
+<p>
+returns the intersection of the groups in <var>list</var>, resp. of the classes
+<var>C1</var>, <var>C2</var>, .... If one of the classes is a list with fewer than
+<code>INTERSECTION_LIMIT</code> elements, then the result will be
+a sublist of that list. By default, <code>INTERSECTION_LIMIT</code> is 1000. 
+<p>
+<pre>
+gap&gt; Intersection (Class (IsPrimeInt), [1..10]);
+[ 2, 3, 5, 7 ]
+gap&gt; Intersection (Class (IsPrimeInt), Class (n -&gt; n = 2^LogInt (n+1, 2) - 1));
+Intersection ([ Class (in:=function( n ) ... end), 
+  Class (in:=function( n ) ... end) ])
+</pre>
+<p>
+<a name = "I23"></a>
+<li><code>Union(</code><var>C</var><code>, </code><var>D</var><code>) F</code>
+<p>
+returns the union of <var>C</var> and <var>D</var>.  
+<p>
+<pre>
+gap&gt; Union (Class (n -&gt; n mod 2 = 0), Class (n -&gt; n mod 3 = 0));
+Union ([ Class (in:=function( n ) ... end), Class (in:=function( n ) ... end) 
+ ])
+</pre>
+<p>
+<a name = "I24"></a>
+<li><code>Difference(</code><var>C</var><code>, </code><var>D</var><code>) O</code>
+<p>
+returns the difference of <var>C</var> and <var>D</var>. If <var>C</var> is a list, then the
+result will be a sublist of <var>C</var>.
+<p>
+<pre>
+gap&gt; Difference (Class (IsPrimePowerInt), Class (IsPrimeInt));
+Intersection ([ Class (in:=function( n ) ... end), 
+  Complement (Class (in:=function( n ) ... end)) ])
+gap&gt; Difference ([1..10], Class (IsPrimeInt));
+[ 1, 4, 6, 8, 9, 10 ]
+</pre>
+<p>
+[<a href ="C002S002.htm">Previous</a>] [<a href = "C002S000.htm">Up</a>] [<a href = "theindex.htm">Index</a>]
+<P>
+<address>GAP 4 manual<br>November 2000
+</address></body></html>

@@ -1,0 +1,81 @@
+<html><head><title>[crisp] 5.4 Attributes and operations for Fitting classes and Fitting sets</title></head>
+<body bgcolor="ffffff">
+<a name = "I18"></a>
+<h1>5.4 Attributes and operations for Fitting classes and Fitting sets</h1><p>
+<p>
+<a name = "I19"></a>
+
+<a name = "I20"></a>
+
+<a name = "I21"></a>
+
+<a name = "I22"></a>
+
+<a name = "I23"></a>
+
+<a name = "I24"></a>
+
+<a name = "I25"></a>
+
+<a name = "I26"></a>
+
+In addition to operations applicable to classes, both Fitting sets and
+Fitting classes admit the following attributes and operations. Of course,
+Fitting classes, being group classes, also admit all properties and
+attributes for group classes.
+<p>
+<a name = "I27"></a>
+<li><code>RadicalFunction(</code><var>class</var><code>) A</code>
+<p>
+This attribute stores a function which computes the <var>grpclass</var>-radical of a
+given group. In general, such a radical only exists if <var>grpclass</var> is closed
+with respect to products of normal subgroups; cf. <code>IsNormalProductClosed</code>.
+<p>
+<a name = "I28"></a>
+<li><code>InjectorFunction(</code><var>class</var><code>) A</code>
+<p>
+If bound, <code>InjectorFunction</code> stores a function taking a group <var>G</var> as the
+only argument and returning a <var>grpclass</var>-injector of <var>G</var>.
+<p>
+<a name = "I29"></a>
+<li><code>Radical(</code><var>G</var><code>,  </code><var>fitset</var><code>) O</code>
+<p>
+returns the <var>grpclass</var>-radical of the group <var>G</var>, where
+<var>fitset</var> is a Fitting set of <var>G</var> (see <a href="C005S003.htm">IsFittingSet</a>), or a Fitting
+class. The <var>fitset</var>-radical of <var>G</var> is the unique largest normal subgroup
+of <var>G</var> belonging to <var>fitset</var>. Note that <code>Radical(</code><var>G</var><code>)</code> returns the solvable
+radical of a group <var>G</var> (see <a href="../../../doc/htm/ref/C036S011.htm">RadicalGroup</a> in the <font face="helvetica,arial">GAP</font> reference
+manual). The class <code>myL2_Nilp</code> in the example below has been defined in <a href="C005S001.htm">FittingClass</a>.
+<p>
+<pre>
+gap&gt; Radical (SymmetricGroup (4), FittingClass (rec(\in := IsNilpotentGroup)));
+Group([ (1,4)(2,3), (1,3)(2,4) ])
+gap&gt; Radical (SymmetricGroup (4), myL2_Nilp);
+Sym( [ 1 .. 4 ] ) 
+gap&gt; Radical (SymmetricGroup (3), myL2_Nilp);
+Group([ (1,2,3) ])
+</pre>
+<p>
+<a name = "I30"></a>
+<li><code>Injector(</code><var>G</var><code>, </code><var>fitset</var><code>) O</code>
+<p>
+returns a <var>fitset</var>-injector of the group <var>G</var>, where <var>fitset</var> is a
+Fitting set of <var>G</var> (or a group containing <var>G</var>), or a Fitting class. A
+subgroup <var>H</var> of <var>G</var> is a <var>fitset</var>-injector of <var>G</var> if <var>S  cap  H</var> is
+<var>fitset</var>-maximal in <var>S</var> for every subnormal subgroup <var>S</var> of <var>G</var>. Note that by 
+<a href="biblio.htm#DH1992"><cite>DH1992</cite></a>, VIII,&nbsp;2.9, all <var>fitset</var>-injectors of <var>G</var> are conjugate in <var>G</var>,
+and it is not hard to see that every subgroup of <var>G</var> has <var>fitset</var>-injectors
+if and only if <var>fitset</var> is a Fitting set of <var>G</var>. In particular, if <var>fitset</var>
+is a group class, then every finite
+solvable group has <var>fitset</var>-injectors if and only if <var>fitset</var> is a Fitting
+class; see <a href="biblio.htm#DH1992"><cite>DH1992</cite></a>, IX,&nbsp;1.4.
+<p>
+<pre>
+gap&gt; Injector (SymmetricGroup (4), FittingClass (rec(\in := IsNilpotentGroup)));
+Group([ (1,3)(2,4), (1,4)(2,3), (3,4) ])
+</pre>
+<p>
+[<a href ="C005S003.htm">Previous</a>] [<a href = "C005S000.htm">Up</a>] [<a href ="C005S005.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
+<P>
+<address>GAP 4 manual<br>November 2000
+</address></body></html>

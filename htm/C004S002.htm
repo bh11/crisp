@@ -1,0 +1,90 @@
+<html><head><title>[crisp] 4.2 Attributes and operations for Schunck classes</title></head>
+<body bgcolor="ffffff">
+<a name = "I4"></a>
+<h1>4.2 Attributes and operations for Schunck classes</h1><p>
+<p>
+<a name = "I5"></a>
+
+<a name = "I6"></a>
+
+<a name = "I7"></a>
+
+<a name = "I8"></a>
+
+In addition to the attributes and operations for generic group classes,
+for Schunck classes also the following are available:
+<p>
+<a name = "I9"></a>
+<li><code>BoundaryFunction(</code><var>grpclass</var><code>) A</code>
+<p>
+This attribute stores a function <var>func</var>. This function takes one argument,
+which must be a finite solvable group <var>G</var> having attributes <code>Socle</code> and
+<code>SocleComplement</code>. See Section<a href="C004S003.htm">Additional attributes for primitive solvable groups</a> below. <var>func</var> must  return <code>true</code> if <var>G</var> is in the boundary of
+<var>grpclass</var>, and <code>false</code> if <var>G</var> belongs to <var>grpclass</var>. The behaviour for
+arguments which are not primitive, or which do neither belong to <var>grpclass</var>
+nor to the boundary of <var>grpclass</var> need not be defined. 
+<p>
+<a name = "I10"></a>
+<li><code>ProjectorFunction(</code><var>grpclass</var><code>) A</code>
+<p>
+If bound, <code>ProjectorFunction</code> stores a function taking a group <var>G</var> as the
+only argument, and returns a <var>grpclass</var>-projector of <var>G</var>. 
+<p>
+<a name = "I11"></a>
+<li><code>Boundary(</code><var>class</var><code>) A</code>
+<p>
+computes the boundary of <var>class</var>, i.&nbsp;e., the class of all
+primitive groups which do not belong to <var>class</var> but whose proper
+factor groups do. The result is a group class. 
+<p>
+<a name = "I12"></a>
+<li><code>Basis(</code><var>class</var><code>) A</code>
+<p>
+The basis of <var>class</var> consists of the primitive solvable 
+groups in <var>class</var>. The result is a group class. 
+<p>
+<a name = "I13"></a>
+<li><code>Projector(</code><var>grp</var><code>, </code><var>class</var><code>) O</code>
+<p>
+This function returns a <var>class</var>-projector of <var>grp</var>.
+Note that, at present, methods are only available for finite
+solvable groups <var>grp</var>, or when <var>class</var> has an attribute <code>ProjectorFunction</code>.
+<p>
+A subgroup 
+<var>H</var> of the group <var>G</var> is a <var>class</var>-projector of <var>G</var> if <var>H N/N</var> is
+<var>class</var>-maximal in <var>G/N</var> for all normal subgroups <var>N</var> of&nbsp;<var>G</var>. A subgroup <var>H</var>
+of <var>G</var> is <var>class</var>-maximal in <var>G</var> if <var>H</var> belongs to <var>class</var>, and there is no
+subgroup <var>L</var> of <var>G</var> which contains <var>H</var> and lies in <var>class</var>. Note that if
+<var>class</var> consists of finite solvable groups, then <var>class</var>-projectors exist in
+every finite solvable group if and only if <var>class</var> is a Schunck class, and in
+this case all <var>class</var>-projectors of
+<var>G</var> are conjugate. See <a href="biblio.htm#DH1992"><cite>DH1992</cite></a>, III,&nbsp;3.21.
+<p>
+<pre>
+gap&gt; H := SchunckClass (rec (bound := G -&gt; Size (G) = 6));
+SchunckClass (bound:=function( G ) ... end)
+gap&gt; Size (Projector (GL(2,3), H)); 
+16 
+gap&gt; # H-projectors coincide with Sylow subgroups
+gap&gt; U := SchunckClass (rec ( # class of all supersolvable groups
+&gt;    bound := G -&gt; not IsPrimeInt ( Size (Socle (G)))
+&gt; )); 
+SchunckClass (bound:=function( G ) ... end)
+gap&gt; Size (Projector (SymmetricGroup (4), U));
+6 
+gap&gt; # the projectors are the point stabilizers
+</pre>
+<p>
+<a name = "I14"></a>
+<li><code>CoveringSubgroup(</code><var>grp</var><code>, </code><var>class</var><code>) O</code>
+<p>
+A subgroup <var>H</var> of <var>G</var> is a <var>class</var>-covering subgroup of <var>G</var> if <var>H</var> is a
+<var>class</var>-projector of <var>L</var> for every subgroup <var>L</var> with <var>H leq L leq G</var>.
+Note that projectors and covering subgroups coincide for Schunck classes of
+finite solvable groups. At present, methods are only available for finite
+solvable groups <var>grp</var>.
+<p>
+[<a href ="C004S001.htm">Previous</a>] [<a href = "C004S000.htm">Up</a>] [<a href ="C004S003.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
+<P>
+<address>GAP 4 manual<br>November 2000
+</address></body></html>

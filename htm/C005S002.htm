@@ -1,0 +1,41 @@
+<html><head><title>[crisp] 5.2 Creating Fitting formations</title></head>
+<body bgcolor="ffffff">
+<a name = "I5"></a>
+<h1>5.2 Creating Fitting formations</h1><p>
+<p>
+<a name = "I6"></a>
+
+<a name = "I7"></a>
+
+<a name = "I8"></a>
+
+Fitting formations are Fitting classes which are also formations.
+<p>
+<a name = "I9"></a>
+<li><code>FittingFormation(</code><var>rec</var><code>) O</code>
+<p>
+creates a Fitting formation from the record <var>rec</var>. Note that it is the user's 
+responsibility to ensure that <var>rec</var> really defines a Fitting formation.
+<var>rec</var> may  have any components admissible for saturated formations (see
+<a href="C004S004.htm">SaturatedFormation</a>)  or Fitting classes (see <a href="C005S001.htm">FittingClass</a>), that is,
+<code>\in</code>, <code>res</code>, <code>char</code>, <code>rad</code>, <code>inj</code>, and <code>name</code>, 
+ whose values are stored in the attributes <code>MemberFunction</code>,
+<code>ResidualFunction</code>, <code>Characteristic</code>,  <code>RadicalFunction</code>,
+<code>InjectorFunction</code>,  and <code>Name</code>, respectively.
+<p>
+<a name = "I10"></a>
+<li><code>SaturatedFittingFormation(</code><var>rec</var><code>) O</code>
+<p>
+creates a saturated Fitting formation from the record <var>rec</var>. Note that it is the user's responsibility to ensure that <var>rec</var> really
+defines a saturated Fitting formation. <var>rec</var> may have any
+components admissible for saturated formations (see <a href="C004S004.htm">SaturatedFormation</a>) or
+Fitting classes (see <a href="C005S001.htm">FittingClass</a>), that is, <code>\in</code>, <code>res</code>, <code>char</code>, <code>proj</code>,
+<code>bound</code>, <code>locdef</code>, <code>rad</code>, <code>inj</code>,  and <code>Name</code>, whose values are stored in the
+attributes <code>MemberFunction</code>, <code>ResidualFunction</code>, <code>Characteristic</code>, 
+<code>ProjectorFunction</code> and <code>BoundaryFunction</code>,  <code>LocalDefinitionFunction</code>,
+<code>RadicalFunction</code>, <code>InjectorFunction</code>, and <code>Name</code>, respectively.
+<p>
+[<a href ="C005S001.htm">Previous</a>] [<a href = "C005S000.htm">Up</a>] [<a href ="C005S003.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
+<P>
+<address>GAP 4 manual<br>November 2000
+</address></body></html>
