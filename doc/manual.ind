@@ -9,7 +9,7 @@
     \sub of Fitting sets, 22
     \sub of formation, 16
     \sub of group classes, 11
-    \sub of primitive solvable group, 13
+    \sub of primitive solvable group, 14
     \sub of Schunck class, 12
 \letter B
   `Basis', 12
@@ -93,7 +93,7 @@
   `IsNormalProductClosed', 9
   `IsNormalSubgroupClosed', 9
   `IsOrdinaryFormation', 10
-  `IsPrimitiveSolvable', 13
+  `IsPrimitiveSolvable', 14
   `IsQuotientClosed', 9
   `IsResiduallyClosed', 9
   `IsSaturated', 9
@@ -126,7 +126,7 @@
   `PiGroups', 24
   `PreImageFittingSet', 21
   primes, set of all, 25
-  primitive solvable group, attributes of, 13
+  primitive solvable group, attributes of, 14
   `Print', for classes, 5
   `Projector', 13
   `ProjectorFunction', 13

@@ -32,11 +32,11 @@ subcategory of the category `IsListOrCollection'.
 returns a class <C>. In the first form, <rec> must be a record having a
 component `\\in' and an optional component `name'. The values of these
 components, if present, are bound to the attributes `MemberFunction' and
-`Name' of the class created. The value bound to `\\in' must be a function
+`Name'(see "ref:Name") of the class created. The value bound to `\\in' must be a function
 <func> which returns `true' if a {\GAP} object belongs to <C>, and `false'
-otherwise. The second form is equivalent to `Class(rec(\\in := <func>))'. It
-is the user's responsibility to ensure that <func> returns the same result
-for different {\GAP} objects representing the same mathematical object (or
+otherwise; cf. "MemberFunction" below. The second form is equivalent to `Class(rec(\\in
+:= <func>))'. It is the user's responsibility to ensure that <func> returns the same
+result for different {\GAP} objects representing the same mathematical object (or
 element, in the {\GAP} sense; see "ref:objects and elements" in the {\GAP}
 reference manual).
 
@@ -123,10 +123,11 @@ resp. not empty.
 
 \>MemberFunction(<C>) A
 
-This attribute, if bound, stores a function which decides if an object
-belongs to <C> or not, and returns `true' and `false' accordingly. If
-present, this function is called by the default method for `\\in'.
-`MemberFunction' should not be called directly by the user.
+This attribute, if bound, stores a function with one argument, <obj>,
+which decides if <obj> belongs to <C> or not, and returns `true' and `false' accordingly.
+If present, this function is called by the default method for `\\in'.
+`MemberFunction' is part of the definition of <C> and should not be called 
+directly by the user.
 
 
 

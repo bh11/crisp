@@ -77,9 +77,9 @@
 \indexentry {CoveringSubgroup@`CoveringSubgroup'}{13}
 \indexentry {BoundaryFunction@`BoundaryFunction'}{13}
 \indexentry {ProjectorFunction@`ProjectorFunction'}{13}
-\indexentry {primitive solvable group!attributes of}{13}
-\indexentry {attributes!of primitive solvable group}{13}
-\indexentry {IsPrimitiveSolvable@`IsPrimitiveSolvable'}{13}
+\indexentry {primitive solvable group!attributes of}{14}
+\indexentry {attributes!of primitive solvable group}{14}
+\indexentry {IsPrimitiveSolvable@`IsPrimitiveSolvable'}{14}
 \indexentry {SocleComplement@`SocleComplement'}{14}
 \indexentry {formations!creating}{14}
 \indexentry {OrdinaryFormation@`OrdinaryFormation'}{14}

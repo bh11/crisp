@@ -11,7 +11,7 @@
 \chapcontents {4}{Schunck classes and formations}{12}
 \seccontents {4.1}{Creating Schunck classes} {12}
 \seccontents {4.2}{Attributes and operations for Schunck classes} {12}
-\seccontents {4.3}{Additional attributes for primitive solvable groups} {13}
+\seccontents {4.3}{Additional attributes for primitive solvable groups} {14}
 \seccontents {4.4}{Creating formations} {14}
 \seccontents {4.5}{Attributes and operations for formations} {16}
 \seccontents {4.6}{Functions for normal subgroups related to residuals} {16}

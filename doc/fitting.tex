@@ -30,12 +30,15 @@ to normal subgroups and joins of subnormal subgroups.
 returns the Fitting class <fitclass> defined by the entries of the record
 <rec>. Note that it is the user's responsibility to ensure that <rec> really
 defines a Fitting class.
-<rec> may have components `\\in', `inj', `rad', and `name'. The
+<rec> may have components `\\in', `inj', `rad', `char', and `name'. The
 functions assigned to the components are stored in the attributes
-`MemberFunction' (see "MemberFunction"), `InjectorFunction',
-`RadicalFunction', and `Name', of <fitclass>. The functions bound to `inj' and
-`rad' must have one argument, <H>, and return a <fitclass>-injector and the
-<fitclass>-radical of <H>, respectively. The third example shows how to construct
+`MemberFunction', `InjectorFunction',
+`RadicalFunction', `Characteristic', and `Name', of <fitclass>. Please refer
+to "MemberFunction",  "InjectorFunction", "RadicalFunction",
+"Characteristic", and "ref:Name" for the meaning of these attributes.
+
+
+ The third example below shows how to construct
 the Fitting class $L_2({\cal N})$ (see \cite{DH92}, IX, 1.14 and 1.15), where
 $\cal N$ is the class of all finite nilpotent groups.
 
@@ -97,21 +100,30 @@ creates a Fitting formation from the record <rec>. Note that it is the user's
 responsibility to ensure that <rec> really defines a Fitting formation.
 <rec> may  have any components admissible for saturated formations (see
 "SaturatedFormation")  or Fitting classes (see "FittingClass"), that is,
-`\\in', `res', `char', `rad', `inj', and `name', 
+`\\in', `res', `rad', `inj', `char', and `name', 
  whose values are stored in the attributes `MemberFunction',
-`ResidualFunction', `Characteristic',  `RadicalFunction',
-`InjectorFunction',  and `Name', respectively.
+`ResidualFunction', `RadicalFunction',
+`InjectorFunction', `Characteristic', and `Name', respectively.
+Please refer
+to "MemberFunction",  "ResidualFunction", "RadicalFunction",
+"InjectorFunction",  "Characteristic", and "ref:Name", respectively, for the
+meaning of these attributes.
+
 
 \>SaturatedFittingFormation(<rec>) O
 
 creates a saturated Fitting formation from the record <rec>. Note that it is the user's responsibility to ensure that <rec> really
 defines a saturated Fitting formation. <rec> may have any
 components admissible for saturated formations (see "SaturatedFormation") or
-Fitting classes (see "FittingClass"), that is, `\\in', `res', `char', `proj',
-`bound', `locdef', `rad', `inj',  and `Name', whose values are stored in the
-attributes `MemberFunction', `ResidualFunction', `Characteristic', 
-`ProjectorFunction' and `BoundaryFunction',  `LocalDefinitionFunction',
-`RadicalFunction', `InjectorFunction', and `Name', respectively.
+Fitting classes (see "FittingClass"), that is, `\\in', `res', `proj',
+`bound', `locdef', `rad', `inj',   `char', and `Name', whose values are
+stored in the attributes `MemberFunction' (see "MemberFunction"),
+`ResidualFunction' (see "ResidualFunction"),
+ `ProjectorFunction' (see "ProjectorFunction"), `BoundaryFunction' (see
+"BoundaryFunction"), `LocalDefinitionFunction' (see
+"LocalDefinitionFunction"), `RadicalFunction' (see "RadicalFunction"),
+`InjectorFunction' (see "InjectorFunction"), `Characteristic' (see
+"Characteristic"), and `Name' (see "ref:Name"), respectively.
 
 
 
@@ -161,10 +173,9 @@ small groups.
 
 <rec> may have components `\\in', `inj', `rad', and `name'. The
 functions assigned to the components are stored in the attributes
-`MemberFunction' (see "MemberFunction"), `InjectorFunction', 
-`RadicalFunction', and `Name', of <fitset>. The latter functions must have one
-argument, <H>, which will be a subgroup of <G>, and return a
-<fitset>-injector and the <fitset>-radical of <H>, respectively. 
+`MemberFunction', `InjectorFunction', 
+`RadicalFunction', and `Name', of <fitset>. Please see "MemberFunction",
+"InjectorFunction" and "RadicalFunction" for the meaning of these arguments.
 
 Note that at present, every Fitting set has to be a class (see "Set theoretical
 classes"). The second example below shows how to define a Fitting set from 
@@ -229,8 +240,8 @@ Group([ (1,4)(2,3), (1,2)(3,4), (2,3,4) ])
 
 Let <fitset1> and <fitset2> be Fitting sets of the groups <G1> and <G2>. 
 Then the intersection of <fitset1> and <fitset2> will be a Fitting set of the 
-intersection of <G1> and <G2>, provided that <G1> and <G2> lie in some 
-common supergroup.
+intersection of <G1> and <G2>. You will run into an error if
+{\GAP} cannot compute the intersection of <G1> and <G2>.
 
 \beginexample
 gap> F1 := FittingSet (SymmetricGroup (3),
@@ -306,22 +317,22 @@ Group([ (1,3)(2,4), (1,4)(2,3), (3,4) ])
 
 \>RadicalFunction(<class>) A
 
-This attribute stores a function which computes the <grpclass>-radical of a
-given group. In general, such a radical only exists if <grpclass> is closed
-with respect to products of normal subgroups; cf. `IsNormalProductClosed'.
-Note that `Radical' (see "Radical") , which is guaranteed to work for arbitrary 
-Fitting classes <class>, should be used by the user to compute
-<grpclass>-radicals.
+This attribute, if present, forms part of the definition of <class> supplied
+by the user. It must contain a function taking one argument, a group
+$G$, and which  returns the <class>-radical of $G$. This function
+will be used during subsequent calls to `Radical'. Therefore
+`Radical' (see "Radical"), which is guaranteed to work for
+arbitrary  Fitting sets <class>, should always be called by the user to
+compute <class>-radicals.
 
 \>InjectorFunction(<class>) A
 
-If bound, `InjectorFunction' stores a function taking a group $G$ as the
-only argument and returning a <grpclass>-injector of $G$. Note that `Injector'
-(see "Injector") should be used by the user to compute
-<grpclass>-injectors.
-
-
-
+This attribute constitutes part of the definition of <class> supplied by the
+user. If present, it must contain a function taking a group
+$G$ as the only argument and returning a <class>-injector of $G$. This
+function will then be used by `Injector' (see "Injector"). Since `Injector'
+will work for arbitrary  Fitting sets, it should always be called by the user
+to compute <class>-injectors.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
