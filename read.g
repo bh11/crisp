@@ -21,6 +21,7 @@ ReadPkg ("crisp", "lib/radical.gi");
 ReadPkg ("crisp", "lib/residual.gi");
 ReadPkg ("crisp", "lib/util.gi");
 ReadPkg ("crisp", "lib/samples.gi");
+ReadPkg ("crisp", "lib/socle.gi");
 
 
 ############################################################################
