@@ -36,7 +36,7 @@ insolvgroups:= [ function (  )
         return GL(2,5);
     end,
     function (  )
-    	return AffinePermGroupByMatrixGroup (GL(2,5));
+    	return WreathProduct (CyclicGroup (IsPermGroup, 5), SymmetricGroup (5));
     end]; 
   
 if not IsBound (InfoTest) then
