@@ -37,13 +37,6 @@ subgroup closed saturated Fitting formation.
 This global variable contains the class of all finite nilpotent groups. It is a
 subgroup closed saturated Fitting formation.
 
-\>NilpotentProjector(<grp>) A
-
-\index{Carter subgroup}%
-This function returns a projector for the class of all finite nilpotent
-groups. For a definition, see "Projector". Note that the nilpotent projectors
-of a finite solvable group equal its a Carter subgroups, that is, its
-self-normalizing nilpotent subgroups. 
 
 \>`SupersolvableGroups'{class}!{of all supersolvable groups} V
 
@@ -52,10 +45,6 @@ self-normalizing nilpotent subgroups.
 This global variable contains the class of all finite supersolvable groups. It
 is a subgroup closed saturated formation.
 
-\>SupersolvableProjector(<grp>) A
-
-These functions return a projector for the class of all finite supersolvable
-groups. For a definition, see "Projector". 
 
 \>`AbelianGroups'{class}!{of all abelian groups} V
 
@@ -63,10 +52,6 @@ groups. For a definition, see "Projector".
 \index{abelian groups!class of}%
 \index{class!of all abelian groups}%
 is the class of all abelian groups. It is a subgroup closed formation.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{More concrete group classes}\null
 
 
 \>AbelianGroupsOfExponent(<n>) F
@@ -90,6 +75,22 @@ set of primes. The result is a subgroup-closed saturated Fitting formation.
 \index{class!of all $p$-groups}
 returns the class of all <p>-groups, where <p> is a prime.  The result is a
 subgroup-closed saturated Fitting formation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Pre-defined projector functions}\null
+
+\>NilpotentProjector(<grp>) A
+
+\index{Carter subgroup}%
+This function returns a projector for the class of all finite nilpotent
+groups. For a definition, see "Projector". Note that the nilpotent projectors
+of a finite solvable group equal its a Carter subgroups, that is, its
+self-normalizing nilpotent subgroups. 
+
+\>SupersolvableProjector(<grp>) A
+
+These functions return a projector for the class of all finite supersolvable
+groups. For a definition, see "Projector". 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Pre-defined sets of primes}\null
