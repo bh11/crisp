@@ -16,7 +16,7 @@ nilp := FittingClass (rec (\in := IsNilpotent));
 fit := function (G)
    local pcgs, p, newpcgs, pcser, depths, x;
    
-   pcgs := FamilyPcgs (G);
+   pcgs := Pcgs (G);
    pcser := [];
    depths := [];
    for p in Set (Factors (Size (G))) do
