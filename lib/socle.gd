@@ -48,6 +48,13 @@ KeyDependentOperation ("PSocle", IsGroup, IsPosInt, "prime");
 
 #############################################################################
 ##
+#A  SolvableMinimalNormalSubgroups (<G>) 
+##
+DeclareAttribute ("AbelianMinimalNormalSubgroups", IsGroup);
+
+
+#############################################################################
+##
 #F  SolvableSocleComponentsBySeries (<G>, <ser>) 
 ##
 ##  G must be a finite group and ser must be a G-composition series of ser[i],

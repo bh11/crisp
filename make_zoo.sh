@@ -1,6 +1,7 @@
 #! /bin/sh
 cd ../
 rm crisp.zoo
+zoo ach crisp crisp/PkgInfo.g <crisp/text_comment
 zoo ach crisp crisp/init.g <crisp/text_comment
 zoo ach crisp crisp/read.g <crisp/text_comment
 zoo ach crisp crisp/doc/classes.tex <crisp/text_comment

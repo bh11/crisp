@@ -7,7 +7,7 @@
 ##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
 ##  Friedrich Schiller-Universit\"at Jena, Germany
 ##
-DeclareAutoPackage ("crisp", "1.1", true);
+DeclareAutoPackage ("crisp", "1.2", true);
 DeclarePackageAutoDocumentation ("crisp", "doc");
 
 if BANNER then

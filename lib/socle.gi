@@ -375,6 +375,81 @@ RedispatchOnCondition (PSocleOp, true,
    [IsFinite, ], 0);
    
    
+#############################################################################
+##
+#M  AbelianMinimalNormalSubgroups (<G>) 
+##
+
+InstallMethod (AbelianMinimalNormalSubgroups, 
+	"complements of chief factors, for finite groups",
+    true, [IsGroup and IsFinite], 0,	
+	function (G)
+
+    local norms, k;
+
+    norms := AllInvariantSubgroupsWithNProperty (G, FittingSubgroup (G),
+       function (U, V, R, data)
+          return IsTrivial(R);
+       end,
+       ReturnFail,
+       []);
+
+    # remove trivial subgroup - in the current implementation, this is always
+    # the last group in the list, but better check...
+    k := Length (norms);
+    while not IsTrivial (norms[k]) do
+       k := k - 1;
+    od;
+    norms{[k..Length(norms)-1]} := norms{[k+1..Length(norms)]};
+    Unbind (norms[Length(norms)]);
+    return norms;
+end);
+
+
+#############################################################################
+##
+#M  AbelianMinimalNormalSubgroups (<G>) 
+##
+RedispatchOnCondition (AbelianMinimalNormalSubgroups, true, 
+   [IsGroup], 
+   [IsFinite], 0);
+
+
+#############################################################################
+##
+#M  AbelianMinimalNormalSubgroups (<G>) 
+##
+InstallMethod (AbelianMinimalNormalSubgroups,
+   "handled by nice monomorphism",
+   true,
+   [IsGroup and IsHandledByNiceMonomorphism and IsFinite],
+   0,
+   function( grp )
+      local hom;
+      hom := NiceMonomorphism (grp);
+      return List (AbelianMinimalNormalSubgroups (NiceObject (grp)), 
+      	N -> PreImagesSet (hom, N));
+   end);
+   
+   
+#############################################################################
+##
+#M  MinimalNormalSubgroups (<G>) 
+##
+InstallMethod (MinimalNormalSubgroups, 
+	"for solvable groups: use AbelianMinimalNormalSubgroups",
+	true, [IsGroup and IsFinite and IsSolvableGroup], 0,
+	AbelianMinimalNormalSubgroups);
+	
+	
+#############################################################################
+##
+#M  MinimalNormalSubgroups (<G>) 
+##
+RedispatchOnCondition (MinimalNormalSubgroups, 
+	true, [IsGroup], [IsSolvableGroup], 0);
+
+
 ############################################################################
 ##
 #E

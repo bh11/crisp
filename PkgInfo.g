@@ -13,16 +13,16 @@ PkgName := "CRISP",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers.
-Version := "1.1",
+Version := "1.2",
 
 ##  Release date of the current version in dd/mm/yyyy format.
-Date := "02/05/2002",
+Date := "??/??/????",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
 ##  The archive file name *must be changed* with each version of the archive
 ##  (and probably somehow contain the package name and version).
-ArchiveURL := "http://www.tu-bs.de/~bhoefling/crisp/crisp-1r1",
+ArchiveURL := "http://www.tu-bs.de/~bhoefling/crisp/crisp-1r2",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -135,7 +135,7 @@ AcceptDate := "12/2000",
 ##  the updating of package information on the GAP Website, and inclusion
 ##  and updating of the package in the GAP distribution.
 ##  
-README_URL := "http://www.tu-bs.de/~bhoeflin/crisp/README.crisp-1r1",
+README_URL := "http://www.tu-bs.de/~bhoeflin/crisp/README.crisp-1r2",
 PkgInfoURL := "http://www.tu-bs.de/~bhoeflin/crisp/PkgInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
@@ -158,7 +158,8 @@ computation of normal subgroups \
 invariant under a prescribed set of automorphisms and belonging to a given \
 group class.</P>\
 <P>This includes an improved method to compute the set of all normal subgroups \
-of a finite solvable group, its characteristic subgroups, and the socle and \
+of a finite solvable group, its characteristic subgroups, minimal normal \
+subgroups and the socle and \
 <i>p</i>-socles for given primes <i>p</i>.</P> \
 ",
 
@@ -186,7 +187,7 @@ PackageDoc := rec(
   BookName := "CRISP",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   # Archive := "http://www.math.rwth-aachen.de/~Frank.Luebeck/EDIM/edimdoc-1p1.tar.bz2",
-  Archive := "http://www.tu-bs.de/~bhoefling/crisp/crisp-1r1",
+  Archive := "http://www.tu-bs.de/~bhoefling/crisp/crisp-1r2",
   HTMLStart := "htm/chapters.html",
   PDFFile := "doc/manual.pdf",
   # the path to the .six file used by GAP's help system
@@ -205,7 +206,7 @@ PackageDoc := rec(
 Dependencies := rec(
   # GAP version, use version strings for specifying exact versions,
   # prepend a '>=' for specifying a least version.
-  GAP := ">=4.2",
+  GAP := ">=4.4",
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
@@ -251,7 +252,7 @@ TestFile := "tst/all.g",
 # Keywords := ["Smith normal form", "p-adic", "rational matrix inversion"]
 Keywords := ["radical", "residual", "projector", "injector", 
    "formation", "Fitting class", "Fitting set", "Schunck class",
-   "group class", "normal subgropus", "socle"]
+   "group class", "normal subgropus", "minimal normal subgropus", "socle"]
 
 ));
 

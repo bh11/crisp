@@ -535,8 +535,11 @@ InstallMethod (CompositionSeriesUnderAction, "for solvable group",
       if pcgs = fail then
          TryNextMethod();
       fi;
-      
-      elabser := List (InvariantElementaryAbelianSeries (G, act, TrivialSubgroup (G), true),
+
+#      InvariantElementaryAbelianSeries with four arguments seems to be buggy
+#      elabser := List (InvariantElementaryAbelianSeries (G, act, TrivialSubgroup (G), true),
+#         S -> InducedPcgs (pcgs, S));
+      elabser := List (InvariantElementaryAbelianSeries (G, act),
          S -> InducedPcgs (pcgs, S));
 
       ser := [];
@@ -673,7 +676,7 @@ InstallGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs",
 ##
 #M  PcgsElementaryAbelianSeries
 ##
-InstallMethod (PcgsElementaryAbelianSeries, "for pc group", 
+InstallMethod (PcgsElementaryAbelianSeries, "CRISP method for pc group", 
    true,
    [IsPcGroup and IsFinite],
    1, # this makes the priority higher than the (slow) library method which uses SpecialPcgs
