@@ -41,6 +41,7 @@ zoo ach crisp crisp/lib/samples.gd <crisp/text_comment
 zoo ach crisp crisp/lib/samples.gi <crisp/text_comment
 zoo ach crisp crisp/lib/schunck.gd <crisp/text_comment
 zoo ach crisp crisp/lib/schunck.gi <crisp/text_comment
+zoo ach crisp crisp/lib/socle.gd <crisp/text_comment
 zoo ach crisp crisp/lib/socle.gi <crisp/text_comment
 zoo ach crisp crisp/lib/solveeq.gd <crisp/text_comment
 zoo ach crisp crisp/lib/solveeq.gi <crisp/text_comment
