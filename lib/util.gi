@@ -490,14 +490,9 @@ InstallMethod (ChiefSeries,
       local gens, pcgs, inds, elabser, i, ser;
       
       pcgs := PcgsElementaryAbelianSeries (G);
-      if pcgs = fail then
-         TryNextMethod();
-      fi;
-      
-      inds := IndicesNormalSteps (pcgs);
+      inds := IndicesEANormalSteps (pcgs);
       elabser := List (inds, 
-         i -> InducedPcgsByPcSequence (pcgs, pcgs{[i..Length (pcgs)]}));
-      
+          i -> InducedPcgsByPcSequence (pcgs, pcgs{[i..Length (pcgs)]}));      
       ser := [];
       for i in [1..Length (elabser)-1] do
          Append (ser, 
@@ -577,7 +572,7 @@ InstallGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs",
       local ro, p, new, i, nsteps, j, k,  n, d, 
          npcgs, dpcgs, der, depths, x, m;
       
-      if IsPcgsElementaryAbelianSeries (pcgs) and HasIndicesNormalSteps (pcgs) then
+      if IsPcgsElementaryAbelianSeries (pcgs) then
          return pcgs;
       fi;
       
@@ -658,16 +653,9 @@ InstallGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs",
          Add (nsteps, n);
          i := n;
       od;
-      if HasIndicesNormalSteps (pcgs) and 
-      	not HasIsPcgsElementaryAbelianSeries (pcgs) then
-      	   pcgs := PcgsByPcSequenceNC (FamilyObj (pcgs[1]), List (pcgs)); # get a copy
-      	   if HasIndicesNormalSteps (pcgs) and 
-      	      not HasIsPcgsElementaryAbelianSeries (pcgs) then
-      	         Error ("cannot get fresh pcgs");
-      	    fi;
-      fi;
+
       SetIsPcgsElementaryAbelianSeries (pcgs, true);
-      SetIndicesNormalSteps (pcgs, nsteps);
+      SetIndicesEANormalSteps (pcgs, nsteps);
       return pcgs;
    end);
 
@@ -706,7 +694,7 @@ InstallMethod (PcgsElementaryAbelianSeries, "for pc group with parent group", tr
          pcgs := CanonicalPcgs (InducedPcgs (ppcgs, G));
          # now find an elementary abelian series
          depths := List (pcgs, x -> DepthOfPcElement (ppcgs, x));
-         pinds := IndicesNormalSteps (ppcgs);
+         pinds := IndicesEANormalSteps (ppcgs);
          inds := [];
          i := 1;
          for j in [1..Length(depths)] do
@@ -718,7 +706,8 @@ InstallMethod (PcgsElementaryAbelianSeries, "for pc group with parent group", tr
             fi;
          od;
          Add (inds, Length (pcgs)+1);
-         SetIndicesNormalSteps (pcgs, inds);
+         SetIsPcgsElementaryAbelianSeries (pcgs, true);
+         SetIndicesEANormalSteps (pcgs, inds);
          return pcgs;
       else
          TryNextMethod();
@@ -758,7 +747,7 @@ InstallMethod (PcgsElementaryAbelianSeries, "for group with parent group", true,
          pcgs := CanonicalPcgs (InducedPcgs (ppcgs, G));
 
          depths := List (pcgs, x -> DepthOfPcElement (ppcgs, x));
-         pinds := IndicesNormalSteps (ppcgs);
+         pinds := IndicesEANormalSteps (ppcgs);
          inds := [];
          i := 1;
          for j in [1..Length(depths)] do
@@ -770,8 +759,9 @@ InstallMethod (PcgsElementaryAbelianSeries, "for group with parent group", true,
             fi;
          od;
          Add (inds, Length (pcgs)+1);
-            SetIndicesNormalSteps (pcgs, inds);
-          return pcgs;
+         SetIsPcgsElementaryAbelianSeries (pcgs, true);
+         SetIndicesEANormalSteps (pcgs, inds);
+         return pcgs;
       else
          TryNextMethod();
       fi;

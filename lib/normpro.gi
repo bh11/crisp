@@ -33,13 +33,13 @@ InstallMethod (PcgsNormalizerOfPronormalSubgroup,
       null, mat, sol, n, NN, sub, inters, gens;
 
    parentpcgs := ParentPcgs (pcgs);
-   ind := IndicesNormalSteps (pcgs);
    
-   if ind = fail then
+   if not IsPcgsElementaryAbelianSeries (pcgs) then
       Error ("pcgs must refine an elementary abelian series");
    elif parentpcgs <> ParentPcgs (ppcgs) then
       Error ("pcgs and ppcgs must have the same parent pcgs");
    fi;
+   ind := IndicesEANormalSteps (pcgs);
    
    N := List ([1..Length (ind)], 
       i -> InducedPcgsByPcSequenceNC (parentpcgs, pcgs{[ind[i]..Length (pcgs)]}));

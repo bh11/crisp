@@ -521,10 +521,11 @@ InstallGlobalFunction ("PROJECTOR_FROM_BOUNDARY",
       fi;
    fi;
    
-   inds := IndicesNormalSteps (pcgs);
-   if inds = fail then
+   if not IsPcgsElementaryAbelianSeries (pcgs) then
       Error ("pcgs must refine an elementary abelian series");
    fi;
+   
+   inds := IndicesEANormalSteps (pcgs);
    
    if conv or hom then
       grp := PcGroupWithPcgs (pcgs);

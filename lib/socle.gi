@@ -441,11 +441,6 @@ InstallMethod (MinimalNormalSubgroups,
 	true, [IsGroup and IsFinite and IsSolvableGroup], 0,
 	AbelianMinimalNormalSubgroups);
 	
-	
-#############################################################################
-##
-#M  MinimalNormalSubgroups (<G>) 
-##
 RedispatchOnCondition (MinimalNormalSubgroups, 
 	true, [IsGroup], [IsSolvableGroup], 0);
 
