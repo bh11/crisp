@@ -1,20 +1,5 @@
 
 gap> RequirePackage ("crisp");
-
-             _____  ___    __  ____   ___
-            / ___/ / _ \  / / / __/  / _ \
-           / /__  /   _/ / / _\_ \  / ___/
-           \___/ /_/\_\ /_/ /____/ /_/
-
-              A GAP 4 share package for
-          Computing with Radicals, Injectors
-            Schunck classes and Projectors
-              of finite solvable groups
-
-                By Burkhard H\"ofling
-
-                For help, type ?CRISP
-
 true
 gap> FermatPrimes := Class (p -> IsPrime (p) and p = 2^LogInt (p, 2) + 1);
 Class (in:=function( p ) ... end)
