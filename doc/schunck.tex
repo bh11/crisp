@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%%  construct.tex            CRISP documentation           Burkhard H\"ofling
+%%  schunck.tex              CRISP documentation           Burkhard H\"ofling
 %%
 %%  @(#)$Id$
 %%
@@ -17,10 +17,12 @@ available to accomplish this task, which are described in this and the
 following chapter.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Creating Schunck classes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Creating Schunck classes}\null
 
-A classes $\cal C$ of finite groups is a *Schunck class* if a finite group
+\index{Schunck class!creating}
+
+A class $\cal C$ of finite groups is a *Schunck class* if a finite group
 $G$ belongs to $\cal C$ if and only if all its primitive factor groups
 belong to $\cal C$. In particular, a Schunck class is nonempty and closed
 with respect to factor groups. By definition, a Schunck class $\cal C$ is
@@ -32,7 +34,7 @@ groups belong to $\cal C$ (the boundary of $\cal C$).
 
 returns a Schunck class defined by the information stored in the record
 <rec>. Note that it is the user's responsibility to ensure that <rec> really
-defines a Schunck class.<rec> may have the following components: `\\in',
+defines a Schunck class. <rec> may have the following components: `\\in',
 `proj', `bound', `char', and `name'. The values bound to these entries, if
 present, are stored in the attributes `MemberFunction', `ProjectorFunction',
 `BoundaryFunction', `Characteristic', and `Name', respectively.
@@ -51,21 +53,26 @@ gap> SymmetricGroup (3) in nilp;
 false
 \endexample
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Attributes and operations for Schunck classes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Attributes and operations for Schunck classes}\null
+
+\index{Schunck class!attributes of}
+\index{Schunck class!operations for}
+\index{attributes!of Schunck class}
+\index{operations!for Schunck class!}
 
 In addition to the attributes and operations for generic group classes,
 for Schunck classes also the following are available:
 
 \>BoundaryFunction(<grpclass>) A
 
-This attribute stores a function <func> which, when called with a finite primitive
-soluble group $G$ as an argument, returns true if $G$ is in the boundary of <grpclass>,
-and returns `false' if $G$ belongs to <grpclass>. When `BoundaryFunction(<grpclass>)'
-is called with argument <grp>, the attributes `Socle' and `SocleComplement' of 
-<grp> must be bound. See Section"Additional attributes for primitive solvable
-groups" below. The behaviour for arguments which are not primitive need not
-be defined. 
+This attribute stores a function <func>. This function takes one argument,
+which must be a finite solvable group $G$ having attributes `Socle' and
+`SocleComplement'. See Section"Additional attributes for primitive solvable
+groups" below. <func> must  return `true' if $G$ is in the boundary of
+<grpclass>, and `false' if $G$ belongs to <grpclass>. The behaviour for
+arguments which are not primitive, or which do neither belong to <grpclass>
+nor to the boundary of <grpclass> need not be defined. 
 
 \>ProjectorFunction(<grpclass>) A
 
@@ -80,22 +87,22 @@ factor groups do. The result is a group class.
 
 \>Basis(<class>) A
 
-The basis of <class> consists of the primitive soluble 
+The basis of <class> consists of the primitive solvable 
 groups in <class>. The result is a group class. 
 
 \>Projector(<grp>, <class>) A
 
 This function returns a <class>-projector of <grp>.
 Note that, at present, methods are only available for finite
-soluble groups <grp>, or when <class> has an attribute `ProjectorFunction'.
+solvable groups <grp>, or when <class> has an attribute `ProjectorFunction'.
 
 A subgroup 
 $H$ of the group $G$ is a <class>-projector of $G$ if $H N/N$ is
 <class>-maximal in $G/N$ for all normal subgroups $N$ of~$G$. A subgroup $H$
 of $G$ is <class>-maximal in $G$ if $H$ belongs to <class>, and there is no
 subgroup $L$ of $G$ which contains $H$ and lies in <class>. Note that if
-<class> consists of finite soluble groups, then <class>-projectors exist in
-every finite soluble group if and only if <class> is a Schunck class, and in
+<class> consists of finite solvable groups, then <class>-projectors exist in
+every finite solvable group if and only if <class> is a Schunck class, and in
 this case all <class>-projectors of
 $G$ are conjugate. See \cite{DH1992}, III,~3.21.
 
@@ -119,18 +126,22 @@ gap> # the projectors are the point stabilizers
 A subgroup $H$ of $G$ is a <class>-covering subgroup of $G$ if $H$ is a
 <class>-projector of $L$ for every subgroup $L$ with $H \leq L \leq G$.
 Note that projectors and covering subgroups coincide for Schunck classes of
-finite soluble groups. At present, methods are only available for finite
-soluble groups <grp>.
+finite solvable groups. At present, methods are only available for finite
+solvable groups <grp>.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Additional attributes for primitive solvable groups}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Additional attributes for primitive solvable groups}\null
+
+\index{primitive solvable group!attributes of}
+\index{attributes!of primitive solvable group}
 
 A finite group $G$ is *primitive* if it has a faithful primitive permutation 
 representation, or equivalently, if it has a maximal subgroup $M$ with trivial 
-core. If $G$ is soluble, $M$ complements the unique minimal normal subgroup $N$
-of $G$. Therefore $N$ is the socle as well as the Fitting subgroup of <grp>.
+core. If $G$ is solvable, $M$ complements the unique minimal normal subgroup
+$N$ of $G$. Therefore $N$ is the socle as well as the Fitting subgroup of
+<grp>.
 
 
 \>IsPrimitiveSolvable(<grp>) P
@@ -143,8 +154,10 @@ returns true if <grp> is primitive and solvable, and false otherwise.
 If present, this attribute stores a complement of the socle of <grp>.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Creating formations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Creating formations}\null
+
+\index{formations!creating}
 
 A nonempty group class is a  formation if it is closed with respect to factor
 groups and residually closed. A saturated formation is, of course, a
@@ -158,7 +171,7 @@ admits the operations `Boundary', `Basis', and `Projector'.
 \>OrdinaryFormation(<rec>) O
 
 creates a formation from the record <rec>. Note that it is the user's responsibility to ensure that <rec> really
-defines a formation.<rec> may have components `\\in',
+defines a formation. <rec> may have components `\\in',
 `res', `char', and `name', whose values are stored in the attributes
 `MemberFunction', `ResidualFunction', `Characteristic', and
 `Name', respectively, of the new formation.
@@ -184,7 +197,7 @@ OrdinaryFormation (in:=function( G ) ... end)
 \>SaturatedFormation(<rec>) O
 
 creates a saturated formation from the record <rec>. Note that it is the user's responsibility to ensure that <rec> really
-defines a saturated formation..<rec> may have any
+defines a saturated formation. <rec> may have any
 components admissible for formations (see "OrdinaryFormation") or Schunck
 classes (see "SchunckClass"), that is, `\\in', `res', `char', `proj',
 `bound', `locdef', and `name', 
@@ -196,7 +209,7 @@ classes (see "SchunckClass"), that is, `\\in', `res', `char', `proj',
 There are also functions `FittingFormation' and `SaturatedFittingFormation'
 to create Fitting
 formations and saturated Fitting formations; see
- "Fitting formations" and "SaturatedFittingFormation" below for details. 
+ "FittingFormation" and "SaturatedFittingFormation" below for details. 
 
 The following example shows how to construct the saturated formations of
 all finite nilpotent groups and of
@@ -230,14 +243,11 @@ Group([ [ [ Z(3), 0*Z(3) ], [ 0*Z(3), Z(3)^0 ] ],
 
 The formation product <prod> of two formations <form1> and <form2> 
 consists  of the groups $G$ such that the <form2>-residual of $G$ belongs to
-<form1>. The product <prod> is again a formation. 
-
-If <form1> and <form2> are saturated formations, the result
-is again a saturated formation. The same is true if the characteristic of
-<form2> is contained in that of <form1>. This is automatically recognised if
-the characteristic of <form1> is `AllPrimes' (see "AllPrimes").
-
-If the characteristic of <form2> is a finite list. In all other cases, you
+<form1>. The product <prod> is again a formation. If <form1>
+and <form2> are saturated formations, the result is a saturated
+formation. The same is true if the characteristic of <form2> is contained in
+that of <form1>. This is automatically recognised if the characteristic of
+<form1> is `AllPrimes' (see "AllPrimes"). In all other cases, you
 will have to set the attribute `IsSaturated' manually, if applicable. Note
 that in general it is not possible for {\CRISP} to determine if two classes
 are contained in each other.
@@ -266,10 +276,11 @@ equals the Fitting product (see "FittingProduct") of <fitform1> and
 <fitform2>. The latter consists of all groups <G> having a  normal subgroup
 <N> in <fitform1> such that $<G>/<N>$ belongs to <fitform2>.
 
-Note that if <fitform1>, <fitform2> are Fitting formations, then 
+Note that if <fitform1> and <fitform2> are Fitting formations, then 
 `FormationProduct(<fitform1>, <fitform2>)', `FittingProduct(<fitform1>,
 <fitform2>)' and `FittingFormationProduct(<fitform1>, <fitform2>)' all
-return the same result, which is, again, a Fitting formation.
+return the same mathematical object (but distinct GAP objects), which is,
+again, a Fitting formation.
 
 
 \beginexample
@@ -283,8 +294,13 @@ FittingFormationProduct (nilp, nilp)
 \endexample
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Attributes and operations for formations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Attributes and operations for formations}\null
+
+\index{formations!attributes for}
+\index{formations!operations for}
+\index{attributes!of formation}
+\index{operations!for formation}
 
 In addition to those available for generic group classes, formations also
 admit the following attributes and operations. See also "Attributes and
@@ -297,7 +313,7 @@ returns the <form>-residual of the group <grp>, i.~e., the smallest
 normal subgroup <res> of <grp> such that $<grp>/<res>$ belongs to <form>.
 Note that, unless <form>
 has an attribute `ResidualFunction', there are presently only methods
-available for finite soluble groups.
+available for finite solvable groups.
 
 \>ResidualFunction(<form>) A
 
@@ -316,8 +332,10 @@ $f(p)$-residual of $G$. If $p$ is not in the characteristic of <form>,
 then `<func>($G$, $p$)' must return `fail' for any group $G$. 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Functions for normal subgroups related to residuals}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Functions for normal subgroups related to residuals}\null
+
+\index{normal subgroups!related to residuals}
 
 \>OneNormalSubgroupMinWrtQProperty(<grp>, <pretest>, <test>, <data>) O
 
@@ -327,16 +345,16 @@ $M$ and $N$ are normal subgroups with $M \in \cal X$ and $M$
 contained in $N$, then also $N \in \cal X$. Then
 `OneNormalSubgroupMinWrtQProperty' computes a normal subgroup $M \in \cal X$
 such that no normal subgroup of <grp> contained in $M$ belongs to $\cal X$. 
-At present, there exist only methods for finite soluble groups <grp>.
+At present, there exist only methods for finite solvable groups <grp>.
 
 
 The class $\cal X$ is described by two functions, <pretest> and <test>. 
 
 <pretest> is a function taking four arguments, <U>, <V>, <R>, and <data>,
 where <data> is just the argument passed to
-`OneNormalSubgroupMinWrtQProperty'. $<U>/<V>$ is a chief factor of <grp>,
-and  <R> is a normal subgroup of <grp> containing <U> which is known to
-belong to
+`OneNormalSubgroupMinWrtQProperty' (see below for examples). $<U>/<V>$ is a
+chief factor of <grp>, and  <R> is a normal subgroup of <grp> containing <U>
+which is known to belong to
 $\cal X$.
 
 <pretest> may return the values `true', `false', or `fail'. If it returns 
@@ -362,7 +380,7 @@ exists only as a means for passing additional information to or between
 the functions <pretest> and <test>.
 
 For example, if $\cal C$ is a group class which is closed with respect to
-factor groups, then the class $\cal X$ of all normal subgroups $N$ of <grp>
+factor groups and $\cal X$ is the set of all normal subgroups $N$ of <grp>
 with $<grp>/N \in \cal C$, then $\cal X$ satisfies the above properties. In
 particular, if $\cal C$ is a formation, then
 `OneNormalSubgroupMinWrtQProperty' will return the $\cal C$-residual of
@@ -399,7 +417,7 @@ true
 `AllNormalSubgroupsWithQProperty' returns a list consisting of all normal
 subgroups in $\cal X$, where $\cal X$ is the class defined by <pretest>,
 <test>, and <data>, as described for `OneNormalSubgroupMaxWrtNProperty'. 
-At present, there exist only methods for finite soluble groups <grp>.
+At present, there exist only methods for finite solvable groups <grp>.
 
 \beginexample
 gap> normsWithSupersolvableFactorGroups :=
@@ -421,7 +439,7 @@ gap> normsWithSupersolvableFactorGroups :=
 \>NormalSubgroups(<grp>) O
 
 {\CRISP} also provides an improved method for `NormalSubgroups' (see
-"ref:NormalSubgroups") for groups <grp> which are finite and  soluble.
+"ref:NormalSubgroups") for groups <grp> which are finite and  solvable.
 This method simply calls `AllNormalSubgroupsWithQProperty' (with `ReturnTrue'
 as <pretest> and `ReturnFail' as <test>). Note that, since
 <pretest> always returns `true', <test> is never actually called.

@@ -9,7 +9,7 @@ gap> RequirePackage ("crisp");
               A GAP 4 share package for
           Computing with Radicals, Injectors
             Schunck classes and Projectors
-               of finite soluble groups
+              of finite solvable groups
 
                 By Burkhard H\"ofling
 

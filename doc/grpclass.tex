@@ -37,7 +37,9 @@ of pre-defined group classes; see Chapter~"Examples of group classes".
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Creating group classes}
+\Section{Creating group classes}\null
+
+\index{group classes!creation}
 
 Group classes can either be defined by a function deciding membership, or
 alternatively by a (finite) list of groups containing at least one
@@ -54,11 +56,11 @@ argument(s).
 In the first form, <rec> must be a record which has a component `\\in', and may have
 further components `name', and  `char'. `\\in' must be a function having one argument.
 When called with a group <G> as its argument, it must return `true' or `false',
-depending whether <G> is in <class> or not. It is the user's responsibility to
-ensure that the function supplied returns the same value when called with isomorphic
-groups. If <rec> has components  `name' or  `char', their values are stored in the
-attributes `Name' (see "ref:Name") and `Characteristic' (see "Characteristic") of
-<class>.
+depending upon whether <G> is in <class> or not. It is the user's
+responsibility to ensure that the function supplied returns the same value
+when called with isomorphic groups. If <rec> has components  `name' or 
+`char', their values are stored in the attributes `Name' (see "ref:Name")
+and `Characteristic' (see "Characteristic") of <class>.
 
 `GroupClass(<func>)' is a shorthand for `GroupClass(rec(\\in := func))'.
 
@@ -113,10 +115,11 @@ a group class. The intersection automatically has those closure properties
 have. 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Properties of group classes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Properties of group classes}\null
 
 \index{closure properties!of group classes}%
+\index{group classes!closure properties of}%
 
 Since nonempty group classes are infinite, {\CRISP} cannot, in
 general, decide whether a group class has a certain property. Therefore the
@@ -168,7 +171,7 @@ likewise belong to <grpclass>.
 \> IsResiduallyClosed(<grpclass>) P
 
 if true and $G$ is a group such that $G/N_1$ and $G/N_2$ belong to
-<grpclass> for two normal subgroup $N_1$ and $N_2$ of $G$ *which intersect
+<grpclass> for two normal subgroups $N_1$ and $N_2$ of $G$ *which intersect
 trivially*, then $G$ belongs to <grpclass>.
 
 \> IsNormalProductClosed(<grpclass>) P
@@ -195,23 +198,28 @@ group.
 if true, <G> belongs to <X> whenever <G>/`FrattiniSubgroup(<G>)' belongs to
 <X>.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Additional properties of group classes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Additional properties of group classes}\null
+
+\index{group classes!properties of}
+\index{properties!of group classes}
 
 Note that the following ``properties'' are not properties but only filters in
 the {\GAP} sense (cf. "ref:Properties" and "ref:filters" in the {\GAP}
 reference manual).
 
-\>HasIsFittingClass( <obj>) F
+\>HasIsFittingClass(<obj>) F
 
-is true of <obj> knows if it is a Fitting class, that is, if it has 
-`HasIsGroupClass', `HasContainsTrivialGroup', `HasIsNormalSubgroupClosed' 
-and `HasIsNormalProductClosed'.
+is true of <obj> knows if it is a Fitting class, that is, if it lies in the
+filters  `HasIsGroupClass', `HasContainsTrivialGroup',
+`HasIsNormalSubgroupClosed'  and `HasIsNormalProductClosed'.
 
-\>IsFittingClass( <obj>) F
+\>IsFittingClass(<obj>) F
 
-is true of <obj> is a Fitting class, that is, if it has `IsGroupClass',
-`ContainsTrivialGroup', `IsNormalSubgroupClosed' and `IsNormalProductClosed'.
+is true of <obj> is a Fitting class, that is, if it has the properties
+`IsGroupClass', `ContainsTrivialGroup', `IsNormalSubgroupClosed' and
+`IsNormalProductClosed'.
 
 \>SetIsFittingClass(<group class>, <bool>) F
 
@@ -230,27 +238,28 @@ FittingClass (in:=<Operation "IsNilpotent">)
 
 \>HasIsOrdinaryFormation(<obj>) F
 
-\index{HasIsFormation}%
+\indextt{HasIsFormation}%
 is true if <obj> knows if it is a formation, that is, if it lies in the filters
 `HasIsGroupClass', `HasContainsTrivialGroup', `HasIsQuotientClosed' and 
 `HasIsResiduallyClosed'.
 
 \>IsOrdinaryFormation(<obj>) F
 
-\index{IsFormation}%
+\indextt{IsFormation}%
 is true if <obj> is a formation, that is, if it has the properties
 `IsGroupClass', `ContainsTrivialGroup', `IsQuotientClosed' and `IsResiduallyClosed'.
 
 \>SetIsOrdinaryFormation(<class>, <bool>) F
 
-\index{SetIsFormation}%
+\indextt{SetIsFormation}%
 If <bool> is `true', this sets the attributes `IsQuotientClosed',
 `ContainsTrivialGroup', and `IsResiduallyClosed' of <class>, making it a formation.
 
 \>HasIsSaturatedFormation(<obj>) 
 
 returns true if <obj> knows if it is a saturated formation, that is, if it
-lies in the filters `HasIsOrdinaryFormation' and `HasIsSaturated'
+lies in the filters `HasIsOrdinaryFormation' and `HasIsSaturated'.
+
 \>IsSaturatedFormation(<obj>) 
 
 returns true if <obj> is a saturated formation, that is, if it has the
@@ -264,8 +273,8 @@ of <class>, making it a saturated formation.
 
 \>HasIsFittingFormation(<obj>) 
 
-returns true if <obj> lies in the filters `IsOrdinaryFormation' and 
-`IsFittingClass' (see "IsOrdinaryFormation" and "IsFittingClass").
+returns true if <obj> lies in the filters `HasIsOrdinaryFormation' and 
+`HasIsFittingClass' (see "HasIsOrdinaryFormation" and "HasIsFittingClass").
 
 
 \>IsFittingFormation(<obj>) 
@@ -279,8 +288,8 @@ that it is a Fitting formation.
 
 \>HasIsSaturatedFittingFormation(<obj>) 
 
-returns true if <obj> lies in the filters `IsSaturatedFormation' and 
-`IsFittingClass' (see "IsSaturatedFormation" and "IsFittingClass").
+returns true if <obj> lies in the filters `HasIsSaturatedFormation' and 
+`HasIsFittingClass' (see "HasIsSaturatedFormation" and "HasIsFittingClass").
 
 \>IsSaturatedFittingFormation(<obj>) 
 
@@ -291,8 +300,12 @@ returns true if <obj> is both a saturated formation and a Fitting class.
 If <bool> is `true', this sets the attributes of <class> to indicate that it
 is a saturated Fitting formation.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Attributes of group classes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Attributes of group classes}\null
+
+\index{group classes!attributes for}
+\index{attributes!of group classes}
 
 In addition to the attribute `MemberFunction' which has the same meaning as
 for generic classes, a group class may have the following attribute.

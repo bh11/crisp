@@ -21,17 +21,19 @@ how group classes can be defined using the methods described in the preceding
 chapters.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Pre-defined group classes}
+\Section{Pre-defined group classes}\null
 
 \>`TrivialGroups'{class}!{of all trivial groups} V
 
 \index{trivial groups!class of}%
+\index{class!of all trivial groups}
 The global variable `TrivialGroups' contains the class of all trivial groups. It is a
 subgroup closed saturated Fitting formation.
 
 \>`NilpotentGroups'{class}!{of all nilpotent groups} V
 
 \index{nilpotent groups!class of}%
+\index{class!of all nilpotent groups}%
 This global variable contains the class of all finite nilpotent groups. It is a
 subgroup closed saturated Fitting formation.
 
@@ -40,12 +42,13 @@ subgroup closed saturated Fitting formation.
 \index{Carter subgroup}%
 This function returns a projector for the class of all finite nilpotent
 groups. For a definition, see "Projector". Note that the nilpotent projectors
-of a finite soluble group equal its a Carter subgroups, that is, its
+of a finite solvable group equal its a Carter subgroups, that is, its
 self-normalizing nilpotent subgroups. 
 
 \>`SupersolvableGroups'{class}!{of all supersolvable groups} V
 
 \index{supersolvable groups!class of}%
+\index{class!of all supersolvable groups}%
 This global variable contains the class of all finite supersolvable groups. It
 is a subgroup closed saturated formation.
 
@@ -56,15 +59,20 @@ groups. For a definition, see "Projector".
 
 \>`AbelianGroups'{class}!{of all abelian groups} V
 
+\indextt{AbelianGroups}
 \index{abelian groups!class of}%
+\index{class!of all abelian groups}%
 is the class of all abelian groups. It is a subgroup closed formation.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{More concrete group classes}
+\Section{More concrete group classes}\null
 
 
 \>AbelianGroupsOfExponent(<n>) F
+
+\index{class!of all abelian groups of bounded exponent}
+\index{abelian groups of bounded exponent!class of}
 
 returns the class of all abelian groups of exponent dividing <n>, 
 where <n> is
@@ -73,17 +81,21 @@ a positive integer. It is always a subgroup-closed formation.
 
 \>PiGroups(<pi>) F
 
+\index{class!of all $\pi$-groups}
+
 constructs the class of all <pi>-groups.  <pi> may be a non-empty class or a
 set of primes. The result is a subgroup-closed saturated Fitting formation.
 
 
 \>PGroups(<p>) F
 
+\index{class!of all $p$-groups}
+
 returns the class of all <p>-groups, where <p> is a prime.  The result is a
 subgroup-closed saturated Fitting formation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Pre-defined sets of primes}
+\Section{Pre-defined sets of primes}\null
 
 \>`AllPrimes'{set}!{of all primes} V
 

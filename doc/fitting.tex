@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%%  construct.tex            CRISP documentation           Burkhard H\"ofling
+%%  fitting.tex              CRISP documentation           Burkhard H\"ofling
 %%
 %%  @(#)$Id$
 %%
@@ -17,8 +17,10 @@ with respect to these;  see "Attributes and operations for Fitting classes
 and Fitting sets".
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Creating Fitting classes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Creating Fitting classes}\null
+
+\index{Fitting classes!creating}
 
 Recall that a Fitting class is a nonempty group class which is closed with respect
 to normal subgroups and joins of subnormal subgroups.
@@ -32,7 +34,7 @@ defines a Fitting class.
 functions assigned to the components are stored in the attributes
 `MemberFunction' (see "MemberFunction"), `InjectorFunction',
 `RadicalFunction', and `Name', of <fitclass>. The functions bound to `inj' and
-`rad' must have one argument, <H>, and return an <fitclass>-injector and the
+`rad' must have one argument, <H>, and return a <fitclass>-injector and the
 <fitclass>-radical of <H>, respectively.
 
 
@@ -52,8 +54,8 @@ tion( G ) ... end)
 \>FittingProduct(<fit1>, <fit2>) O
 
 returns the Fitting product <prod> of the Fitting classes <fit1> and <fit2>,
-i.~e., the class of all groups G such that G/R is  an <fit2>-group, where R
-is the <fit1>-radical of G.  <prod> is again a Fitting class.
+i.~e., the class of all groups $G$ such that $G/R$ is  a <fit2>-group, where
+$R$ is the <fit1>-radical of $G$.  <prod> is again a Fitting class.
 Note that if <fit1> and <fit2> are also
 formations, then <prod> equals the
 formation product of <fit1> and <fit2>; see "FormationProduct" 
@@ -67,18 +69,23 @@ FittingSubgroup">), FittingClass (in:=function( G ) ... end, rad:=function( G \
 ) ... end, inj:=function( G ) ... end))
 \endexample
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Fitting formations}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Creating Fitting formations}\null
+
+\index{Fitting formations!creating}
+\index{formations!creating Fitting formations}
+\index{Fitting classes!creating Fitting formations}
 
 Fitting formations are Fitting classes which are also formations.
 
 \>FittingFormation(<rec>) O
 
 creates a Fitting formation from the record <rec>. Note that it is the user's 
-responsibility to ensure that <rec> really defines a Fitting formation.<rec> may 
-have any components admissible for saturated formations (see "SaturatedFormation") 
-or Fitting classes (see "FittingClass"), that is, `\\in', `res', `char', `rad',
-`inj', and `name', 
+responsibility to ensure that <rec> really defines a Fitting formation.
+<rec> may  have any components admissible for saturated formations (see
+"SaturatedFormation")  or Fitting classes (see "FittingClass"), that is,
+`\\in', `res', `char', `rad', `inj', and `name', 
  whose values are stored in the attributes `MemberFunction',
 `ResidualFunction', `Characteristic',  `RadicalFunction',
 `InjectorFunction',  and `Name', respectively.
@@ -86,7 +93,7 @@ or Fitting classes (see "FittingClass"), that is, `\\in', `res', `char', `rad',
 \>SaturatedFittingFormation(<rec>) O
 
 creates a saturated Fitting formation from the record <rec>. Note that it is the user's responsibility to ensure that <rec> really
-defines a saturated Fitting formation.<rec> may have any
+defines a saturated Fitting formation. <rec> may have any
 components admissible for saturated formations (see "SaturatedFormation") or
 Fitting classes (see "FittingClass"), that is, `\\in', `res', `char', `proj',
 `bound', `locdef', `rad', `inj',  and `Name', whose values are stored in the
@@ -96,8 +103,10 @@ attributes `MemberFunction', `ResidualFunction', `Characteristic',
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Creating Fitting sets}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Creating Fitting sets}\null
+
+\index{Fitting sets!creating}
 
 A nonempty set $\cal F$ of subgroups of a group $G$ is a *Fitting set of
 $G$*  if it satisfies the following properties:
@@ -142,8 +151,8 @@ small groups.
 functions assigned to the components are stored in the attributes
 `MemberFunction' (see "MemberFunction"), `InjectorFunction', 
 `RadicalFunction', and `Name', of <fitset>. The latter functions must have one
-argument, <H>, which will be a subgroup of <G>, and return an <fitset>-injector
-and the <fitset>-radical of <H>, respectively. 
+argument, <H>, which will be a subgroup of <G>, and return a
+<fitset>-injector and the <fitset>-radical of <H>, respectively. 
 
 Note that at present, every Fitting set has to be a class (see "Set theoretical
 classes"). The second example below shows how to define a Fitting set from 
@@ -168,7 +177,7 @@ FittingSet (SymmetricGroup( [ 1 .. 3 ] ), rec (in:=function( H ) ... end))
 returns the image <F_1> of the Fitting set <fitset> under the group homomorphism 
 <alpha>, i.e.
 the Fitting set <F_1> of `Image(<alpha>)' which consists of all subgroups
-`<alpha>(<S>)' of `Image(<alpha>)' such that <S> is an <fitset>-injector of 
+`<alpha>(<S>)' of `Image(<alpha>)' such that <S> is a <fitset>-injector of 
 `PreImage(<alpha>, <S>)'. <fitset> must be a Fitting set of `PreImage(<alpha>)'
 or a Fitting class.  Note that the image of a Fitting class is a
 Fitting set but not a Fitting class.
@@ -230,8 +239,17 @@ FittingSet (SymmetricGroup(
 \endexample
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Attributes and operations for Fitting classes and Fitting sets}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Attributes and operations for Fitting classes and Fitting sets}\null
+
+\index{attributes!of Fitting sets}
+\index{attributes!of Fitting classes}
+\index{operations!for Fitting sets}
+\index{operations!for Fitting classes}
+\index{Fitting sets!operations for}
+\index{Fitting classes!operations for}
+\index{Fitting sets!attributes of}
+\index{Fitting classes!attributes of}
 
 In addition to operations applicable to classes, both Fitting sets and
 Fitting classes admit the following attributes and operations. Of course,
@@ -252,8 +270,6 @@ only argument and returning a <grpclass>-injector of $G$.
 
 \>Radical(<G>,  <fitset>)
 
-\index{radical!wrt Fitting class}%
-\index{radical!wrt Fitting set}%
 returns the <grpclass>-radical of the group <G>, where
 <fitset> is a Fitting set of <G> (see "IsFittingSet"), or a Fitting
 class. The <fitset>-radical of <G> is the unique largest normal subgroup
@@ -268,7 +284,7 @@ Group([ (1,4)(2,3), (1,3)(2,4) ])
 
 \>Injector(<G>, <fitset>).
 
-returns a <grpclass>-injector of the group <G>, where <fitset> is a
+returns a <fitset>-injector of the group <G>, where <fitset> is a
 Fitting set of <G> (or a group containing <G>), or a Fitting class. A
 subgroup $H$ of $G$ is a <fitset>-injector of <G> if $S \cap H$ is
 <fitset>-maximal in $S$ for every subnormal subgroup $S$ of $G$. Note that by 
@@ -276,8 +292,8 @@ subgroup $H$ of $G$ is a <fitset>-injector of <G> if $S \cap H$ is
 and it is not hard to see that every subgroup of <G> has <fitset>-injectors
 if and only if <fitset> is a Fitting set of <G>. In particular, if <fitset>
 is a group class, then every finite
-soluble group has <fitset>-injectors if and only if <fitset> is a Fitting class;
-see \cite{DH1992}, IX,~1.4.
+solvable group has <fitset>-injectors if and only if <fitset> is a Fitting
+class; see \cite{DH1992}, IX,~1.4.
 
 \beginexample
 gap> Injector (SymmetricGroup (4), FittingClass (rec(\in := IsNilpotentGroup)));
@@ -286,8 +302,10 @@ Group([ (1,3)(2,4), (1,4)(2,3), (3,4) ])
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Functions for normal subgroups related to radicals}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Functions for normal subgroups related to radicals}\null
+
+\index{normal subgroups!related to radicals}
 
 \>OneNormalSubgroupMaxWrtNProperty(<grp>, <pretest>, <test>, <data>) O
 

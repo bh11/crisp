@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%%  construct.tex            CRISP documentation           Burkhard H\"ofling
+%%  classes.tex              CRISP documentation           Burkhard H\"ofling
 %%
 %%  @(#)$Id$
 %%
@@ -16,8 +16,10 @@ sense, sets (see "ref:Set" in the {\GAP} reference
 manual) may also be used as classes.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Creating set theoretical classes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Creating set theoretical classes}\null
+
+\index{classes!creating}
 
 \>IsClass(<C>) C
 
@@ -27,15 +29,16 @@ subcategory of the category `IsListOrCollection'.
 \>Class(<rec>) O
 \>Class(<func>) O
 
-returns a class <C>. In the first form, <rec> must be a record having at most
-two components, `\\in' and `name'. The values of these components, if
-present, are bound to the attributes `MemberFunction' and `Name' of the
-class created. The value bound to `\\in' must be a function <func> which
-returns `true' if a {\GAP} object belongs to <C>, and `false' otherwise. The
-second form is equivalent to `Class(rec(\\in := <func>))'. It is the user's
-responsibility to ensure that <func> returns the same result for different
-{\GAP} objects representing the same mathematical object (or element, in the
-{\GAP} sense; see "ref:objects and elements" in the {\GAP} reference manual).
+returns a class <C>. In the first form, <rec> must be a record having a
+component `\\in' and an optional component `name'. The values of these
+components, if present, are bound to the attributes `MemberFunction' and
+`Name' of the class created. The value bound to `\\in' must be a function
+<func> which returns `true' if a {\GAP} object belongs to <C>, and `false'
+otherwise. The second form is equivalent to `Class(rec(\\in := <func>))'. It
+is the user's responsibility to ensure that <func> returns the same result
+for different {\GAP} objects representing the same mathematical object (or
+element, in the {\GAP} sense; see "ref:objects and elements" in the {\GAP}
+reference manual).
 
 \beginexample
 gap> RequirePackage ("crisp");
@@ -48,7 +51,7 @@ gap> RequirePackage ("crisp");
               A GAP 4 share package for           
           Computing with Radicals, Injectors        
             Schunck classes and Projectors          
-               of finite soluble groups             
+              of finite solvable groups             
                                                     
                 By Burkhard H\"ofling               
                                                     
@@ -89,14 +92,14 @@ For classes, `Display' works exactly as `Print'.
 
 \>`<obj> in <class>'{element test}!{for classes}
 
-\index{in!for classes}%
+\indextt{in} % doesn't allow subentries !for classes}%
 \index{membership test!for classes}%
-returns true or false, depending whether <obj> belongs to <class> or not. If
-bound, `MemberFunction' is used to perform this test. If <obj> can store
-attributes, the outcome of the membership test is stored in an attribute
-`ComputedIsMembers' of <obj>.
+returns true or false, depending upon whether <obj> belongs to <class> or
+not. If <obj> can store attributes, the outcome of the membership test is
+stored in an attribute `ComputedIsMembers' of <obj>.
 
 \>`<C1> = <C2>'{equality!for classes}
+
 Since it is not possible to compare classes given by membership algorithms,
 two classes are equal in {\GAP} if and only if they are the same {\GAP}
 object (see "ref:IsIdenticalObj" in the {\GAP} reference manual).
@@ -107,8 +110,11 @@ The operation `\<' for classes has no mathematical meaning; it only exists
 so that one can form sorted lists of classes.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Properties of classes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Properties of classes}\null
+
+\index{classes!properties of}
+\index{properties!of classes}
 
 \>IsEmpty(<C>)!{for classes} P
 
@@ -118,11 +124,15 @@ resp. not empty.
 \>MemberFunction(<C>) A
 
 This attribute, if bound, stores a function which decides if an object
-belongs to <C> or not, and returns `true' and `false' accordingly. This
-function, if bound, is called by the default method for `\\in'.
+belongs to <C> or not, and returns `true' and `false' accordingly. If
+present, this function is called by the default method for `\\in'.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Lattice operations for classes}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Lattice operations for classes}\null
+
+\index{lattice operations!for classes}
 
 \>Complement(<C>) O
 
