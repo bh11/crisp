@@ -11,6 +11,45 @@ RequirePackage ("crisp");
 ReadPkg ("crisp", "tst/timing_test.g");
 ReadPkg ("crisp", "tst/timing_samples.g");
 
+IsHypercentral := function (G, H)
+
+	local C;
+
+	repeat
+		C := H;
+		H := CommutatorSubgroup (G, H);
+	until C = H;
+	return IsTrivial (H);
+end;
+
+O235hypercentralWithoutRad := FittingClass ( rec (
+	\in := G -> IsHypercentral (G, Core (G, HallSubgroup (G,[2,3,5])))
+));
+
+O235hypercentralWithRad := FittingClass ( rec (
+	\in := G -> IsHypercentral (G, Core (G, HallSubgroup (G,[2,3,5]))),
+	rad := function (G)
+			local C, ser, comp, i, j, M, N, F, nat;
+			C := G;
+			M := Core (G, HallSubgroup (G,[2,3,5]));
+			comp := ChiefSeriesUnderAction (G, M);
+			for j in [2..Length (comp)] do
+				nat:= NaturalHomomorphismByNormalSubgroup (C, comp[j]);
+				C := PreImage (nat, Centralizer (Image (nat), Image (nat, comp[j-1])));
+			od;
+			return C;
+		end));
+
+
+tests :=
+[ [tmp -> Radical (tmp, O235hypercentralWithoutRad), Size, "in", []],
+  [tmp -> Radical (tmp, O235hypercentralWithRad),  Size, "rad", []],
+];
+
+Print ("D_{2,3,5}-radical\n");
+DoTests (groups, tests);
+
+
 
 nilp := FittingClass (rec (\in := IsNilpotent));
 fit := function (G)
