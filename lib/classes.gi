@@ -388,8 +388,9 @@ InstallMethod (IsEmpty, "for generic class",
 ##
 InstallImmediateMethod (IsEmpty, IsClassByComplementRep, 0,
    function (C)
-      if HasContainsTrivialGroup(C!.complement) then
-         return not ContainsTrivialGroup (C!.complement);
+      if HasContainsTrivialGroup(C!.complement) 
+         and not ContainsTrivialGroup (C!.complement) then
+         return false;
       else
          TryNextMethod();
       fi;
@@ -463,7 +464,7 @@ InstallImmediateMethod (IsEmpty, IsClassByIntersectionRep, 0,
 ##
 InstallImmediateMethod (IsFinite, IsClassByIntersectionRep, 0,
    function (C)
-      if ForAll (C!.intersected, C -> HasIsFinite (C) and IsFinite (C)) then
+      if ForAny (C!.intersected, C -> HasIsFinite (C) and IsFinite (C)) then
          return true;
       else
          TryNextMethod();

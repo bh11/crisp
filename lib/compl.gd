@@ -16,19 +16,20 @@ Revision.compl_gi :=
 #F  PcgsComplementOfChiefFactor (<pcgs>, <hpcgs>, <first>, <npcgs>, <kpcgs>)
 ##
 ##  The arguments of PcgsComplementOfChiefFactor represent the following 
-##           situation. Let H be a group, K < N < R, such that N/K is a p-chief  a 
-##   H       factor of H, and R is a normal subgroup of H which does not 
-##  : \      centralise H/K, and such that R/N is elementary abelian
-## ?   R     of exponent q (<> p).
-##  : / \       
-##   Q   N   hpcgs is a pc sequence (i.e, a list of elements forming a pcgs,  
-##    \ /    but not necessarily a modulo pcgs) representing the factor group 
-##     K     H/N, such that hpcgs{[first..Length (hpcgs)]} represents R/N.
-##           npcgs is a modulo pcgs representing N/K. kpcgs is a pc sequence
-##  which generates K. All pc sequences and pcgses above must be induced 
-##  with respect to pcgs, that is, the depths wrt. pcgs of their elements 
-##  must be strictly increasing. Moreover, the depths (wrt pcgs) of the elements 
-##  in kpcgs must be strictly larger than the depths of the elements in hpcgs.
+##            situation. Let H be a group, K < N < R, such that N/K is a
+##    H       p-chief factor of H, and R is a normal subgroup of H which does   
+##   : \      not centralise H/K, and such that R/N is elementary abelian 
+##  ?   R     of exponent q (<> p). 
+##   : / \       
+##    Q   N   hpcgs is a pc sequence (i.e, a list of elements forming a pcgs,  
+##     \ /    but not necessarily a modulo pcgs) representing the factor  
+##      K     group H/N, such that hpcgs{[first..Length (hpcgs)]} represents 
+##            R/N. npcgs is a modulo pcgs representing N/K. kpcgs is a pc 
+##  sequence which generates K. All pc sequences and pcgses above must be  
+##  induced with respect to pcgs, that is, the depths wrt. pcgs of their  
+##  elements must be strictly increasing. Moreover, the depths (wrt pcgs) of   
+##  the elementsin kpcgs must be strictly larger than the depths of the  
+##  elements in hpcgs.
 ##
 ##  PcgsComplementOfChiefFactor returns a pcgs (induced wrt pcgs) for a
 ##  complement C of N/K in H. C is computed as the normaliser of Q, where

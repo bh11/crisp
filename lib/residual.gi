@@ -16,7 +16,7 @@ Revision.residual_gi :=
 #M  NormalSubgroups (<grp>)
 ##
 InstallMethod (NormalSubgroups, 
-   "normal complement method for finite soluble groups",
+   "normal complement method for finite solvable groups",
    true,
    [IsGroup and IsFinite and IsSolvableGroup], 
    RankFilter (IsPcGroup and IsPermGroup), # use for pc groups and perm groups 
@@ -33,7 +33,7 @@ InstallMethod (NormalSubgroups,
 RedispatchOnCondition (NormalSubgroups, 
    true, [IsGroup],  [IsFinite and IsSolvableGroup], 
    # rank this method fairly high - presumably all fast methods for computing
-   # the normal subgroups need to know if the group is finite and soluble
+   # the normal subgroups need to know if the group is finite and solvable
    RankFilter (IsPcGroup and IsPermGroup));
    
 

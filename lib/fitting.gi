@@ -97,7 +97,7 @@ InstallMethod (IsMemberOp, "if injector is known", true,
 ##
 #R  IsFittingProductRep (<cl>)
 ##
-##  classes which are defined as formation product
+##  classes which are defined as Fitting product
 ##
 DeclareRepresentation ("IsFittingProductRep", 
    IsClass and IsGroupClass and IsFittingClass and 
@@ -109,7 +109,7 @@ DeclareRepresentation ("IsFittingProductRep",
 ##
 #M  FittingProduct (<bot>, <top>)
 ##
-InstallMethod (FittingProduct, "of two formations", true, 
+InstallMethod (FittingProduct, "of two Fittng classes", true, 
    [IsFittingClass, IsFittingClass], 0, 
    function (B, T)
       return NewClass ("Fitting product fam", IsFittingProductRep,

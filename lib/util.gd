@@ -11,7 +11,7 @@ Revision.util_gd :=
     "@(#)$Id$";
 
 
-###################################################################################
+#############################################################################
 ##
 #A  NormalGeneratorsOfNilpotentResidualNilpotentResidual 
 ##
@@ -21,7 +21,7 @@ Revision.util_gd :=
 DeclareAttribute ("NormalGeneratorsOfNilpotentResidual", IsGroup);
 
 
-###################################################################################
+#############################################################################
 ##
 #F  ChiefSeriesElAbFactorUnderAction (<grp>, <M>, <N>)
 ##
@@ -33,12 +33,12 @@ DeclareAttribute ("NormalGeneratorsOfNilpotentResidual", IsGroup);
 DeclareGlobalFunction ("ChiefSeriesElAbFactorUnderAction");
 
 
-###################################################################################
+#############################################################################
 ##
 #F  PcgsChiefSeriesElAbModuloPcgsUnderAction (<grp>, <sec>)
 ##
-##  computes a series of pcgs representing a <grp>-chief series of the elementary 
-##  abelian normal section M/N,
+##  computes a series of pcgs representing a <grp>-chief series of the  
+##  elementary abelian normal section M/N,
 ##  i.e. a list M = N_0 > N_1 > ... > N_r = N of subgroups of <grp> such that 
 ##  each N_i is normal in M and there is no <grp>-invariant subgroup between 
 ##  N_i and N_{i+1}.
@@ -46,7 +46,7 @@ DeclareGlobalFunction ("ChiefSeriesElAbFactorUnderAction");
 DeclareGlobalFunction ("PcgsChiefSeriesElAbModuloPcgsUnderAction");
 
 
-###################################################################################
+#############################################################################
 ##
 #F  IsAbelianModuloPcgs (<pcgs>)
 ##
@@ -62,7 +62,7 @@ DeclareGlobalFunction ("IsAbelianModuloPcgs");
 DeclareOperation ("CentralizesLayer", [IsListOrCollection, IsModuloPcgs]);
 
 
-###################################################################################
+#############################################################################
 ##
 #F  PcgsElementaryAbelianSeriesFromGenericPcgs (<G>)
 ##
@@ -73,14 +73,14 @@ DeclareOperation ("CentralizesLayer", [IsListOrCollection, IsModuloPcgs]);
 DeclareGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs");
 
 
-##################################################################################
+#############################################################################
 ##
 #P  IsPrimitiveSolvable (<grp>)
 ##
 DeclareProperty ("IsPrimitiveSolvable", IsGroup);
 
 
-##################################################################################
+#############################################################################
 ##
 #A  IndicesElementaryAbelianSteps (<pcgs>)
 ##
@@ -96,9 +96,10 @@ DeclareAttribute ("IndicesElementaryAbelianSteps", IsPcgs);
 #O  SiftedPcElementWrtPcSequence (<pcgs>, <seq>, <depths>, <x>)
 ##
 ##  sifts an element x through a pc sequence <seq> (that is, a plain list
-##  whose elements for a (modulo) pcgs), reducing <x> if it has the same depth 
-##  (wrt. the pcgs <pcgs>) as an element in seq. It returns the sifted element.
-##  <depths> must be a list containing for each element in seq its depth wrt. <pcgs>.
+##  whose elements form a (modulo) pcgs), reducing <x> if it has the same  
+##  depth (wrt. the pcgs <pcgs>) as an element in seq. It returns the 
+##  sifted element. <depths> must be a list containing for each element 
+##  in seq its depth wrt. <pcgs>.
 ##
 DeclareOperation ("SiftedPcElementWrtPcSequence", 
    [IsPcgs, IsListOrCollection, IsList, IsMultiplicativeElementWithInverse]);

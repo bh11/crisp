@@ -32,7 +32,7 @@ DeclareAttribute ("Boundary", IsGroupClass);
 ##
 #A  Basis (<class>)
 ##
-##  the basis of a Schunck class <class> consists of the primitive soluble 
+##  the basis of a Schunck class <class> consists of the primitive solvable 
 ##  groups in <class>
 ##
 DeclareAttribute ("Basis", IsGroupClass);

@@ -134,7 +134,8 @@ RedispatchOnCondition (IsMemberOp, true,
 InstallMethod (Boundary, "if BoundaryFunction is known", true, 
    [IsSchunckClass and HasBoundaryFunction], 3,
    function (H)
-       return GroupClass (G -> IsPrimitiveSolvable (G) and BoundaryFunction(G)
+       return GroupClass (G -> IsPrimitiveSolvable (G) 
+										and BoundaryFunction(H)(G)
           and G/Socle(G) in H);
  end);
   

@@ -781,7 +781,7 @@ InstallGlobalFunction  ("SetIsSaturatedFittingFormation",
 ##
 #M  Basis (<class>)
 ##
-##  the basis of a group class <class> consists of the primitive soluble 
+##  the basis of a group class <class> consists of the primitive solvable 
 ##  groups in <class>
 ##
 InstallMethod (Basis, "for group class", true, 

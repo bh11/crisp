@@ -58,7 +58,7 @@ SetName (NilpotentGroups, "<class of all nilpotent groups>");
 ##  
 #M  NilpotentProjector
 ##
-InstallMethod (NilpotentProjector, "for finite soluble groups", true, 
+InstallMethod (NilpotentProjector, "for finite solvable groups", true, 
    [IsFinite and IsGroup and IsSolvableGroup], 0,
    function (G)
       return ProjectorFromExtendedBoundaryFunction (
@@ -115,7 +115,7 @@ SetName (SupersolvableGroups, "<class of all supersolvable groups>");
 ##  
 #M  SupersolvableProjector (<grp>)
 ##
-InstallMethod (SupersolvableProjector, "for finite soluble groups", true, 
+InstallMethod (SupersolvableProjector, "for finite solvable groups", true, 
    [IsFinite and IsGroup and IsSolvableGroup], 0,
    function (G)
       return ProjectorFromExtendedBoundaryFunction (

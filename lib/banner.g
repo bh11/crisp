@@ -16,7 +16,7 @@ Print ("                                                    \n");
 Print ("              A GAP 4 share package for           \n");
 Print ("          Computing with Radicals, Injectors        \n");
 Print ("            Schunck classes and Projectors          \n");
-Print ("               of finite soluble groups             \n");
+Print ("              of finite solvable groups             \n");
 Print ("                                                    \n");
 Print ("                By Burkhard H\\\"ofling               \n");
 Print ("                                                    \n");
