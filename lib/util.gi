@@ -15,9 +15,15 @@ Revision.util_gi :=
 ##
 #M  SmallGeneratingSet 
 ##
-InstallMethod (SmallGeneratingSet, "for groups with pcgs", true,
+InstallMethod (SmallGeneratingSet, "for pc groups", true,
    [IsPcGroup], SUM_FLAGS, 
-   Pcgs);
+   function (G)
+      if Length (GeneratorsOfGroup (G)) < Length (Pcgs(G)) then
+         return GeneratorsOfGroup (G);
+      else
+         return Pcgs (G);
+      fi;
+   end);
 
 
 InstallMethod (SmallGeneratingSet, "for groups with pcgs", true,
