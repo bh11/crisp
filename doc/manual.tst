@@ -193,11 +193,22 @@ gap> myTwoGroups := FittingClass(rec(
 >    inj := G -> SylowSubgroup(G,2)));
 FittingClass (in:=function( G ) ... end, rad:=function( G ) ... end, inj:=func\
 tion( G ) ... end)
+gap> myL2_Nilp := FittingClass (rec (\in := 
+>     G -> IsSolvableGroup (G) 
+>          and Index (G, Injector (G, myNilpotentGroups)) mod 2 <> 0));
+FittingClass (in:=function( G ) ... end)
+gap> SymmetricGroup (3) in myL2_Nilp;
+false
+gap> SymmetricGroup (4) in myL2_Nilp;
+true
 
 gap> FittingProduct (myNilpotentGroups, myTwoGroups);
 FittingProduct (FittingClass (in:=<Operation "IsNilpotent">, rad:=<Operation "\
 FittingSubgroup">), FittingClass (in:=function( G ) ... end, rad:=function( G \
 ) ... end, inj:=function( G ) ... end))
+gap> FittingProduct (myNilpotentGroups, myL2_Nilp);
+FittingProduct (FittingClass (in:=<Operation "IsNilpotent">, rad:=<Operation "\
+FittingSubgroup">), FittingClass (in:=function( G ) ... end))
 
 gap>  fitset := FittingSet(SymmetricGroup (4), rec(
 >        \in := S -> IsSubgroup (AlternatingGroup (4), S),
@@ -241,6 +252,10 @@ FittingSet (SymmetricGroup(
 
 gap> Radical (SymmetricGroup (4), FittingClass (rec(\in := IsNilpotentGroup)));
 Group([ (1,4)(2,3), (1,3)(2,4) ])
+gap> Radical (SymmetricGroup (4), myL2_Nilp);
+Sym( [ 1 .. 4 ] )
+gap> Radical (SymmetricGroup (3), myL2_Nilp);
+Group([ (1,2,3) ])
 
 gap> Injector (SymmetricGroup (4), FittingClass (rec(\in := IsNilpotentGroup)));
 Group([ (1,3)(2,4), (1,4)(2,3), (3,4) ])

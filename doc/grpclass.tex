@@ -211,13 +211,13 @@ reference manual).
 
 \>HasIsFittingClass(<obj>) F
 
-is true of <obj> knows if it is a Fitting class, that is, if it lies in the
+is true if <obj> *knows* if it is a Fitting class, that is, if it lies in the
 filters  `HasIsGroupClass', `HasContainsTrivialGroup',
 `HasIsNormalSubgroupClosed'  and `HasIsNormalProductClosed'.
 
 \>IsFittingClass(<obj>) F
 
-is true of <obj> is a Fitting class, that is, if it has the properties
+is true if <obj> is a Fitting class, that is, if it has the properties
 `IsGroupClass', `ContainsTrivialGroup', `IsNormalSubgroupClosed' and
 `IsNormalProductClosed'.
 
@@ -239,7 +239,7 @@ FittingClass (in:=<Operation "IsNilpotent">)
 \>HasIsOrdinaryFormation(<obj>) F
 
 \indextt{HasIsFormation}%
-is true if <obj> knows if it is a formation, that is, if it lies in the filters
+is true if <obj> *knows* if it is a formation, that is, if it lies in the filters
 `HasIsGroupClass', `HasContainsTrivialGroup', `HasIsQuotientClosed' and 
 `HasIsResiduallyClosed'.
 
@@ -255,12 +255,12 @@ is true if <obj> is a formation, that is, if it has the properties
 If <bool> is `true', this sets the attributes `IsQuotientClosed',
 `ContainsTrivialGroup', and `IsResiduallyClosed' of <class>, making it a formation.
 
-\>HasIsSaturatedFormation(<obj>) 
+\>HasIsSaturatedFormation(<obj>) F
 
-returns true if <obj> knows if it is a saturated formation, that is, if it
+returns true if <obj> *knows* if it is a saturated formation, that is, if it
 lies in the filters `HasIsOrdinaryFormation' and `HasIsSaturated'.
 
-\>IsSaturatedFormation(<obj>) 
+\>IsSaturatedFormation(<obj>) F
 
 returns true if <obj> is a saturated formation, that is, if it has the
 properties `IsOrdinaryFormation' and `IsSaturated'
@@ -271,13 +271,14 @@ If <bool> is `true', this sets the attributes `IsQuotientClosed',
 `ContainsTrivialGroup', and `IsResiduallyClosed' and `IsSaturated'
 of <class>, making it a saturated formation.
 
-\>HasIsFittingFormation(<obj>) 
+\>HasIsFittingFormation(<obj>) F
 
-returns true if <obj> lies in the filters `HasIsOrdinaryFormation' and 
-`HasIsFittingClass' (see "HasIsOrdinaryFormation" and "HasIsFittingClass").
+returns true if <obj> *knows* that it is a Fitting formation, that is, if it lies in the filters
+`HasIsOrdinaryFormation' and  `HasIsFittingClass' (see "HasIsOrdinaryFormation" and
+"HasIsFittingClass").
 
 
-\>IsFittingFormation(<obj>) 
+\>IsFittingFormation(<obj>) F
 
 returns true if <obj> is both a formation and a Fitting class.
 
@@ -286,14 +287,17 @@ returns true if <obj> is both a formation and a Fitting class.
 If <bool> is `true', this function sets the attributes of <class> to indicate
 that it is a Fitting formation.
 
-\>HasIsSaturatedFittingFormation(<obj>) 
+\>HasIsSaturatedFittingFormation(<obj>)  F
 
-returns true if <obj> lies in the filters `HasIsSaturatedFormation' and 
-`HasIsFittingClass' (see "HasIsSaturatedFormation" and "HasIsFittingClass").
+returns true if <obj>  *knows* that it is a Fitting formation, that is, if it lies in the
+filters `HasIsSaturatedFormation' and  `HasIsFittingClass' (see "HasIsSaturatedFormation" and
+"HasIsFittingClass").
 
-\>IsSaturatedFittingFormation(<obj>) 
+\>IsSaturatedFittingFormation(<obj>) F
 
-returns true if <obj> is both a saturated formation and a Fitting class.
+returns true if <obj> is both a saturated formation and a Fitting class, that is, if it lies 
+in the filters `IsSaturatedFormation' and  `IsFittingClass' (see "IsSaturatedFormation"
+and "IsFittingClass").
 
 \>SetIsSaturatedFittingFormation(<class>, <bool>) F
 
