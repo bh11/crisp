@@ -514,7 +514,7 @@ InstallGlobalFunction ("PROJECTOR_FROM_BOUNDARY",
        bool;       # result returned by the boundary function, or false if no complement
            
       
-   inds := IndicesElementaryAbelianSteps (pcgs);
+   inds := IndicesNormalSteps (pcgs);
    if inds = fail then
       Error ("pcgs must refine an elementary abelian series");
    fi;

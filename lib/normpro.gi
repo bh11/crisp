@@ -33,7 +33,7 @@ InstallMethod (PcgsNormalizerOfPronormalSubgroup,
       null, mat, sol, n, NN, sub, inters, gens;
 
    parentpcgs := ParentPcgs (pcgs);
-   ind := IndicesElementaryAbelianSteps (pcgs);
+   ind := IndicesNormalSteps (pcgs);
    
    if ind = fail then
       Error ("pcgs must refine an elementary abelian series");
