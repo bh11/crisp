@@ -14,16 +14,16 @@ Subtitle := "Computing with Radicals, Injectors, Schunck classes and Projectors"
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers.
-Version := "1.2",
+Version := "1.2.1",
 
 ##  Release date of the current version in dd/mm/yyyy format.
-Date := "21/08/2003",
+Date := "26/04/2004",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
 ##  The archive file name *must be changed* with each version of the archive
 ##  (and probably somehow contain the package name and version).
-ArchiveURL := "http://www.tu-bs.de/~bhoeflin/crisp/crisp-1r2",
+ArchiveURL := "http://www.tu-bs.de/~bhoeflin/crisp/crisp-1r2n1",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -136,7 +136,7 @@ AcceptDate := "12/2000",
 ##  the updating of package information on the GAP Website, and inclusion
 ##  and updating of the package in the GAP distribution.
 ##  
-README_URL := "http://www.tu-bs.de/~bhoeflin/crisp/README.crisp-1r2",
+README_URL := "http://www.tu-bs.de/~bhoeflin/crisp/README",
 PackageInfoURL := "http://www.tu-bs.de/~bhoeflin/crisp/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
@@ -146,25 +146,27 @@ PackageInfoURL := "http://www.tu-bs.de/~bhoeflin/crisp/PackageInfo.g",
 ##  Please, use '<span class="pkgname">GAP</span>' and
 ##  '<span class="pkgname">MyPKG</span>' for specifing package names.
 ##  
-AbstractHTML := "<P>The <span class=\"pkgname\">GAP</span> package \
-<span class=\"pkgname\">CRISP</span> provides algorithms for computing subgroups of \
-finite solvable groups related to a group class <I>C</I>. In particular, it allows \
-to compute <I>C</I>-radicals and <I>C</I>-injectors for Fitting classes \
-(and Fitting sets) <I>C</I>, <I>C</I>-residuals for formations <I>C</I>, and \
-<I>C</I>-projectors for Schunck classes <I>C</I>. In order to carry out these \
-computations, the group class <I>C</I> must be represented by an \
-algorithm which can decide membership in the group class. </P>\
-<P>Moreover, <span class=\"pkgname\">CRISP</span> contains algorithms for the \
-computation of normal subgroups \
-invariant under a prescribed set of automorphisms and belonging to a given \
-group class.</P>\
-<P>This includes an improved method to compute the set of all normal subgroups \
-of a finite solvable group, its characteristic subgroups, minimal normal \
-subgroups and the socle and \
-<i>p</i>-socles for given primes <i>p</i>.</P> \
-",
+AbstractHTML := "The <span class=\"pkgname\">GAP</span> package <span \
+class=\"pkgname\">CRISP</span> provides algorithms for computing \
+subgroups of finite solvable groups related to a group class \
+<i>C</i>. In particular, it allows to compute <i>C</i>-radicals and \
+<i>C</i>-injectors for Fitting classes (and Fitting sets) <i>C</i>, \
+<i>C</i>-residuals for formations <i>C</i>, and <i>C</i>-projectors \
+for Schunck classes <i>C</i>. In order to carry out these \
+computations, the group class <i>C</i> must be represented by an \
+algorithm which can decide membership in the group class.</p> \
+ \
+<p>Moreover, <span class=\"pkgname\">CRISP</span> contains algorithms \
+for the computation of normal subgroups invariant under a \
+prescribed set of automorphisms and belonging to a given group \
+class.</p> \
+ \
+<p>This includes an improved method to compute the set of all \
+normal subgroups of a finite solvable group, its characteristic \
+subgroups, minimal normal subgroups and the socle and \
+<i>p</i>-socles for given primes <i>p</i>.",
 
-PackageWWWHome := "http://www.tu-bs.de/~bhoeflin/crisp/index.html",
+PackageWWWHome := "http://www.tu-bs.de/~bhoeflin/crisp/index.htm",
                   
 ##  On the GAP Website there is an online version of all manuals in the
 ##  GAP distribution. To handle the documentation of a package it is
@@ -189,7 +191,7 @@ PackageDoc := rec(
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   # Archive := "http://www.math.rwth-aachen.de/~Frank.Luebeck/EDIM/edimdoc-1p1.tar.bz2",
   ArchiveURLSubset := ["doc", "htm"],
-  HTMLStart := "htm/index.html",
+  HTMLStart := "htm/chapters.htm",
   PDFFile := "doc/manual.pdf",
   # the path to the .six file used by GAP's help system
   SixFile := "doc/manual.six",

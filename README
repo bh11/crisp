@@ -1,5 +1,5 @@
                        The CRISP package
-                          Version 1.2
+                          Version 1.2.1
 
 The GAP package CRISP provides algorithms for computing subgroups of
 finite solvable groups related to a group class C. In particular, it
@@ -19,9 +19,9 @@ p-socles for given primes p.
 
 This version of CRISP requires at least GAP 4.4.
 
-In order to install CRISP, you have to get the archive file `crisp-1r2.zoo'.
+In order to install CRISP, you have to get the archive file `crisp-1r2n1.zoo'.
 
-You can download `crisp-1r2.zoo' from the same places as GAP. The main FTP
+You can download `crisp-1r2n1.zoo' from the same places as GAP. The main FTP
 servers are:
 
 ftp://ftp-gap.dcs.st-and.ac.uk/pub/gap/gap4/share/
@@ -29,27 +29,23 @@ ftp://ftp.math.rwth-aachen.de/pub/gap4/share/
 ftp://ftp.ccs.neu.edu/pub/mirrors/ftp-gap.dcs.st-and.ac.uk/pub/gap/gap4/share/
 ftp://pell.anu.edu.au/pub/algebra/gap4/share/
 
-`crisp-1r1.zoo' is also available via the GAP www page at
+`crisp-1r2n1.zoo' is also available via the GAP www page at
 
 http://www-gap.dcs.st-and.ac.uk/~gap/Info4/share.html
 http://aldebaran.math.rwth-aachen.de/~GAP/Info4/share.html
 http://mirrors.ccs.neu.edu/GAP/NEU/Info4/share.html
 http://wwwmaths.anu.edu.au/research.groups/algebra/GAP/www/Info4/share.html
 
-or, alternatively, from the author's home page at
-
-http://www.tu-bs.de/~bhoeflin/crisp/index.html
-
-To install CRISP, move the file `crisp-1r2.zoo' into the `pkg' directory in
+To install CRISP, move the file `crisp-1r2n1.zoo' into the `pkg' directory in
 which you plan to install CRISP. Usually, this will be the directory `pkg'
 in the GAP directory. 
 
 If you already have a previous version of CRISP, that is, there is a directory
 `crisp' in the `pkg' directory, delete (or rename) this directory first.
 
-Then unzoo `crisp-1r2.zoo' by starting `unzoo' and type
+Then unzoo `crisp-1r2n1.zoo' by starting `unzoo' and type
 
-    -x crisp-1r2
+    -x crisp-1r2n1
 
 (and <return>) at the prompt. (To quit `unzoo', enter <return> when the prompt
 re-appears.)
@@ -61,16 +57,9 @@ That's all. Now start GAP and type
 The CRISP banner should appear on the screen.
 
 
-Please do not hesitate to report any bugs or other problems/suggestions to the 
-author:
+Please do not hesitate to report any bugs or other problems/suggestions to the author:
 
 Burkhard H\"ofling
-Technische Universitaet 
-Institut fuer Geometrie
-Pockelsstr. 14
-38106 Braunschweig
-Germany
 e-mail: b.hoefling@tu-bs.de
 www:    http://www.tu-bs.de/~bhoeflin
-
 
