@@ -1,130 +1,142 @@
 \letter A
-  abelian groups, class of, 18
-  `AbelianGroupsOfExponent', 18
-  Additional attributes for primitive solvable groups, \indexit{11}
-  Additional properties of group classes, \indexit{8}
-  `AllNormalSubgroupsWithNProperty', 17
-  `AllNormalSubgroupsWithQProperty', 13
-  Attributes and operations for Fitting classes and Fitting sets, \indexit{16}
-  Attributes and operations for formations, \indexit{12}
-  Attributes and operations for Schunck classes, \indexit{10}
-  Attributes of group classes, \indexit{9}
+  abelian groups, class of, 23
+  `AbelianGroupsOfExponent', 23
+  Additional attributes for primitive solvable groups, \indexit{13}
+  Additional properties of group classes, \indexit{9}
+  `AllNormalSubgroupsWithNProperty', 22
+  `AllNormalSubgroupsWithQProperty', 17
+  Attributes and operations for Fitting classes and Fitting sets, \indexit{21}
+  Attributes and operations for formations, \indexit{16}
+  Attributes and operations for Schunck classes, \indexit{12}
+  Attributes of group classes, \indexit{11}
 \letter B
-  `Basis', 11
-  `Boundary', 11
-  `BoundaryFunction', 10
+  `Basis', 13
+  `Boundary', 13
+  `BoundaryFunction', 12
 \letter C
-  Carter subgroup, 18
-  `Characteristic', 9
-  class, of all abelian groups, 18
-    \sub of all nilpotent groups, 18
-    \sub of all supersolvable groups, 18
-    \sub of all trivial groups, 18
+  Carter subgroup, 23
+  `Characteristic', 11
+  class, of all abelian groups, 23
+    \sub of all nilpotent groups, 23
+    \sub of all supersolvable groups, 23
+    \sub of all trivial groups, 23
   `Class', 4
-  closure properties, of group classes, 7
+  closure properties, of group classes, 8
   comparison, for classes, 5
   `Complement', 5
-  `CoveringSubgroup', 11
-  Creating Fitting classes, \indexit{14}
-  Creating Fitting sets, \indexit{15}
-  Creating formations, \indexit{11}
-  Creating group classes, \indexit{6}
-  Creating Schunck classes, \indexit{10}
+  `ContainsTrivialGroup', 9
+  `CoveringSubgroup', 13
+  Creating Fitting classes, \indexit{18}
+  Creating Fitting sets, \indexit{19}
+  Creating formations, \indexit{14}
+  Creating group classes, \indexit{7}
+  Creating Schunck classes, \indexit{12}
   Creating set theoretical classes, \indexit{4}
   CRISP, 3
 \letter D
-  `Difference', 5
+  `Difference', 6
+  `Display', for classes, 5
 \letter E
-  element test, for classes, 4
+  element test, for classes, 5
   equality, for classes, 5
 \letter F
-  Fitting formations, \indexit{14}
-  `FittingClass', 14
-  `FittingFormation', 14
-  `FittingProduct', 14
-  `FittingSet', 15
-  `FormationProduct', 12
-  Functions for normal subgroups related to radicals, \indexit{17}
-  Functions for normal subgroups related to residuals, \indexit{13}
+  Fitting formations, \indexit{19}
+  `FittingClass', 18
+  `FittingFormation', 19
+  `FittingFormationProduct', 15, 18
+  `FittingProduct', 18
+  `FittingSet', 19
+  `FormationProduct', 15
+  Functions for normal subgroups related to radicals, \indexit{21}
+  Functions for normal subgroups related to residuals, \indexit{16}
 \letter G
-  `GroupClass', 6
+  `GroupClass', 7
+\letter H
+  `HasIsFittingClass', 9
+  `HasIsFittingFormation', 10
+  HasIsFormation, 10
+  `HasIsOrdinaryFormation', 10
+  `HasIsSaturatedFittingFormation', 10
+  `HasIsSaturatedFormation', 10
 \letter I
-  `ImageFittingSet', 15
-  in, for classes, 4
-  `Injector', 17
-  `InjectorFunction', 16
+  `ImageFittingSet', 20
+  in, for classes, 5
+  `Injector', 21
+  `InjectorFunction', 21
   `Intersection', of classes, 5
-    \sub of Fitting sets, 16
-    \sub of group classes, 7
+    \sub of Fitting sets, 20
+    \sub of group classes, 8
+  `INTERSECTION_LIMIT', 5
   `IsClass', 4
-  `IsDirectProductClosed', 8
+  `IsDirectProductClosed', 9
   `IsEmpty', for classes, 5
-  `IsFittingClass', 8
-  `IsFittingFormation', 9
-  `IsFittingSet', 15
-  IsFormation, 8
-  `IsGroupClass', 7
-  `IsMember', 4
-  `IsNonEmpty', 5
-  `IsNormalProductClosed', 8
-  `IsNormalSubgroupClosed', 7
-  `IsOrdinaryFormation', 8
-  `IsPrimitiveSolvable', 11
-  `IsQuotientClosed', 7
-  `IsResiduallyClosed', 8
-  `IsSaturated', 8
-  `IsSaturatedFittingFormation', 9
-  `IsSaturatedFormation', 8
-  `IsSchunckClass', 8
-  `IsSubgroupClosed', 7
+  `IsFittingClass', 9
+  `IsFittingFormation', 10
+  `IsFittingSet', 19
+  IsFormation, 10
+  `IsGroupClass', 8
+  `IsNormalProductClosed', 9
+  `IsNormalSubgroupClosed', 9
+  `IsOrdinaryFormation', 10
+  `IsPrimitiveSolvable', 13
+  `IsQuotientClosed', 9
+  `IsResiduallyClosed', 9
+  `IsSaturated', 9
+  `IsSaturatedFittingFormation', 10
+  `IsSaturatedFormation', 10
+  `IsSchunckClass', 9
+  `IsSubgroupClosed', 9
 \letter L
   Lattice operations for classes, \indexit{5}
-  `LocalDefinitionFunction', 12
+  `LocalDefinitionFunction', 16
 \letter M
   `MemberFunction', 5
-  membership test, for classes, 4
-  More concrete group classes, \indexit{18}
+  membership test, for classes, 5
+  More concrete group classes, \indexit{23}
 \letter N
-  nilpotent groups, class of, 18
-  `NilpotentProjector', 18
-  `NormalSubgroups', 13
+  nilpotent groups, class of, 23
+  `NilpotentProjector', 23
+  `NormalSubgroups', 17
 \letter O
-  `OneNormalSubgroupMaxWrtNProperty', 17
-  `OneNormalSubgroupMinWrtQProperty', 13
-  `OrdinaryFormation', 11
+  `OneNormalSubgroupMaxWrtNProperty', 21
+  `OneNormalSubgroupMinWrtQProperty', 16
+  `OrdinaryFormation', 14
 \letter P
-  `PGroups', 18
-  `PiGroups', 18
-  Pre-defined group classes, \indexit{18}
-  Pre-defined sets of primes, \indexit{19}
-  `PreImageFittingSet', 16
-  primes, set of all, 19
-  `Projector', 11
-  `ProjectorFunction', 11
+  `PGroups', 23
+  `PiGroups', 23
+  Pre-defined group classes, \indexit{23}
+  Pre-defined sets of primes, \indexit{24}
+  `PreImageFittingSet', 20
+  primes, set of all, 24
+  `Print', for classes, 5
+  `Projector', 13
+  `ProjectorFunction', 13
   Properties of classes, \indexit{5}
-  Properties of group classes, \indexit{7}
+  Properties of group classes, \indexit{8}
 \letter R
-  radical, wrt Fitting class, 16
-    \sub wrt Fitting set, 16
-  `Radical', 16
-  `RadicalFunction', 16
-  `Residual', 12
-  `ResidualFunction', 12
+  radical, wrt Fitting class, 21
+    \sub wrt Fitting set, 21
+  `Radical', 21
+  `RadicalFunction', 21
+  `Residual', 16
+  `ResidualFunction', 16
 \letter S
-  `SaturatedFittingFormation', 15
-  `SaturatedFormation', 12
-  `SchunckClass', 10
-  set, of all primes, 19
-  `SetIsFittingClass', 8
-  `SetIsFittingFormation', 9
-  SetIsFormation, 8
-  `SetIsOrdinaryFormation', 8
-  `SetIsSaturatedFittingFormation', 9
-  `SetIsSaturatedFormation', 9
-  `SocleComplement', 11
-  supersolvable groups, class of, 18
-  `SupersolvableProjector', 18
+  `SaturatedFittingFormation', 19
+  `SaturatedFormation', 14
+  `SchunckClass', 12
+  set, of all primes, 24
+  `SetIsFittingClass', 9
+  `SetIsFittingFormation', 10
+  SetIsFormation, 10
+  `SetIsOrdinaryFormation', 10
+  `SetIsSaturatedFittingFormation', 10
+  `SetIsSaturatedFormation', 10
+  `SocleComplement', 13
+  supersolvable groups, class of, 23
+  `SupersolvableProjector', 23
 \letter T
-  trivial groups, class of, 18
+  trivial groups, class of, 23
 \letter U
-  `Union', 5
+  `Union', 6
+\letter V
+  `View', for classes, 4

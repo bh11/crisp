@@ -3,117 +3,128 @@
 \indexentry {IsClass@`IsClass'}{4}
 \indexentry {Class@`Class'}{4}
 \indexentry {Class@`Class'}{4}
-\indexentry {element test!for classes}{4}
-\indexentry {IsMember@`IsMember'}{4}
-\indexentry {in!for classes}{4}
-\indexentry {membership test!for classes}{4}
+\indexentry {View@`View'!for classes}{4}
+\indexentry {Print@`Print'!for classes}{5}
+\indexentry {Display@`Display'!for classes}{5}
+\indexentry {element test!for classes}{5}
+\indexentry {in!for classes}{5}
+\indexentry {membership test!for classes}{5}
 \indexentry {equality!for classes}{5}
 \indexentry {comparison!for classes}{5}
 \indexentry {Properties of classes@Properties of classes|indexit}{5}
 \indexentry {IsEmpty@`IsEmpty'!for classes}{5}
-\indexentry {IsNonEmpty@`IsNonEmpty'}{5}
 \indexentry {MemberFunction@`MemberFunction'}{5}
 \indexentry {Lattice operations for classes@Lattice operations for classes|indexit}{5}
 \indexentry {Complement@`Complement'}{5}
 \indexentry {Intersection@`Intersection'!of classes}{5}
 \indexentry {Intersection@`Intersection'!of classes}{5}
-\indexentry {Union@`Union'}{5}
-\indexentry {Difference@`Difference'}{5}
-\indexentry {Creating group classes@Creating group classes|indexit}{6}
-\indexentry {GroupClass@`GroupClass'}{6}
-\indexentry {GroupClass@`GroupClass'}{6}
-\indexentry {GroupClass@`GroupClass'}{6}
-\indexentry {GroupClass@`GroupClass'}{6}
-\indexentry {Intersection@`Intersection'!of group classes}{7}
-\indexentry {Intersection@`Intersection'!of group classes}{7}
-\indexentry {Properties of group classes@Properties of group classes|indexit}{7}
-\indexentry {closure properties!of group classes}{7}
-\indexentry {IsGroupClass@`IsGroupClass'}{7}
-\indexentry {IsSubgroupClosed@`IsSubgroupClosed'}{7}
-\indexentry {IsNormalSubgroupClosed@`IsNormalSubgroupClosed'}{7}
-\indexentry {IsQuotientClosed@`IsQuotientClosed'}{7}
-\indexentry {IsResiduallyClosed@`IsResiduallyClosed'}{8}
-\indexentry {IsNormalProductClosed@`IsNormalProductClosed'}{8}
-\indexentry {IsDirectProductClosed@`IsDirectProductClosed'}{8}
-\indexentry {IsSchunckClass@`IsSchunckClass'}{8}
-\indexentry {IsSaturated@`IsSaturated'}{8}
-\indexentry {Additional properties of group classes@Additional properties of group classes|indexit}{8}
-\indexentry {IsFittingClass@`IsFittingClass'}{8}
-\indexentry {SetIsFittingClass@`SetIsFittingClass'}{8}
-\indexentry {IsOrdinaryFormation@`IsOrdinaryFormation'}{8}
-\indexentry {IsFormation}{8}
-\indexentry {SetIsOrdinaryFormation@`SetIsOrdinaryFormation'}{8}
-\indexentry {SetIsFormation}{8}
-\indexentry {IsSaturatedFormation@`IsSaturatedFormation'}{8}
-\indexentry {SetIsSaturatedFormation@`SetIsSaturatedFormation'}{9}
-\indexentry {IsFittingFormation@`IsFittingFormation'}{9}
-\indexentry {SetIsFittingFormation@`SetIsFittingFormation'}{9}
-\indexentry {IsSaturatedFittingFormation@`IsSaturatedFittingFormation'}{9}
-\indexentry {SetIsSaturatedFittingFormation@`SetIsSaturatedFittingFormation'}{9}
-\indexentry {Attributes of group classes@Attributes of group classes|indexit}{9}
-\indexentry {Characteristic@`Characteristic'}{9}
-\indexentry {Creating Schunck classes@Creating Schunck classes|indexit}{10}
-\indexentry {SchunckClass@`SchunckClass'}{10}
-\indexentry {Attributes and operations for Schunck classes@Attributes and operations for Schunck classes|indexit}{10}
-\indexentry {BoundaryFunction@`BoundaryFunction'}{10}
-\indexentry {ProjectorFunction@`ProjectorFunction'}{11}
-\indexentry {Boundary@`Boundary'}{11}
-\indexentry {Basis@`Basis'}{11}
-\indexentry {Projector@`Projector'}{11}
-\indexentry {CoveringSubgroup@`CoveringSubgroup'}{11}
-\indexentry {Additional attributes for primitive solvable groups@Additional attributes for primitive solvable groups|indexit}{11}
-\indexentry {IsPrimitiveSolvable@`IsPrimitiveSolvable'}{11}
-\indexentry {SocleComplement@`SocleComplement'}{11}
-\indexentry {Creating formations@Creating formations|indexit}{11}
-\indexentry {OrdinaryFormation@`OrdinaryFormation'}{11}
-\indexentry {SaturatedFormation@`SaturatedFormation'}{12}
-\indexentry {FormationProduct@`FormationProduct'}{12}
-\indexentry {Attributes and operations for formations@Attributes and operations for formations|indexit}{12}
-\indexentry {Residual@`Residual'}{12}
-\indexentry {ResidualFunction@`ResidualFunction'}{12}
-\indexentry {LocalDefinitionFunction@`LocalDefinitionFunction'}{12}
-\indexentry {Functions for normal subgroups related to residuals@Functions for normal subgroups related to residuals|indexit}{13}
-\indexentry {OneNormalSubgroupMinWrtQProperty@`OneNormalSubgroupMinWrtQProperty'}{13}
-\indexentry {AllNormalSubgroupsWithQProperty@`AllNormalSubgroupsWithQProperty'}{13}
-\indexentry {NormalSubgroups@`NormalSubgroups'}{13}
-\indexentry {Creating Fitting classes@Creating Fitting classes|indexit}{14}
-\indexentry {FittingClass@`FittingClass'}{14}
-\indexentry {FittingProduct@`FittingProduct'}{14}
-\indexentry {Fitting formations@Fitting formations|indexit}{14}
-\indexentry {FittingFormation@`FittingFormation'}{14}
-\indexentry {SaturatedFittingFormation@`SaturatedFittingFormation'}{15}
-\indexentry {Creating Fitting sets@Creating Fitting sets|indexit}{15}
-\indexentry {IsFittingSet@`IsFittingSet'}{15}
-\indexentry {FittingSet@`FittingSet'}{15}
-\indexentry {ImageFittingSet@`ImageFittingSet'}{15}
-\indexentry {PreImageFittingSet@`PreImageFittingSet'}{16}
-\indexentry {Intersection@`Intersection'!of Fitting sets}{16}
-\indexentry {Attributes and operations for Fitting classes and Fitting sets@Attributes and operations for Fitting classes and Fitting sets|indexit}{16}
-\indexentry {RadicalFunction@`RadicalFunction'}{16}
-\indexentry {InjectorFunction@`InjectorFunction'}{16}
-\indexentry {Radical@`Radical'}{16}
-\indexentry {radical!wrt Fitting class}{16}
-\indexentry {radical!wrt Fitting set}{16}
-\indexentry {Injector@`Injector'}{17}
-\indexentry {Functions for normal subgroups related to radicals@Functions for normal subgroups related to radicals|indexit}{17}
-\indexentry {OneNormalSubgroupMaxWrtNProperty@`OneNormalSubgroupMaxWrtNProperty'}{17}
-\indexentry {AllNormalSubgroupsWithNProperty@`AllNormalSubgroupsWithNProperty'}{17}
-\indexentry {Pre-defined group classes@Pre-defined group classes|indexit}{18}
-\indexentry {class!of all trivial groups}{18}
-\indexentry {trivial groups!class of}{18}
-\indexentry {class!of all nilpotent groups}{18}
-\indexentry {nilpotent groups!class of}{18}
-\indexentry {NilpotentProjector@`NilpotentProjector'}{18}
-\indexentry {Carter subgroup}{18}
-\indexentry {class!of all supersolvable groups}{18}
-\indexentry {supersolvable groups!class of}{18}
-\indexentry {SupersolvableProjector@`SupersolvableProjector'}{18}
-\indexentry {class!of all abelian groups}{18}
-\indexentry {abelian groups!class of}{18}
-\indexentry {More concrete group classes@More concrete group classes|indexit}{18}
-\indexentry {AbelianGroupsOfExponent@`AbelianGroupsOfExponent'}{18}
-\indexentry {PiGroups@`PiGroups'}{18}
-\indexentry {PGroups@`PGroups'}{18}
-\indexentry {Pre-defined sets of primes@Pre-defined sets of primes|indexit}{19}
-\indexentry {set!of all primes}{19}
-\indexentry {primes!set of all}{19}
+\indexentry {INTERSECTION_LIMIT@`INTERSECTION_LIMIT'}{5}
+\indexentry {Union@`Union'}{6}
+\indexentry {Difference@`Difference'}{6}
+\indexentry {Creating group classes@Creating group classes|indexit}{7}
+\indexentry {GroupClass@`GroupClass'}{7}
+\indexentry {GroupClass@`GroupClass'}{7}
+\indexentry {GroupClass@`GroupClass'}{7}
+\indexentry {GroupClass@`GroupClass'}{7}
+\indexentry {Intersection@`Intersection'!of group classes}{8}
+\indexentry {Intersection@`Intersection'!of group classes}{8}
+\indexentry {Properties of group classes@Properties of group classes|indexit}{8}
+\indexentry {closure properties!of group classes}{8}
+\indexentry {IsGroupClass@`IsGroupClass'}{8}
+\indexentry {ContainsTrivialGroup@`ContainsTrivialGroup'}{9}
+\indexentry {IsSubgroupClosed@`IsSubgroupClosed'}{9}
+\indexentry {IsNormalSubgroupClosed@`IsNormalSubgroupClosed'}{9}
+\indexentry {IsQuotientClosed@`IsQuotientClosed'}{9}
+\indexentry {IsResiduallyClosed@`IsResiduallyClosed'}{9}
+\indexentry {IsNormalProductClosed@`IsNormalProductClosed'}{9}
+\indexentry {IsDirectProductClosed@`IsDirectProductClosed'}{9}
+\indexentry {IsSchunckClass@`IsSchunckClass'}{9}
+\indexentry {IsSaturated@`IsSaturated'}{9}
+\indexentry {Additional properties of group classes@Additional properties of group classes|indexit}{9}
+\indexentry {HasIsFittingClass@`HasIsFittingClass'}{9}
+\indexentry {IsFittingClass@`IsFittingClass'}{9}
+\indexentry {SetIsFittingClass@`SetIsFittingClass'}{9}
+\indexentry {HasIsOrdinaryFormation@`HasIsOrdinaryFormation'}{10}
+\indexentry {HasIsFormation}{10}
+\indexentry {IsOrdinaryFormation@`IsOrdinaryFormation'}{10}
+\indexentry {IsFormation}{10}
+\indexentry {SetIsOrdinaryFormation@`SetIsOrdinaryFormation'}{10}
+\indexentry {SetIsFormation}{10}
+\indexentry {HasIsSaturatedFormation@`HasIsSaturatedFormation'}{10}
+\indexentry {IsSaturatedFormation@`IsSaturatedFormation'}{10}
+\indexentry {SetIsSaturatedFormation@`SetIsSaturatedFormation'}{10}
+\indexentry {HasIsFittingFormation@`HasIsFittingFormation'}{10}
+\indexentry {IsFittingFormation@`IsFittingFormation'}{10}
+\indexentry {SetIsFittingFormation@`SetIsFittingFormation'}{10}
+\indexentry {HasIsSaturatedFittingFormation@`HasIsSaturatedFittingFormation'}{10}
+\indexentry {IsSaturatedFittingFormation@`IsSaturatedFittingFormation'}{10}
+\indexentry {SetIsSaturatedFittingFormation@`SetIsSaturatedFittingFormation'}{10}
+\indexentry {Attributes of group classes@Attributes of group classes|indexit}{11}
+\indexentry {Characteristic@`Characteristic'}{11}
+\indexentry {Creating Schunck classes@Creating Schunck classes|indexit}{12}
+\indexentry {SchunckClass@`SchunckClass'}{12}
+\indexentry {Attributes and operations for Schunck classes@Attributes and operations for Schunck classes|indexit}{12}
+\indexentry {BoundaryFunction@`BoundaryFunction'}{12}
+\indexentry {ProjectorFunction@`ProjectorFunction'}{13}
+\indexentry {Boundary@`Boundary'}{13}
+\indexentry {Basis@`Basis'}{13}
+\indexentry {Projector@`Projector'}{13}
+\indexentry {CoveringSubgroup@`CoveringSubgroup'}{13}
+\indexentry {Additional attributes for primitive solvable groups@Additional attributes for primitive solvable groups|indexit}{13}
+\indexentry {IsPrimitiveSolvable@`IsPrimitiveSolvable'}{13}
+\indexentry {SocleComplement@`SocleComplement'}{13}
+\indexentry {Creating formations@Creating formations|indexit}{14}
+\indexentry {OrdinaryFormation@`OrdinaryFormation'}{14}
+\indexentry {SaturatedFormation@`SaturatedFormation'}{14}
+\indexentry {FormationProduct@`FormationProduct'}{15}
+\indexentry {FittingFormationProduct@`FittingFormationProduct'}{15}
+\indexentry {Attributes and operations for formations@Attributes and operations for formations|indexit}{16}
+\indexentry {Residual@`Residual'}{16}
+\indexentry {ResidualFunction@`ResidualFunction'}{16}
+\indexentry {LocalDefinitionFunction@`LocalDefinitionFunction'}{16}
+\indexentry {Functions for normal subgroups related to residuals@Functions for normal subgroups related to residuals|indexit}{16}
+\indexentry {OneNormalSubgroupMinWrtQProperty@`OneNormalSubgroupMinWrtQProperty'}{16}
+\indexentry {AllNormalSubgroupsWithQProperty@`AllNormalSubgroupsWithQProperty'}{17}
+\indexentry {NormalSubgroups@`NormalSubgroups'}{17}
+\indexentry {Creating Fitting classes@Creating Fitting classes|indexit}{18}
+\indexentry {FittingClass@`FittingClass'}{18}
+\indexentry {FittingProduct@`FittingProduct'}{18}
+\indexentry {FittingFormationProduct@`FittingFormationProduct'}{18}
+\indexentry {Fitting formations@Fitting formations|indexit}{19}
+\indexentry {FittingFormation@`FittingFormation'}{19}
+\indexentry {SaturatedFittingFormation@`SaturatedFittingFormation'}{19}
+\indexentry {Creating Fitting sets@Creating Fitting sets|indexit}{19}
+\indexentry {IsFittingSet@`IsFittingSet'}{19}
+\indexentry {FittingSet@`FittingSet'}{19}
+\indexentry {ImageFittingSet@`ImageFittingSet'}{20}
+\indexentry {PreImageFittingSet@`PreImageFittingSet'}{20}
+\indexentry {Intersection@`Intersection'!of Fitting sets}{20}
+\indexentry {Attributes and operations for Fitting classes and Fitting sets@Attributes and operations for Fitting classes and Fitting sets|indexit}{21}
+\indexentry {RadicalFunction@`RadicalFunction'}{21}
+\indexentry {InjectorFunction@`InjectorFunction'}{21}
+\indexentry {Radical@`Radical'}{21}
+\indexentry {radical!wrt Fitting class}{21}
+\indexentry {radical!wrt Fitting set}{21}
+\indexentry {Injector@`Injector'}{21}
+\indexentry {Functions for normal subgroups related to radicals@Functions for normal subgroups related to radicals|indexit}{21}
+\indexentry {OneNormalSubgroupMaxWrtNProperty@`OneNormalSubgroupMaxWrtNProperty'}{21}
+\indexentry {AllNormalSubgroupsWithNProperty@`AllNormalSubgroupsWithNProperty'}{22}
+\indexentry {Pre-defined group classes@Pre-defined group classes|indexit}{23}
+\indexentry {class!of all trivial groups}{23}
+\indexentry {trivial groups!class of}{23}
+\indexentry {class!of all nilpotent groups}{23}
+\indexentry {nilpotent groups!class of}{23}
+\indexentry {NilpotentProjector@`NilpotentProjector'}{23}
+\indexentry {Carter subgroup}{23}
+\indexentry {class!of all supersolvable groups}{23}
+\indexentry {supersolvable groups!class of}{23}
+\indexentry {SupersolvableProjector@`SupersolvableProjector'}{23}
+\indexentry {class!of all abelian groups}{23}
+\indexentry {abelian groups!class of}{23}
+\indexentry {More concrete group classes@More concrete group classes|indexit}{23}
+\indexentry {AbelianGroupsOfExponent@`AbelianGroupsOfExponent'}{23}
+\indexentry {PiGroups@`PiGroups'}{23}
+\indexentry {PGroups@`PGroups'}{23}
+\indexentry {Pre-defined sets of primes@Pre-defined sets of primes|indexit}{24}
+\indexentry {set!of all primes}{24}
+\indexentry {primes!set of all}{24}

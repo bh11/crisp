@@ -793,14 +793,6 @@ InstallMethod (InducedPcgsWrtPcgsOp, "generic method",
    end);
    
    
-###################################################################################
-##
-#M  IndicesElementaryAbelianSteps (<pcgs>)
-##
-InstallMethod (IndicesElementaryAbelianSteps, "for generic pcgs", true, [IsPcgs], 0,
-   IndicesNormalSteps);
-
-   
 #############################################################################
 ##
 #M  <IsNBitsPcWordRep> ^ <IsNBitsPcWordRep>
