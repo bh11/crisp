@@ -1,10 +1,14 @@
 \letter A
-  abelian groups, class of, 24
-  abelian groups of bounded exponent, class of, 24
-  `AbelianGroups', 24
-  `AbelianGroupsOfExponent', 24
-  `AllNormalSubgroupsWithNProperty', 23
-  `AllNormalSubgroupsWithQProperty', 17
+  abelian groups, class of, 25
+  abelian groups of bounded exponent, class of, 25
+  `AbelianGroups', 25
+  `AbelianGroupsOfExponent', 25
+  `AbelianSocle', 23
+  `AbelianSocleComponents', 23
+  `AllInvariantSubgroupsWithNProperty', 24
+  `AllInvariantSubgroupsWithQProperty', 17
+  `AllNormalSubgroupsWithNProperty', 24
+  `AllNormalSubgroupsWithQProperty', 18
   attributes, of Fitting classes, 22
     \sub of Fitting sets, 22
     \sub of formation, 16
@@ -16,16 +20,17 @@
   `Boundary', 12
   `BoundaryFunction', 13
 \letter C
-  Carter subgroup, 24
+  Carter subgroup, 25
   `Characteristic', 10
-  class, of all $p$-groups, 24
-    \sub of all $\pi $-groups, 24
-    \sub of all abelian groups, 24
-    \sub of all abelian groups of bounded exponent, 24
-    \sub of all nilpotent groups, 24
-    \sub of all supersolvable groups, 24
-    \sub of all trivial groups, 24
+  `CharacteristicSubgroups', 16
   `Class', 4
+  class, of all $\pi $-groups, 25
+    \sub of all $p$-groups, 25
+    \sub of all abelian groups, 25
+    \sub of all abelian groups of bounded exponent, 25
+    \sub of all nilpotent groups, 25
+    \sub of all supersolvable groups, 25
+    \sub of all trivial groups, 25
   classes, creating, 4
     \sub properties of, 5
   closure properties, of group classes, 8
@@ -41,6 +46,7 @@
   element test, for classes, 5
   equality, for classes, 5
 \letter F
+  factor groups, with properties inherited by factor groups, 16
   Fitting classes, attributes of, 22
     \sub creating, 19
     \sub creating Fitting formations, 20
@@ -82,6 +88,8 @@
     \sub of Fitting sets, 21
     \sub of group classes, 8
   `INTERSECTION_LIMIT', 5
+  invariant normal subgroups, with properties inherited by normal subgroups, 23
+    \sub with properties inherited by normal subgroups above, 16
   `IsClass', 4
   `IsDirectProductClosed', 9
   `IsEmpty', for classes, 5
@@ -108,30 +116,36 @@
   `MemberFunction', 5
   membership test, for classes, 5
 \letter N
-  nilpotent groups, class of, 24
-  `NilpotentProjector', 24
-  normal subgroups, related to radicals, 23
-    \sub related to residuals, 16
-  `NormalSubgroups', 18
+  nilpotent groups, class of, 25
+  `NilpotentProjector', 25
+  normal subgroups, with properties inherited by normal subgroups, 23
+    \sub with properties inherited by normal subgroups above, 16
+  `NormalSubgroups', 16
 \letter O
-  `OneNormalSubgroupMaxWrtNProperty', 23
-  `OneNormalSubgroupMinWrtQProperty', 16
+  `OneInvariantSubgroupMaxWrtNProperty', 23
+  `OneInvariantSubgroupMinWrtQProperty', 16
+  `OneNormalSubgroupMinWrtQProperty', 18
+  `OneNormalSubgroupWithNProperty', 24
   operations, for Fitting classes, 22
     \sub for Fitting sets, 22
     \sub for formation, 16
     \sub for Schunck class, 12
   `OrdinaryFormation', 14
 \letter P
-  `PGroups', 24
-  `PiGroups', 24
+  `PGroups', 25
+  `PiGroups', 25
   `PreImageFittingSet', 21
-  primes, set of all, 24
+  primes, set of all, 25
   primitive solvable group, attributes of, 13
   `Print', for classes, 5
   `Projector', 12
   `ProjectorFunction', 13
   properties, of classes, 5
     \sub of group classes, 9
+  `PSocle', 23
+  `PSocleComponents', 23
+\letter Q
+  quotient groups, with properties inherited by quotients, 16
 \letter R
   `Radical', 22
   `RadicalFunction', 22
@@ -144,7 +158,7 @@
     \sub creating, 12
     \sub operations for, 12
   `SchunckClass', 12
-  set, of all primes, 24
+  set, of all primes, 25
   `SetIsFittingClass', 9
   `SetIsFittingFormation', 10
   `SetIsFormation', 10
@@ -153,10 +167,13 @@
   `SetIsSaturatedFormation', 10
   `Socle', 23
   `SocleComplement', 13
-  supersolvable groups, class of, 24
-  `SupersolvableProjector', 24
+  `SocleComponents', 23
+  `SolvableSocle', 23
+  `SolvableSocleComponents', 23
+  supersolvable groups, class of, 25
+  `SupersolvableProjector', 25
 \letter T
-  trivial groups, class of, 24
+  trivial groups, class of, 25
 \letter U
   `Union', 6
 \letter V
