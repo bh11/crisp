@@ -32,25 +32,15 @@ InstallGlobalFunction (LinearSystem,
          solutions := [],
          solvable := ListWithIdenticalEntries (nrsolutions,true),
          conv := conv,
-         convsol := convsol);
-      if conv then
-         sys.nullrow := ListWithIdenticalEntries (
-            sys.nrvars, sys.zero);
-      else
-         sys.nullrow := [];
-         for i in [1..sys.nrvars] do
-            sys.nullrow[i] := sys.zero;
-         od;
-      fi;
-      if convsol then
-         sys.nullsol := ListWithIdenticalEntries (
-            sys.nrsolutions, sys.zero);
-      else
-         sys.nullsol := [];
-         for i in [1..sys.nrsolutions] do
-            sys.nullsol[i] := sys.zero;
-         od;
-      fi;
+         convsol := convsol,
+         nullrow := ListWithIdenticalEntries (nrvars, Zero (field)),
+         nullsol := ListWithIdenticalEntries (nrsolutions, Zero (field)));
+     if conv then
+         ConvertToVectorRep (sys.nullrow, sys.fieldsize);
+     fi;
+     if convsol then
+         ConvertToVectorRep (sys.nullsol, sys.fieldsize);
+     fi;
          
       return sys;
    end);
