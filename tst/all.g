@@ -2,7 +2,7 @@
 ##
 ##  all.g                           CRISP                 Burkhard H\"ofling
 ##
-##  @(#)$ $
+##  @(#)$Id$
 ##
 ##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
 ##  Friedrich Schiller-Universit\"at Jena, Germany
@@ -20,7 +20,6 @@ ReadPkg ("crisp", "tst/print.g");
 ReadPkg ("crisp", "tst/projectors.g");
 ReadPkg ("crisp", "tst/radicals.g");
 ReadPkg ("crisp", "tst/residuals.g");
-ReadPkg ("crisp", "tst/samples.g");
 
 FAST_TEST := true;
 DO_TIMING := false;
