@@ -12,6 +12,8 @@ RequirePackage ("crisp");
 PRINT_METHODS := false;
    
 ReadPkg ("crisp", "tst/classes.g");
+ReadPkg ("crisp", "tst/basis.g");
+ReadPkg ("crisp", "tst/boundary.g");
 ReadPkg ("crisp", "tst/char.g");
 ReadPkg ("crisp", "tst/in.g");
 ReadPkg ("crisp", "tst/injectors.g");

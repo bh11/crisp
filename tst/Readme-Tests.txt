@@ -33,6 +33,8 @@ The following table lists the available test files and their content.
 
 Readme-Tests.txt        -- this file
 all.g                   -- runs all of the following test files
+basis.g                 -- tests methods for Basis
+boundary.g              -- tests methods for Boundary
 char.g                  -- tests methods for Characteristic
 classes.g               -- tests constructions of classes and immediate methods
 in.g                    -- tests methods for IsMemberOp
