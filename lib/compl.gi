@@ -408,10 +408,10 @@ InstallGlobalFunction (PcgsComplementsOfCentralModuloPcgsUnderActionNC,
    
 #############################################################################
 ##
-#F  PcgsInvariantComplementsOfElAbModuloPcgsUnderAction (
+#F  PcgsInvariantComplementsOfElAbModuloPcgs (
 ##      <act>, <pcgsnum>, <pcgs>, <mpcgs>, <pcgsdenum>, <all>)
 ##
-InstallGlobalFunction ("PcgsInvariantComplementsOfElAbModuloPcgsUnderAction",
+InstallGlobalFunction ("PcgsInvariantComplementsOfElAbModuloPcgs",
    function (act, pcgs, gpcgs, npcgs, kpcgs, all)
 
       if CentralizesLayer (gpcgs, npcgs) then
@@ -485,12 +485,12 @@ InstallGlobalFunction ("ComplementsOfCentralSectionUnderAction",
    
 #############################################################################
 ##
-#M  InvariantComplementsOfElAbSectionUnderAction (<act>,<G>,<N>,<L>,<all>)
+#M  InvariantComplementsOfElAbSection (<act>,<G>,<N>,<L>,<all>)
 ##
 ##  version where <act> is a list of maps G -> G (which are supposed to
 ##  induce automorphisms on G/L)
 ##
-InstallMethod (InvariantComplementsOfElAbSectionUnderAction,
+InstallMethod (InvariantComplementsOfElAbSection,
     "for section of finite solvable group",
    function (famact, famG, famN, famL, famall)
       return IsIdenticalObj (famG, famN) and IsIdenticalObj (famN, famL);
@@ -504,7 +504,7 @@ InstallMethod (InvariantComplementsOfElAbSectionUnderAction,
       pcgs := ParentPcgs (Pcgs(G));
       pcgsL := InducedPcgs (pcgs, L);
       
-      cpcgs := PcgsInvariantComplementsOfElAbModuloPcgsUnderAction (
+      cpcgs := PcgsInvariantComplementsOfElAbModuloPcgs (
          act, pcgs, ModuloPcgs (G, N), ModuloPcgs (N, L), pcgsL, all);
       
       complements := List (cpcgs, c -> SubgroupByPcgs (G, c));

@@ -22,23 +22,23 @@ KeyDependentOperation ("Radical", IsGroup, IsClass, ReturnTrue);
 
 #############################################################################
 ##
-#O  OneInvariantSubgroupMaxWrtNPropertyUnderAction
+#O  OneInvariantSubgroupMaxWrtNProperty
 #O                           (<act>, <grp>, <pretest>, <test>, <data>)
 ##
 ##  See the manual.
 ##
-DeclareOperation ("OneInvariantSubgroupMaxWrtNPropertyUnderAction", 
+DeclareOperation ("OneInvariantSubgroupMaxWrtNProperty", 
    [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject]);
 
 
 #############################################################################
 ##
-#O  AllInvariantSubgroupsWithNPropertyUnderAction 
+#O  AllInvariantSubgroupsWithNProperty 
 #O                           (<act>, <grp>, <pretest>, <test>, <data>)
 ##
 ##  See the manual.
 ##
-DeclareOperation ("AllInvariantSubgroupsWithNPropertyUnderAction",
+DeclareOperation ("AllInvariantSubgroupsWithNProperty",
     [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject]);
    
 
@@ -66,22 +66,22 @@ DeclareOperation ("AllNormalSubgroupsWithNProperty",
 
 #############################################################################
 ##
-#F  InvariantSubgroupsCAUnderAction (
+#F  InvariantSubgroupsCA (
 #F                          act, ser, avoid, cover, property, max) . . . local
 ##
 ##  ser must be a series invariant under act, and act must generate the full 
 ##  inner automorphism group on ser[1].
-##  if all is true, InvariantSubgroupsCAUnderAction computes the act-invariant 
+##  if all is true, InvariantSubgroupsCA computes the act-invariant 
 ##  subgroups N of ser[1] such that ser[cover] equals the intersection of N
 ##  and ser[avoid], N contains ser[cover] properly, and property(N) returns 
 ##  true. 
-##  If all is false, InvariantSubgroupsCAUnderAction only returns the 
+##  If all is false, InvariantSubgroupsCA only returns the 
 ##  subgroups N
 ##  which are maximal subject to the above conditions. property must be
 ##  inherited by act-invariant subgroups, and property(ser[cover])
 ##  is assumed to be true
 ##
-DeclareGlobalFunction ("InvariantSubgroupsCAUnderAction");
+DeclareGlobalFunction ("InvariantSubgroupsCA");
 
 
 ############################################################################

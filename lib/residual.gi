@@ -21,7 +21,7 @@ InstallMethod (NormalSubgroups,
    [IsGroup and IsFinite and IsSolvableGroup], 
    RankFilter (IsPcGroup and IsPermGroup), # use for pc groups and perm groups 
    function (G) 
-      return AllInvariantSubgroupsWithQPropertyUnderAction (G, G, 
+      return AllInvariantSubgroupsWithQProperty (G, G, 
          ReturnTrue, ReturnTrue, rec());
    end);
 
@@ -47,7 +47,7 @@ InstallMethod (CharacteristicSubgroups,
    [IsGroup and IsFinite and IsSolvableGroup], 
    0,
    function (G) 
-      return AllInvariantSubgroupsWithQPropertyUnderAction (
+      return AllInvariantSubgroupsWithQProperty (
          AutomorphismGroup (G), G, ReturnTrue, ReturnTrue, rec());
    end);
 
@@ -63,12 +63,12 @@ RedispatchOnCondition (CharacteristicSubgroups,
 
 #############################################################################
 ##
-#M  AllInvariantSubgroupsWithQPropertyUnderAction 
+#M  AllInvariantSubgroupsWithQProperty 
 #M                                  (<act>, <grp>, <pretest>, <test>, <data>)
 ##
 ##  note that act must induce the full inner automorphism group
 ##
-InstallMethod (AllInvariantSubgroupsWithQPropertyUnderAction, 
+InstallMethod (AllInvariantSubgroupsWithQProperty, 
    "for solvable group",
    true,
    [IsListOrCollection, IsGroup and IsSolvableGroup and IsFinite, IsFunction, IsFunction, IsObject], 
@@ -91,7 +91,7 @@ InstallMethod (AllInvariantSubgroupsWithQPropertyUnderAction,
          for N in norms do
             bool := pretest (ser[i-1], ser[i], N, data);
             if bool <> false then
-               cmpl := InvariantComplementsOfElAbSectionUnderAction (
+               cmpl := InvariantComplementsOfElAbSection (
                   act, N, ser[i-1], ser[i], true);
                if bool = true then
                   Append (new, cmpl);
@@ -133,10 +133,10 @@ InstallMethod (AllInvariantSubgroupsWithQPropertyUnderAction,
 
 #############################################################################
 ##
-#M  AllInvariantSubgroupsWithQPropertyUnderAction
+#M  AllInvariantSubgroupsWithQProperty
 #M                (<act>, <grp>, <pretest>, <test>, <data>)
 ##
-RedispatchOnCondition (AllInvariantSubgroupsWithQPropertyUnderAction,
+RedispatchOnCondition (AllInvariantSubgroupsWithQProperty,
    true,
    [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject], 
    [, IsFinite and IsSolvableGroup], # no conditions on other arguments
@@ -145,10 +145,10 @@ RedispatchOnCondition (AllInvariantSubgroupsWithQPropertyUnderAction,
    
 #############################################################################
 ##
-#M  OneInvariantSubgroupMinWrtQPropertyUnderAction
+#M  OneInvariantSubgroupMinWrtQProperty
 #M                (<act>, <grp>, <pretest>, <test>, <data>)
 ##
-InstallMethod (OneInvariantSubgroupMinWrtQPropertyUnderAction, 
+InstallMethod (OneInvariantSubgroupMinWrtQProperty, 
    "for solvable group",
     true,
     [IsListOrCollection, IsGroup and IsSolvableGroup and IsFinite, 
@@ -185,7 +185,7 @@ InstallMethod (OneInvariantSubgroupMinWrtQPropertyUnderAction,
       for i in [k..Length (ser)-1] do
          bool := pretest (ser[i], ser[i+1], M, data);
          if bool <> false then
-            cmpl := InvariantComplementsOfElAbSectionUnderAction (
+            cmpl := InvariantComplementsOfElAbSection (
                act, M, ser[i], ser[i+1], bool <> true);
             if bool = true then
                if cmpl <> fail then
@@ -209,10 +209,10 @@ InstallMethod (OneInvariantSubgroupMinWrtQPropertyUnderAction,
 
 ############################################################################
 ##
-#M  OneInvariantSubgroupMinWrtQPropertyUnderAction 
+#M  OneInvariantSubgroupMinWrtQProperty 
 #M                                   (<act>, <grp>, <pretest>, <test>, <data>)
 ##
-RedispatchOnCondition (OneInvariantSubgroupMinWrtQPropertyUnderAction, true,
+RedispatchOnCondition (OneInvariantSubgroupMinWrtQProperty, true,
    [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject], 
    [,IsFinite and IsSolvableGroup], # no conditions on other arguments
    0);
@@ -267,9 +267,9 @@ InstallMethod (ResidualOp, "for group and intersection of formations", true,
       if Length (l) > 0 then # treat the remaining classes
          # Note that, although the intersection of the classes in l 
          # need not be a formation, any subgroup returned by 
-         # OneInvariantSubgroupMinWrtQPropertyUnderAction lies below the C-residual of G.
+         # OneInvariantSubgroupMinWrtQProperty lies below the C-residual of G.
          
-         R := ClosureGroup (R, OneInvariantSubgroupMinWrtQPropertyUnderAction (G, G, 
+         R := ClosureGroup (R, OneInvariantSubgroupMinWrtQProperty (G, G, 
              ReturnFail,
             function (R, S, data)
                local fac;
@@ -289,7 +289,7 @@ InstallMethod (ResidualOp, "for group and intersection of formations", true,
 InstallMethod (ResidualOp, "generic method for formation", true, 
    [IsGroup and IsFinite and IsSolvableGroup, IsOrdinaryFormation], 0,
    function (G, C)
-       return OneInvariantSubgroupMinWrtQPropertyUnderAction (G, G, 
+       return OneInvariantSubgroupMinWrtQProperty (G, G, 
           ReturnFail,
           function (R, S, data)
              return data.grp/R in data.class;
@@ -307,7 +307,7 @@ InstallMethod (ResidualOp, "for locally defined formation", true,
       IsSaturatedFormation and HasLocalDefinitionFunction], 
    0,
    function (G, C)
-       return OneInvariantSubgroupMinWrtQPropertyUnderAction (G, G, 
+       return OneInvariantSubgroupMinWrtQProperty (G, G, 
           function (U, V, R, data)
              local mpcgs, p, pos;
              mpcgs := ModuloPcgs (U, V);

@@ -74,7 +74,7 @@ DeclareGlobalFunction ("ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction");
 
 #############################################################################
 ##
-#F  PcgsInvariantComplementsOfElAbModuloPcgsUnderAction (
+#F  PcgsInvariantComplementsOfElAbModuloPcgs (
 ##      <act>, <numpcgs>, <pcgs>, <mpcgs>, <denpcgs>, <all>)
 ##
 ##  computes invariant complements of the elementary abelian section 
@@ -84,14 +84,14 @@ DeclareGlobalFunction ("ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction");
 ##  If all is true, all such complements are computed, otherwise just one.
 ##  If no complement exists, an empty list is returned.
 ##
-DeclareGlobalFunction ("PcgsInvariantComplementsOfElAbModuloPcgsUnderAction"); 
+DeclareGlobalFunction ("PcgsInvariantComplementsOfElAbModuloPcgs"); 
    
 
 #############################################################################
 ##
 #F  PcgsComplementsOfCentralModuloPcgsUnderActionNC (<act>,<pcgs>, <mpcgs>,<all>)
 ##
-##  similar to PcgsInvariantComplementsOfElAbModuloPcgsUnderAction, except that it
+##  similar to PcgsInvariantComplementsOfElAbModuloPcgs, except that it
 ##  presumes that pcgs centralises mpcgs (and will probably produce an
 ##  error if not).
 ##  
@@ -101,7 +101,7 @@ DeclareGlobalFunction ("PcgsComplementsOfCentralModuloPcgsUnderActionNC");
    
 #############################################################################
 ##
-#O  InvariantComplementsOfElAbSectionUnderAction (<act>,<G>,<N>,<L>,<all>)
+#O  InvariantComplementsOfElAbSection (<act>,<G>,<N>,<L>,<all>)
 ##
 ##  computes complements of N/L in G/L which are invariant under act.
 ##  act can be a collection of elements of a supergroup of G, or a collection 
@@ -110,7 +110,7 @@ DeclareGlobalFunction ("PcgsComplementsOfCentralModuloPcgsUnderActionNC");
 ##  If no complement exists, or if N/L is not central in G/L, an empty 
 ##  list is returned if all is true, and fail is returned if all is false.
 ##
-DeclareOperation ("InvariantComplementsOfElAbSectionUnderAction", 
+DeclareOperation ("InvariantComplementsOfElAbSection", 
    [IsListOrCollection, IsGroup, IsGroup, IsGroup, IsBool]);
 
 #############################################################################

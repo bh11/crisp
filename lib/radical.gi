@@ -13,15 +13,15 @@ Revision.radical_gi :=
 
 #############################################################################
 ##
-#F  InvariantSubgroupsCAUnderAction (act, ser, avoid, cover, pretest, test, data) 
+#F  InvariantSubgroupsCA (act, ser, avoid, cover, pretest, test, data) 
 ##
 ##  computes the G-invariant normal subgroups N of ser[1] such that 
 ##  ser[cover] equals the intersection of N and ser[avoid], N contains 
 ##  ser[cover] properly, and N belongs to the class described by the functions
 ##  pretest and test. pretest and test are the functions described in the 
-##  manual (see "OneInvariantSubgroupMaxWrtNPropertyUnderAction").
+##  manual (see "OneInvariantSubgroupMaxWrtNProperty").
 ##
-InstallGlobalFunction (InvariantSubgroupsCAUnderAction,
+InstallGlobalFunction (InvariantSubgroupsCA,
    function (act, ser, avoid, cover, pretest, test, data)
 
       local j, CC, L, newser, norms, bool, newnorms;
@@ -30,7 +30,7 @@ InstallGlobalFunction (InvariantSubgroupsCAUnderAction,
          return [];
       fi;
       
-      norms := InvariantSubgroupsCAUnderAction (act, ser, avoid-1, cover, 
+      norms := InvariantSubgroupsCA (act, ser, avoid-1, cover, 
          pretest, test, data);
       
       bool := pretest (ser[avoid-1], ser[avoid], ser[cover], data);
@@ -55,7 +55,7 @@ InstallGlobalFunction (InvariantSubgroupsCAUnderAction,
                   Add (norms, L);
                   if avoid > 2 then
                      Append (norms, 
-                        InvariantSubgroupsCAUnderAction (act, 
+                        InvariantSubgroupsCA (act, 
                            newser, avoid-1, cover-1, 
                            pretest, test, data));
                   fi;
@@ -69,10 +69,10 @@ InstallGlobalFunction (InvariantSubgroupsCAUnderAction,
 
 #############################################################################
 ##
-#O  AllInvariantSubgroupsWithNPropertyUnderAction 
+#O  AllInvariantSubgroupsWithNProperty 
 #O                         (<act>, <G>, <pretest>, <test>, <data>) 
 ##
-InstallMethod (AllInvariantSubgroupsWithNPropertyUnderAction, 
+InstallMethod (AllInvariantSubgroupsWithNProperty, 
    "for solvable group", true, 
    [IsListOrCollection, IsGroup and IsSolvableGroup and IsFinite, 
       IsFunction, IsFunction, IsObject], 
@@ -86,7 +86,7 @@ InstallMethod (AllInvariantSubgroupsWithNPropertyUnderAction,
       fi;
       
       ser := CompositionSeriesUnderAction (act, G);
-      norms := InvariantSubgroupsCAUnderAction (act, ser, 
+      norms := InvariantSubgroupsCA (act, ser, 
             Length (ser), Length (ser), pretest, test, data);
       Add (norms, TrivialSubgroup (G));
       return norms;
@@ -95,9 +95,9 @@ InstallMethod (AllInvariantSubgroupsWithNPropertyUnderAction,
 
 #############################################################################
 ##
-#M  AllInvariantSubgroupsWithNPropertyUnderAction
+#M  AllInvariantSubgroupsWithNProperty
 ##
-RedispatchOnCondition (AllInvariantSubgroupsWithNPropertyUnderAction, true, 
+RedispatchOnCondition (AllInvariantSubgroupsWithNProperty, true, 
    [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject], 
    [, IsFinite and IsSolvableGroup], # no conditions on other arguments
    0);
@@ -105,10 +105,10 @@ RedispatchOnCondition (AllInvariantSubgroupsWithNPropertyUnderAction, true,
    
 #############################################################################
 ##
-#M  OneInvariantSubgroupMaxWrtNPropertyUnderAction (
+#M  OneInvariantSubgroupMaxWrtNProperty (
 #M              <act>, <G>, <pretest>, <test>, <data>) 
 ##
-InstallMethod (OneInvariantSubgroupMaxWrtNPropertyUnderAction, 
+InstallMethod (OneInvariantSubgroupMaxWrtNProperty, 
    "for solvable group", true, 
    [IsListOrCollection, IsGroup and IsSolvableGroup and IsFinite, 
       IsFunction, IsFunction, IsObject], 
@@ -177,9 +177,9 @@ InstallMethod (OneInvariantSubgroupMaxWrtNPropertyUnderAction,
 
 #############################################################################
 ##
-#M  OneInvariantSubgroupMaxWrtNPropertyUnderAction
+#M  OneInvariantSubgroupMaxWrtNProperty
 ##
-RedispatchOnCondition (OneInvariantSubgroupMaxWrtNPropertyUnderAction, true, 
+RedispatchOnCondition (OneInvariantSubgroupMaxWrtNProperty, true, 
    [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject], 
    [, IsFinite and IsSolvableGroup], # no conditions on other arguments
    0);
@@ -192,7 +192,7 @@ RedispatchOnCondition (OneInvariantSubgroupMaxWrtNPropertyUnderAction, true,
 InstallMethod (RadicalOp, "if only in is known", true, 
    [IsGroup and IsFinite and IsSolvableGroup, IsFittingClass], 0,
    function (G, C)
-      return OneInvariantSubgroupMaxWrtNPropertyUnderAction (G, G, 
+      return OneInvariantSubgroupMaxWrtNProperty (G, G, 
          function (U, V, R, class)
             if Factors (Index (U, V))[1] in Characteristic (class) then
                return fail; # cannot decide
@@ -267,7 +267,7 @@ InstallMethod (RadicalOp, "for intersection of classes", true,
          # contains the group returned by OneNormalSubgroupMaxWrtNProperty,
          # even though the intersection of the classes in l need not itself
          # be a Fitting class.
-         return OneInvariantSubgroupMaxWrtNPropertyUnderAction (G, R, 
+         return OneInvariantSubgroupMaxWrtNProperty (G, R, 
             function (U, V, T, data)
                local p;
                p := Factors (Index (U, V))[1];
@@ -301,7 +301,7 @@ InstallMethod (RadicalOp, "generic method for FittingSetRep",
       if not IsFittingSet (G, C) then
          Error ("<C> must be a Fitting set for <G>");
       fi;
-      return OneInvariantSubgroupMaxWrtNPropertyUnderAction (G, G, 
+      return OneInvariantSubgroupMaxWrtNProperty (G, G, 
          ReturnFail,
          function (S, R, data)
             return S in data;
