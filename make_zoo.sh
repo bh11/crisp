@@ -1,9 +1,13 @@
 #! /bin/sh
+if [ "x$1" = "x" ];  then
+echo "Please supply a version number"
+else
 cd ../
+chmod -R a+rX crisp
 rm crisp.zoo
-zoo ach crisp crisp/PackageInfo.g <crisp/text_comment
 zoo ach crisp crisp/init.g <crisp/text_comment
 zoo ach crisp crisp/read.g <crisp/text_comment
+zoo ach crisp crisp/PackageInfo.g <crisp/text_comment
 zoo ach crisp crisp/doc/classes.tex <crisp/text_comment
 zoo ach crisp crisp/doc/examples.tex <crisp/text_comment
 zoo ach crisp crisp/doc/fitting.tex <crisp/text_comment
@@ -18,6 +22,7 @@ zoo ach crisp crisp/doc/manual.six <crisp/text_comment
 zoo ach crisp crisp/doc/manual.tex <crisp/text_comment
 zoo ach crisp crisp/doc/manual.tst <crisp/text_comment
 zoo ach crisp crisp/doc/schunck.tex <crisp/text_comment
+zoo ach crisp crisp/lib/banner.g <crisp/text_comment
 zoo ach crisp crisp/lib/classes.gd <crisp/text_comment
 zoo ach crisp crisp/lib/classes.gi <crisp/text_comment
 zoo ach crisp crisp/lib/compl.gd <crisp/text_comment
@@ -84,3 +89,11 @@ zoo ach crisp crisp/htm/theindex.htm <crisp/text_comment
 zoo ach crisp crisp/htm/index.htm <crisp/text_comment
 zoo ah crisp crisp/htm/logo.gif
 zoo ach crisp crisp/README <crisp/text_comment
+mv crisp.zoo crisp/crisp-$1.zoo
+fi
+
+
+
+
+
+
