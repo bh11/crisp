@@ -39,16 +39,16 @@ responsibility to ensure that <func> returns the same result for different
 
 \beginexample
 gap> RequirePackage ("crisp");
+                                                   
+             _____  ___    __  ____   ___        
+            / ___/ / _ \  / / / __/  / _ \       
+           / /__  /   _/ / / _\_ \  / ___/       
+           \___/ /_/\_\ /_/ /____/ /_/           
                                                     
-              _____  ___    __  ____   ___        
-             / ___/ / _ \  / / / __/  / _ \       
-            / /__  /   _/ / / _\_ \  / ___/       
-            \___/ /_/\_\ /_/ /____/ /_/           
-
               A GAP 4 share package for           
           Computing with Radicals, Injectors        
             Schunck classes and Projectors          
-               of finite soluble gropus             
+               of finite soluble groups             
                                                     
                 By Burkhard H\"ofling               
                                                     
@@ -56,11 +56,38 @@ gap> RequirePackage ("crisp");
                                                     
 true
 gap> FermatPrimes := Class (p -> IsPrime (p) and p = 2^LogInt (p, 2) + 1); 
-Class (in=function( p ) ... end)
+Class (in:=function( p ) ... end)
 \endexample
 
+\>View(<class>)!{for classes}
+
+If the class does not have a name, this produces a brief description of the
+information defining <class> which has been supplied by the user. If the
+class has a name, only its name will be printed.
+
+\begintt
+gap> View (FermatPrimes);
+Class (in:=function( p ) ... end)
+\endtt
+
+\>Print(<class>)!{for classes}
+
+`Print' behaves very similarly to `View', except that the defining
+information is being printed in a more explicit way if possible.
+
+\begintt
+gap> Print (FermatPrimes);
+Class (rec ( in = function ( p )
+    return IsPrime( p ) and p = 2 ^ LogInt( p, 2 ) + 1;
+end))
+\endtt
+
+
+\>Display(<class>)!{for classes}
+
+For classes, `Display' works exactly as `Print'.
+
 \>`<obj> in <class>'{element test}!{for classes}
-\>IsMember(<obj>, <class>) A
 
 \index{in!for classes}%
 \index{membership test!for classes}%
@@ -88,11 +115,6 @@ so that one can form sorted lists of classes.
 This property may be set to `true' or `false' if the class <C> is empty
 resp. not empty.
 
-\>IsNonEmpty(<C>) P
-
-This property may be set to `true' or `false' if the class <C> is not
-empty resp. empty.
-
 \>MemberFunction(<C>) A
 
 This attribute, if bound, stores a function which decides if an object
@@ -116,17 +138,19 @@ gap> Complement (cmpl);
 
 \>Intersection(<list>)!{of classes} F
 \>Intersection(<C1>, <C2>, \dots)!{of classes} F
+\indextt{INTERSECTION\noexpand_LIMIT}
 
 returns the intersection of the groups in <list>, resp. of the classes
-<C1>, <C2>, \dots. If one of the classes is a list, then the result will be
-a sublist of that list.
+<C1>, <C2>, \dots. If one of the classes is a list with fewer than
+`INTERSECTION_LIMIT' elements, then the result will be
+a sublist of that list. By default, `INTERSECTION_LIMIT' is 1000. 
 
 \beginexample
 gap> Intersection (Class (IsPrimeInt), [1..10]);
 [ 2, 3, 5, 7 ]
 gap> Intersection (Class (IsPrimeInt), Class (n -> n = 2^LogInt (n+1, 2) - 1));
-Intersection ([ Class (in=function( n ) ... end), 
-  Class (in=function( n ) ... end) ])
+Intersection ([ Class (in:=function( n ) ... end), 
+  Class (in:=function( n ) ... end) ])
 \endexample
 
 \>Union(<C>, <D>) F
@@ -135,7 +159,8 @@ returns the union of <C> and <D>.
 
 \beginexample
 gap> Union (Class (n -> n mod 2 = 0), Class (n -> n mod 3 = 0));
-Union ([ Class (in=function( n ) ... end), Class (in=function( n ) ... end) ])
+Union ([ Class (in:=function( n ) ... end), Class (in:=function( n ) ... end) 
+ ])
 \endexample
 
 \>Difference(<C>, <D>) O
@@ -145,8 +170,8 @@ result will be a sublist of <C>.
 
 \beginexample
 gap> Difference (Class (IsPrimePowerInt), Class (IsPrimeInt));
-Intersection ([ Class (in=function( n ) ... end), 
-  Complement (Class (in=function( n ) ... end)) ])
+Intersection ([ Class (in:=function( n ) ... end), 
+  Complement (Class (in:=function( n ) ... end)) ])
 gap> Difference ([1..10], Class (IsPrimeInt));
 [ 1, 4, 6, 8, 9, 10 ]
 \endexample

@@ -26,7 +26,9 @@ to normal subgroups and joins of subnormal subgroups.
 \>FittingClass(<rec>) O
 
 returns the Fitting class <fitclass> defined by the entries of the record
-<rec>. <rec> may have components `\\in', `inj', `rad', and `name'. The
+<rec>. Note that it is the user's responsibility to ensure that <rec> really
+defines a Fitting class.
+<rec> may have components `\\in', `inj', `rad', and `name'. The
 functions assigned to the components are stored in the attributes
 `MemberFunction' (see "MemberFunction"), `InjectorFunction',
 `RadicalFunction', and `Name', of <fitclass>. The functions bound to `inj' and
@@ -37,12 +39,14 @@ functions assigned to the components are stored in the attributes
 \beginexample
 gap> myNilpotentGroups := FittingClass(rec(\in := IsNilpotent,
 >    rad := FittingSubgroup));
-FittingClass (in=<Operation "IsNilpotent">, rad=<Operation "FittingSubgroup">) 
-gap> myTwoGroups := FittingClass(rec(\in := G -> IsSubset([2], Set(Factors(Size(G)))),
+FittingClass (in:=<Operation "IsNilpotent">, rad:=<Operation "FittingSubgroup"\
+>)
+gap> myTwoGroups := FittingClass(rec(
+>    \in := G -> IsSubset([2], Set(Factors(Size(G)))), 
 >    rad :=  G -> PCore(G,2),
 >    inj := G -> SylowSubgroup(G,2)));
-FittingClass (in=function( G ) ... end, rad=function( G ) ... end, inj=functio\
-n( G ) ... end)
+FittingClass (in:=function( G ) ... end, rad:=function( G ) ... end, inj:=func\
+tion( G ) ... end)
 \endexample
 
 \>FittingProduct(<fit1>, <fit2>) O
@@ -52,11 +56,15 @@ i.~e., the class of all groups G such that G/R is  an <fit2>-group, where R
 is the <fit1>-radical of G.  <prod> is again a Fitting class.
 Note that if <fit1> and <fit2> are also
 formations, then <prod> equals the
-formation product of <fit1> and <fit2>; see "FormationProduct".
+formation product of <fit1> and <fit2>; see "FormationProduct" 
+and\indextt{FittingFormationProduct}
+"FittingFormationProduct".
 
 \beginexample
 gap> FittingProduct (myNilpotentGroups, myTwoGroups);
-FittingClass (in=function( G ) ... end, rad=function( G ) ... end)
+FittingProduct (FittingClass (in:=<Operation "IsNilpotent">, rad:=<Operation "\
+FittingSubgroup">), FittingClass (in:=function( G ) ... end, rad:=function( G \
+) ... end, inj:=function( G ) ... end))
 \endexample
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -66,9 +74,10 @@ Fitting formations are Fitting classes which are also formations.
 
 \>FittingFormation(<rec>) O
 
-creates a Fitting formation from the record <rec>. <rec> may have any
-components admissible for saturated formations (see "SaturatedFormation") or
-Fitting classes (see "FittingClass"), that is, `\\in', `res', `char', `rad',
+creates a Fitting formation from the record <rec>. Note that it is the user's 
+responsibility to ensure that <rec> really defines a Fitting formation.<rec> may 
+have any components admissible for saturated formations (see "SaturatedFormation") 
+or Fitting classes (see "FittingClass"), that is, `\\in', `res', `char', `rad',
 `inj', and `name', 
  whose values are stored in the attributes `MemberFunction',
 `ResidualFunction', `Characteristic',  `RadicalFunction',
@@ -76,7 +85,8 @@ Fitting classes (see "FittingClass"), that is, `\\in', `res', `char', `rad',
 
 \>SaturatedFittingFormation(<rec>) O
 
-creates a Fitting formation from the record <rec>. <rec> may have any
+creates a saturated Fitting formation from the record <rec>. Note that it is the user's responsibility to ensure that <rec> really
+defines a saturated Fitting formation.<rec> may have any
 components admissible for saturated formations (see "SaturatedFormation") or
 Fitting classes (see "FittingClass"), that is, `\\in', `res', `char', `proj',
 `bound', `locdef', `rad', `inj',  and `Name', whose values are stored in the
@@ -112,23 +122,28 @@ We will not distinguish between <fitset> and the arising Fitting set of $H$.
 Moreover, if  <fit> is a Fitting class and <grp> is a group, then the set of all
 subgroups of <grp> which belong to <fit> is a Fitting set of <grp>.
 
-\>IsFittingSet(<fitset>, <G>) O
+\>IsFittingSet(<G>, <fitset>) O
 
 tests whether <fitset> (or, more precisely, the set of all subgroups of $G$
 which are contained in  <fitset>) is a Fitting set of the group <G>. Thus if
 <fitset> is a Fitting class, or if
 <G> is a subgroup of the group <H> and <fitset> is a Fitting set of <H>,
-then `IsFittingSet(<fitset>, <G>)' will return `true'.
+then `IsFittingSet(<G>, <fitset>)' will return `true'.
 
 \>FittingSet(<G>, <rec>) O
 
 returns the Fitting set <fitset> of the group <G>, defined by the entries of the
-record <rec>. <rec> may have components `\\in', `inj', `rad', and `name'. The
+record <rec>. Note that, although it would be possible to test whether <rec> 
+defines a Fitting set, such a test
+is not performed, since it would be extremely expensive, even for relatively
+small groups.
+
+<rec> may have components `\\in', `inj', `rad', and `name'. The
 functions assigned to the components are stored in the attributes
 `MemberFunction' (see "MemberFunction"), `InjectorFunction', 
 `RadicalFunction', and `Name', of <fitset>. The latter functions must have one
 argument, <H>, which will be a subgroup of <G>, and return an <fitset>-injector
-and the <fitset>-radical of <H>, respectively.
+and the <fitset>-radical of <H>, respectively. 
 
 Note that at present, every Fitting set has to be a class (see "Set theoretical
 classes"). The second example below shows how to define a Fitting set from 
@@ -136,16 +151,16 @@ a list of subgroups.
 
 
 \beginexample
-gap> G := SymmetricGroup(4);;V := PCore(G,2);;
-gap> fitset := FittingSet(G, rec(\in := S -> IsSubgroup(V, S),
-> rad := S -> Intersection(V, S),
-> inj := S -> Intersection(V, S)));
+gap>  fitset := FittingSet(SymmetricGroup (4), rec(
+>        \in := S -> IsSubgroup (AlternatingGroup (4), S),
+>        rad := S -> Intersection (AlternatingGroup (4), S),
+>        inj := S -> Intersection (AlternatingGroup (4), S)));
 FittingSet (SymmetricGroup( 
-[ 1 .. 4 ] ), rec (in=function( S ) ... end, rad=function( S ) ... end, inj=fu\
-nction( S ) ... end))
+[ 1 .. 4 ] ), rec (in:=function( S ) ... end, rad:=function( S ) ... end, inj:\
+=function( S ) ... end))
 gap> FittingSet (SymmetricGroup (3), rec(
-> \in := H -> H in [Group (()), Group ((1,2)), Group ((1,3)), Group ((2,3))]));
-FittingSet (SymmetricGroup( [ 1 .. 3 ] ), rec (in=function( H ) ... end))
+>       \in := H -> H in [Group (()), Group ((1,2)), Group ((1,3)), Group ((2,3))]));
+FittingSet (SymmetricGroup( [ 1 .. 3 ] ), rec (in:=function( H ) ... end))
 \endexample
 
 \>ImageFittingSet(<alpha>, <fitset>) O
@@ -159,10 +174,13 @@ or a Fitting class.  Note that the image of a Fitting class is a
 Fitting set but not a Fitting class.
 
 \beginexample
-gap> alpha := GroupHomomorphismByImages (G, SymmetricGroup (3),
+gap> alpha := GroupHomomorphismByImages (SymmetricGroup (4), SymmetricGroup (3),
 >  [(1,2), (1,3), (1,4)], [(1,2), (1,3), (2,3)]);;
-gap> ImageFittingSet (alpha, fitset);
-FittingSet (Group( [ (1,2), (1,3), (2,3) ] ), rec (inj=function( G ) ... end))
+gap> im := ImageFittingSet (alpha, fitset);
+FittingSet (Group( [ (1,2), (1,3), (2,3) 
+ ] ), rec (inj:=function( G ) ... end))
+gap> Radical (Image (alpha), im);
+Group([ (1,2,3), (1,3,2) ])
 \endexample
 
 \>PreImageFittingSet(<alpha>, <fitset>) O
@@ -179,6 +197,13 @@ Moreover, `ImageFittingSet(PreImageFittingSet(<fitset>, <alpha>),
 `PreImageFittingSet(ImageFittingSet(<fitset>, <alpha>), <alpha>)'; see
 e.g. Example VIII,~2.16 of~\cite{DH1992}.
 
+\beginexample
+gap> pre := PreImageFittingSet (alpha, NilpotentGroups);
+FittingSet (SymmetricGroup( [ 1 .. 4 ] ), rec (inj:=function( G ) ... end))
+gap> Injector (Source (alpha), pre);
+Group([ (1,4)(2,3), (1,2)(3,4), (2,3,4) ])
+\endexample
+
 \>Intersection(<fitset1>, <fitset2>)!{of Fitting sets}
 
 Let <fitset1> and <fitset2> be Fitting sets of the groups <G1> and <G2>. 
@@ -190,16 +215,20 @@ common supergroup.
 gap> F1 := FittingSet (SymmetricGroup (3),
 > rec (\in := IsNilpotent, rad := FittingSubgroup));
 FittingSet (SymmetricGroup( 
-[ 1 .. 3 ] ), rec (in=<Operation "IsNilpotent">, rad=<Operation "FittingSubgro\
-up">))
+[ 1 .. 3 ] ), rec (in:=<Operation "IsNilpotent">, rad:=<Operation "FittingSubg\
+roup">))
 gap> F2 := FittingSet (AlternatingGroup (4),
 > rec (\in := ReturnTrue, rad := H -> H));
 FittingSet (AlternatingGroup( 
-[ 1 .. 4 ] ), rec (in=function(  ) ... end, rad=function( H ) ... end))
+[ 1 .. 4 ] ), rec (in:=function(  ) ... end, rad:=function( H ) ... end))
 gap> F := Intersection (F1, F2);
 FittingSet (Group( 
-[ (1,2,3) ] ), rec (in=function( x ) ... end, rad=function( G ) ... end))
+[ (1,2,3) ] ), rec (in:=function( x ) ... end, rad:=function( G ) ... end))
+gap> Intersection (F1, PiGroups ([2,5]));
+FittingSet (SymmetricGroup( 
+[ 1 .. 3 ] ), rec (in:=function( x ) ... end, rad:=function( G ) ... end))
 \endexample
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Attributes and operations for Fitting classes and Fitting sets}
@@ -275,32 +304,37 @@ this case, `OneNormalSubgroupMaxWrtNProperty' will return the $\cal
 X$-radical of <grp>.
 
 The class $\cal X$ is described by two functions, <pretest> and <test>. 
+
 <pretest> is a function taking four arguments, <U>, <V>, <R>, and <data>,
 where <data> is just the argument passed to
 `OneNormalSubgroupMaxWrtNProperty'. $<U>/<V>$ is a chief factor of <grp>,
-and  <R> is a normal subgroup of <grp> which is known to belong to $\cal X$.
+and  <R> is a normal subgroup of <grp> contained in <V> which is known to
+belong to
+$\cal X$.
 
 <pretest> may return the values `true', `false', or `fail'. If it returns 
-`true', every normal subgroup <N> of <grp> such that $<N>/R>$ is $G$-isomorphic
-with $<U>/<V>$ must belong to
-$\cal X$. If it returns `false', no such <N> may belong to to $\cal X$. 
+`true', every normal subgroup <N> of <grp> contained in <U> such that
+$<N>/<R>$ is 
+$G$-isomorphic with $<U>/<V>$ must belong to $\cal X$. If it returns `false',
+no such <N> may belong to $\cal X$. 
 
 <test> is a function taking three arguments, <S>, <R>, and <data>, where
 data has been described above. <R> is a normal subgroup of <grp> belonging to
 $\cal X$, and $<S>/<R>$ is a chief factor of <grp>. The function must return
 true if <S> belongs to $\cal X$, and false otherwise. 
 
-Note that <test> is never called if `pretest(U, V, R)' has returned `true' or
-`false' for a chief factor $<U>/<V>$ which is G-isomorphic with $<S>/<R>$.
-Thus if <pretest> always returns `true' or `false', <test> will not be
-called at all.
+Note that `<test>(<S>, <R>, <data>)' is only called if `pretest(<U>, <V>,
+<R>, <data>)' has returned `fail' for a chief factor $<U>/<V>$ which is
+<G>-isomorphic with $<S>/<R>$. Therefore <test> need not repeat tests
+already performed by <pretest>. In particular, if <pretest> always returns
+`true' or `false', <test> will not be called at all.
 
 <data> is never used or changed by `OneNormalSubgroupMaxWrtNProperty', but
 exists only as a means for passing additional information to or between
 the functions <pretest> and <test>.
 
 
-\>AllNormalSubgroupsWithNProperty(<grp>, <pretest>, <test>, <data>)
+\>AllNormalSubgroupsWithNProperty(<grp>, <pretest>, <test>, <data>) O
 
 returns a list consisting of all normal subgroups of <grp> belonging 
 to the class $\cal X$ described by <pretest>, <test>, and <data>. See
@@ -308,16 +342,14 @@ the documentation of `OneNormalSubgroupMaxWrtNProperty' above for details.
 
 \beginexample
 gap> AllNormalSubgroupsWithNProperty (
-> DirectProduct (SymmetricGroup (4), Group ((1,2,3,4))),
+> DihedralGroup (8),
 >     ReturnFail,
 >     function (R, S, data)
 >         return IsAbelian (R);
 >     end,
 >     fail);
-[ Group([ (5,7)(6,8) ]), Group([ (5,6,7,8), (5,7)(6,8) ]), 
-  Group([ (1,4)(2,3), (1,3)(2,4) ]), 
-  Group([ (1,4)(2,3), (1,3)(2,4), (5,7)(6,8) ]), 
-  Group([ (1,3)(2,4), (1,4)(2,3), (5,6,7,8), (5,7)(6,8) ]), Group(()) ]
+[ Group([ f3 ]), <pc group with 2 generators>, <pc group with 2 generators>,
+  Group([ f2, f3 ]), Group([  ]) ]
 \endexample
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

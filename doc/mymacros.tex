@@ -273,7 +273,7 @@
 \def\folio{\ifnum\pageno<0 \romannumeral-\pageno \else
   \number\pageno\fi}
 \def\doindex#1#2#3{\write\indexout{\noexpand\indexentry{#1#2#3}%
-  {\ifnum\pageno<0\romannumeral-\pageno \else %BH: remove space after 0
+  {\ifnum\pageno<0\romannumeral-\pageno \else %BH: remove space after <0
    \number\pageno\fi}}%
   \ifvmode\nobreak\fi}
 

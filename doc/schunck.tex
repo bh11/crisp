@@ -31,9 +31,10 @@ groups belong to $\cal C$ (the boundary of $\cal C$).
 \>SchunckClass(<rec>) O
 
 returns a Schunck class defined by the information stored in the record
-<rec>. <rec> may have the following components: `\\in', `proj', `bound',
-`char', and `name'. The values bound to these entries, if present, are
-stored in the attributes `MemberFunction', `ProjectorFunction',
+<rec>. Note that it is the user's responsibility to ensure that <rec> really
+defines a Schunck class.<rec> may have the following components: `\\in',
+`proj', `bound', `char', and `name'. The values bound to these entries, if
+present, are stored in the attributes `MemberFunction', `ProjectorFunction',
 `BoundaryFunction', `Characteristic', and `Name', respectively.
 
 At least one of the attributes `MemberFunction', `ProjectorFunction', 
@@ -71,7 +72,7 @@ be defined.
 If bound, `ProjectorFunction' stores a function taking a group $G$ as the
 only argument, and returns a <grpclass>-projector of $G$. 
 
-\>Boundary(<class>) O
+\>Boundary(<class>) A
 
 computes the boundary of <class>, i.~e., the class of all
 primitive groups which do not belong to <class> but whose proper
@@ -84,7 +85,11 @@ groups in <class>. The result is a group class.
 
 \>Projector(<grp>, <class>) A
 
-This function returns a <class>-projector of <grp>. A subgroup 
+This function returns a <class>-projector of <grp>.
+Note that, at present, methods are only available for finite
+soluble groups <grp>, or when <class> has an attribute `ProjectorFunction'.
+
+A subgroup 
 $H$ of the group $G$ is a <class>-projector of $G$ if $H N/N$ is
 <class>-maximal in $G/N$ for all normal subgroups $N$ of~$G$. A subgroup $H$
 of $G$ is <class>-maximal in $G$ if $H$ belongs to <class>, and there is no
@@ -95,17 +100,28 @@ this case all <class>-projectors of
 $G$ are conjugate. See \cite{DH1992}, III,~3.21.
 
 \beginexample
-gap> Projector (GL(2,3), SupersolvableGroups);
-Group([ [ [ Z(3), 0*Z(3) ], [ 0*Z(3), Z(3)^0 ] ], 
-  [ [ Z(3)^0, Z(3) ], [ 0*Z(3), Z(3)^0 ] ], 
-  [ [ Z(3), 0*Z(3) ], [ 0*Z(3), Z(3) ] ] ])
+gap> H := SchunckClass (rec (bound := G -> Size (G) = 6));
+SchunckClass (bound:=function( G ) ... end)
+gap> Size (Projector (GL(2,3), H)); 
+16 
+gap> # H-projectors coincide with Sylow subgroups
+gap> U := SchunckClass (rec ( # class of all supersolvable groups
+>    bound := G -> not IsPrimeInt ( Size (Socle (G)))
+> )); 
+SchunckClass (bound:=function( G ) ... end)
+gap> Size (Projector (SymmetricGroup (4), U));
+6 
+gap> # the projectors are the point stabilizers
 \endexample
 
 \>CoveringSubgroup(<grp>, <class>) A
 
 A subgroup $H$ of $G$ is a <class>-covering subgroup of $G$ if $H$ is a
 <class>-projector of $L$ for every subgroup $L$ with $H \leq L \leq G$.
-Note that projectors and covering subgroups coincide for Schunck classes. 
+Note that projectors and covering subgroups coincide for Schunck classes of
+finite soluble groups. At present, methods are only available for finite
+soluble groups <grp>.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -119,7 +135,7 @@ of $G$. Therefore $N$ is the socle as well as the Fitting subgroup of <grp>.
 
 \>IsPrimitiveSolvable(<grp>) P
 
-is true if <grp> is primitive and solvable.
+returns true if <grp> is primitive and solvable, and false otherwise.
 
 
 \>SocleComplement(<grp>) A
@@ -141,15 +157,34 @@ admits the operations `Boundary', `Basis', and `Projector'.
 
 \>OrdinaryFormation(<rec>) O
 
-creates a formation from the record <rec>. <rec> may have components `\\in',
+creates a formation from the record <rec>. Note that it is the user's responsibility to ensure that <rec> really
+defines a formation.<rec> may have components `\\in',
 `res', `char', and `name', whose values are stored in the attributes
 `MemberFunction', `ResidualFunction', `Characteristic', and
 `Name', respectively, of the new formation.
 
+The following example shows how to construct the formations of all groups of 
+derived length at most $3$ and of all groups of exponent dividing $6$.
+
+\beginexample
+gap> der3 := OrdinaryFormation (rec (
+>    res := G -> DerivedSubgroup (DerivedSubgroup (DerivedSubgroup (G)))
+> ));
+OrdinaryFormation (res:=function( G ) ... end)
+gap> SymmetricGroup (4) in der3;
+true
+gap> GL (2,3) in der3;
+false
+gap> exp6 := OrdinaryFormation (rec (
+>    \in := G -> 6 mod Exponent (G) = 0,
+>    char := [2,3]));
+OrdinaryFormation (in:=function( G ) ... end)
+\endexample
 
 \>SaturatedFormation(<rec>) O
 
-creates a saturated formation from the record <rec>. <rec> may have any
+creates a saturated formation from the record <rec>. Note that it is the user's responsibility to ensure that <rec> really
+defines a saturated formation..<rec> may have any
 components admissible for formations (see "OrdinaryFormation") or Schunck
 classes (see "SchunckClass"), that is, `\\in', `res', `char', `proj',
 `bound', `locdef', and `name', 
@@ -161,9 +196,35 @@ classes (see "SchunckClass"), that is, `\\in', `res', `char', `proj',
 There are also functions `FittingFormation' and `SaturatedFittingFormation'
 to create Fitting
 formations and saturated Fitting formations; see
- "Fitting formations" below for details. 
+ "Fitting formations" and "SaturatedFittingFormation" below for details. 
 
+The following example shows how to construct the saturated formations of
+all finite nilpotent groups and of
+all nilpotent-by-abelian groups whose order is not divisible by a
+prime congruent 3 mod 4, and whose $2$-chief factors are central.
 
+\beginexample
+gap> nilp := SaturatedFormation (rec (
+>      locdef := function (G, p)
+>          return SmallGeneratingSet (G);
+>      end));
+SaturatedFormation (locdef:=function( G, p ) ... end)
+gap> form := SaturatedFormation (rec (
+>    locdef := function (G, p)
+>        if p = 2 then
+>           return SmallGeneratingSet (G);
+>        elif p mod 4 = 3 then
+>           return SmallGeneratingSet (DerivedSubgroup (G));
+>        else
+>           return fail;
+>        fi;
+>     end));
+SaturatedFormation (locdef:=function( G, p ) ... end)
+gap> Projector (GL(2,3), form);
+Group([ [ [ Z(3), 0*Z(3) ], [ 0*Z(3), Z(3)^0 ] ], 
+  [ [ Z(3)^0, Z(3) ], [ 0*Z(3), Z(3)^0 ] ], 
+  [ [ Z(3), 0*Z(3) ], [ 0*Z(3), Z(3) ] ] ])
+\endexample
 
 \>FormationProduct(<form1>, <form2>) O
 
@@ -173,25 +234,52 @@ consists  of the groups $G$ such that the <form2>-residual of $G$ belongs to
 
 If <form1> and <form2> are saturated formations, the result
 is again a saturated formation. The same is true if the characteristic of
-<form2> is contained in that of <form1>. This is automatically recognised in
-the following cases: (i) if the characteristic of <form1> is `AllPrimes' (see
-"AllPrimes"), or (ii) if the characteristic of <form2> is a finite list. In
-all other cases, you will have to set the attribute `IsSaturated' manually,
-if applicable. Note that in general it is not possible for {\CRISP} to
-determine if two classes are contained in each other.
+<form2> is contained in that of <form1>. This is automatically recognised if
+the characteristic of <form1> is `AllPrimes' (see "AllPrimes").
 
-If <form1> and <form2>  are also  Fitting classes, the formation product
-equals the Fitting product of <form1> and <form2>; see "FittingProduct".
+If the characteristic of <form2> is a finite list. In all other cases, you
+will have to set the attribute `IsSaturated' manually, if applicable. Note
+that in general it is not possible for {\CRISP} to determine if two classes
+are contained in each other.
 
 \beginexample
-gap> FormationProduct (NilpotentGroups, NilpotentGroups);
-SaturatedFittingFormation (in=function( G ) ... end, rad=function( G ) ... end\
-, locdef=function( G, p ) ... end, res=function( G ) ... end)
-gap> FormationProduct (NilpotentGroups, AbelianGroups);
-SaturatedFormation (in=function( G ) ... end, res=function( G ) ... end, locde\
-f=function( G, p ) ... end)
-gap> FormationProduct (AbelianGroups, NilpotentGroups);
-OrdinaryFormation (in=function( G ) ... end, res=function( G ) ... end)
+gap> nilp := SaturatedFormation (rec (\in := IsNilpotent, name := "nilp"));
+nilp
+gap> FormationProduct (nilp, der3); # no characteristic known
+FormationProduct (nilp, OrdinaryFormation (res:=function( G ) ... end))
+gap> HasIsSaturated (last);HasCharacteristic (nilp);
+false
+false
+gap> SetCharacteristic (nilp, AllPrimes);
+gap> FormationProduct (nilp, der3); # try with characteristic
+FormationProduct (nilp, OrdinaryFormation (res:=function( G ) ... end))
+gap> IsSaturated (last);
+true
+\endexample
+
+
+\>FittingFormationProduct(<fitform1>, <fitform2>) O
+
+If <fitform1> and <fitform2>  are Fitting formations, the formation product
+equals the Fitting product (see "FittingProduct") of <fitform1> and
+<fitform2>, which, in turn, equals the class product of <fitform1> and
+<fitform2>. The latter consists of all groups <G> having a  normal subgroup
+<N> in <fitform1> such that $<G>/<N>$ belongs to <fitform2>.
+
+Note that if <fitform1>, <fitform2> are Fitting formations, then 
+`FormationProduct(<fitform1>, <fitform2>)', `FittingProduct(<fitform1>,
+<fitform2>)' and `FittingFormationProduct(<fitform1>, <fitform2>)' all
+return the same result, which is, again, a Fitting formation.
+
+
+\beginexample
+gap> nilp := FittingFormation (rec (\in := IsNilpotent, name := "nilp"));;
+gap> FormationProduct (nilp, nilp);
+FittingFormationProduct (nilp, nilp)
+gap> FittingProduct (nilp, nilp);
+FittingFormationProduct (nilp, nilp)
+gap> FittingFormationProduct (nilp, nilp);
+FittingFormationProduct (nilp, nilp)
 \endexample
 
 
@@ -207,6 +295,9 @@ formations.
 
 returns the <form>-residual of the group <grp>, i.~e., the smallest
 normal subgroup <res> of <grp> such that $<grp>/<res>$ belongs to <form>.
+Note that, unless <form>
+has an attribute `ResidualFunction', there are presently only methods
+available for finite soluble groups.
 
 \>ResidualFunction(<form>) A
 
@@ -221,9 +312,8 @@ stores a function <func> taking two parameters, a group
 $G$ and a prime $p$. If $p$ is in the characteristic of <form>, this
 function must return a list <list> of elements of
 $G$, such that the smallest normal subgroup of $G$ containing <list> is the
-$f(p)$-residual of $G$. If $p$ is not in the characteristic of <form>, and the
-attribute `Characteristic' of <form> is not present, then `<func>($G$, $p$)'
-must return `fail' for any group $G$. 
+$f(p)$-residual of $G$. If $p$ is not in the characteristic of <form>, 
+then `<func>($G$, $p$)' must return `fail' for any group $G$. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -237,6 +327,39 @@ $M$ and $N$ are normal subgroups with $M \in \cal X$ and $M$
 contained in $N$, then also $N \in \cal X$. Then
 `OneNormalSubgroupMinWrtQProperty' computes a normal subgroup $M \in \cal X$
 such that no normal subgroup of <grp> contained in $M$ belongs to $\cal X$. 
+At present, there exist only methods for finite soluble groups <grp>.
+
+
+The class $\cal X$ is described by two functions, <pretest> and <test>. 
+
+<pretest> is a function taking four arguments, <U>, <V>, <R>, and <data>,
+where <data> is just the argument passed to
+`OneNormalSubgroupMinWrtQProperty'. $<U>/<V>$ is a chief factor of <grp>,
+and  <R> is a normal subgroup of <grp> containing <U> which is known to
+belong to
+$\cal X$.
+
+<pretest> may return the values `true', `false', or `fail'. If it returns 
+`true', every normal subgroup <N> of <grp> such that <V> is
+contained in $N$ and $<R>/<N>$ is
+$G$-isomorphic with $<U>/<V>$ must belong to $\cal X$. If it returns
+`false', no such normal subgroup~$N$ may belong to $\cal X$. 
+
+<test> is a function taking three arguments, <S>, <R>, and <data>, where
+data has been described above. <R> is a normal subgroup of <grp> belonging to
+$\cal X$, and $<R>/<S>$ is a chief factor of <grp>. The function must return
+true if <S> belongs to $\cal X$, and false otherwise. 
+
+Note that whenever `<test>(<S>, <R>, <data>)' is called, 
+`<pretest>(<U>, <V>, <R>, <data>)' has been called before, and has returned
+`fail', where  $<U>/<V>$ is a  chief factor which is <G>-isomorphic with
+$<R>/<S>$. Thus <test> need not repeat tests which have been performed by
+<pretest>. In particular, if <pretest> always returns `true' or `false',
+<test> will never be called.
+
+<data> is never used or changed by `OneNormalSubgroupMinWrtQProperty', but
+exists only as a means for passing additional information to or between
+the functions <pretest> and <test>.
 
 For example, if $\cal C$ is a group class which is closed with respect to
 factor groups, then the class $\cal X$ of all normal subgroups $N$ of <grp>
@@ -245,52 +368,47 @@ particular, if $\cal C$ is a formation, then
 `OneNormalSubgroupMinWrtQProperty' will return the $\cal C$-residual of
 <grp>.
 
-The class $\cal X$ is described by two functions, <pretest> and <test>. 
-<pretest> is a function taking four arguments, <U>, <V>, <R>, and <data>,
-where <data> is just the argument passed to
-`OneNormalSubgroupMaxWrtNProperty'. $<U>/<V>$ is a chief factor of <grp>,
-and  <R> is a normal subgroup of <grp> which is known to belong to $\cal X$.
+The following example shows how to use `OneNormalSubgroupMinWrtQProperty' to
+compute the derived subgroup of a group $G$. (Note that in practise, this 
+is not a particularly efficient way of computing the derived subgroup.)
 
-<pretest> may return the values `true', `false', or `fail'. If it returns 
-`true', every normal subgroup <N> of <grp> such that $<R>/<N>$ is
-$G$-isomorphic with $<U>/<V>$ must belong to $\cal X$. If it returns
-`false', no such normal subgroup~$N$ may belong to to $\cal X$. 
-
-<test> is a function taking three arguments, <S>, <R>, and <data>, where
-data has been described above. <R> is a normal subgroup of <grp> belonging to
-$\cal X$, and $<R>/<S>$ is a chief factor of <grp>. The function must return
-true if <S> belongs to $\cal X$, and false otherwise. 
-
-Note that <test> is never called if `<pretest>(U, V, R)' has returned true or
-false for a chief factor $<U>/<V>$ which is G-isomorphic with $<R>/<S>$.
-Thus if <pretest> always returns `true' or `false', <test> will never be
-called.
-
-<data> is never used or changed by `OneNormalSubgroupMaxWrtNProperty', but
-exists only as a means for passing additional information to or between
-the functions <pretest> and <test>.
-
+\beginexample
+gap> G := DirectProduct (SL(2,3), CyclicGroup (2));;
+gap> data := rec (gens := SmallGeneratingSet (G),
+>    comms := List (Combinations (SmallGeneratingSet (G), 2), 
+>       x -> Comm (x[1],x[2])));;
+gap> OneNormalSubgroupMinWrtQProperty (
+>    G,
+>    function (U, V, R, data) # test if U/V is central in G
+>        if ForAny (ModuloPcgs (U, V), y ->
+>           ForAny (data.gens, x -> not Comm (x, y) in V)) then 
+>           return false;
+>        else
+>           return fail;
+>        fi;
+>     end,
+>     function (S, R, data)
+>        return ForAll (data.comms, x -> x in S);
+>     end,
+>     data) = DerivedSubgroup (G); # compare results
+true
+\endexample       
 
 \>AllNormalSubgroupsWithQProperty(<grp>, <pretest>, <test>, <data>) O
 
-returns a list consisting of all normal subgroups in $\cal X$, where $\cal
-X$ is the class defined by <pretest>, <test>, and <data>, as described for
-`OneNormalSubgroupMaxWrtNProperty'. 
-
-\indextt{NormalSubgroups}%
-`AllNormalSubgroupsWithQProperty' (with `ReturnTrue' as
-<pretest> and `ReturnFail' (or any other function) as <test>) is installed as a method for
-`NormalSubgroups', because it usually performs better than the method in the
-{\GAP} library.
+`AllNormalSubgroupsWithQProperty' returns a list consisting of all normal
+subgroups in $\cal X$, where $\cal X$ is the class defined by <pretest>,
+<test>, and <data>, as described for `OneNormalSubgroupMaxWrtNProperty'. 
+At present, there exist only methods for finite soluble groups <grp>.
 
 \beginexample
 gap> normsWithSupersolvableFactorGroups :=
 > AllNormalSubgroupsWithQProperty (GL(2,3),
-> function (U, V, R, data)
-> return IsPrimeInt (Index (U, V));
-> end,
-> ReturnFail,
-> fail);
+>    function (U, V, R, data)
+>       return IsPrimeInt (Index (U, V));
+>    end,
+>    ReturnFail, # pretest is sufficient
+>    fail); # no data required
 [ GL(2,3), 
   Group([ [ [ Z(3)^0, Z(3) ], [ 0*Z(3), Z(3)^0 ] ], [ [ Z(3), Z(3)^0 ], 
           [ Z(3)^0, Z(3)^0 ] ], [ [ 0*Z(3), Z(3)^0 ], [ Z(3), 0*Z(3) ] ], 
@@ -300,6 +418,14 @@ gap> normsWithSupersolvableFactorGroups :=
       [ [ Z(3), 0*Z(3) ], [ 0*Z(3), Z(3) ] ] ]) ]
 \endexample
 
+\>NormalSubgroups(<grp>) O
+
+{\CRISP} also provides an improved method for `NormalSubgroups' (see
+"ref:NormalSubgroups") for groups <grp> which are finite and  soluble.
+This method simply calls `AllNormalSubgroupsWithQProperty' (with `ReturnTrue'
+as <pretest> and `ReturnFail' as <test>). Note that, since
+<pretest> always returns `true', <test> is never actually called.
+This is usually significantly faster than the methods in the {\GAP} library.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%

@@ -48,13 +48,21 @@ representative of each isomorphism type of groups contained in the class.
 \>GroupClass(<group-list>) O
 \>GroupClass(<group-list>, <iso-func>) O
 
-In the first form, <rec> must be a record which may have components `\\in'
-and `name', having the same meaning as in `Class' (see "Class"). It is the
-user's responsibility to ensure that the function supplied returns the same
-value when called with isomorphic groups. `GroupClass(<func>)' is a
-shorthand for `GroupClass(rec(\\in := func))'.
+The function `GroupClass' returns a new group class <class>, specified by its
+argument(s).
 
-In the other cases, GroupClass returns the group
+In the first form, <rec> must be a record which has a component `\\in', and may have
+further components `name', and  `char'. `\\in' must be a function having one argument.
+When called with a group <G> as its argument, it must return `true' or `false',
+depending whether <G> is in <class> or not. It is the user's responsibility to
+ensure that the function supplied returns the same value when called with isomorphic
+groups. If <rec> has components  `name' or  `char', their values are stored in the
+attributes `Name' (see "ref:Name") and `Characteristic' (see "Characteristic") of
+<class>.
+
+`GroupClass(<func>)' is a shorthand for `GroupClass(rec(\\in := func))'.
+
+In the other cases, `GroupClass' returns the group
 class consisting of the isomorphism classes of the groups in the list
 <group-list>. If <iso-func> is
 given, <iso-func> is used to check whether a given group <G> is isomorphic
@@ -68,10 +76,10 @@ the isomorphism test. Note that even for relatively small groups,
 
 \beginexample
 gap> GroupClass(IsNilpotent);
-GroupClass (in=<Operation "IsNilpotent">)
+GroupClass (in:=<Operation "IsNilpotent">)
 gap> GroupClass([CyclicGroup(2), CyclicGroup(3)]);
 GroupClass ([ <pc group of size 2 with 1 generators>, 
-  <pc group of size 3 with 1 generators> ], function( G, H ) ... end)
+  <pc group of size 3 with 1 generators> ])
 gap> AbelianIsomorphismTest := function (A,B)
 >     if IsAbelian (A) then
 >         if IsAbelian (B) then
@@ -137,6 +145,11 @@ class if it has the property `IsGroupClass'. There is no way for {\CRISP} to
 *know* that a given class defined by a membership function is a group class,
 i.~e., consists of groups and is closed under group isomorphisms.
 
+\> ContainsTrivialGroup(<grpclass>) P
+
+This property, if bound, indicates whether <grpclass> contains the trivial group
+or not.
+
 \> IsSubgroupClosed(<grpclass>) P
 
 if true, then for every $G$ in <grpclass>, the subgroups of <G> likewise
@@ -189,10 +202,16 @@ Note that the following ``properties'' are not properties but only filters in
 the {\GAP} sense (cf. "ref:Properties" and "ref:filters" in the {\GAP}
 reference manual).
 
+\>HasIsFittingClass( <obj>) F
+
+is true of <obj> knows if it is a Fitting class, that is, if it has 
+`HasIsGroupClass', `HasContainsTrivialGroup', `HasIsNormalSubgroupClosed' 
+and `HasIsNormalProductClosed'.
+
 \>IsFittingClass( <obj>) F
 
 is true of <obj> is a Fitting class, that is, if it has `IsGroupClass',
-`IsNonEmpty', `IsNormalSubgroupClosed' and `IsNormalProductClosed'.
+`ContainsTrivialGroup', `IsNormalSubgroupClosed' and `IsNormalProductClosed'.
 
 \>SetIsFittingClass(<group class>, <bool>) F
 
@@ -203,24 +222,35 @@ indeed a Fitting class.
 
 \beginexample
 gap> nilp := GroupClass (IsNilpotent);
-GroupClass (in=<Operation "IsNilpotent">)
+GroupClass (in:=<Operation "IsNilpotent">)
 gap> SetIsFittingClass (nilp, true);
 gap> nilp;
-FittingClass (in=<Operation "IsNilpotent">)
+FittingClass (in:=<Operation "IsNilpotent">)
 \endexample
+
+\>HasIsOrdinaryFormation(<obj>) F
+
+\index{HasIsFormation}%
+is true if <obj> knows if it is a formation, that is, if it lies in the filters
+`HasIsGroupClass', `HasContainsTrivialGroup', `HasIsQuotientClosed' and 
+`HasIsResiduallyClosed'.
 
 \>IsOrdinaryFormation(<obj>) F
 
 \index{IsFormation}%
 is true if <obj> is a formation, that is, if it has the properties
-`IsGroupClass', `IsNonEmpty',`IsQuotientClosed' and `IsResiduallyClosed'.
+`IsGroupClass', `ContainsTrivialGroup', `IsQuotientClosed' and `IsResiduallyClosed'.
 
 \>SetIsOrdinaryFormation(<class>, <bool>) F
 
 \index{SetIsFormation}%
 If <bool> is `true', this sets the attributes `IsQuotientClosed',
-`IsNonEmpty', and `IsResiduallyClosed' of <class>, making it a formation.
+`ContainsTrivialGroup', and `IsResiduallyClosed' of <class>, making it a formation.
 
+\>HasIsSaturatedFormation(<obj>) 
+
+returns true if <obj> knows if it is a saturated formation, that is, if it
+lies in the filters `HasIsOrdinaryFormation' and `HasIsSaturated'
 \>IsSaturatedFormation(<obj>) 
 
 returns true if <obj> is a saturated formation, that is, if it has the
@@ -229,7 +259,15 @@ properties `IsOrdinaryFormation' and `IsSaturated'
 \>SetIsSaturatedFormation(<class>, <bool>) F
 
 If <bool> is `true', this sets the attributes `IsQuotientClosed',
-`IsNonEmpty', and `IsResiduallyClosed' of <class>, making it a formation.
+`ContainsTrivialGroup', and `IsResiduallyClosed' and `IsSaturated'
+of <class>, making it a saturated formation.
+
+\>HasIsFittingFormation(<obj>) 
+
+returns true if <obj> lies in the filters `IsOrdinaryFormation' and 
+`IsFittingClass' (see "IsOrdinaryFormation" and "IsFittingClass").
+
+
 \>IsFittingFormation(<obj>) 
 
 returns true if <obj> is both a formation and a Fitting class.
@@ -238,6 +276,11 @@ returns true if <obj> is both a formation and a Fitting class.
 
 If <bool> is `true', this function sets the attributes of <class> to indicate
 that it is a Fitting formation.
+
+\>HasIsSaturatedFittingFormation(<obj>) 
+
+returns true if <obj> lies in the filters `IsSaturatedFormation' and 
+`IsFittingClass' (see "IsSaturatedFormation" and "IsFittingClass").
 
 \>IsSaturatedFittingFormation(<obj>) 
 
