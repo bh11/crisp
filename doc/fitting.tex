@@ -393,26 +393,26 @@ subgroups. Note that, in general, this decomposition is not unique.
 \index{normal subgroups!related to radicals}
 
 
-\>OneInvariantSubgroupMaxWrtNPropertyUnderAction(<act>, <grp>, <pretest>, <test>, <data>) O
+\>OneInvSgrMaxWrtNPropUnderAction(<act>, <grp>, <pretest>, <test>, <data>) O
 
 Let <act> be a list or group whose elements act on <grp> via the caret operator,
 such that every subgroup of <grp> invariant under <act> is normal in <grp>. 
 Assume $\cal X$ is a set of subgroups of <grp>  such that $\cal X$ contains the trivial group,
 and if $M$ and $N$ are <act>-invariant subgroups with $M \in \cal X$ and $M$ containing $N$,
 then also $N \in \cal X$. Then 
-`OneInvariantSubgroupMaxWrtNPropertyUnderAction' computes an <act>-invariant subgroup $M \in
+`OneInvSgrMaxWrtNPropUnderAction' computes an <act>-invariant subgroup $M \in
 \cal X$ such that no <act>-invariant subgroup of <grp> properly containing $M$ belongs to $\cal
 X$. 
 
 For example, every Fitting set $\cal X$ satisfies the above properties, where $<act> = G$. In
-this case, `OneInvariantSubgroupMaxWrtNPropertyUnderAction' will return the $\cal
+this case, `OneInvSgrMaxWrtNPropUnderAction' will return the $\cal
 X$-radical of <grp>.
 
 The class $\cal X$ is described by two functions, <pretest> and <test>. 
 
 <pretest> is a function taking four arguments, <U>, <V>, <R>, and <data>,
 where <data> is just the argument passed to
-`OneInvariantSubgroupMaxWrtNPropertyUnderAction'. $<U>/<V>$ is an <act>-composition factor of
+`OneInvSgrMaxWrtNPropUnderAction'. $<U>/<V>$ is an <act>-composition factor of
 <grp>, and  <R> is an <act>-invariant subgroup of <grp> contained in <V> which is known to
 belong to
 $\cal X$.
@@ -434,20 +434,20 @@ Note that `<test>(<S>, <R>, <data>)' is only called if `pretest(<U>, <V>,
 already performed by <pretest>. In particular, if <pretest> always returns
 `true' or `false', <test> will not be called at all.
 
-<data> is never used or changed by `OneInvariantSubgroupMaxWrtNPropertyUnderAction', but
+<data> is never used or changed by `OneInvSgrMaxWrtNPropUnderAction', but
 exists only as a means for passing additional information to or between
 the functions <pretest> and <test>.
 
-\>AllInvariantSubgroupsWithNPropertyUnderAction(<act>, <grp>, <pretest>, <test>, <data>) O
+\>AllInvSgrsWithNPropUnderAction(<act>, <grp>, <pretest>, <test>, <data>) O
 
 returns a list consisting of all <act>-invariant subgroups of <grp> belonging 
 to the class $\cal X$ described by <pretest>, <test>, and <data>. See
-the documentation of `OneInvariantSubgroupMaxWrtNPropertyUnderAction' (see
-"OneInvariantSubgroupMaxWrtNPropertyUnderAction") for details.
+the documentation of `OneInvSgrMaxWrtNPropUnderAction' (see
+"OneInvSgrMaxWrtNPropUnderAction") for details.
 
 \beginexample
 gap> D := DihedralGroup (8);;
-gap> AllInvariantSubgroupsWithNPropertyUnderAction (
+gap> AllInvSgrsWithNPropUnderAction (
 > D, D,
 >     ReturnFail,
 >     function (R, S, data)
@@ -460,13 +460,13 @@ gap> AllInvariantSubgroupsWithNPropertyUnderAction (
 
 
 
-\>OneNormalSubgroupWithNProperty (<grp>, <pretest>, <test>, <data>) O
-\>AllNormalSubgroupsWithNProperty (<grp>, <pretest>, <test>, <data>) O
+\>OneNormalSubgroupWithNProperty(<grp>, <pretest>, <test>, <data>) O
+\>AllNormalSubgroupsWithNProperty(<grp>, <pretest>, <test>, <data>) O
 
-are the same as `OneInvariantSubgroupWithNPropertyUnderAction' (see
-"OneInvariantSubgroupMaxWrtNPropertyUnderAction")
-and  `AllInvariantSubgroupsWithNPropertyUnderAction' ((see
-"AllInvariantSubgroupsWithNPropertyUnderAction"), where $<act> = <grp>$, and thus the
+are the same as `OneInvSgrMaxWrtNPropUnderAction' (see
+"OneInvSgrMaxWrtNPropUnderAction")
+and  `AllInvSgrsWithNPropUnderAction' ((see
+"AllInvSgrsWithNPropUnderAction"), where $<act> = <grp>$, and thus the
 <act>-invariant subgroups of <grp> are just the normal subgroups of <grp>.
 
 

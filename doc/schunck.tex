@@ -370,7 +370,7 @@ be called by the user.
 
 {\CRISP} provides an improved method for `NormalSubgroups' (see
 "ref:NormalSubgroups") for groups <grp> which are finite and  solvable.
-This method simply calls `AllInvariantSubgroupsWithQPropertyUnderAction' with
+This method simply calls `AllInvSgrsWithQPropUnderAction' with
 $<act> = <grp>$, `ReturnTrue'
 as <pretest> and `ReturnFail' as <test>. Note that, since
 <pretest> always returns `true', <test> is never actually called.
@@ -379,14 +379,14 @@ This is usually significantly faster than the methods in the {\GAP} library.
 \>CharacteristicSubgroups(<grp>) A
 
 returns a list containing all characteristic subgroups of <grp>. 
-`CharacteristicSubgroups' calls `AllInvariantSubgroupsWithQPropertyUnderAction'.
+`CharacteristicSubgroups' calls `AllInvSgrsWithQPropUnderAction'.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Low level functions for normal subgroups related to residuals}\null
 
 \index{normal subgroups!related to residuals}
 
-\>OneInvariantSubgroupMinWrtQPropertyUnderAction(<act>, <grp>, <pretest>, <test>, <data>) O
+\>OneInvSgrMinWrtQPropUnderAction(<act>, <grp>, <pretest>, <test>, <data>) O
 
 Let <act> be a list or group whose elements act on <grp> via the caret operator,
 such that every subgroup of <grp> invariant under <act> is normal in <grp>. 
@@ -394,7 +394,7 @@ Assume that $\cal X$ is a set of <act>-invariant subgroups of <grp> containing <
 such that whenever
 $M$ and $N$ are <act>-invariant subgroups with $M \in \cal X$ and $M$
 contained in $N$, then also $N \in \cal X$. Then
-`OneInvariantSubgroupMinWrtQProperty' computes an <act>-invariant subgroup $M \in \cal X$
+`OneInvSgrMinWrtQPropUnderAction' computes an <act>-invariant subgroup $M \in \cal X$
 such that no <act>-invariant subgroup of <grp> contained in $M$ belongs to $\cal X$. 
 At present, there exist only methods for finite solvable groups <grp>.
 
@@ -402,7 +402,7 @@ The class $\cal X$ is described by two functions, <pretest> and <test>.
 
 <pretest> is a function taking four arguments, <U>, <V>, <R>, and <data>,
 where <data> is just the argument passed to
-`OneInvariantSubgroupMinWrtQProperty' (see below for examples). $<U>/<V>$ is a
+`OneInvSgrMinWrtQPropUnderAction' (see below for examples). $<U>/<V>$ is a
 chief factor of <grp>, and  <R> is an <act>-invariant subgroup of <grp> containing <U>
 which is known to belong to
 $\cal X$.
@@ -425,7 +425,7 @@ $<R>/<S>$. Thus <test> need not repeat tests which have been performed by
 <pretest>. In particular, if <pretest> always returns `true' or `false',
 <test> will never be called.
 
-<data> is never used or changed by `OneInvariantSubgroupMinWrtQPropertyUnderAction', but
+<data> is never used or changed by `OneInvSgrMinWrtQPropUnderAction', but
 exists only as a means for passing additional information to or between
 the functions <pretest> and <test>.
 
@@ -433,10 +433,10 @@ For example, if $\cal C$ is a group class which is closed with respect to
 factor groups and $\cal X$ is the set of all <act>-invariant subgroups $N$ of <grp>
 with $<grp>/N \in \cal C$, then $\cal X$ satisfies the above properties. In
 particular, if $\cal C$ is a formation, then
-`OneInvariantSubgroupMinWrtQPropertyUnderAction' will return the $\cal C$-residual of
+`OneInvSgrMinWrtQPropUnderAction' will return the $\cal C$-residual of
 <grp>.
 
-The following example shows how to use `OneInvariantSubgroupMinWrtQPropertyUnderAction' to
+The following example shows how to use `OneInvSgrMinWrtQPropUnderAction' to
 compute the derived subgroup of a group $G$. (Note that in practise, this 
 is not a particularly efficient way of computing the derived subgroup.)
 
@@ -445,7 +445,7 @@ gap> G := DirectProduct (SL(2,3), CyclicGroup (2));;
 gap> data := rec (gens := SmallGeneratingSet (G),
 >    comms := List (Combinations (SmallGeneratingSet (G), 2), 
 >       x -> Comm (x[1],x[2])));;
-gap> OneInvariantSubgroupMinWrtQPropertyUnderAction (
+gap> OneInvSgrMinWrtQPropUnderAction (
 >    G, G,
 >    function (U, V, R, data) # test if U/V is central in G
 >        if ForAny (ModuloPcgs (U, V), y ->
@@ -463,19 +463,19 @@ true
 \endexample       
 
 
-\>AllInvariantSubgroupsWithQPropertyUnderAction(<act>, <grp>, <pretest>, <test>, <data>) O
+\>AllInvSgrsWithQPropUnderAction(<act>, <grp>, <pretest>, <test>, <data>) O
 
-`AllInvariantSubgroupsWithQPropertyUnderAction' returns a list consisting of all 
+`AllInvSgrsWithQPropUnderAction' returns a list consisting of all 
 <act>-invariant subgroups in $\cal X$, where $\cal X$ is the class defined by <pretest>,
-<test>, and <data>, as described for `OneInvariantSubgroupMinWrtQPropertyUnderAction' (see
-"OneInvariantSubgroupMinWrtQPropertyUnderAction"). 
+<test>, and <data>, as described for `OneInvSgrMinWrtQPropUnderAction' (see
+"OneInvSgrMinWrtQPropUnderAction"). 
 At present, there exist only methods for finite solvable groups <grp>.
 
 \beginexample
 gap> G := GL(2,3);
 GL(2,3)
 gap> normsWithSupersolvableFactorGroups :=
-> AllInvariantSubgroupsWithQPropertyUnderAction (G, G, 
+> AllInvSgrsWithQPropUnderAction (G, G, 
 >    function (U, V, R, data)
 >       return IsPrimeInt (Index (U, V));
 >    end,
@@ -494,14 +494,14 @@ gap> normsWithSupersolvableFactorGroups :=
 \>OneNormalSubgroupMinWrtQProperty(<grp>, <pretest>, <test>, <data>) O
 
 `OneNormalSubgroupMinWrtQProperty' is the same as 
-`OneInvariantSubgroupMinWrtQPropertyUnderAction' (see
-"OneInvariantSubgroupMinWrtQPropertyUnderAction"), where $<act> = <grp>$. 
+`OneInvSgrMinWrtQPropUnderAction' (see
+"OneInvSgrMinWrtQPropUnderAction"), where $<act> = <grp>$. 
 
 \>AllNormalSubgroupsWithQProperty(<grp>, <pretest>, <test>, <data>) O
 
 `AllNormalSubgroupsWithQProperty' is the same as 
-`AllInvariantSubgroupsWithQPropertyUnderAction' (see
-"AllInvariantSubgroupsWithQPropertyUnderAction"), where $<act> = <grp>$. 
+`AllInvSgrsWithQPropUnderAction' (see
+"AllInvSgrsWithQPropUnderAction"), where $<act> = <grp>$. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
