@@ -513,6 +513,10 @@ InstallGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs",
       local ro, p, new, i, nsteps, j, k,  n, d, 
          npcgs, dpcgs, der, depths, x, m;
       
+      if IsPcgsElementaryAbelianSeries (pcgs) and HasIndicesNormalSteps (pcgs) then
+         return pcgs;
+      fi;
+      
       ro := RelativeOrders( pcgs );
       
       i := 1;
@@ -590,8 +594,16 @@ InstallGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs",
          Add (nsteps, n);
          i := n;
       od;
-      SetIndicesNormalSteps (pcgs, nsteps);
+      if HasIndicesNormalSteps (pcgs) and 
+      	not HasIsPcgsElementaryAbelianSeries (pcgs) then
+      	   pcgs := PcgsByPcSequenceNC (FamilyObj (pcgs[1]), List (pcgs)); # get a copy
+      	   if HasIndicesNormalSteps (pcgs) and 
+      	      not HasIsPcgsElementaryAbelianSeries (pcgs) then
+      	         Error ("cannot get fresh pcgs");
+      	    fi;
+      fi;
       SetIsPcgsElementaryAbelianSeries (pcgs, true);
+      SetIndicesNormalSteps (pcgs, nsteps);
       return pcgs;
    end);
 
@@ -608,10 +620,11 @@ InstallMethod (PcgsElementaryAbelianSeries, "for pc group",
       local pcgs;
       pcgs := Pcgs (G);
       if not IsPrimeOrdersPcgs (pcgs) then
-	 TryNextMethod();
+	     TryNextMethod();
       fi;
       return PcgsElementaryAbelianSeriesFromGenericPcgs (pcgs);
    end);
+
 
 ###################################################################################
 ##
@@ -701,98 +714,6 @@ InstallMethod (PcgsElementaryAbelianSeries, "for group with parent group", true,
    end);
    
    
-###################################################################################
-##
-#M  IndicesNormalSteps
-##
-InstallMethod (IndicesNormalSteps, "for generic pcgs", true,
-   [IsPcgs],0, 
-   function (pcgs)
-   
-      local ro, p, new, i, nsteps, j, k,  n, d, npcgs, dpcgs, der, m;
-      
-      if not IsPrimeOrdersPcgs (pcgs) then
-	 Print ("not a prime power pcgs\n");
-         return fail;
-      fi;
-               
-      ro := RelativeOrders( pcgs );
-      
-      i := 1;
-      nsteps := [1];
-      
-      while i <= Length (pcgs) do      
-      
-         p := ro[i];
-         n := DepthOfPcElement (pcgs, pcgs[i]^p);
-         j := i + 1;
-         
-         while j < n do
-         
-            if ro[j] = p then
-               d := DepthOfPcElement (pcgs, pcgs[j]^p);
-            
-               if d < n then
-                  n := d;
-               fi;
-            
-               d := Minimum (List ([i..j-1], k ->
-                  DepthOfPcElement (pcgs, Comm(pcgs[j], pcgs[k]))));
-               
-               if d < n then
-                  n := d;
-               fi;
-               
-               j := j + 1;
-
-            else
-               n := j;
-            fi;
-         od;
-         
-         # now find smallest normal subgroup of the series containing 
-         # the previously computed group
-         j := 1;
-         while i < n and j < n do
-            k := n;
-            while i < n and k <= Length (pcgs) do
-               d := DepthOfPcElement (pcgs, Comm(pcgs[k], pcgs[j]));
-               if d < n then
-                  n := d;
-               fi;
-               k := k + 1;
-            od;
-            j := j + 1;
-         od;
-         
-         if n < i then 
-            Error ("internal error!");
-         elif n = i then 
-            Print ("fails at step ", n, "\n");
-            return fail;
-         fi;
-         Add (nsteps, n);
-         i := n;
-      od;
-      Print ("indices: ", nsteps,"\n");
-      Assert (0, nsteps = Filtered ([1..Length (pcgs)+1], 
-	     k -> IsNormal (GroupOfPcgs (pcgs), PcSeries (pcgs)[k])));
-      SetIsPcgsElementaryAbelianSeries (pcgs, true);
-      return nsteps;
-   end);
-
-
-###################################################################################
-##
-#M  IsPcgsElementaryAbelianSeries
-##
-InstallMethod (IsPcgsElementaryAbelianSeries, "for generic pcgs", true,
-   [IsPcgs],1, # give this a higher priority than library method
-   function (pcgs)
-      return IndicesNormalSteps (pcgs) <> fail;
-   end);
-
-
 #############################################################################
 ##
 #M  InducedPcgs (<pcgs>, <grp>)
@@ -853,23 +774,6 @@ InstallMethod (InducedPcgsWrtPcgsOp, "generic method",
    
 #############################################################################
 ##
-#M  <IsNBitsPcWordRep> ^ <IsNBitsPcWordRep>
-##
-InstallMethod( \^,
-    "improved method for n bits pc word rep",
-    IsIdenticalObj,
-    [ IsMultiplicativeElementWithInverseByPolycyclicCollector
-        and IsNBitsPcWordRep, 
-      IsMultiplicativeElementWithInverseByPolycyclicCollector
-        and IsNBitsPcWordRep ],
-    1,
-    function (u, v) 
-       return NBitsPcWord_LeftQuotient (v, NBitsPcWord_Product(u,v));
-    end);
-
-
-#############################################################################
-##
 #M  SiftedPcElementWrtPcSequence (<pcgs>, <seq>, <depths>, <x>)
 ##
 ##  sifts an element x through a list seq of elements resembling a Pcgs,
@@ -910,6 +814,7 @@ InstallMethod (SiftedPcElementWrtPcSequence, "method for an empty collection",
    function (pcgs, seq, depths, x)
       return x;
    end);
+   
    
 #############################################################################
 ##
