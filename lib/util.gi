@@ -577,18 +577,15 @@ InstallGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs",
             dpcgs := List (dpcgs);
             depths := List (dpcgs, x -> DepthOfPcElement (pcgs, x));
             for x in Reversed (m) do
-               if RelativeOrderOfPcElement (pcgs, x) = p then
-                  AddPcElementToPcSequence (pcgs, dpcgs, depths, x^p);
-               else
-                  AddPcElementToPcSequence (pcgs, dpcgs, depths, x);
-               fi;
+               AddPcElementToPcSequence (pcgs, dpcgs, depths, x^p);
             od;
             dpcgs := CanonicalPcgs (
                InducedPcgsByPcSequenceNC (pcgs, dpcgs));
             m := npcgs mod dpcgs;
             pcgs := PcgsByPcSequenceNC (FamilyObj (pcgs[1]), 
                Concatenation (pcgs{[1..i-1]}, m, dpcgs));
-            ro := RelativeOrders( pcgs );
+            ro := Concatenation (ro{[1..i-1]}, RelativeOrders (m), RelativeOrders (dpcgs));
+            SetRelativeOrders (pcgs, ro );
             Info (InfoPcGroup, 2, "changing pcgs from ",i," ",pcgs);
             n := n + Length (m);
          else
