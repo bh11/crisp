@@ -1,0 +1,76 @@
+                    The CRISP share package
+                          Version 1.1
+
+The GAP package CRISP provides algorithms for computing subgroups of
+finite solvable groups related to a group class C. In particular, it
+allows to compute C-radicals and C-injectors for Fitting classes (and
+Fitting sets) C, C-residuals for formations C, and C-projectors for
+Schunck classes C. In order to carry out these computations, the group
+class C must be represented by an algorithm which can decide membership
+in the group class. 
+
+Moreover, CRISP contains algorithms for the computation of normal subgroups 
+invariant under a prescribed set of automorphisms and belonging to a given 
+group class.
+
+This includes an improved method to compute the set of all normal subgroups 
+of a finite solvable group, its characteristic subgroups, and the socle and 
+p-socles for given primes p.
+
+This version of CRISP requires at least GAP 4.2 with bugfixes 1 to 8 installed.
+
+In order to install CRISP, you have to get the archive file `crisp-1r1.zoo'.
+
+You can download `crisp-1r1.zoo' from the same places as GAP. The main FTP
+servers are:
+
+ftp://ftp-gap.dcs.st-and.ac.uk/pub/gap/gap4/share/
+ftp://ftp.math.rwth-aachen.de/pub/gap4/share/
+ftp://ftp.ccs.neu.edu/pub/mirrors/ftp-gap.dcs.st-and.ac.uk/pub/gap/gap4/share/
+ftp://pell.anu.edu.au/pub/algebra/gap4/share/
+
+`crisp-1r1.zoo' is also available via the GAP www page at
+
+http://www-gap.dcs.st-and.ac.uk/~gap/Info4/share.html
+http://aldebaran.math.rwth-aachen.de/~GAP/Info4/share.html
+http://mirrors.ccs.neu.edu/GAP/NEU/Info4/share.html
+http://wwwmaths.anu.edu.au/research.groups/algebra/GAP/www/Info4/share.html
+
+or, alternatively, from the author's home page at
+
+http://www.tu-bs.de/~bhoeflin/crisp/index.html
+
+To install CRISP, move the file `crisp-1r1.zoo' into the `pkg' directory in
+which you plan to install CRISP. Usually, this will be the directory `pkg'
+in the GAP directory. 
+
+If you already have a previous version of CRISP, that is, there is a directory
+`crisp' in the `pkg' directory, delete (or rename) this directory first.
+
+Then unzoo `crisp-1r1.zoo' by starting `unzoo' and type
+
+    -x crisp-1r1
+
+(and <return>) at the prompt. (To quit `unzoo', enter <return> when the prompt
+re-appears.)
+
+That's all. Now start GAP and type
+
+    RequirePackage ("crisp");
+
+The CRISP banner should appear on the screen.
+
+
+Please do not hesitate to report any bugs or other problems/suggestions to the 
+author:
+
+Burkhard H\"ofling
+Technische Universitaet 
+Institut fuer Geometrie
+Pockelsstr. 14
+38106 Braunschweig
+Germany
+e-mail: b.hoefling@tu-bs.de
+www:    http://www.tu-bs.de/~bhoeflin
+
+
