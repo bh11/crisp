@@ -28,6 +28,7 @@ ReadPkg ("crisp", "lib/radical.gd");
 ReadPkg ("crisp", "lib/residual.gd");
 ReadPkg ("crisp", "lib/util.gd");
 ReadPkg ("crisp", "lib/samples.gd");
+ReadPkg ("crisp", "lib/socle.gd");
 
 
 ############################################################################
