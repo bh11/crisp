@@ -42,7 +42,7 @@ InstallValue (NilpotentGroups, SaturatedFittingFormation ( rec(
 	\in := IsNilpotentGroup,
 	rad := FittingSubgroup,
 	res := G -> NormalClosure (G, 
-		SubgroupNC (G, GeneratorsOfNilpotentResidual (G))),
+		SubgroupNC (G, NormalGeneratorsOfNilpotentResidual (G))),
 	proj := NilpotentProjector,
 	locdef := function (G, p) return SmallGeneratingSet (G); end,
 	char := AllPrimes,

@@ -60,60 +60,9 @@ InstallMethod (CentralizesLayer, "for empty list", true,
 
 #############################################################################
 ##
-#M  PrimePowerGenerators (<grp>)
+#M  PrimePowerGensPcSequence (<grp>)
 ##
-InstallMethod (PrimePowerGenerators, "for generic group", true,
-	[IsGroup], 0,
-	function (G)
-		local primes, gens, x, o, fac, p, f, pos, len;
-			
-		primes := [];
-		gens := [];
-		len := 0;
-		
-		for x in SmallGeneratingSet (G) do
-			o := Order (x);
-			if o > 1 then
-				fac := Collected (Factors (o));
-				
-				if Length (fac) > 1 then
-					for f in fac do
-						p := f[1];
-						pos := PositionSorted (primes, p);
-						if pos <= Length (primes) and primes[pos] = p then
-							Add (gens[pos], x^(o/(p^f[2])));
-						else #insert a new prime
-							primes{[pos+1..len+1]} := primes{[pos..len]};
-							gens{[pos+1..len+1]} := gens{[pos..len]};
-							primes[pos] := p;
-							gens[pos] := [x^(o/(p^f[2]))];
-							len := len + 1;
-						fi;
-					od;
-				else
-					p := fac[1][1];
-					pos := PositionSorted (primes, p);
-					if pos <= Length (primes) and primes[pos] = p then
-						Add (gens[pos], x);
-					else #insert a new prime
-						primes{[pos+1..len+1]} := primes{[pos..len]};
-						gens{[pos+1..len+1]} := gens{[pos..len]};
-						primes[pos] := p;
-						gens[pos] := [x];
-						len := len + 1;
-					fi;
-				fi;
-			fi;
-		od;
-		return rec (primes := primes, generators := gens);
-	end);
-	
-	
-#############################################################################
-##
-#M  PrimePowerGenerators (<grp>)
-##
-InstallMethod (PrimePowerGenerators, 
+InstallMethod (PrimePowerGensPcSequence, 
 	"for group which can easily compute a pcgs", true,
 	[IsGroup and CanEasilyComputePcgs], 0,
 	function (G)
@@ -146,15 +95,15 @@ InstallMethod (PrimePowerGenerators,
 				len := len + 1;
 			fi;
 		od;
-		return rec (primes := primes, generators := gens);
+		return rec (primes := primes, generators := gens, pcgs := pcgs);
 	end);
 	
 	
 #############################################################################
 ##
-#M  PrimePowerGenerators (<grp>)
+#M  PrimePowerGensPcSequence (<grp>)
 ##
-InstallMethod (PrimePowerGenerators, "for group with special pcgs", true,
+InstallMethod (PrimePowerGensPcSequence, "for group with special pcgs", true,
 	[IsGroup and HasSpecialPcgs], 0,
 	function (G)
 		local pcgs, primes, gens, x, o, qr, r, p, f, pos, len;
@@ -178,7 +127,7 @@ InstallMethod (PrimePowerGenerators, "for group with special pcgs", true,
 				len := len + 1;
 			fi;
 		od;
-		return rec (primes := primes, generators := gens);
+		return rec (primes := primes, generators := gens, pcgs := pcgs);
 	end);
 	
 
@@ -187,19 +136,19 @@ InstallMethod (PrimePowerGenerators, "for group with special pcgs", true,
 #M  IsNilpotentGroup
 ##
 InstallMethod (IsNilpotentGroup, "for pcgs computable group", true,
-	[IsGroup and IsFinite], 
-	RankFilter (CanEasilyComputePcgs), # prefer to library method
+	[IsGroup and IsFinite and CanEasilyComputePcgs], 0,
 	function (G)
-		local pgens, i, j;
+		local pseq, i, j;
+		
 		if HasSpecialPcgs (G) then
 			TryNextMethod();
 		fi;
 		
-		pgens := PrimePowerGenerators (G);
-		for i in [1..Length (pgens.generators)] do
-			for j in [i+1..Length (pgens.generators)] do
-				if ForAny (pgens.generators[i], x ->
-					ForAny (pgens.generators[j], y -> x^y <> x)) then
+		pseq := PrimePowerGensPcSequence (G);
+		for i in [1..Length (pseq.generators)] do
+			for j in [i+1..Length (pseq.generators)] do
+				if ForAny (pseq.generators[i], x ->
+					ForAny (pseq.generators[j], y -> x^y <> x)) then
 						return false;
 				fi;
 			od;
@@ -210,17 +159,17 @@ InstallMethod (IsNilpotentGroup, "for pcgs computable group", true,
 		
 ############################################################################
 ##
-#M  GeneratorsOfNilpotentResidual
+#M  NormalGeneratorsOfNilpotentResidual
 ##
-InstallMethod (GeneratorsOfNilpotentResidual, "for finite group",
+InstallMethod (NormalGeneratorsOfNilpotentResidual, "for pcgs computable group",
 	true,
-	[IsGroup and IsFinite], 
+	[IsGroup and IsFinite and CanEasilyComputePcgs], 
 	0,
 	function (G)
 		local pgens, gens, i, j, x, y, c, id;
 		id := One(G);
 		gens := [];
-		pgens := PrimePowerGenerators (G);
+		pgens := PrimePowerGensPcSequence (G);
 		for i in [1..Length (pgens.generators)] do
 			for j in [i+1..Length (pgens.generators)] do
 				for x in pgens.generators[i] do
@@ -239,20 +188,17 @@ InstallMethod (GeneratorsOfNilpotentResidual, "for finite group",
 
 ############################################################################
 ##
-#M  GeneratorsOfNilpotentResidual
+#M  NormalGeneratorsOfNilpotentResidual
 ##
-InstallMethod (GeneratorsOfNilpotentResidual, "for finite group",
+InstallMethod (NormalGeneratorsOfNilpotentResidual, 
+	"generic method - use lower central series",
 	true,
 	[IsGroup], 
 	0,
 	function (G)
 		local lcs;
-		if not HasIsFinite(G) and IsFinite (G) then
-			return GeneratorsOfNilpotentResidual (G);
-		else
-			lcs := LowerCentralSeries (G);
-			return GeneratorsOfGroup (lcs);
-		fi;
+		lcs := LowerCentralSeries (G);
+		return GeneratorsOfGroup (lcs[Length (lcs)]);
 	end);
 
 		
@@ -437,8 +383,9 @@ InstallGlobalFunction ("PcgsChiefSeriesElAbModuloPcgsUnderAction",
 ##
 #M  ChiefSeries (<grp>)
 ##
-InstallMethod (ChiefSeries, "for group refining PcgsElementaryAbelianSeries",
-	true, [IsGroup], 1,
+InstallMethod (ChiefSeries, 
+	"for pcgs computable group refining PcgsElementaryAbelianSeries",
+	true, [IsGroup and CanEasilyComputePcgs], 1,
 	function (G)
 	
 		local gens, pcgs, inds, elabser, i, ser;
