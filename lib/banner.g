@@ -13,7 +13,8 @@ Print ("            / ___/ / _ \\  / / / __/  / _ \\       \n");
 Print ("           / /__  /   _/ / / _\\_ \\  / ___/       \n");
 Print ("           \\___/ /_/\\_\\ /_/ /____/ /_/           \n");
 Print ("                                                    \n");
-Print ("                     Version 1.2                    \n");
+Print ("                     Version ",
+Print (InstalledPackageVersion ("crisp"),"                   \n");
 Print ("                                                    \n");
 Print ("                 A GAP 4 package for              \n");
 Print ("          Computing with Radicals, Injectors        \n");
