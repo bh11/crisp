@@ -500,7 +500,9 @@ InstallMethod (NormalComplementsOfElAbSectionUnderAction,
          IsNormal (G, C) 
             and NormalIntersection (C, N) = L 
             and Index (G, C) * Index (G, N) = Index (G, L)
-            and ForAll (act, a -> Image (a, C) = C)),
+            and ( (FamilyObj(act)=FamilyObj(C) and ForAll (act, a -> C^a = C))
+               or (FamilyObj(act)<>FamilyObj(C) and ForAll (act, a -> Image (a, C) = C))
+               )),
          Error ("wrong normal complement(s)"));
       if all then
          return complements;
