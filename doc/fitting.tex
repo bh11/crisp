@@ -403,6 +403,18 @@ gap> AllNormalSubgroupsWithNProperty (
   Group([ f2, f3 ]), Group([  ]) ]
 \endexample
 
+
+\>Socle (<grp>)!{for solvable groups} O
+
+{\CRISP} provides a method for `Socle' (see "ref:Socle") for which works for 
+all finite soluble groups <grp>.
+
+\beginexample
+gap> Socle ( DirectProduct (DihedralGroup (8), CyclicGroup (12)));
+<pc group with 3 generators>
+\endexample
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %E
