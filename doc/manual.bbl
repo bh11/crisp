@@ -1,21 +1,10 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%%  manual.bbl              CRISP documentation           Burkhard H\"ofling
-%%
-%%  @(#)$Id$
-%%
-%%  Copyright (C) 2000, Burkhard H\"ofling, Mathematisches Institut,
-%%  Friedrich Schiller-Universit\"at Jena, Germany
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\bibitem[DH92]{DH1992}
+\bibitem[DH92]{DH92}
 K.~Doerk and T.~O. Hawkes.
 \newblock {\em Finite soluble groups}.
 \newblock Walter de Gruyter, 1992.
 
 
-\bibitem[EW99]{EW1999}
+\bibitem[EW99]{EW99}
 B.~Eick and C.~R.~B. Wright.
 \newblock Computing formation theoretic subgroups and certain complements in finite solvable
 groups.
@@ -23,20 +12,20 @@ groups.
 \newblock Available from {\tt www.uoregon.edu/\string~wright/research.html}.
 
 
-\bibitem[FGH67]{FGH1967}
+\bibitem[FGH67]{FGH67}
 B.~Fischer, W.~Gasch\accent127 utz, W., B.~Hartley.
 \newblock In\-jek\-to\-ren end\-li\-cher
 aufl\accent127os\-ba\-rer Grup\-pen.
 \newblock {\em Math. Z.}, 102:337--339, 1967.
 
 
-\bibitem[Gas63]{Ga1963}
+\bibitem[Gas63]{Gas63}
 W.~Gasch\accent127utz.
 \newblock Zur Theorie der endlichen aufl\accent127 osbaren gruppen.
 \newblock {\em Math. Z.}, 80:300 -- 305, 1963.
 
 
-\bibitem[H\accent127of99]{HoePP1999a}
+\bibitem[H\accent127of99]{Hof99}
 B.~H\accent127oflling.
 \newblock Computing projectors, injectors, residuals and radicals  of finite
 soluble groups.
@@ -44,7 +33,7 @@ soluble groups.
 \newblock Available from {\tt www.minet.uni-jena.de/\string~hoefling/}.
 
 
-\bibitem[Sch67]{Sch1967}
+\bibitem[Sch67]{Sch67}
 H.~Schunck.
 \newblock $\cal H$-Untergruppen in endlichen aufl\accent127osbaren Gruppen.
 \newblock {\em Math. Z.}, 97:326--330, 1967.
