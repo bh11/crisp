@@ -40,7 +40,7 @@ tests :=
 Print ("supersolvable projector\n");
 DoTests (groups, tests);
 
-metanilp := ProductOfFormation (nilp, nilp);
+metanilp := ProductOfFormations (nilp, nilp);
 MetaNilpotentGroups := FormationProduct (NilpotentGroups, NilpotentGroups);
 
 tests :=
@@ -62,9 +62,8 @@ tests :=
   [tmp -> Projector (tmp, TwoThreeGroups), Size, "form", [], MTXReset, MTXTime, "mtx"],
   [tmp -> Projector (tmp, SchunckClass (rec (
   	bound := G -> not SmallestRootInt (Size (Socle(G))) in [2,3] ))), Size, "bound", [], MTXReset, MTXTime, "mtx"],
-# the following do not work, due to a bug in Format
-#  [tmp -> CoveringSubgroup1 (tmp, 23groups), Size, "cov1", [], SpcgsCompute, SpcgsTime, "spcgs"],
-#  [tmp -> CoveringSubgroup2 (tmp, 23groups), Size, "cov2", [], SpcgsCompute, SpcgsTime, "spcgs"],
+  [tmp -> CoveringSubgroup1 (tmp, 23groups), Size, "cov1", [], SpcgsCompute, SpcgsTime, "spcgs"],
+  [tmp -> CoveringSubgroup2 (tmp, 23groups), Size, "cov2", [], SpcgsCompute, SpcgsTime, "spcgs"],
 ];
 Print ("[2,3]- projector\n");
 DoTests (groups, tests);
@@ -79,9 +78,8 @@ tests :=
   	bound := G -> not SmallestRootInt (Size (Socle(G))) in [2,3] 
   		or not IsNilpotent (G)))), 
   	Size, "bound", [], MTXReset, MTXTime, "mtx"],
-# the following do not work, due to a bug in Format
-#  [tmp -> CoveringSubgroup1 (tmp, nilp23), Size, "cov1", ["FI22", "UPP"], SpcgsCompute, SpcgsTime, "spcgs"],
-#  [tmp -> CoveringSubgroup2 (tmp, nilp23), Size, "cov2", [], SpcgsCompute, SpcgsTime, "spcgs"],
+  [tmp -> CoveringSubgroup1 (tmp, nilp23), Size, "cov1", [], SpcgsCompute, SpcgsTime, "spcgs"],
+  [tmp -> CoveringSubgroup2 (tmp, nilp23), Size, "cov2", [], SpcgsCompute, SpcgsTime, "spcgs"],
 ];
 Print ("nilp [2,3]- projector\n");
 DoTests (groups, tests);
