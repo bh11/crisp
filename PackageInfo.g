@@ -23,7 +23,7 @@ Date := "23/06/2003",
 ##  the format extension(s), like '.zoo', which are given next.
 ##  The archive file name *must be changed* with each version of the archive
 ##  (and probably somehow contain the package name and version).
-ArchiveURL := "http://www.tu-bs.de/~bhoefling/crisp/crisp-1r2",
+ArchiveURL := "http://www.tu-bs.de/~bhoeflin/crisp/crisp-1r2",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -164,7 +164,7 @@ subgroups and the socle and \
 <i>p</i>-socles for given primes <i>p</i>.</P> \
 ",
 
-PackageWWWHome := "http://www.tu-bs.de/~bhoefling/crisp/index.html",
+PackageWWWHome := "http://www.tu-bs.de/~bhoeflin/crisp/index.html",
                   
 ##  On the GAP Website there is an online version of all manuals in the
 ##  GAP distribution. To handle the documentation of a package it is
