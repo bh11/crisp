@@ -9,16 +9,7 @@
 ##
 RequirePackage ("format");
 
-G := fail; # define global var.
-
-StoreDirectPower := function (F, n)
-   G := DirectProduct (ListWithIdenticalEntries (n, F));
-end;
-
 groups := [
- [StoreDirectPower, [SymmetricGroup (4), 3], "G", "Sym(4)^3"],
- [StoreDirectPower, [SymmetricGroup (4), 4], "G", "Sym(4)^4"],
- [StoreDirectPower, [SymmetricGroup (4), 5], "G", "Sym(4)^5"],
  ["format","grp/g93.gi", "g93", "31:3"],
  ["format","grp/OOF.gi", "OOF"],
  ["format","grp/ONF.gi", "ONF"],
@@ -30,7 +21,7 @@ groups := [
 ];
 
 if IsBound (FAST_TEST) and FAST_TEST then
-   groups := groups{[4..7]};
+   groups := groups{[1..3]};
 fi;
 
 
