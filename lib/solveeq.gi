@@ -28,6 +28,7 @@ InstallGlobalFunction (LinearSystem,
          zero := Zero (field),
          one := One (field),
          equations := [],
+         nrequations := 0,
          solutions := [],
          solvable := ListWithIdenticalEntries (nrsolutions,true),
          conv := conv,
@@ -80,15 +81,19 @@ InstallGlobalFunction (AddEquation,
             if IsBound (sys.equations[i]) then
                # row := row - row[i] * sys.equations[i];
                AddRowVector (row, sys.equations[i], - coeff);
-               AddRowVector (sol, sys.solutions[i], - coeff);
+               if sys.nrsolutions > 0 then
+               	  AddRowVector (sol, sys.solutions[i], - coeff);
+               fi;
             elif coeff = sys.one then
                sys.equations[i] := row;
                sys.solutions[i] := sol;
+               sys.nrequations := sys.nrequations + 1;
                return true;
             else
                sys.equations[i] := row / coeff;
                sys.solutions[i] := sol / coeff;
-               return true;
+               sys.nrequations := sys.nrequations + 1;
+              return true;
             fi;
          fi;
          i := i + 1;
@@ -103,6 +108,28 @@ InstallGlobalFunction (AddEquation,
       od;
 
       return solv;
+   end);
+
+
+#############################################################################
+##
+#F  HasSolution (sys, n)
+##
+InstallGlobalFunction (HasSolution, 
+   function (sys, n)
+
+      return sys.solvable[n];
+   end);
+
+
+#############################################################################
+##
+#F  DimensionOfNullspace (sys)
+##
+InstallGlobalFunction (DimensionOfNullspace, 
+   function (sys)
+
+      return sys.nrvars - sys.nrequations;
    end);
 
 

@@ -50,6 +50,26 @@ DeclareGlobalFunction ("AddEquation");
 
 #############################################################################
 ##
+#F  HasSolution (sys, n)
+##
+##  This function returns true or false, depending whether sys has a solution
+##  or not, using the linear system whose right hand side consists of the 
+##  <n>-th entries of the solutions added via AddEquation.
+##
+DeclareGlobalFunction ("HasSolution");
+
+
+#############################################################################
+##
+#F  DimensionOfNullspace (sys)
+##
+##  This function returns the dimension of the nullspace of sys.
+##
+DeclareGlobalFunction ("DimensionOfNullspace");
+
+
+#############################################################################
+##
 #F  OneSolution (sys, n)
 ##
 ##  This function returns fail if sys has no solutions. Otherwise it returns
