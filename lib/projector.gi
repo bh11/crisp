@@ -303,10 +303,10 @@ InstallGlobalFunction(BFUNC_FROM_TEST_FUNC_FAC,
 
 ###################################################################################
 ##
-#F  BFUNC_FROM_TEST_FUNC (<upcgs>, <cpcgs>, <kpcgs>, <npcgs>, <p>, 
+#F  BFUNC_FROM_TEST_FUNC_MOD (<upcgs>, <cpcgs>, <kpcgs>, <npcgs>, <p>, 
 ##     <centind>, <data>)
 ##
-InstallGlobalFunction(BFUNC_FROM_TEST_FUNC, 
+InstallGlobalFunction(BFUNC_FROM_TEST_FUNC_MOD, 
    function (upcgs, cpcgs, kpcgs, npcgs, p, centind, data)
       local H, cent, x, nat, F;
    

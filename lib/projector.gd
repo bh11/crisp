@@ -201,18 +201,29 @@ DeclareGlobalFunction ("BFUNC_FROM_TEST_FUNC_FAC");
 
 #############################################################################
 ##
-#F  BFUNC_FROM_TEST_FUNC (<upcgs>, <cpcgs>, <kpcgs>, <npcgs>, <p>, 
+#F  BFUNC_FROM_TEST_FUNC_MOD (<upcgs>, <cpcgs>, <kpcgs>, <npcgs>, <p>, 
 ##     <centind>, <data>)
 ##
 ##  this is the same as BFUNC_FROM_TEST_FUNC, except that it uses
 ##  CentralizerModulo to compute the centralizer of a chief factor. 
 ##
-##  In ProjectorOp, we use this function, rather than
+##  In ProjectorOp, we may want to use this function, rather than
 ##  BFUNC_FROM_TEST_FUNC_FAC because its performance seems to be the
-##  same for pc groups, while it works better for perm groups because
+##  same for pc groups, while it might work better for perm groups because
 ##  one does not have to work in factor groups. 
 ##
-DeclareGlobalFunction ("BFUNC_FROM_TEST_FUNC");
+DeclareGlobalFunction ("BFUNC_FROM_TEST_FUNC_MOD");
+
+
+#############################################################################
+##
+#F  BFUNC_FROM_TEST_FUNC (<upcgs>, <cpcgs>, <kpcgs>, <npcgs>, <p>, 
+##     <centind>, <data>)
+##
+##  Presently, we only use BFUNC_FROM_TEST_FUNC_FAC because of a bug in 
+##  CentralizerModulo in the released version  (4.2 fix 5) of GAP.
+##
+DeclareSynonym ("BFUNC_FROM_TEST_FUNC", BFUNC_FROM_TEST_FUNC_FAC);
 
 
 ############################################################################
