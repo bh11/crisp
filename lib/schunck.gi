@@ -134,10 +134,19 @@ RedispatchOnCondition (IsMemberOp, true,
 InstallMethod (Boundary, "if BoundaryFunction is known", true, 
    [IsSchunckClass and HasBoundaryFunction], 3,
    function (H)
-       return GroupClass (G -> IsPrimitiveSolvable (G) 
-										and BoundaryFunction(H)(G)
-          and G/Socle(G) in H);
- end);
+       return GroupClass (
+          function (G)
+             if not IsPrimitiveSolvable (G) then
+                return false;
+             fi;
+             Socle (G);
+             if SocleComplement (G) in H then
+                return BoundaryFunction(H)(G);
+             else
+                return false;
+             fi;
+          end);
+   end);
   
 
 #############################################################################
@@ -155,9 +164,14 @@ InstallMethod (Boundary, "for Schunck class with local definition", true,
              if not IsPrimitiveSolvable (G) then
                 return false;
              fi;
-             soc := Socle (G);
-             p := Factors (Size (soc))[1];
-             return not G/soc in LocalDefinitionFunction (H) (p);
+             if SocleComplement (G) in H then
+                soc := Socle (G);
+                p := Factors (Size (soc))[1];
+                return ForAny (LocalDefinitionFunction (H) (G, p),
+                   x -> ForAny (SmallGeneratingSet (soc), y -> y^x <> y));
+             else
+                return false;
+             fi;
           end);
     end);
  
@@ -167,15 +181,14 @@ InstallMethod (Boundary, "for Schunck class with local definition", true,
 #M  Boundary (<class>)
 ##
 ##  This function is not particularly efficient - it exists merely for the
-##  convenience of the user. The information actually needed for the 
-##  algorithms is stored in BoundaryFunction, and even retrievable using in.
+##  convenience of the user. 
 ##
 InstallMethod (Boundary, "for generic grp class", true, 
    [IsGroupClass], 0,
    function (H)
        return GroupClass (G -> IsPrimitiveSolvable (G) 
           and not G in H
-          and G/Socle(G) in H);
+          and SocleComplement (G) in H);
    end);
   
 
