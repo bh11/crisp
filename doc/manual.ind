@@ -75,7 +75,7 @@
   `HasIsSaturatedFormation', 10
 \letter I
   `ImageFittingSet', 21
-  `in', 5
+  `in', for classes, 5
   `Injector', 22
   `InjectorFunction', 22
   `Intersection', of classes, 5
