@@ -1,0 +1,128 @@
+\makelabel {crisp:introduction}{1}
+\makelabel {crisp:set theoretical classes}{2}
+\makelabel {crisp:creating set theoretical classes}{2.1}
+\makelabel {crisp:isclass}{2.1.1}
+\makelabel {crisp:class}{2.1.2}
+\makelabel {crisp:class}{2.1.2}
+\makelabel {crisp:view!for classes}{2.1.3}
+\makelabel {crisp:print!for classes}{2.1.4}
+\makelabel {crisp:display!for classes}{2.1.5}
+\makelabel {crisp:element test!for classes}{2.1.6}
+\makelabel {crisp:equality!for classes}{2.1.7}
+\makelabel {crisp:comparison!for classes}{2.1.8}
+\makelabel {crisp:properties of classes}{2.2}
+\makelabel {crisp:isempty!for classes}{2.2.1}
+\makelabel {crisp:memberfunction}{2.2.2}
+\makelabel {crisp:lattice operations for classes}{2.3}
+\makelabel {crisp:complement}{2.3.1}
+\makelabel {crisp:intersection!of classes}{2.3.2}
+\makelabel {crisp:intersection!of classes}{2.3.2}
+\makelabel {crisp:union}{2.3.3}
+\makelabel {crisp:difference}{2.3.4}
+\makelabel {crisp:generic group classes}{3}
+\makelabel {crisp:creating group classes}{3.1}
+\makelabel {crisp:groupclass}{3.1.1}
+\makelabel {crisp:groupclass}{3.1.1}
+\makelabel {crisp:groupclass}{3.1.1}
+\makelabel {crisp:groupclass}{3.1.1}
+\makelabel {crisp:intersection!of group classes}{3.1.2}
+\makelabel {crisp:intersection!of group classes}{3.1.2}
+\makelabel {crisp:properties of group classes}{3.2}
+\makelabel {crisp:isgroupclass}{3.2.1}
+\makelabel {crisp:containstrivialgroup}{3.2.2}
+\makelabel {crisp:issubgroupclosed}{3.2.3}
+\makelabel {crisp:isnormalsubgroupclosed}{3.2.4}
+\makelabel {crisp:isquotientclosed}{3.2.5}
+\makelabel {crisp:isresiduallyclosed}{3.2.6}
+\makelabel {crisp:isnormalproductclosed}{3.2.7}
+\makelabel {crisp:isdirectproductclosed}{3.2.8}
+\makelabel {crisp:isschunckclass}{3.2.9}
+\makelabel {crisp:issaturated}{3.2.10}
+\makelabel {crisp:additional properties of group classes}{3.3}
+\makelabel {crisp:hasisfittingclass}{3.3.1}
+\makelabel {crisp:isfittingclass}{3.3.2}
+\makelabel {crisp:setisfittingclass}{3.3.3}
+\makelabel {crisp:hasisordinaryformation}{3.3.4}
+\makelabel {crisp:isordinaryformation}{3.3.5}
+\makelabel {crisp:setisordinaryformation}{3.3.6}
+\makelabel {crisp:hasissaturatedformation}{3.3.7}
+\makelabel {crisp:issaturatedformation}{3.3.8}
+\makelabel {crisp:setissaturatedformation}{3.3.9}
+\makelabel {crisp:hasisfittingformation}{3.3.10}
+\makelabel {crisp:isfittingformation}{3.3.11}
+\makelabel {crisp:setisfittingformation}{3.3.12}
+\makelabel {crisp:hasissaturatedfittingformation}{3.3.13}
+\makelabel {crisp:issaturatedfittingformation}{3.3.14}
+\makelabel {crisp:setissaturatedfittingformation}{3.3.15}
+\makelabel {crisp:attributes of group classes}{3.4}
+\makelabel {crisp:characteristic}{3.4.1}
+\makelabel {crisp:schunck classes and formations}{4}
+\makelabel {crisp:creating schunck classes}{4.1}
+\makelabel {crisp:schunckclass}{4.1.1}
+\makelabel {crisp:attributes and operations for schunck classes}{4.2}
+\makelabel {crisp:boundary}{4.2.1}
+\makelabel {crisp:basis}{4.2.2}
+\makelabel {crisp:projector}{4.2.3}
+\makelabel {crisp:coveringsubgroup}{4.2.4}
+\makelabel {crisp:boundaryfunction}{4.2.5}
+\makelabel {crisp:projectorfunction}{4.2.6}
+\makelabel {crisp:additional attributes for primitive solvable groups}{4.3}
+\makelabel {crisp:isprimitivesolvable}{4.3.1}
+\makelabel {crisp:soclecomplement}{4.3.2}
+\makelabel {crisp:creating formations}{4.4}
+\makelabel {crisp:ordinaryformation}{4.4.1}
+\makelabel {crisp:saturatedformation}{4.4.2}
+\makelabel {crisp:formationproduct}{4.4.3}
+\makelabel {crisp:fittingformationproduct}{4.4.4}
+\makelabel {crisp:attributes and operations for formations}{4.5}
+\makelabel {crisp:residual}{4.5.1}
+\makelabel {crisp:residualfunction}{4.5.2}
+\makelabel {crisp:localdefinitionfunction}{4.5.3}
+\makelabel {crisp:functions for normal subgroups related to residuals}{4.6}
+\makelabel {crisp:onenormalsubgroupminwrtqproperty}{4.6.1}
+\makelabel {crisp:allnormalsubgroupswithqproperty}{4.6.2}
+\makelabel {crisp:normalsubgroups}{4.6.3}
+\makelabel {crisp:fitting classes and fitting sets}{5}
+\makelabel {crisp:creating fitting classes}{5.1}
+\makelabel {crisp:fittingclass}{5.1.1}
+\makelabel {crisp:fittingproduct}{5.1.2}
+\makelabel {crisp:creating fitting formations}{5.2}
+\makelabel {crisp:fittingformation}{5.2.1}
+\makelabel {crisp:saturatedfittingformation}{5.2.2}
+\makelabel {crisp:creating fitting sets}{5.3}
+\makelabel {crisp:isfittingset}{5.3.1}
+\makelabel {crisp:fittingset}{5.3.2}
+\makelabel {crisp:imagefittingset}{5.3.3}
+\makelabel {crisp:preimagefittingset}{5.3.4}
+\makelabel {crisp:intersection!of fitting sets}{5.3.5}
+\makelabel {crisp:attributes and operations for fitting classes and fitting sets}{5.4}
+\makelabel {crisp:radical}{5.4.1}
+\makelabel {crisp:injector}{5.4.2}
+\makelabel {crisp:radicalfunction}{5.4.3}
+\makelabel {crisp:injectorfunction}{5.4.4}
+\makelabel {crisp:functions for normal subgroups related to radicals}{5.5}
+\makelabel {crisp:onenormalsubgroupmaxwrtnproperty}{5.5.1}
+\makelabel {crisp:allnormalsubgroupswithnproperty}{5.5.2}
+\makelabel {crisp:examples of group classes}{6}
+\makelabel {crisp:pre-defined group classes}{6.1}
+\makelabel {crisp:class!of all trivial groups}{6.1.1}
+\makelabel {crisp:class!of all nilpotent groups}{6.1.2}
+\makelabel {crisp:nilpotentprojector}{6.1.3}
+\makelabel {crisp:class!of all supersolvable groups}{6.1.4}
+\makelabel {crisp:supersolvableprojector}{6.1.5}
+\makelabel {crisp:class!of all abelian groups}{6.1.6}
+\makelabel {crisp:more concrete group classes}{6.2}
+\makelabel {crisp:abeliangroupsofexponent}{6.2.1}
+\makelabel {crisp:pigroups}{6.2.2}
+\makelabel {crisp:pgroups}{6.2.3}
+\makelabel {crisp:pre-defined sets of primes}{6.3}
+\makelabel {crisp:set!of all primes}{6.3.1}
+\makelabel {crisp:allprimes}{6.3.1}
+\makelabel {crisp:bibliography}{}
+\setcitlab {DH92}{DH92}
+\setcitlab {EW99}{EW99}
+\setcitlab {FGH67}{FGH67}
+\setcitlab {Gas63}{Gas63}
+\setcitlab {Hof99}{H\accent 127of99}
+\setcitlab {Sch67}{Sch67}
+\makelabel {crisp:index}{}
