@@ -227,7 +227,13 @@ InstallMethod (IsPrimitiveSolvable, "for generic group", true,
       
       pcgs := Pcgs (N);
       if Length (ds) = 2 then # abelian case
-         return Length (pcgs) = 1;
+         if Length (pcgs) = 1 then
+            SetSocle (G, G);
+            SetSocleComplement (G, TrivialSubgroup (G));
+            return true;
+         else
+            return false;
+         fi;
       fi;
       
       p := RelativeOrderOfPcElement (pcgs, pcgs[1]);
@@ -281,8 +287,84 @@ InstallMethod (IsPrimitiveSolvable, "for generic group", true,
       SetFittingSubgroup (G, N);
       
       # if Q is not normal, its normalizer is a complement of N in G
-       SetSocleComplement (G, M);
+      SetSocleComplement (G, M);
       return true;
+   end);
+
+
+###################################################################################
+##
+#M  SocleComplement
+##
+InstallMethod (SocleComplement, "for primitive solvable group", true,
+   [IsGroup and IsPrimitiveSolvable], 0,
+   function (G)
+   
+      local N, ds, p, pcgs, mats, R, Q, M, m, k, q, c, i;
+      
+      if IsTrivial (G) then
+         Error ("G must be primitive and solvable");
+      fi;
+      
+      ds := DerivedSeries (G);
+      
+      if not IsTrivial (ds[Length (ds)]) then
+          Error ("G must be primitive and solvable");
+      fi; 
+      
+      N := ds[Length (ds)-1];
+      
+      pcgs := Pcgs (N);
+      if Length (ds) = 2 then # abelian case
+         if Length (pcgs) = 1 then
+            SetSocle (G, G);
+            SetSocleComplement (G, TrivialSubgroup (G));
+            return true;
+         else
+            return false;
+         fi;
+      fi;
+      
+      p := RelativeOrderOfPcElement (pcgs, pcgs[1]);
+      
+      if ForAny (pcgs, x -> x^p <> One(G)) then
+          Error ("G must be primitive and solvable");
+      fi;
+      
+      R := ds[Length (ds)-2];
+      
+      # now test if N is complemented
+      
+      # find small Sylow subgroup of R 
+      c := Collected (RelativeOrders (m));
+      k := c[1][2];
+      q := c[1][1];
+      
+      for i in [2..Length (c)] do
+         if c[i][2] < k then
+            k := c[i][2];
+            q := c[i][1];
+         fi;
+      od;
+      
+      Q := SylowSubgroup (R, q);
+      
+      if IsNormal (G, Q) then
+         return false;
+      fi;
+      
+      M := NormalizerOfPronormalSubgroup (G, Q);
+      
+      if not IsTrivial (Core (N, M)) then
+         return false;
+      fi;
+      
+      # save some information about G
+      SetSocle (G, N);
+      SetFittingSubgroup (G, N);
+      
+      # if Q is not normal, its normalizer is a complement of N in G
+      return M;
    end);
 
 
