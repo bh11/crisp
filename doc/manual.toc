@@ -1,0 +1,29 @@
+\chapcontents {1}{Introduction}{3}
+\chapcontents {2}{Set theoretical classes}{4}
+\seccontents {2.1}{Creating set theoretical classes} {4}
+\seccontents {2.2}{Properties of classes} {5}
+\seccontents {2.3}{Lattice operations for classes} {5}
+\chapcontents {3}{Generic group classes}{7}
+\seccontents {3.1}{Creating group classes} {7}
+\seccontents {3.2}{Properties of group classes} {8}
+\seccontents {3.3}{Additional properties of group classes} {9}
+\seccontents {3.4}{Attributes of group classes} {11}
+\chapcontents {4}{Schunck classes and formations}{12}
+\seccontents {4.1}{Creating Schunck classes} {12}
+\seccontents {4.2}{Attributes and operations for Schunck classes} {12}
+\seccontents {4.3}{Additional attributes for primitive solvable groups} {13}
+\seccontents {4.4}{Creating formations} {14}
+\seccontents {4.5}{Attributes and operations for formations} {16}
+\seccontents {4.6}{Functions for normal subgroups related to residuals} {16}
+\chapcontents {5}{Fitting classes and Fitting sets}{18}
+\seccontents {5.1}{Creating Fitting classes} {18}
+\seccontents {5.2}{Creating Fitting formations} {19}
+\seccontents {5.3}{Creating Fitting sets} {19}
+\seccontents {5.4}{Attributes and operations for Fitting classes and Fitting sets} {21}
+\seccontents {5.5}{Functions for normal subgroups related to radicals} {22}
+\chapcontents {6}{Examples of group classes}{23}
+\seccontents {6.1}{Pre-defined group classes} {23}
+\seccontents {6.2}{More concrete group classes} {23}
+\seccontents {6.3}{Pre-defined sets of primes} {24}
+\chapcontents {}{Bibliography}{25}
+\chapcontents {}{Index}{26}
