@@ -1,0 +1,77 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  manual.tex               CRISP documentation           Burkhard H\"ofling
+%%
+%%  @(#)$Id$
+%%
+%%  Copyright (C) 2000, Burkhard H\"ofling, Mathematisches Institut,
+%%  Friedrich Schiller-Universit\"at Jena, Germany
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\input ../../../doc/gapmacro.tex % this causes trouble with citations
+%\input gapmacro.tex
+\input mymacros.tex % this works like gapmacro.tex but produces manual.tst
+\hyphenation{Is-ListOr-Col-lec-tion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\BeginningOfBook{crisp}
+  \UseReferences{../../../doc/ref}
+  \TitlePage{
+    \vfill
+    \centerline{\titlefont The share package}
+    \bigskip
+    \bigskip
+    \centerline{\inchhigh CRISP}
+    \bigskip
+    \bigskip
+    \centerline{\secfont A GAP 4 share package for}
+    \smallskip
+    \centerline{\secfont Computing with Radicals, Injectors}
+    \smallskip
+    \centerline{\secfont Schunck classes and Projectors}
+    \smallskip
+    \centerline{\secfont of finite soluble gropus}          
+    \bigskip
+    \bigskip
+    \centerline{\bsf by}
+    \bigskip
+    \bigskip
+    \centerline{\secfont Burkhard H{\accent 127 o}f{}ling}
+    \bigskip
+    \centerline{\bsf Mathematisches Institut}
+    \centerline{\bsf Friedrich Schiller-Universit{\accent 127 a}t}
+	   \centerline{\bsf Jena, Germany}
+    \centerline{\bsf e-mail: hoefling@minet.uni-jena.de}
+    \vfill
+  }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \TableOfContents
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \FrontMatter
+  
+%    \Input{copyright}
+%    \Input{preface}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \Chapters
+  
+    \Input{intro}
+    \Input{classes}    % classes
+    \Input{grpclass}   % group classes and closure properties
+    \Input{schunck}    % Schunck classes and formations
+    \Input{fitting}    % Fitting sets, normal subgroups
+    \Input{examples}   % pre-defined classes and class families
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \Appendices     % don't uncomment - this is needed for the online manual
+  
+    \Bibliography
+    \Index
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\EndOfBook
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%E
+%%
