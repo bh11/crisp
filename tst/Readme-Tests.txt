@@ -2,7 +2,7 @@
 ##
 ##  Readme-Tests.txt                CRISP                 Burkhard H\"ofling
 ##
-##  @(#)$ $
+##  @(#)$Id$
 ##
 ##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
 ##  Friedrich Schiller-Universit\"at Jena, Germany
@@ -24,26 +24,34 @@ FAST_TEST and DO_TIMING only affect the files whose names start with
 `timing_'. Note that these files require that the package `format' is present.
 PRINT_METHODS only affects the other test files.
 
+Note that, in order to get reasonably reliable timings, one should read the
+"timing_" files twice, withouot re-starting GAP, and only use the results
+obtained during the second run. This ensures that all required library files 
+are properly loaded before times are taken.
+
 The following table lists the available test files and their content.
 
-Readme-Tests.txt    -- this file
-all.g               -- runs all of the following test files
-char.g              -- tests methods for Characteristic
-classes.g           -- tests constructions of classes and immediate methods
-in.g                -- tests methods for IsMemberOp
-injectors.g         -- tests methods for InjectorOp
-normals.g           -- tests algorithms for normal subgroups
-print.g             -- tests methods for PrintObj and ViewObj
-projectors.g        -- tests methods for ProjectorOp
-radicals.g          -- tests methods for RadicalOp
-residuals.g         -- tests methods for ResidualOp
-samples.g           -- file containing sample groups and sample classes
-timing_injectors.g  -- tests algorithms for InjectorOp
-timing_normals.g    -- tests algorithms for NormalSubgroups
-timing_normpro.g    -- tests algorithms for NormalizerOfPronormalSubgroup
-timing_projectors.g -- tests algorithms for ProjectorOp
-timing_radicals.g   -- tests algorithms for RadicalOp
-timing_residuals.g  -- tests algorithms for ResidualOp
+Readme-Tests.txt        -- this file
+all.g                   -- runs all of the following test files
+char.g                  -- tests methods for Characteristic
+classes.g               -- tests constructions of classes and immediate methods
+in.g                    -- tests methods for IsMemberOp
+injectors.g             -- tests methods for InjectorOp
+normals.g               -- tests algorithms for normal subgroups
+print.g                 -- tests methods for PrintObj and ViewObj
+projectors.g            -- tests methods for ProjectorOp
+radicals.g              -- tests methods for RadicalOp
+residuals.g             -- tests methods for ResidualOp
+samples.g               -- file containing sample groups and sample classes
+timing_injectors.g      -- tests algorithms for InjectorOp
+timing_normals.g        -- tests algorithms for NormalSubgroups
+timing_normpro.g        -- tests algorithms for NormalizerOfPronormalSubgroup
+timing_projectors.g     -- tests algorithms for ProjectorOp
+timing_projectors_mod.g -- as timing_projectors, but uses different library
+                           method for the centralizer, which produces wrong
+                           results in GAP 4.2.5
+timing_radicals.g       -- tests algorithms for RadicalOp
+timing_residuals.g      -- tests algorithms for ResidualOp
 
 
 ############################################################################
