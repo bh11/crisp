@@ -7,7 +7,17 @@
 ##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
 ##  Friedrich Schiller-Universit\"at Jena, Germany
 ##
-groups:= [ function (  )
+groups:= [
+    function (  )
+        return TrivialGroup( IsPcGroup);
+    end, 
+    function (  )
+        return TrivialGroup( IsPermGroup);
+    end, 
+    function (  )
+        return Group (IdentityMat (4, GF(25)));
+    end, 
+    function (  )
         return SymmetricGroup( 4 );
     end, 
     function (  )
@@ -15,8 +25,20 @@ groups:= [ function (  )
     end, 
     function (  )
         return GL( 2, 3 );
-    end ];
-    
+    end 
+];
+ 
+   
+insolvgroups:= [ function (  )
+        return SymmetricGroup( 5 );
+    end, 
+    function (  )
+        return GL(2,5);
+    end,
+    function (  )
+    	return AffinePermGroupByMatrixGroup (GL(2,5));
+    end]; 
+  
 if not IsBound (InfoTest) then
    DeclareInfoClass ("InfoTest");
 

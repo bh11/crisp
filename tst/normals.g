@@ -12,10 +12,35 @@ ReadPkg ("crisp", "tst/samples.g");
 
 if PRINT_METHODS then
    TraceMethods (NormalSubgroups);
+   TraceMethods (CharacteristicSubgroups);
+   TraceMethods (AllInvariantSubgroupsWithQPropertyUnderAction);
+   TraceMethods (AllInvariantSubgroupsWithNPropertyUnderAction);
 fi;
-List (groups, G -> NormalSubgroups (G()));
+
+for G in groups do
+	old := SortedList (List (NormalSubgroups (G()), Order));
+	H := G();
+	new := SortedList (List (AllInvariantSubgroupsWithNPropertyUnderAction (H, H, 
+		ReturnTrue, ReturnTrue, rec()), Size));
+	if old <> new then
+		Error ("results don't agree");
+	fi;
+
+	old := SortedList (List (CharacteristicSubgroups (G()), Order));
+	H := G();
+	new := SortedList (List (AllInvariantSubgroupsWithNPropertyUnderAction (
+		AutomorphismGroup (H), H, 
+		ReturnTrue, ReturnTrue, rec()), Size));
+	if old <> new then
+		Error ("results don't agree");
+	fi;
+od;
+
 if PRINT_METHODS then
    UntraceMethods (NormalSubgroups);
+   UntraceMethods (CharacteristicSubgroups);
+   UntraceMethods (AllInvariantSubgroupsWithQPropertyUnderAction);
+   UntraceMethods (AllInvariantSubgroupsWithNPropertyUnderAction);
 fi;
 
 
