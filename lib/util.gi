@@ -269,12 +269,18 @@ InstallMethod (IsPrimitiveSolvable, "for generic group", true,
 			return false;
 		fi;
 		
+		M := NormalizerOfPronormalSubgroup (G, Q);
+		
+		if not IsTrivial (Core (N, M)) then
+			return false;
+		fi;
+		
 		# save some information about G
 		SetSocle (G, N);
 		SetFittingSubgroup (G, N);
 		
 		# if Q is not normal, its normalizer is a complement of N in G
-	 SetSocleComplement (G, NormalizerOfPronormalSubgroup (G, Q));
+	 	SetSocleComplement (G, M);
 		return true;
 	end);
 
