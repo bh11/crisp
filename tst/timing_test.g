@@ -54,7 +54,7 @@ end;
 ##
 ##  groups is a list describing the sample input groups for the tests.
 ##  Each entry consists of a list g. 
-##  Either g[1] is the name of the GAP share package to which the sample group 
+##  Either g[1] is the name of the GAP package to which the sample group 
 ##  belongs, and g[2] is the file containing the sample group, or g[1] is a
 ##  function which returns a *new* group (not identical to any previous object) -
 ##  note that each call to g[1] should return a group with the same presentation.
