@@ -22,13 +22,6 @@ DeclareCategory ("IsClass", IsListOrCollection);
 
 #############################################################################
 ##
-#P  IsNonEmpty (<group class>)
-##
-DeclareProperty ("IsNonEmpty", IsListOrCollection);
-
-
-#############################################################################
-##
 #A  MemberFunction (<obj>)
 ##
 ##  function tests whether <obj> belongs to the class
@@ -42,7 +35,8 @@ DeclareAttribute ("MemberFunction", IsClass);
 ##
 ##  tests whether <obj> belongs to the class <class>. A class representation
 ##  should install a method for `IsMember', rather than \in, so that the 
-##  result of the membership test can be stored in <obj>.
+##  result of the membership test can be stored in <obj> if the latter 
+##  belongs to IsAttributeStoringRep.
 ##
 KeyDependentOperation ("IsMember", IsObject, IsClass, ReturnTrue); 
 

@@ -5,20 +5,22 @@ S 2.1. Creating set theoretical classes
 F 2.1. IsClass
 F 2.1. Class
 F 2.1. Class
+F 2.1. View!for classes
+F 2.1. Print!for classes
+F 2.1. Display!for classes
 F 2.1. element test!for classes
-F 2.1. IsMember
 I 2.1. in!for classes
 I 2.1. membership test!for classes
 F 2.1. equality!for classes
 F 2.1. comparison!for classes
 S 2.2. Properties of classes
 F 2.2. IsEmpty!for classes
-F 2.2. IsNonEmpty
 F 2.2. MemberFunction
 S 2.3. Lattice operations for classes
 F 2.3. Complement
 F 2.3. Intersection!of classes
 F 2.3. Intersection!of classes
+I 2.3. INTERSECTION_LIMIT
 F 2.3. Union
 F 2.3. Difference
 C grpclass.tex 3. Generic group classes
@@ -32,6 +34,7 @@ F 3.1. Intersection!of group classes
 S 3.2. Properties of group classes
 I 3.2. closure properties!of group classes
 F 3.2. IsGroupClass
+F 3.2. ContainsTrivialGroup
 F 3.2. IsSubgroupClosed
 F 3.2. IsNormalSubgroupClosed
 F 3.2. IsQuotientClosed
@@ -41,16 +44,22 @@ F 3.2. IsDirectProductClosed
 F 3.2. IsSchunckClass
 F 3.2. IsSaturated
 S 3.3. Additional properties of group classes
+F 3.3. HasIsFittingClass
 F 3.3. IsFittingClass
 F 3.3. SetIsFittingClass
+F 3.3. HasIsOrdinaryFormation
+I 3.3. HasIsFormation
 F 3.3. IsOrdinaryFormation
 I 3.3. IsFormation
 F 3.3. SetIsOrdinaryFormation
 I 3.3. SetIsFormation
+F 3.3. HasIsSaturatedFormation
 F 3.3. IsSaturatedFormation
 F 3.3. SetIsSaturatedFormation
+F 3.3. HasIsFittingFormation
 F 3.3. IsFittingFormation
 F 3.3. SetIsFittingFormation
+F 3.3. HasIsSaturatedFittingFormation
 F 3.3. IsSaturatedFittingFormation
 F 3.3. SetIsSaturatedFittingFormation
 S 3.4. Attributes of group classes
@@ -72,6 +81,7 @@ S 4.4. Creating formations
 F 4.4. OrdinaryFormation
 F 4.4. SaturatedFormation
 F 4.4. FormationProduct
+F 4.4. FittingFormationProduct
 S 4.5. Attributes and operations for formations
 F 4.5. Residual
 F 4.5. ResidualFunction
@@ -79,11 +89,12 @@ F 4.5. LocalDefinitionFunction
 S 4.6. Functions for normal subgroups related to residuals
 F 4.6. OneNormalSubgroupMinWrtQProperty
 F 4.6. AllNormalSubgroupsWithQProperty
-I 4.6. NormalSubgroups
+F 4.6. NormalSubgroups
 C fitting.tex 5. Fitting classes and Fitting sets
 S 5.1. Creating Fitting classes
 F 5.1. FittingClass
 F 5.1. FittingProduct
+I 5.1. FittingFormationProduct
 S 5.2. Fitting formations
 F 5.2. FittingFormation
 F 5.2. SaturatedFittingFormation

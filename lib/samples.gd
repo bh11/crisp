@@ -27,7 +27,7 @@ DeclareGlobalVariable ("NilpotentGroups");
 
 #############################################################################
 ##  
-#A  NilpotentProjector
+#A  NilpotentProjector (<grp>)
 ##
 DeclareAttribute ("NilpotentProjector", IsGroup);
 
@@ -41,7 +41,7 @@ DeclareGlobalVariable ("SupersolvableGroups");
 
 #############################################################################
 ##
-#A  SupersolvableProjector
+#A  SupersolvableProjector (<grp>)
 ##
 DeclareAttribute ("SupersolvableProjector", IsGroup);
 
@@ -55,28 +55,21 @@ DeclareGlobalVariable ("AbelianGroups");
 
 #############################################################################
 ##
-#F  AbelianGroupsOfExponent
+#F  AbelianGroupsOfExponent (<exp>)
 ##
 DeclareGlobalFunction ("AbelianGroupsOfExponent");
 
 
 #############################################################################
 ##
-#F  GroupsOfPiLength
-##
-DeclareGlobalFunction ("GroupsOfPiLength");
-
-
-#############################################################################
-##
-#F  PiGroups
+#F  PiGroups (<primes>)
 ##
 DeclareGlobalFunction ("PiGroups");
 
 
 #############################################################################
 ##
-#F  PGroups
+#F  PGroups (<p>)
 ##
 DeclareGlobalFunction ("PGroups");
 

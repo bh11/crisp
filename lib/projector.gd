@@ -11,146 +11,206 @@ Revision.projector_gd :=
     "@(#)$Id$";
 
 
-###################################################################################
+#############################################################################
 ##
 #V  InfoProjector 
 ##
 DeclareInfoClass ("InfoProjector");
 
 
-###################################################################################
+#############################################################################
 ##
 #O  Projector (<grp>, <class>)
 ##
 KeyDependentOperation ("Projector", IsGroup, IsGroupClass, ReturnTrue);
 
 
-###################################################################################
+#############################################################################
 ##
 #M  CoveringSubgroup (<grp>, <class>)
 ##
 KeyDependentOperation ("CoveringSubgroup", IsGroup, IsGroupClass,
-		ReturnTrue);
+      ReturnTrue);
 
 
-###################################################################################
+#############################################################################
 ##
-#O  ProjectorFromExtendedBoundaryFunction (<grp>, <rec>, <inonly>) 
+#O  ProjectorFromExtendedBoundaryFunction (<grp>, <data>, <inonly>) 
 ##
 ##  if inonly is false, this computes a projector of <grp> for the 
-##  Schunck class described by <rec.dfunc>, <rec.cfunc>, <rec.ncfunc>, 
-##  <rec.bfunc>, and <rec.data>.
+##  Schunck class described by <data>.
 ##  if inonly is true, it returns true or false depending whether <grp>
 ##  belongs to the Schunck class or not.
 ##
-##  See PROJECTOR_FROM_BOUNDARY below for the meaning of arguments
+##  See PROJECTOR_FROM_BOUNDARY below for the meaning of <data>.
 ##
 DeclareOperation ("ProjectorFromExtendedBoundaryFunction",
-	[IsGroup, IsRecord, IsBool]);
+   [IsGroup, IsRecord, IsBool]);
 
 
-###################################################################################
+#############################################################################
 ##
-#F  PROJECTOR_FROM_BOUNDARY (
-##	   <gpcgs>, <dfunc>, <cfunc>, <ncfunc>, <bfunc>, <data>, 
-##     <inonly>, <hom>, <conv>)
+#F  PROJECTOR_FROM_BOUNDARY (<gpcgs>, <data>, <inonly>, <hom>, <conv>)
 ##
-#F  PROJECTOR_FROM_BOUNDARY_2 (
-##	   <gpcgs>, <dfunc>, <cfunc>, <ncfunc>, <bfunc>, <data>, 
-##     <inonly>, <hom>, <conv>)
+##  <gpcgs> is a pcgs of the group G for which the computation will be performed.
 ##
-##  <gpcgs> is a pcgs of the group G for which the projector will be computed
-##  dfunc, cfunc, ncfunc, bfunc are functions which describe the boundary of
-##  a Schunck class H. If inonly is true, the function returns true if G
-##  belongs to H, and false otherwise. If inonly is false, it returns the 
-##  pcgs of a projector of G. If hom is true, computations will be carried out
-##  in factor groups, otherwise wrt modulo pcgs. if conv is true, computatios
-##  will take place wrt a pcgs refining an elementary abelian series of G.
-##  hom implies conv.
+##  If the boolean inonly is true, the function returns true if G belongs to H, 
+##  and false otherwise. If inonly is false, it returns the pcgs (an induced 
+##  pcgs wrt. gpcgs) of a projector of G. 
 ##
-##  Consider the following situation: N/K is a chief factor
-##             of U with U/N in H, complemented by a maximal subgroup M of U.
-##    U        U and M are given by pcgs <upcgs> and <mpcgs>induced from gpcgs
-##   / \       and N/K is represented by <npcgs> and p, its exponent. 
-##  M   D      upcgs{[cent..Length(upcgs)]} is the longest tail sequence
-##   \ / \     of upcgs centralising npcgs, and C/K is a normal complement of 
-##    C   N    N/K in C/K. C is represented by ncpcgs. 
-##     \ /     
-##      K      The functions dfunc, cfunc, ncfunc, and bfunc take the following
-##             arguments.
+##  hom and conv are booleans. If hom is true, computations will be carried 
+##  out in factor groups, otherwise wrt to modulo pcgs. If hom or conv is true, 
+##  computations will take place wrt a pcgs refining an elementary abelian 
+##  series of G, otherwise wrt. the pcgs <gpcgs> supplied.
 ##
-##  dfunc (upcgs, npcgs, p, data)
-##  cfunc (upcgs, npcgs, p, cent, data)
-##  ncfunc (upcgs, ncpcgs, npcgs, p, cent, data)
-##  bfunc (upcgs, cpcgs, ncpcgs, npcgs, p, cent, data)
+##  <data> must contain four components, dfunc, cfunc, kfunc, and bfunc,
+##  each bound to a function. The purpose of these functions is as follows.
 ##
-##  They are supposed to test whether U/C_M(N/K) belongs to the boundary of H,
-##  (or, equivalently, if U/K does *not* belong to H), and return true in that 
-##  case, or false if U/C_M(N/K) (or equivalently, U/K) belongs to H. dfunc,
-##  cfunc, and ncfunc are allowed to return fail if no decision has been reached.
+##  - data.dfunc takes four arguments, upcgs, npcgs, p, and data.
+##  Here upcgs is a pcgs of the group U and npcgs is a modulo pcgs 
+##  induced by upcgs which represents a p-chief factor N/L of U. Moreover, 
+##  U/N belongs to the Schunck class H. data is just the argument of
+##  PROJECTOR_FROM_BOUNDARY. data.dfunc may return true, false, or fail.
+##  data.dfunc may  return true if U/L does not belong to H, and false if 
+##  U/L belongs to H. (An example may be to use information on whether groups in H
+##  can have order divisible by p).
+## 
+##  - data.cfunc takes five arguments, upcgs, npcgs, p, cent, and data.
+##  The meaning of the arguments and the purpose of the function is the
+##  same as for data.dfunc, except there is one additional information
+##  available: the subgroup D of U represented by upcgs{[cent..Length(upcgs)]} 
+##  centralises npcgs, and if D < U, then there exists a normal subgroup R
+##  of U such that R/D is elementary abelian and R does not centralise npcgs. 
+##  (The obvious interpretation is that npcgs is central iff cent = 1). 
+##  data.cfunc is only called when data.dfunc has returned fail.
 ##
-##  For any chief factor N/K, dfunc is called. If it returns fail, 
-##  then additional information
-##  is collected and cfunc is called. If this returns fail, ncfunc is called;
-##  if no decision is readched, bfunc is called, which is supposed to return 
-##  true or false. Note that dfunc and cfunc may be called in cases when 
-##  the chief factor N/K is not complemented (in which case the answer 
-##  returned has no effect on the result, but `false' may speed up computations).
+##  - data.kfunc has six arguments: upcgs, kpcgs, npcgs, p, cent, and data.
+##  Except for kpcgs, the meaning is the same as for cfunc and dfunc.
+##  In addition, kpcgs is a pcgs induced from upcgs for a normal subgroup K
+##  of U such that K/L is a complement of N/L in D/L. Note that the existence
+##  of K implies that K/L is a complemented chief factor of U/L (see the
+##  accompanying article "crisp.dvi" for details). data.kfunc is only called
+##  when cfunc and dfunc have both returned fail, and if K exists. 
+##  One possible application is that if H is a local formation defined by a 
+##  formation function f, then U/L belongs to H if and only if the f(p)-
+##  residual of U centralises N/L.
 ##
-##  data is any data which is passed to dfunc, cfunc, ncfunc, and bfunc,
-##  which may, for instance, be used to share information between these 
-##  functions.
+##  - data.bfunc has arguments upcgs, cpcgs, kpcgs, npcgs, p, cent, and data.
+##              Except for cpcgs, they are the same as above. bfunc must either 
+##    U         return true or false. it is only called if all of the above 
+##   / \        functions have returned fail. cpcgs is a pcgs induced from 
+##  C   R       upcgs for a maximal subgroup C of U which complements N/L 
+##   \   \      and contains K. In this situation, it is known that U/Core_U(C) 
+##    \   D     is a primitive group with socle N Core_U(C)/Core_U(C) which
+##     \ / \    is U-isomorphic with N/L; moreover Core_U(C) = C_C(N/L) 
+##      K   N   contains K. Moreover, U/L belongs to H if and only if 
+##       \ /    U/Core_U(C) belongs to (the basis of) H, and otherwise 
+##        L     U/Core_U(C) is in the boundary of H. Therefore information about
+##              the basis or boundary of H is sufficient for the test to be
+##              performed by bfunc.
+##              
+##  Note that it is a good idea only to perform cheap tests by data.dfunc and
+##  data.cfunc, and leave expensive tests to data.kfunc and data.bfunc, because
+##  in that case, the expensive tests are only carried out if it is known that
+##  N/L is complemented in U. (Otherwise N/L is a Frattini chief factor, and
+##  U/L must belong to H - no further test is required.)
 ##
 DeclareGlobalFunction ("PROJECTOR_FROM_BOUNDARY");
-DeclareGlobalFunction ("PROJECTOR_FROM_BOUNDARY_2");
 
 
-###################################################################################
+#############################################################################
 ##
-#F  DFUNC_FROM_CHARACTERISTIC
+#F  DFUNC_FROM_CHARACTERISTIC (<upcgs>, <npcgs>, <p>, <data>)
 ##
 ##  standard function to pass to PcgsProjectorFromExtendedBoundaryFunction
-##  as dfunc
+##  as data.dfunc, where the argument data must have a component char containing
+##  the characteristic of the formation. Every prime divisor of any group in the 
+##  class must be in the characteristic. 
 ##
 DeclareGlobalFunction ("DFUNC_FROM_CHARACTERISTIC");
 
 
-###################################################################################
+#############################################################################
 ##
-#F  CFUNC_FROM_CHARACTERISTIC
+#F  DFUNC_FROM_MEMBER_FUNCTION (<upcgs>, <npcgs>, <p>, <data>)
 ##
 ##  standard function to pass to PcgsProjectorFromExtendedBoundaryFunction
-##  as cfunc
+##  as data.dfunc, where the argument data must have a component memberf 
+##  containing a function which decides membership in the Schunck class.
+##
+DeclareGlobalFunction ("DFUNC_FROM_MEMBER_FUNCTION");
+
+
+#############################################################################
+##
+#F  CFUNC_FROM_CHARACTERISTIC (<upcgs>, <npcgs>, <p>, <centind>, <data>)
+##
+##  standard function to pass to PcgsProjectorFromExtendedBoundaryFunction
+##  as data.dfunc, where the argument data must have a component char containing
+##  the characteristic of the class. Every prime divisor of any group in the 
+##  class must be in the characteristic. Otherwise 
+##  CFUNC_FROM_CHARACTERISTIC_SCHUNCK may be used.
 ##
 DeclareGlobalFunction ("CFUNC_FROM_CHARACTERISTIC");
 
 
-###################################################################################
+#############################################################################
 ##
-#F  NCFUNC_FROM_LOCAL_DEFINITION
-##
-##  standard function to pass to PcgsProjectorFromExtendedBoundaryFunction
-##  as ncfunc
-##
-DeclareGlobalFunction ("NCFUNC_FROM_LOCAL_DEFINITION");
-
-
-###################################################################################
-##
-#F  CFUNC_FROM_CHARACTERISTIC_SCHUNCK
+#F  KFUNC_FROM_LOCAL_DEFINITION (<upcgs>, <kpcgs>, <npcgs>, <p>, 
+##     <centind>, <data>)
 ##
 ##  standard function to pass to PcgsProjectorFromExtendedBoundaryFunction
-##  as cfunc
+##  as data.kfunc. The argument data must have a component lfunc containing a
+##  function taking three arguments: a group G, a prime p, and a record r. 
+##  It must return a list of elements of G such that the smallest normal 
+##  subgroup of G containing them is the f(p)-residual of G, or fail if  
+##  f(p) isempty, where f is a local function for the formation for which 
+##  the computation should be carried out. The argument data passed to 
+##  PcgsProjectorFromExtendedBoundaryFunction will be in r when lfunc is 
+##  called.
+##
+DeclareGlobalFunction ("KFUNC_FROM_LOCAL_DEFINITION");
+
+
+#############################################################################
+##
+#F  CFUNC_FROM_CHARACTERISTIC_SCHUNCK (<upcgs>, <npcgs>, <p>, 
+##     <centind>, <data>)
+##
+##  standard function to pass to PcgsProjectorFromExtendedBoundaryFunction
+##  as data.dfunc, where the argument data must have a component char 
+##  containing the characteristic of the Schunck class 
 ##
 DeclareGlobalFunction ("CFUNC_FROM_CHARACTERISTIC_SCHUNCK");
 
 
-###################################################################################
+#############################################################################
 ##
-#F  BFUNC_FROM_TEST_FUNC
+#F  BFUNC_FROM_TEST_FUNC_FAC (<upcgs>, <cpcgs>, <kpcgs>, <npcgs>, <p>, 
+##     <centind>, <data>)
 ##
 ##  standard function to pass to PcgsProjectorFromExtendedBoundaryFunction
-##  as bfunc
+##  as data.bfunc. The argument data must have a component test containing 
+##  a function taking two arguments, a primitive soluble group G such that
+##  G/Socle(G) belongs to the Schunck class H in question, and a record r. 
+##  data.test must return true if G is in the boundary of the Schunck class H, 
+##  and false if it belongs to H.
+##
+DeclareGlobalFunction ("BFUNC_FROM_TEST_FUNC_FAC");
+
+
+#############################################################################
+##
+#F  BFUNC_FROM_TEST_FUNC (<upcgs>, <cpcgs>, <kpcgs>, <npcgs>, <p>, 
+##     <centind>, <data>)
+##
+##  this is the same as BFUNC_FROM_TEST_FUNC, except that it uses
+##  CentralizerModulo to compute the centralizer of a chief factor. 
+##
+##  In ProjectorOp, we use this function, rather than
+##  BFUNC_FROM_TEST_FUNC_FAC because its performance seems to be the
+##  same for pc groups, while it works better for perm groups because
+##  one does not have to work in factor groups. 
 ##
 DeclareGlobalFunction ("BFUNC_FROM_TEST_FUNC");
 

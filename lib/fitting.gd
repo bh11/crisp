@@ -13,10 +13,20 @@ Revision.fitting_gd :=
 
 #############################################################################
 ##
-##  IsFittingClass (<group class>) 
+#F  IsFittingClass (<group class>) 
+##
 DeclareSynonym ("IsFittingClass", 
-	IsNonEmpty and IsGroupClass and IsNormalSubgroupClosed 
-	and IsNormalProductClosed);
+   ContainsTrivialGroup and IsGroupClass and IsNormalSubgroupClosed 
+   and IsNormalProductClosed);
+
+
+#############################################################################
+##
+#F  HasIsFittingClass (<group class>) 
+##
+DeclareSynonym ("HasIsFittingClass", 
+   HasContainsTrivialGroup and HasIsGroupClass and HasIsNormalSubgroupClosed 
+   and HasIsNormalProductClosed);
 
 
 #############################################################################

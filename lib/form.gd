@@ -7,7 +7,7 @@
 ##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
 ##  Friedrich Schiller-Universit\"at Jena, Germany
 ##
-Revision.form_gi :=
+Revision.form_gd :=
     "@(#)$Id$";
 
 
@@ -16,7 +16,17 @@ Revision.form_gi :=
 #F  IsOrdinaryFormation (<group class>)
 ##
 DeclareSynonym ("IsOrdinaryFormation", 
-	IsGroupClass and IsNonEmpty and IsQuotientClosed and IsResiduallyClosed);
+   IsGroupClass and ContainsTrivialGroup 
+      and IsQuotientClosed and IsResiduallyClosed);
+
+
+#############################################################################
+##
+#F  HasIsOrdinaryFormation (<group class>)
+##
+DeclareSynonym ("HasIsOrdinaryFormation", 
+   HasIsGroupClass and HasContainsTrivialGroup 
+      and HasIsQuotientClosed and HasIsResiduallyClosed);
 
 
 #############################################################################
@@ -38,7 +48,7 @@ DeclareOperation ("OrdinaryFormation", [IsObject]);
 #O  FormationProduct (<form1>, <form2>)
 ##
 DeclareOperation ("FormationProduct", 
-	[IsOrdinaryFormation, IsOrdinaryFormation]);
+   [IsOrdinaryFormation, IsOrdinaryFormation]);
 
 
 #############################################################################
@@ -46,6 +56,14 @@ DeclareOperation ("FormationProduct",
 #F  IsSaturatedFormation (<group class>)
 ##
 DeclareSynonym ("IsSaturatedFormation", IsOrdinaryFormation and IsSaturated);
+
+
+#############################################################################
+##
+#F  HasIsSaturatedFormation (<group class>)
+##
+DeclareSynonym ("HasIsSaturatedFormation", 
+   HasIsOrdinaryFormation and HasIsSaturated);
 
 
 #############################################################################
@@ -64,10 +82,18 @@ DeclareOperation ("SaturatedFormation", [IsObject]);
 
 #############################################################################
 ##
+#F  HasIsFittingFormation(<group class>)
+##
+DeclareSynonym ("HasIsFittingFormation", 
+   HasIsFittingClass and HasIsOrdinaryFormation);
+
+
+#############################################################################
+##
 #F  IsFittingFormation(<group class>)
 ##
 DeclareSynonym ("IsFittingFormation", 
-	IsFittingClass and IsOrdinaryFormation);
+   IsFittingClass and IsOrdinaryFormation);
 
 
 #############################################################################
@@ -88,10 +114,32 @@ DeclareOperation ("FittingFormation", [IsObject]);
 
 #############################################################################
 ##
+#O  FittingFormationProduct (<fitform1>, <fitform2>)
+##
+##  If <fitform1> and <fitform2> are Fitting formations, this returns the
+##  class of all groups which are the extension of a group in <fitform1> by
+##  a group in <fitform2>. Note that this class coincides both with the 
+##  formation product and the Fitting product of the two classes (hence the
+##  name). 
+##
+DeclareOperation ("FittingFormationProduct", 
+   [IsFittingFormation, IsFittingFormation]);
+
+
+#############################################################################
+##
 #F  IsSaturatedFittingFormation (<group class>)
 ##
 DeclareSynonym ("IsSaturatedFittingFormation", 
-	IsFittingFormation and IsSaturated);
+   IsFittingFormation and IsSaturated);
+
+
+#############################################################################
+##
+#F  HasIsSaturatedFittingFormation (<group class>)
+##
+DeclareSynonym ("HasIsSaturatedFittingFormation", 
+   HasIsFittingFormation and HasIsSaturated);
 
 
 #############################################################################
@@ -108,17 +156,6 @@ DeclareGlobalFunction ("SetIsSaturatedFittingFormation");
 #O  SaturatedFittingFormation (<obj>)
 ##
 DeclareOperation ("SaturatedFittingFormation", [IsObject]);
-
-
-#############################################################################
-##
-##  form.gd                         CRISP                 Burkhard H\"ofling
-##
-##  @(#)$Id$
-##
-##  Copyright (C) 2000, Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
-##
 
 
 #############################################################################

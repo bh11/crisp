@@ -20,17 +20,17 @@ DeclareOperation ("SchunckClass", [IsObject]);
 
 #############################################################################
 ##
-#O  Boundary (<class>)
+#A  Boundary (<class>)
 ##
 ##  compute the boundary of <class>, i.e., the set of all primitive solvable
 ##  groups which do not belong to <class> but whose proper factor groups do.
 ##
-DeclareOperation ("Boundary", [IsGroupClass]);
+DeclareAttribute ("Boundary", IsGroupClass);
 
 
 #############################################################################
 ##
-#O  Basis (<class>)
+#A  Basis (<class>)
 ##
 ##  the basis of a Schunck class <class> consists of the primitive soluble 
 ##  groups in <class>
