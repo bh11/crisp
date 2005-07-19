@@ -148,7 +148,7 @@ InstallGlobalFunction ("COMPLEMENT_SOLUTION_FUNCTION",
 
       Assert (1, CanonicalPcgs (gens) 
             = CanonicalPcgs (InducedPcgsByGenerators (complements.pcgs, gens)),
-         "gens is not a pc sequence");
+         Error ("gens is not a pc sequence"));
       return gens;
       
    end);
@@ -281,7 +281,7 @@ InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
                for l in [1..n] do
                   y := npcgs[l]^act[j];
                   Assert (1, y in Group (Concatenation (npcgs, kpcgs)), 
-                     "npcgs[l]^act[j] must be in N");
+                     Error("npcgs[l]^act[j] must be in N"));
                   e[j][l] := ExponentsOfPcElement (npcgs, y) * One(field);
                od;
             fi;
@@ -293,7 +293,7 @@ InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
             delta := exp * One (field);
             y := LeftQuotient (PcElementByExponents (gpcgs, exp), y);
             Assert (1, y in Group (Concatenation (npcgs, kpcgs)), 
-               "gpcgs[i]^act[j]/... must be in N");
+               Error ("gpcgs[i]^act[j]/... must be in N"));
             d := ExponentsOfPcElement (npcgs, y) * One(field);
 
             # translate into a linear equation
@@ -324,7 +324,7 @@ InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
                y := LeftQuotient (PcElementByExponents (gpcgs, exp), y);
         
                Assert (1, y in Group (NumeratorOfModuloPcgs(npcgs)), 
-                  "gpcgs[i]^p/... must be in N");
+                  Error ("gpcgs[i]^p/... must be in N"));
 	           
 	           exp[i] := - p;
 	           gamma := exp * One (field);
@@ -348,7 +348,7 @@ InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
                exp := ExponentsOfPcElement (gpcgs, y);
                y := LeftQuotient (PcElementByExponents (gpcgs, exp), y);
                Assert (1, y in Group (Concatenation (npcgs, kpcgs)), 
-                  "Comm (gpcgs[i], gpcgs[j])/... must be in N");
+                  Error ("Comm (gpcgs[i], gpcgs[j])/... must be in N"));
                exp[i] := exp[i]-1;
                gamma := exp * One (field);
                c := ExponentsOfPcElement (npcgs, y) * One(field);
