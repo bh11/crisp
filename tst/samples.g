@@ -25,6 +25,9 @@ groups:= [
     end, 
     function (  )
         return GL( 2, 3 );
+    end,
+    function (  )
+        return FibonacciGroup( 3, 5 );
     end 
 ];
  

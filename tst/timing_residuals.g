@@ -7,9 +7,9 @@
 ##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
 ##  Friedrich Schiller-Universit\"at Jena, Germany
 ##
-RequirePackage ("crisp");
-ReadPkg ("crisp", "tst/timing_test.g");
-ReadPkg ("crisp", "tst/timing_samples.g");
+LoadPackage ("crisp");
+ReadPackage ("crisp", "tst/timing_test.g");
+ReadPackage ("crisp", "tst/timing_samples.g");
 
 
 nilp := SaturatedFormation (rec (\in := IsNilpotent, 

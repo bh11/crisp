@@ -26,7 +26,7 @@ fi;
 #F  SilentRead (g1, g2)
 ##
 ##  if g1 is a function, this simply returns g1 (g2). 
-##  Otherwise, it behaves like ReadPkg (pkg fname), but suppresses anything 
+##  Otherwise, it behaves like ReadPackage (pkg fname), but suppresses anything 
 ##  printed while reading the file
 ##
 SilentRead := function (g1, g2)
@@ -36,7 +36,7 @@ SilentRead := function (g1, g2)
    else
       MakeReadWriteGlobal ("Print");
       Print := Ignore;
-      ReadPkg (g1, g2);
+      ReadPackage (g1, g2);
       Print := PRINT;
       MakeReadOnlyGlobal ("Print");
    fi;

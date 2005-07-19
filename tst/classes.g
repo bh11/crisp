@@ -7,7 +7,7 @@
 ##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
 ##  Friedrich Schiller-Universit\"at Jena, Germany
 ##
-RequirePackage ("crisp");
+LoadPackage ("crisp");
 
 25grps := PiGroups ([2,5]);
 abab := Intersection (AbelianGroups, AbelianGroups);

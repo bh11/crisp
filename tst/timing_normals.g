@@ -15,9 +15,9 @@ else
 		"Cannot test library method for soluble groups because CRISP is already loaded");
 fi;
 
-RequirePackage ("crisp");
-ReadPkg ("crisp", "tst/timing_test.g");
-ReadPkg ("crisp", "tst/timing_samples.g");
+LoadPackage ("crisp");
+ReadPackage ("crisp", "tst/timing_test.g");
+ReadPackage ("crisp", "tst/timing_samples.g");
 
 Sizes := l -> Collected (List (l, Size));
 

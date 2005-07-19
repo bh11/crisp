@@ -7,7 +7,7 @@
 ##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
 ##  Friedrich Schiller-Universit\"at Jena, Germany
 ##
-RequirePackage ("format");
+LoadPackage ("format");
 
 groups := [
  ["format","grp/g93.gi", "g93", "31:3"],

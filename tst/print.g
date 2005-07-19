@@ -7,10 +7,13 @@
 ##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
 ##  Friedrich Schiller-Universit\"at Jena, Germany
 ##
-RequirePackage ("crisp");
-ReadPkg ("crisp", "tst/samples.g");
+LoadPackage ("crisp");
+ReadPackage ("crisp", "tst/samples.g");
 
-TraceMethods (PrintObj, ViewObj);
+if PRINT_METHODS then
+   TraceMethods (PrintObj, ViewObj);
+fi;
+
 old := fail;
 cl := classes(); 
 for i in [1..Length (cl)] do

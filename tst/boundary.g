@@ -7,8 +7,8 @@
 ##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
 ##  Friedrich Schiller-Universit\"at Jena, Germany
 ##
-RequirePackage ("crisp");
-ReadPkg ("crisp", "tst/samples.g");
+LoadPackage ("crisp");
+ReadPackage ("crisp", "tst/samples.g");
 
 
 if PRINT_METHODS then
