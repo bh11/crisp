@@ -11,23 +11,22 @@ To run these test files, simply read the file "all.g" into GAP using `Read'
 (not `ReadTest'). Their output is for information only, and can safely be
 ignored. If one of the tests discovers an error, it will print an error 
 message and stop. Please report any such error(s) to the author, preferably
-by e-mail to hoefling@minet.uni-jena.de.
+by e-mail to b.hoefling@tu-bs.de.
 
 You may also read individual test files into GAP after setting the following
 boolean variables to `true' or `false'.
 
 PRINT_METHODS - if true, relevant methods are printed using TraceMethods
-FAST_TEST - if true, run only small examples
-DO_TIMING - if true, measures the time required for different algorithms
+FAST_TEST     - if true, run only small examples
+DO_TIMING     - if true, measures the time required for different algorithms
 
 FAST_TEST and DO_TIMING only affect the files whose names start with
 `timing_'. Note that these files require that the package `format' is present.
 PRINT_METHODS only affects the other test files.
 
-Note that, in order to get reasonably reliable timings, one should read the
-"timing_" files twice, withouot re-starting GAP, and only use the results
-obtained during the second run. This ensures that all required library files 
-are properly loaded before times are taken.
+Note that, in order to get reasonably reliable timings, one should start
+GAP using the -N command line option. This ensures that all required library 
+files are properly loaded before times are taken.
 
 The following table lists the available test files and their content.
 
@@ -49,8 +48,8 @@ timing_injectors.g      -- tests algorithms for InjectorOp
 timing_normals.g        -- tests algorithms for NormalSubgroups
 timing_normpro.g        -- tests algorithms for NormalizerOfPronormalSubgroup
 timing_projectors.g     -- tests algorithms for ProjectorOp
-timing_projectors_mod.g -- as timing_projectors, but uses different library
-                           method for the centralizer, which produces wrong
+timing_projectors_mod.g -- as timing_projectors, but uses a different library
+                           method for the centralizer, which produced wrong
                            results in GAP 4.2.5
 timing_radicals.g       -- tests algorithms for RadicalOp
 timing_residuals.g      -- tests algorithms for ResidualOp
