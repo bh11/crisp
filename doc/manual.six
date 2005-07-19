@@ -153,7 +153,7 @@ F 5.4. Radical
 F 5.4. Injector
 F 5.4. RadicalFunction
 F 5.4. InjectorFunction
-S 5.5. Functions for the socle
+S 5.5. Functions for minimal normal subgroups and the socle
 F 5.5. Socle
 F 5.5. AbelianSocle
 F 5.5. SolvableSocle
@@ -162,6 +162,8 @@ F 5.5. AbelianSocleComponents
 F 5.5. SolvableSocleComponents
 F 5.5. PSocle
 F 5.5. PSocleComponents
+F 5.5. AbelianMinimalNormalSubgroups
+I 5.5. minimal normal subgroups
 S 5.6. Low level functions for normal subgroups related to radicals
 I 5.6. normal subgroups!with properties inherited by normal subgroups
 I 5.6. invariant normal subgroups!with properties inherited by normal subgroups

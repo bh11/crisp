@@ -33,8 +33,8 @@
 \indexentry {closure properties!of group classes}{8}
 \indexentry {group classes!closure properties of}{8}
 \indexentry {IsGroupClass@`IsGroupClass'}{8}
-\indexentry {ContainsTrivialGroup@`ContainsTrivialGroup'}{8}
-\indexentry {IsSubgroupClosed@`IsSubgroupClosed'}{8}
+\indexentry {ContainsTrivialGroup@`ContainsTrivialGroup'}{9}
+\indexentry {IsSubgroupClosed@`IsSubgroupClosed'}{9}
 \indexentry {IsNormalSubgroupClosed@`IsNormalSubgroupClosed'}{9}
 \indexentry {IsQuotientClosed@`IsQuotientClosed'}{9}
 \indexentry {IsResiduallyClosed@`IsResiduallyClosed'}{9}
@@ -47,8 +47,8 @@
 \indexentry {HasIsFittingClass@`HasIsFittingClass'}{9}
 \indexentry {IsFittingClass@`IsFittingClass'}{9}
 \indexentry {SetIsFittingClass@`SetIsFittingClass'}{9}
-\indexentry {HasIsOrdinaryFormation@`HasIsOrdinaryFormation'}{9}
-\indexentry {HasIsFormation@`HasIsFormation'}{9}
+\indexentry {HasIsOrdinaryFormation@`HasIsOrdinaryFormation'}{10}
+\indexentry {HasIsFormation@`HasIsFormation'}{10}
 \indexentry {IsOrdinaryFormation@`IsOrdinaryFormation'}{10}
 \indexentry {IsFormation@`IsFormation'}{10}
 \indexentry {SetIsOrdinaryFormation@`SetIsOrdinaryFormation'}{10}
@@ -62,9 +62,9 @@
 \indexentry {HasIsSaturatedFittingFormation@`HasIsSaturatedFittingFormation'}{10}
 \indexentry {IsSaturatedFittingFormation@`IsSaturatedFittingFormation'}{10}
 \indexentry {SetIsSaturatedFittingFormation@`SetIsSaturatedFittingFormation'}{10}
-\indexentry {group classes!attributes for}{10}
-\indexentry {attributes!of group classes}{10}
-\indexentry {Characteristic@`Characteristic'}{10}
+\indexentry {group classes!attributes for}{11}
+\indexentry {attributes!of group classes}{11}
+\indexentry {Characteristic@`Characteristic'}{11}
 \indexentry {Schunck class!creating}{12}
 \indexentry {SchunckClass@`SchunckClass'}{12}
 \indexentry {Schunck class!attributes of}{12}
@@ -73,14 +73,14 @@
 \indexentry {operations!for Schunck class!}{12}
 \indexentry {Boundary@`Boundary'}{12}
 \indexentry {Basis@`Basis'}{12}
-\indexentry {Projector@`Projector'}{12}
+\indexentry {Projector@`Projector'}{13}
 \indexentry {CoveringSubgroup@`CoveringSubgroup'}{13}
 \indexentry {BoundaryFunction@`BoundaryFunction'}{13}
 \indexentry {ProjectorFunction@`ProjectorFunction'}{13}
-\indexentry {primitive solvable group!attributes of}{13}
-\indexentry {attributes!of primitive solvable group}{13}
-\indexentry {IsPrimitiveSolvable@`IsPrimitiveSolvable'}{13}
-\indexentry {SocleComplement@`SocleComplement'}{13}
+\indexentry {primitive solvable group!attributes of}{14}
+\indexentry {attributes!of primitive solvable group}{14}
+\indexentry {IsPrimitiveSolvable@`IsPrimitiveSolvable'}{14}
+\indexentry {SocleComplement@`SocleComplement'}{14}
 \indexentry {formations!creating}{14}
 \indexentry {OrdinaryFormation@`OrdinaryFormation'}{14}
 \indexentry {SaturatedFormation@`SaturatedFormation'}{14}
@@ -95,12 +95,12 @@
 \indexentry {LocalDefinitionFunction@`LocalDefinitionFunction'}{16}
 \indexentry {NormalSubgroups@`NormalSubgroups'}{16}
 \indexentry {CharacteristicSubgroups@`CharacteristicSubgroups'}{16}
-\indexentry {normal subgroups!with properties inherited by normal subgroups above}{16}
-\indexentry {invariant normal subgroups!with properties inherited by normal subgroups above}{16}
-\indexentry {factor groups!with properties inherited by factor groups}{16}
-\indexentry {quotient groups!with properties inherited by quotients}{16}
-\indexentry {OneInvariantSubgroupMinWrtQProperty@`OneInvariantSubgroupMinWrtQProperty'}{16}
-\indexentry {AllInvariantSubgroupsWithQProperty@`AllInvariantSubgroupsWithQProperty'}{17}
+\indexentry {normal subgroups!with properties inherited by normal subgroups above}{17}
+\indexentry {invariant normal subgroups!with properties inherited by normal subgroups above}{17}
+\indexentry {factor groups!with properties inherited by factor groups}{17}
+\indexentry {quotient groups!with properties inherited by quotients}{17}
+\indexentry {OneInvariantSubgroupMinWrtQProperty@`OneInvariantSubgroupMinWrtQProperty'}{17}
+\indexentry {AllInvariantSubgroupsWithQProperty@`AllInvariantSubgroupsWithQProperty'}{18}
 \indexentry {OneNormalSubgroupMinWrtQProperty@`OneNormalSubgroupMinWrtQProperty'}{18}
 \indexentry {AllNormalSubgroupsWithQProperty@`AllNormalSubgroupsWithQProperty'}{18}
 \indexentry {Fitting classes!creating}{19}
@@ -129,7 +129,7 @@
 \indexentry {Radical@`Radical'}{22}
 \indexentry {Injector@`Injector'}{22}
 \indexentry {RadicalFunction@`RadicalFunction'}{22}
-\indexentry {InjectorFunction@`InjectorFunction'}{22}
+\indexentry {InjectorFunction@`InjectorFunction'}{23}
 \indexentry {Socle@`Socle'}{23}
 \indexentry {AbelianSocle@`AbelianSocle'}{23}
 \indexentry {SolvableSocle@`SolvableSocle'}{23}
@@ -138,9 +138,11 @@
 \indexentry {SolvableSocleComponents@`SolvableSocleComponents'}{23}
 \indexentry {PSocle@`PSocle'}{23}
 \indexentry {PSocleComponents@`PSocleComponents'}{23}
-\indexentry {normal subgroups!with properties inherited by normal subgroups}{23}
-\indexentry {invariant normal subgroups!with properties inherited by normal subgroups}{23}
-\indexentry {OneInvariantSubgroupMaxWrtNProperty@`OneInvariantSubgroupMaxWrtNProperty'}{23}
+\indexentry {AbelianMinimalNormalSubgroups@`AbelianMinimalNormalSubgroups'}{23}
+\indexentry {minimal normal subgroups}{23}
+\indexentry {normal subgroups!with properties inherited by normal subgroups}{24}
+\indexentry {invariant normal subgroups!with properties inherited by normal subgroups}{24}
+\indexentry {OneInvariantSubgroupMaxWrtNProperty@`OneInvariantSubgroupMaxWrtNProperty'}{24}
 \indexentry {AllInvariantSubgroupsWithNProperty@`AllInvariantSubgroupsWithNProperty'}{24}
 \indexentry {OneNormalSubgroupWithNProperty@`OneNormalSubgroupWithNProperty'}{24}
 \indexentry {AllNormalSubgroupsWithNProperty@`AllNormalSubgroupsWithNProperty'}{24}
@@ -164,8 +166,8 @@
 \indexentry {class!of all $\pi $-groups}{25}
 \indexentry {PGroups@`PGroups'}{25}
 \indexentry {class!of all $p$-groups}{25}
-\indexentry {NilpotentProjector@`NilpotentProjector'}{25}
-\indexentry {Carter subgroup}{25}
-\indexentry {SupersolvableProjector@`SupersolvableProjector'}{25}
-\indexentry {set!of all primes}{25}
-\indexentry {primes!set of all}{25}
+\indexentry {NilpotentProjector@`NilpotentProjector'}{26}
+\indexentry {Carter subgroup}{26}
+\indexentry {SupersolvableProjector@`SupersolvableProjector'}{26}
+\indexentry {set!of all primes}{26}
+\indexentry {primes!set of all}{26}
