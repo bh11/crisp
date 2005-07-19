@@ -248,7 +248,7 @@ Autoload := true,
 
 ##  *Optional*, but recommended: path relative to package root to a file which 
 ##  contains as many tests of the package functionality as sensible.
-TestFile := "tst/all.g",
+TestFile := "tst/test.tst",
 
 ##  *Optional*: Here you can list some keyword related to the topic 
 ##  of the package.

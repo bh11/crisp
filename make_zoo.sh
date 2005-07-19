@@ -53,6 +53,7 @@ zoo ach crisp crisp/lib/solveeq.gd <crisp/text_comment
 zoo ach crisp crisp/lib/solveeq.gi <crisp/text_comment
 zoo ach crisp crisp/lib/util.gd <crisp/text_comment
 zoo ach crisp crisp/lib/util.gi <crisp/text_comment
+zoo ach crisp crisp/tst/test.tst <crisp/text_comment
 zoo ach crisp crisp/tst/all.g <crisp/text_comment
 zoo ach crisp crisp/tst/basis.g <crisp/text_comment
 zoo ach crisp crisp/tst/boundary.g <crisp/text_comment
