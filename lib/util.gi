@@ -439,7 +439,7 @@ InstallGlobalFunction ("PcgsCompositionSeriesElAbModuloPcgsUnderAction",
          t := Runtime() - t0;
       
          for b in bases do
-            new := MutableCopyMat (b);
+            new := List (b, ShallowCopy);
             TriangulizeMat (new);
             Add (bas, new);
          od;
@@ -519,12 +519,14 @@ InstallMethod (CompositionSeriesUnderAction, "for solvable group",
       local gens, pcgs, inds, elabser, i, ser;
       
       if IsGroup (act) then
-         act := GeneratorsOfGroup (act);
+         act := ShallowCopy (GeneratorsOfGroup (act));
       fi;
       
-      if not ForAll (act, IsGeneralMapping) then
-         act := List (act, a -> ConjugatorAutomorphism (G, a));
-      fi;
+      for i in [1..Length (act)] do
+          if FamilyObj (act[i]) = FamilyObj (One(G)) then
+             act[i] := ConjugatorAutomorphism (G, act[i]);
+          fi;
+      od;
       
       pcgs := PcgsElementaryAbelianSeries (G);
       if pcgs = fail then
