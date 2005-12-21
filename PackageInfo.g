@@ -11,19 +11,25 @@ SetPackageInfo( rec(
 
 PackageName := "CRISP",
 Subtitle := "Computing with Radicals, Injectors, Schunck classes and Projectors",
+BannerString := "\
+----------------------------------------------------------------------\n\
+                         CRISP Version 1.3\n\
+  Computing with Radicals, Injectors, Schunck classes and Projectors\n\
+              by Burkhard Hoefling (b.hoefling@tu-bs.de)\n\
+-----------------------------------------------------------------------\n",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers.
-Version := "1.2.1",
+Version := "1.3",
 
 ##  Release date of the current version in dd/mm/yyyy format.
-Date := "26/04/2004",
+Date := "22/12/2005",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
 ##  The archive file name *must be changed* with each version of the archive
 ##  (and probably somehow contain the package name and version).
-ArchiveURL := "http://www.tu-bs.de/~bhoeflin/crisp/crisp-1r2n1",
+ArchiveURL := "http://www.tu-bs.de/~bhoeflin/crisp/crisp-1r3",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -38,8 +44,8 @@ ArchiveURL := "http://www.tu-bs.de/~bhoeflin/crisp/crisp-1r2n1",
 ##  In the future we may also provide .deb or .rpm formats which allow
 ##  a convenient installation and upgrading on Linux systems.
 ##  
-# ArchiveFormats := ".tar.bz2", # the others are generated automatically
-ArchiveFormats := ".zoo",
+ArchiveFormats := ".tar.bz2", # the others are generated automatically
+# ArchiveFormats := ".zoo",
 
 ##  If not all of the archive formats mentioned above are provided, these 
 ##  can be produced at the GAP side. Therefore it is necessary to know which
@@ -62,7 +68,7 @@ ArchiveFormats := ".zoo",
 ##  archives)
 ##  
 ##  These entries are *optional*.
-
+BinaryFiles := ["doc/manual.dvi", "doc/manual.pdf"],
 
 ##  Information about authors and maintainers. Specify for each person a 
 ##  record with the following information:
@@ -209,7 +215,7 @@ PackageDoc := rec(
 Dependencies := rec(
   # GAP version, use version strings for specifying exact versions,
   # prepend a '>=' for specifying a least version.
-  GAP := ">=4.4",
+  GAP := ">=4.4.6",
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
