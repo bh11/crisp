@@ -93,15 +93,15 @@ OrdinaryFormation (in:=function( G ) ... end)
 
 gap> nilp := SaturatedFormation (rec (
 >      locdef := function (G, p)
->          return SmallGeneratingSet (G);
+>          return GeneratorsOfGroup (G);
 >      end));
 SaturatedFormation (locdef:=function( G, p ) ... end)
 gap> form := SaturatedFormation (rec (
 >    locdef := function (G, p)
 >        if p = 2 then
->           return SmallGeneratingSet (G);
+>           return GeneratorsOfGroup (G);
 >        elif p mod 4 = 3 then
->           return SmallGeneratingSet (DerivedSubgroup (G));
+>           return GeneratorsOfGroup (DerivedSubgroup (G));
 >        else
 >           return fail;
 >        fi;
@@ -134,8 +134,8 @@ gap> FittingFormationProduct (nilp, nilp);
 FittingFormationProduct (nilp, nilp)
 
 gap> G := DirectProduct (SL(2,3), CyclicGroup (2));;
-gap> data := rec (gens := SmallGeneratingSet (G),
->    comms := List (Combinations (SmallGeneratingSet (G), 2),
+gap> data := rec (gens := GeneratorsOfGroup (G),
+>    comms := List (Combinations (GeneratorsOfGroup (G), 2),
 >       x -> Comm (x[1],x[2])));;
 gap> OneNormalSubgroupMinWrtQProperty (
 >    G,
