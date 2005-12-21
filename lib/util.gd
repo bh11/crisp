@@ -117,13 +117,6 @@ DeclareOperation ("AddPcElementToPcSequence",
 
 #############################################################################
 ##
-#A  InducedPcgsWrtPcgs
-##
-KeyDependentOperation ("InducedPcgsWrtPcgs", IsGroup, IsPcgs, ReturnTrue);
-
-
-#############################################################################
-##
 #A  PrimePowerGensPcSequence (<grp>)
 ##
 ##  returns a record with components `primes', `generators', and `pcgs'.
@@ -170,6 +163,51 @@ BindGlobal( "InstallMethodByNiceMonomorphismForGroupAndBool",
       0,
       function( grp, class)
          return oper (NiceObject (grp), class);
+      end);
+   end);
+
+
+#############################################################################
+##
+#F  InstallMethodByIsomorphismPcGroupForGroupAndClass( <oper>, <filt1>, <filt2>)
+##
+##  install method for oper taking a group and a class
+BindGlobal( "InstallMethodByIsomorphismPcGroupForGroupAndClass", 
+   function( oper, filt1, filt2)
+   InstallMethod (oper,
+      "handled by IsomorphismPcGroup",
+      true,
+      [IsGroup and IsSolvableGroup and filt1, filt2],
+      0,
+      function( grp, class)
+         local iso;
+         if CanEasilyComputePcgs (grp) then
+            TryNextMethod();
+         fi;
+         iso := IsomorphismPcGroup (grp);
+         return PreImagesSet (iso, 
+            oper (ImagesSource (iso), class) );
+      end);
+   end);
+
+
+#############################################################################
+##
+#F  InstallMethodByIsomorphismPcGroupForGroupAndClassReturningBool (
+##      <oper>, <filt1>, <filt2>)
+##
+BindGlobal( "InstallMethodByIsomorphismPcGroupForGroupAndClassReturningBool", 
+   function( oper, filt1, filt2)
+   InstallMethod (oper,
+      "handled by IsomorphismPcGroup",
+      true,
+      [IsGroup and IsSolvableGroup and filt1, filt2],
+      0,
+      function( grp, class)
+         if CanEasilyComputePcgs (grp) then
+            TryNextMethod();
+         fi;
+         return oper (ImagesSource (IsomorphismPcGroup (grp)), class);
       end);
    end);
 
