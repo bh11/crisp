@@ -16,13 +16,50 @@ Revision.residual_gi :=
 #M  NormalSubgroups (<grp>)
 ##
 InstallMethod (NormalSubgroups, 
-   "normal complement method for finite solvable groups",
+   "normal complement method for pcgs computable groups",
    true,
-   [IsGroup and IsFinite and IsSolvableGroup], 
-   RankFilter (IsPcGroup and IsPermGroup), # use for pc groups and perm groups 
+   [IsGroup and CanEasilyComputePcgs], 
+   1,
    function (G) 
       return AllInvariantSubgroupsWithQProperty (G, G, 
          ReturnTrue, ReturnTrue, rec());
+   end);
+
+
+#############################################################################
+##
+#M  NormalSubgroups (<grp>)
+##
+InstallMethod (NormalSubgroups, 
+   "via IsomorphismPcGroup",
+   true,
+   [IsGroup and IsFinite and IsSolvableGroup], 
+   0, 
+   function (G) 
+      local iso, im;
+      if CanEasilyComputePcgs (G) then
+         TryNextMethod();
+      fi;
+      iso := IsomorphismPcGroup (G);
+      im := ImagesSource (iso);
+      return List (NormalSubgroups (im), N -> PreImagesSet (iso, N));
+   end);
+
+
+#############################################################################
+##
+#M  NormalSubgroups (<grp>)
+##
+InstallMethod (NormalSubgroups, 
+   "via nice monomorphism",
+   true,
+   [IsGroup and IsFinite and IsHandledByNiceMonomorphism], 
+   0, 
+   function (G) 
+      local iso, im;
+      iso := NiceMonomorphism (G);
+      im := NiceObject (G);
+      return List (NormalSubgroups (im), N -> PreImagesSet (iso, N));
    end);
 
 
@@ -34,7 +71,7 @@ RedispatchOnCondition (NormalSubgroups,
    true, [IsGroup],  [IsFinite and IsSolvableGroup], 
    # rank this method fairly high - presumably all fast methods for computing
    # the normal subgroups need to know if the group is finite and solvable
-   RankFilter (IsPcGroup and IsPermGroup));
+   RankFilter (IsPcGroup and IsPermGroup and IsSolvableGroup));
    
 
 #############################################################################
@@ -42,13 +79,52 @@ RedispatchOnCondition (NormalSubgroups,
 #M  CharacteristicSubgroups (<grp>)
 ##
 InstallMethod (CharacteristicSubgroups, 
-   "normal complement method for finite solvable groups",
+   "normal complement method for pcgs computable groups",
    true,
-   [IsGroup and IsFinite and IsSolvableGroup], 
+   [IsGroup and CanEasilyComputePcgs], 
    0,
    function (G) 
       return AllInvariantSubgroupsWithQProperty (
          AutomorphismGroup (G), G, ReturnTrue, ReturnTrue, rec());
+   end);
+
+
+#############################################################################
+##
+#M  CharacteristicSubgroups (<grp>)
+##
+InstallMethod (CharacteristicSubgroups, 
+   "via IsomorphismPcGroup",
+   true,
+   [IsGroup and IsFinite and IsSolvableGroup], 
+   0,
+   function (G) 
+      local iso, im;
+      if CanEasilyComputePcgs (G) then
+         TryNextMethod();
+      fi;
+      iso := IsomorphismPcGroup (G);
+      im := ImagesSource (iso);
+      return List (CharacteristicSubgroups (im),
+         N -> PreImagesSet (iso, N));
+   end);
+
+
+#############################################################################
+##
+#M  CharacteristicSubgroups (<grp>)
+##
+InstallMethod (CharacteristicSubgroups, 
+   "via NiceMonomorphism",
+   true,
+   [IsGroup and IsFinite and IsHandledByNiceMonomorphism], 
+   0,
+   function (G) 
+      local iso, im;
+      iso := NiceMonomorphism (G);
+      im := NiceObject (G);
+      return List (CharacteristicSubgroups (im),
+         N -> PreImagesSet (iso, N));
    end);
 
 
@@ -180,7 +256,7 @@ InstallMethod (OneInvariantSubgroupMinWrtQProperty,
       
       M := ser[k-1];
       
-      gens := SmallGeneratingSet (G);
+      gens := GeneratorsOfGroup (G);
          
       for i in [k..Length (ser)-1] do
          bool := pretest (ser[i], ser[i+1], M, data);
@@ -271,7 +347,7 @@ InstallMethod (ResidualOp, "for group and formation product", true,
 #M  ResidualOp (<grp>, <class>)
 ##
 InstallMethod (ResidualOp, "for group and intersection of formations", true, 
-   [IsGroup and IsFinite and IsSolvableGroup, IsOrdinaryFormation and IsClassByIntersectionRep], 
+   [IsGroup and IsFinite and CanEasilyComputePcgs, IsOrdinaryFormation and IsClassByIntersectionRep], 
    function (G, C)
       local D, R, l;
       R := TrivialSubgroup (G);
@@ -310,8 +386,8 @@ InstallMethod (ResidualOp, "for group and intersection of formations", true,
 ##
 #M  ResidualOp (<grp>, <class>)
 ##
-InstallMethod (ResidualOp, "generic method for formation", true, 
-   [IsGroup and IsFinite and IsSolvableGroup, IsOrdinaryFormation], 0,
+InstallMethod (ResidualOp, "generic method for pcgs computable group", true, 
+   [IsGroup and IsFinite and CanEasilyComputePcgs, IsOrdinaryFormation], 0,
    function (G, C)
        return OneInvariantSubgroupMinWrtQProperty (G, G, 
           ReturnFail,
@@ -327,7 +403,7 @@ InstallMethod (ResidualOp, "generic method for formation", true,
 #M  ResidualOp (<grp>, <class>)
 ##
 InstallMethod (ResidualOp, "for locally defined formation", true, 
-   [IsGroup and IsFinite and IsSolvableGroup, 
+   [IsGroup and IsFinite and CanEasilyComputePcgs, 
       IsSaturatedFormation and HasLocalDefinitionFunction], 
    0,
    function (G, C)
@@ -340,12 +416,8 @@ InstallMethod (ResidualOp, "for locally defined formation", true,
                 pos := PositionSorted (data.primes, p);
                 if pos > Length (data.primes) or data.primes[pos] <> p then
                    # add the information from LocalDefinitionFunction
-                   data.locgens{[pos+1..Length (data.primes)+1]} := 
-                      data.locgens{[pos..Length (data.primes)]};
-                   data.primes{[pos+1..Length (data.primes)+1]} := 
-                      data.primes{[pos..Length (data.primes)]};
-                   data.primes[pos] := p;
-                   data.locgens[pos] := LocalDefinitionFunction (data.class)(data.grp, p);
+                   Add (data.primes, p, pos);
+                   Add (data.locgens, LocalDefinitionFunction (data.class)(data.grp, p), pos);
                 fi;
                 # test if generators of local residual acts centrally
                 return CentralizesLayer (data.locgens[pos], mpcgs);
@@ -367,6 +439,14 @@ InstallMethod (ResidualOp, "for locally defined formation", true,
 #M  ResidualOp (<grp>, <class>)
 ##
 InstallMethodByNiceMonomorphismForGroupAndClass (ResidualOp, 
+   IsFinite and IsSolvableGroup, IsOrdinaryFormation);
+   
+   
+#############################################################################
+##
+#M  ResidualOp (<grp>, <class>)
+##
+InstallMethodByIsomorphismPcGroupForGroupAndClass (ResidualOp, 
    IsFinite and IsSolvableGroup, IsOrdinaryFormation);
    
    

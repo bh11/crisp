@@ -40,7 +40,7 @@ InstallMethod (ProjectorOp, "if ProjectorFunction is known", true,
 #M  ProjectorOp (<grp>, <class>)
 ##
 InstallMethod (ProjectorOp, "compute from LocalDefinitionFunction", true, 
-   [IsGroup and IsFinite and IsSolvableGroup, 
+   [IsGroup and IsFinite and CanEasilyComputePcgs, 
       IsSaturatedFormation and HasLocalDefinitionFunction], 
    RankFilter (HasBoundaryFunction), # prefer to method using boundary func
    function (G, C)
@@ -64,7 +64,7 @@ InstallMethod (ProjectorOp, "compute from LocalDefinitionFunction", true,
 #M  ProjectorOp (<grp>, <class>)
 ##
 InstallMethod (ProjectorOp, "compute from boundary", true, 
-   [IsGroup and IsFinite and IsSolvableGroup, 
+   [IsGroup and IsFinite and CanEasilyComputePcgs, 
       IsSchunckClass and HasBoundaryFunction], 
    RankFilter (HasMemberFunction),
    function (G, C)
@@ -87,7 +87,7 @@ InstallMethod (ProjectorOp, "compute from boundary", true,
 #M  ProjectorOp (<grp>, <class>)
 ##
 InstallMethod (ProjectorOp, "use MemberFunction", true, 
-   [IsGroup and IsFinite and IsSolvableGroup, 
+   [IsGroup and IsFinite and CanEasilyComputePcgs, 
       IsSchunckClass and HasMemberFunction], 
    0,
    function (G, C)
@@ -105,7 +105,7 @@ InstallMethod (ProjectorOp, "use MemberFunction", true,
 #M  ProjectorOp (<grp>, <class>)
 ##
 InstallMethod (ProjectorOp, "use only membership test", true, 
-   [IsGroup and IsFinite and IsSolvableGroup, 
+   [IsGroup and IsFinite and CanEasilyComputePcgs, 
       IsSchunckClass], 
    0,
    function (G, C)
@@ -128,7 +128,7 @@ InstallMethod (ProjectorOp, "use only membership test", true,
 #M  ProjectorOp (<grp>, <class>)
 ##
 InstallMethod (ProjectorOp, "for intersection of group classes", true, 
-   [IsGroup and IsFinite and IsSolvableGroup, 
+   [IsGroup and IsFinite and CanEasilyComputePcgs, 
       IsSchunckClass and IsClassByIntersectionRep], 
    0,
    function (G, C)
@@ -194,7 +194,7 @@ InstallMethod (ProjectorOp, "for intersection of group classes", true,
 ##
 InstallMethod (ProjectorOp, 
    "for intersection of group classes which is a local formation", true, 
-   [IsGroup and IsFinite and IsSolvableGroup, 
+   [IsGroup and IsFinite and CanEasilyComputePcgs, 
       IsSaturatedFormation and IsClassByIntersectionRep], 
    0,
    function (G, C)
@@ -260,6 +260,14 @@ InstallMethod (ProjectorOp,
 #M  ProjectorOp (<grp>, <class>)
 ##
 InstallMethodByNiceMonomorphismForGroupAndClass (ProjectorOp, 
+   IsFinite and IsSolvableGroup, IsSchunckClass);
+   
+   
+#############################################################################
+##
+#M  ProjectorOp (<grp>, <class>)
+##
+InstallMethodByIsomorphismPcGroupForGroupAndClass (ProjectorOp, 
    IsFinite and IsSolvableGroup, IsSchunckClass);
    
    

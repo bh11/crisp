@@ -272,9 +272,9 @@ end);
 ##  are conjugate in their join.
 ##
 InstallMethod (NormalizerOfPronormalSubgroup, 
-   "for finite solvable group",
+   "use pcgs method",
    IsIdenticalObj, 
-   [IsFinite and IsSolvableGroup, IsGroup], 0, 
+   [IsGroup and IsFinite and CanEasilyComputePcgs, IsGroup], 0, 
    function (H, P)
       local pcgs;
       pcgs := PcgsElementaryAbelianSeries (H);
@@ -288,11 +288,46 @@ InstallMethod (NormalizerOfPronormalSubgroup,
 #M  NormalizerOfPronormalSubgroup (<grp>, <sub>
 ##
 InstallMethod (NormalizerOfPronormalSubgroup, 
+   "via IsomorphismPcGroup",
+   IsIdenticalObj, 
+   [IsSolvableGroup and IsFinite, IsGroup], 0, 
+   function (G, H)
+      local iso;
+      if CanEasilyComputePcgs (G) then
+         TryNextMethod();
+      fi;
+      iso := IsomorphismPcGroup (G);
+      return PreImagesSet (iso, 
+            NormalizerOfPronormalSubgroup (ImagesSource (iso), ImagesSet (iso, H)));
+   end);
+      
+
+#############################################################################
+##
+#M  NormalizerOfPronormalSubgroup (<grp>, <sub>
+##
+InstallMethod (NormalizerOfPronormalSubgroup, 
+   "via nice hom.",
+   IsIdenticalObj, 
+   [IsGroup and IsHandledByNiceMonomorphism, IsGroup], 0, 
+   function (G, H)
+      local iso;
+      iso := NiceMonomorphism (G);
+      return PreImagesSet (iso, 
+            NormalizerOfPronormalSubgroup (NiceObject (G), ImagesSet (iso, H)));
+   end);
+      
+
+#############################################################################
+##
+#M  NormalizerOfPronormalSubgroup (<grp>, <sub>
+##
+InstallMethod (NormalizerOfPronormalSubgroup, 
    "for generic groups",
    IsIdenticalObj, 
    [IsGroup, IsGroup], 0, 
    function (G, H)
-      if IsFinite (G) and IsSolvable (G) then
+      if IsFinite (G) and IsSolvableGroup (G) then
          return NormalizerOfPronormalSubgroup (G, H);
       else
          return Normalizer (G, H);

@@ -46,7 +46,7 @@ InstallValue (NilpotentGroups, SaturatedFittingFormation ( rec(
    res := G -> NormalClosure (G, 
       SubgroupNC (G, NormalGeneratorsOfNilpotentResidual (G))),
    proj := NilpotentProjector,
-   locdef := function (G, p) return SmallGeneratingSet (G); end,
+   locdef := function (G, p) return GeneratorsOfGroup (G); end,
    char := AllPrimes,
    bound := G -> G <> Socle (G)
    )));
@@ -95,7 +95,7 @@ InstallValue (SupersolvableGroups, SaturatedFormation ( rec(
    proj := SupersolvableProjector,
    locdef := function (G, p) 
       local gens, res, i, j;
-      gens := SmallGeneratingSet (G);
+      gens := GeneratorsOfGroup (G);
       res := List (gens, x -> x^(p-1)); 
       for i in [1..Length (gens)] do
          for j in [i+1..Length (gens)] do
@@ -159,7 +159,7 @@ InstallGlobalFunction ("AbelianGroupsOfExponent", function (exp)
    fi;
    form := OrdinaryFormation ( rec(
       res := G -> ClosureGroup (DerivedSubgroup (G), 
-            List (SmallGeneratingSet (G), x -> x^exp)),
+            List (GeneratorsOfGroup (G), x -> x^exp)),
       char := Set(Factors(exp))
       ));
    SetIsSubgroupClosed (form, true);
@@ -197,7 +197,7 @@ InstallGlobalFunction ("PiGroups",
             fi;
          end,
          char := pi,
-         bound := G -> not Factors (Size(Socle (G)))[1] in pi
+         bound := G -> not SmallestRootInt (Size(Socle (G))) in pi
          ));
       SetIsSubgroupClosed (class, true);
       
@@ -238,8 +238,27 @@ InstallGlobalFunction ("PGroups",
          "<class of all ",String (p), "-groups"));
       return class;
    end);
+  
+  
+############################################################################
+##
+#M  HallSubgroupOp (<grp>, <pi>)
+##
+##  make sure that HallSubgroupOp works for arbitrary solvable groups
+##
+RedispatchOnCondition(HallSubgroupOp,true,[IsGroup,IsList],
+  [IsSolvableGroup and IsFinite,],1);
 
 
+############################################################################
+##
+#M  SylowComplementOp (<grp>, <p>)
+##
+RedispatchOnCondition(SylowComplementOp,true,[IsGroup,IsPosInt],
+  [IsSolvableGroup and IsFinite,
+  IsPosInt ],1);
+  
+  
 ############################################################################
 ##
 #E

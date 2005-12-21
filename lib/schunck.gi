@@ -168,7 +168,7 @@ InstallMethod (Boundary, "for Schunck class with local definition", true,
                 soc := Socle (G);
                 p := Factors (Size (soc))[1];
                 return ForAny (LocalDefinitionFunction (H) (G, p),
-                   x -> ForAny (SmallGeneratingSet (soc), y -> y^x <> y));
+                   x -> ForAny (GeneratorsOfGroup (soc), y -> y^x <> y));
              else
                 return false;
              fi;

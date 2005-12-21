@@ -15,27 +15,10 @@ Revision.injector_gi :=
 ##
 #M  InjectorOp (<grp>, <class>)
 ##
-InstallMethod (InjectorOp, "for generic groups: use radical", true, 
-   [IsGroup and IsFinite and IsSolvableGroup, IsFittingClass], 0,
+InstallMethod (InjectorOp, "for pcgs computable groups: use radical", true, 
+   [IsGroup and CanEasilyComputePcgs and IsFinite, IsFittingClass], 0,
    function (G, C)
-      if not IsFittingSet (G, C) then
-         Error ("<C> must be a Fitting set for <G>");
-      fi;
-      return InjectorFromRadicalFunction (G, U -> Radical (U, C), false);
-   end);
-   
-
-#############################################################################
-##
-#M  InjectorOp (<grp>, <class>)
-##
-InstallMethod (InjectorOp, "for pc groups: use radical", true, 
-   [IsPcGroup and IsFinite, IsFittingClass], 0,
-   function (G, C)
-      if not IsFittingSet (G, C) then
-         Error ("<C> must be a Fitting set for <G>");
-      fi;
-      return InjectorFromRadicalFunction (G, U -> Radical (U, C), true);
+       return InjectorFromRadicalFunction (G, U -> Radical (U, C), true);
    end);
    
 
@@ -48,9 +31,6 @@ InstallMethod (InjectorOp, "injector function is known", true,
       IsFittingClass and HasInjectorFunction], 
    SUM_FLAGS,  # prefer injector function if known
    function (G, C)
-      if not IsFittingSet (G, C) then
-         Error ("<C> must be a Fitting set for <G>");
-      fi;
       return InjectorFunction(C) (G);
    end);
 
@@ -67,21 +47,6 @@ InstallMethod (InjectorOp, "for FittingSetRep w/o injector function",
          Error ("<C> must be a Fitting set for <G>");
       fi;
       return InjectorFromRadicalFunction (G, U -> Radical (U, C), false);
-   end);
-   
-   
-#############################################################################
-##
-#M  InjectorOp (<grp>, <class>)
-##
-InstallMethod (InjectorOp, "for pc group and FittingSetRep w/o injector function", 
-   function (G, C) return IsIdenticalObj (CollectionsFamily (G), C); end, 
-   [IsPcGroup and IsFinite, IsFittingSetRep], 0,
-   function (G, C)
-      if not IsFittingSet (G, C) then
-         Error ("<C> must be a Fitting set for <G>");
-      fi;
-      return InjectorFromRadicalFunction (G, U -> Radical (U, C), true);
    end);
    
    
@@ -109,6 +74,14 @@ InstallMethod (InjectorOp, "for FittingSetRep if injector function is known",
 #M  InjectorOp (<grp>, <class>)
 ##
 InstallMethodByNiceMonomorphismForGroupAndClass (InjectorOp, 
+   IsFinite and IsSolvableGroup, IsFittingClass);
+
+      
+#############################################################################
+##
+#M  InjectorOp (<grp>, <class>)
+##
+InstallMethodByIsomorphismPcGroupForGroupAndClass (InjectorOp, 
    IsFinite and IsSolvableGroup, IsFittingClass);
 
       

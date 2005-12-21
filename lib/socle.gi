@@ -60,7 +60,7 @@ InstallMethod (SolvableSocleComponents,
 ##
 InstallMethod (SolvableSocleComponents, 
    "for solvable group", true, 
-   [IsGroup and IsSolvableGroup and IsFinite], 
+   [IsGroup and IsFinite and CanEasilyComputePcgs], 
    0,
    function( G ) 
       if IsTrivial (G) then
@@ -77,7 +77,7 @@ InstallMethod (SolvableSocleComponents,
 ##
 InstallMethod (SolvableSocleComponents, 
    "for solvable group with known Fitting subgroup", true, 
-   [IsGroup and IsSolvableGroup and IsFinite and HasFittingSubgroup], 
+   [IsGroup and CanEasilyComputePcgs and IsFinite and HasFittingSubgroup], 
    0,
    function( G )
       local F;
@@ -94,11 +94,48 @@ InstallMethod (SolvableSocleComponents,
 ##
 #M  SolvableSocleComponents (<G>) 
 ##
+InstallMethod (SolvableSocleComponents,
+   "handled by nice monomorphism",
+   true,
+   [IsGroup and IsHandledByNiceMonomorphism and IsFinite],
+   0,
+   function( grp)
+      local hom;
+      hom := NiceMonomorphism (grp);
+      return List (SolvableSocleComponents (NiceObject (grp)),
+         L -> PreImagesSet (hom, L));
+   end);
+   
+   
+#############################################################################
+##
+#M  SolvableSocleComponents (<G>) 
+##
+InstallMethod (SolvableSocleComponents,
+   "via IsomorphismPcGroup",
+   true,
+   [IsGroup and IsSolvableGroup and IsFinite],
+   0,
+   function( grp)
+      local hom;
+      if CanEasilyComputePcgs (grp) then
+         TryNextMethod();
+      fi;
+      hom := IsomorphismPcGroup (grp);
+      return List (SolvableSocleComponents (ImagesSource (hom)),
+         L -> PreImagesSet (hom, L));
+   end);
+   
+   
+#############################################################################
+##
+#M  SolvableSocleComponents (<G>) 
+##
 RedispatchOnCondition (SolvableSocleComponents, true, 
    [IsGroup], 
    [IsFinite], 0);
    
-   
+
 #############################################################################
 ##
 #M  SocleComponents (<G>) 
@@ -119,6 +156,26 @@ RedispatchOnCondition (SocleComponents, true,
    
    
 
+#############################################################################
+##
+#M  SocleComponents (<G>) 
+##
+InstallMethod (SolvableSocleComponents,
+   "via IsomorphismPcGroup",
+   true,
+   [IsGroup and IsSolvableGroup and IsFinite],
+   0,
+   function( grp)
+      local hom;
+      if CanEasilyComputePcgs (grp) then
+         TryNextMethod();
+      fi;
+      hom := IsomorphismPcGroup (grp);
+      return List (SocleComponents (ImagesSource (hom)),
+         L -> PreImagesSet (hom, L));
+   end);
+   
+   
 #############################################################################
 ##
 #M  SocleComponents (<G>) 
@@ -184,6 +241,26 @@ RedispatchOnCondition (PSocleComponentsOp, true,
 #M  PSocleComponentsOp (<G>, <p>) 
 ##
 InstallMethod (PSocleComponentsOp,
+   "via IsomorphismPcGroup",
+   true,
+   [IsGroup and IsSolvableGroup and IsFinite, IsPosInt],
+   0,
+   function( grp, p)
+      local hom;
+      if CanEasilyComputePcgs (grp) then
+         TryNextMethod();
+      fi;
+      hom := IsomorphismPcGroup (grp);
+      return List (PSocleComponentsOp (ImagesSource (hom), p),
+         L -> PreImagesSet (hom, L));
+   end);
+   
+   
+#############################################################################
+##
+#M  PSocleComponentsOp (<G>, <p>) 
+##
+InstallMethod (PSocleComponentsOp,
    "handled by nice monomorphism",
    true,
    [IsGroup and IsHandledByNiceMonomorphism and IsFinite, 
@@ -203,7 +280,7 @@ InstallMethod (PSocleComponentsOp,
 ##
 InstallMethod (SolvableSocle, 
    "for solvable group", true, 
-   [IsGroup and IsSolvableGroup and IsFinite], 
+   [IsGroup and CanEasilyComputePcgs and IsFinite], 
    0,
    function( G )
 
@@ -270,6 +347,25 @@ InstallMethod (SolvableSocle,
 ##
 #M  SolvableSocle (<G>) 
 ##
+InstallMethod (SolvableSocle,
+   "via IsomorphismPcGroup",
+   true,
+   [IsGroup and IsSolvableGroup and IsFinite],
+   0,
+   function( grp )
+      local hom;
+      if CanEasilyComputePcgs (grp) then
+         TryNextMethod();
+      fi;
+      hom := IsomorphismPcGroup (grp);
+      return PreImagesSet (hom, SolvableSocle (ImagesSource (hom)));
+   end);
+   
+   
+#############################################################################
+##
+#M  SolvableSocle (<G>) 
+##
 RedispatchOnCondition (SolvableSocle, true, 
    [IsGroup], 
    [IsFinite], 0);
@@ -301,8 +397,8 @@ RedispatchOnCondition (Socle, true,
 #M  PSocleOp (<G>, <p>) 
 ##
 InstallMethod (PSocleOp, 
-   "for finite solvable group", true, 
-   [IsGroup and IsSolvableGroup and IsFinite, IsPosInt], 
+   "for pcgs computable group", true, 
+   [IsGroup and CanEasilyComputePcgs and IsFinite, IsPosInt], 
    0,
    function( G, p )
 
@@ -370,11 +466,91 @@ InstallMethod (PSocleOp,
 ##
 #M  PSocleOp (<G>, <p>) 
 ##
+InstallMethod (PSocleOp,
+   "handled by nice monomorphism",
+   true,
+   [IsGroup and IsSolvableGroup and IsFinite,
+      IsPosInt],
+   0,
+   function( grp, p )
+      local hom;
+      if CanEasilyComputePcgs (grp) then
+         TryNextMethod();
+      fi;
+      hom := IsomorphismPcGroup (grp);
+      return PreImagesSet (hom, PSocle (ImagesSource (hom), p));
+   end);
+   
+   
+#############################################################################
+##
+#M  PSocleOp (<G>, <p>) 
+##
 RedispatchOnCondition (PSocleOp, true, 
    [IsGroup, IsPosInt], 
    [IsFinite, ], 0);
    
    
+#############################################################################
+##
+#M  AbelianMinimalNormalSubgroups (<G>) 
+##
+
+InstallMethod (AbelianMinimalNormalSubgroups, 
+	"complements of chief factors, for finite groups",
+    true, [IsGroup and CanEasilyComputePcgs and IsFinite], 0,	
+	function (G)
+
+    local norms, k;
+
+    norms := AllInvariantSubgroupsWithNProperty (G, G,
+       function (U, V, R, data)
+          return IsTrivial(R);
+       end,
+       ReturnFail,
+       []);
+
+    # remove trivial subgroup - in the current implementation, this is always
+    # the last group in the list, but better check...
+    k := Length (norms);
+    while not IsTrivial (norms[k]) do
+       k := k - 1;
+    od;
+    Remove (norms, k);
+    return norms;
+end);
+
+
+#############################################################################
+##
+#M  AbelianMinimalNormalSubgroups (<G>) 
+##
+
+InstallMethod (AbelianMinimalNormalSubgroups, 
+	"complements of chief factors, for finite groups",
+    true, [IsGroup and CanEasilyComputePcgs and HasFittingSubgroup and IsFinite], 0,	
+	function (G)
+
+    local norms, k;
+
+    norms := AllInvariantSubgroupsWithNProperty (G, FittingSubgroup (G),
+       function (U, V, R, data)
+          return IsTrivial(R);
+       end,
+       ReturnFail,
+       []);
+
+    # remove trivial subgroup - in the current implementation, this is always
+    # the last group in the list, but better check...
+    k := Length (norms);
+    while not IsTrivial (norms[k]) do
+       k := k - 1;
+    od;
+    Remove (norms, k);
+    return norms;
+end);
+
+
 #############################################################################
 ##
 #M  AbelianMinimalNormalSubgroups (<G>) 
@@ -400,8 +576,7 @@ InstallMethod (AbelianMinimalNormalSubgroups,
     while not IsTrivial (norms[k]) do
        k := k - 1;
     od;
-    norms{[k..Length(norms)-1]} := norms{[k+1..Length(norms)]};
-    Unbind (norms[Length(norms)]);
+    Remove (norms, k);
     return norms;
 end);
 
@@ -428,6 +603,26 @@ InstallMethod (AbelianMinimalNormalSubgroups,
       local hom;
       hom := NiceMonomorphism (grp);
       return List (AbelianMinimalNormalSubgroups (NiceObject (grp)), 
+      	N -> PreImagesSet (hom, N));
+   end);
+   
+   
+#############################################################################
+##
+#M  AbelianMinimalNormalSubgroups (<G>) 
+##
+InstallMethod (AbelianMinimalNormalSubgroups,
+   "handled by IsomorphismPcGroup",
+   true,
+   [IsGroup and IsSolvableGroup and IsFinite],
+   0,
+   function( grp )
+      local hom;
+      if CanEasilyComputePcgs (grp) then
+         TryNextMethod();
+      fi;
+      hom := IsomorphismPcGroup (grp);
+      return List (AbelianMinimalNormalSubgroups (ImagesSource (hom)), 
       	N -> PreImagesSet (hom, N));
    end);
    

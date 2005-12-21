@@ -207,7 +207,7 @@ InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
       t := Runtime();
       
       if IsGroup (act) then
-         act := SmallGeneratingSet (act);
+         act := GeneratorsOfGroup (act);
       fi;
       r := Length (act);
       s := Length (gpcgs);   
@@ -300,7 +300,7 @@ InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
             for k in [1..n] do
                row := ShallowCopy (sys.nullrow);
                row{[(k-1)*s+1..k*s]} := delta;
-               
+              
                for l in [1..n] do
                   row[(l-1)*s+i] := row[(l-1)*s+i]-e[j][l][k];
                od;

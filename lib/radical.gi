@@ -190,7 +190,7 @@ RedispatchOnCondition (OneInvariantSubgroupMaxWrtNProperty, true,
 #M  AllNormalSubgroupsWithNProperty
 ##
 InstallMethod (AllNormalSubgroupsWithNProperty, 
-	"try AllInvariantSubgroupsWithNProperty", true,
+	"via AllInvariantSubgroupsWithNProperty", true,
 	[IsGroup, IsFunction, IsFunction, IsObject], 0,
 	function (G, pretest, test, data)
 		return AllInvariantSubgroupsWithNProperty (G, G, pretest, test, data);
@@ -202,7 +202,7 @@ InstallMethod (AllNormalSubgroupsWithNProperty,
 #M  OneNormalSubgroupMaxWrtNProperty
 ##
 InstallMethod (OneNormalSubgroupMaxWrtNProperty, 
-	"try OneInvariantSubgroupMaxWrtNProperty", true,
+	"via OneInvariantSubgroupMaxWrtNProperty", true,
 	[IsGroup, IsFunction, IsFunction, IsObject], 0,
 	function (G, pretest, test, data)
 		return OneInvariantSubgroupMaxWrtNProperty (G, G, pretest, test, data);
@@ -214,11 +214,11 @@ InstallMethod (OneNormalSubgroupMaxWrtNProperty,
 #M  RadicalOp
 ##
 InstallMethod (RadicalOp, "if only in is known", true, 
-   [IsGroup and IsFinite and IsSolvableGroup, IsFittingClass], 0,
+   [IsGroup and IsFinite and CanEasilyComputePcgs, IsFittingClass], 0,
    function (G, C)
       return OneInvariantSubgroupMaxWrtNProperty (G, G, 
          function (U, V, R, class)
-            if Factors (Index (U, V))[1] in Characteristic (class) then
+            if SmallestRootInt (Index (U, V)) in Characteristic (class) then
                return fail; # cannot decide
             else
                return false; # never in C
@@ -315,6 +315,22 @@ InstallMethod (RadicalOp, "for intersection of classes", true,
 ##
 #M  RadicalOp
 ##
+InstallMethodByNiceMonomorphismForGroupAndClass (RadicalOp, 
+   IsFinite and IsSolvableGroup, IsFittingClass);
+   
+   
+#############################################################################
+##
+#M  RadicalOp
+##
+InstallMethodByIsomorphismPcGroupForGroupAndClass (RadicalOp, 
+   IsFinite and IsSolvableGroup, IsFittingClass);
+   
+   
+#############################################################################
+##
+#M  RadicalOp
+##
 InstallMethod (RadicalOp, "generic method for FittingSetRep", 
    function (G, C) 
       return IsIdenticalObj (CollectionsFamily (G), C); 
@@ -372,14 +388,6 @@ InstallMethod (RadicalOp, "for FittingSetRep with radical function",
    end);
 
 
-#############################################################################
-##
-#M  RadicalOp
-##
-InstallMethodByNiceMonomorphismForGroupAndClass (ResidualOp, 
-   IsFinite and IsSolvableGroup, IsFittingClass);
-   
-   
 #############################################################################
 ##
 #M  RadicalOp
