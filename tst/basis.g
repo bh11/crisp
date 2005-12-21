@@ -31,7 +31,7 @@ for G in groups do
       if old = fail then
          old := new;
       elif old <> new then
-         Error ("different results");
+         Error ("different result for group ", G(), " and class ", cl[i]);
       fi;
       for j in [i..Length (cl)] do
          I := Intersection (cl[i], cl[j]);
@@ -41,7 +41,9 @@ for G in groups do
          fi;
          new := G() in Basis (I);
          if old <> new then
-            Error ("different results");
+            Error ("different result for group ", G(), 
+                " and intersection of classes ", cl[i],
+                " and ", cl[j]);
          fi;
       od;
    od;
@@ -52,12 +54,16 @@ for G in groups do
       for D in cl do
          P := FormationProduct (C, D);
          if InfoLevel (InfoTest) >= 3 then
-            View (C, "by", D);
+            View (C);
+            Print ("-by-");
+            View (D);
             Print ("\n");
          fi;
          new := G() in Basis (P);
          if old <> new then
-            Error ("different results");
+            Error ("different result for group ", G(), 
+                " and intersection of classes ", cl[i],
+                " and ", cl[j]);
          fi;
       od;
    od;

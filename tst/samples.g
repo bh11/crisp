@@ -9,28 +9,68 @@
 ##
 groups:= [
     function (  )
-        return TrivialGroup( IsPcGroup);
+        local G;
+        G := TrivialGroup( IsPcGroup);
+        SetName (G, "trivial pc group");
+        return G;
     end, 
     function (  )
-        return TrivialGroup( IsPermGroup);
+        local G;
+        G :=  TrivialGroup( IsPermGroup);
+        SetName (G, "trivial perm group");
+        return G;
     end, 
     function (  )
-        return Group (IdentityMat (4, GF(25)));
+        local G;
+        G :=  Group ([], IdentityMat (4, GF(25)));
+        SetName (G, "trivial mat group");
+        return G;
     end, 
     function (  )
-        return SymmetricGroup( 4 );
-    end, 
-    function (  )
-        return DihedralGroup( 10 );
-    end, 
-    function (  )
-        return GL( 2, 3 );
+        local G;
+        G := SmallGroup (48,29);
+        SetName (G, "GL(2,3) as pc group");
+        return G;
     end,
     function (  )
-        return FibonacciGroup( 3, 5 );
-    end 
+        local G;
+        G :=  SymmetricGroup( 4 );
+        SetName (G, "Sym(4)");
+        return G;
+    end, 
+    function (  )
+        local G;
+        G :=  DihedralGroup( 10 );
+        SetName (G, "Dih(10)");
+        return G;
+    end, 
+    function (  )
+        local G;
+        G :=  GL( 2, 3 );
+        SetName (G, "GL(2,3)");
+        return G;
+    end,
+    function (  )
+        local G;
+        G :=  FibonacciGroup( 3, 5 );
+        SetName (G, "Fib(3,5) = C2 x C11");
+        return G;
+    end,
+    function ( )
+        local G;
+        G := AutomorphismGroup (AlternatingGroup (4));
+        SetName (G, "Aut(Alt(4)) = Sym(4)");
+        return G;
+    end,
+    function ( )
+        local G;
+        G := DirectProduct (CyclicGroup (2), CyclicGroup (3), SymmetricGroup (4));
+        SetName (G, "C2 x C3 x S4");
+        return G;
+    end
 ];
- 
+
+groups := groups{[1..Length(groups)-3]}; 
    
 insolvgroups:= [ function (  )
         return SymmetricGroup( 5 );
@@ -40,34 +80,48 @@ insolvgroups:= [ function (  )
     end,
     function (  )
     	return WreathProduct (CyclicGroup (IsPermGroup, 5), SymmetricGroup (5));
+    end,
+    function ( )
+        return AutomorphismGroup (AbelianGroup ([5,5]));
     end]; 
   
-if not IsBound (InfoTest) then
-   DeclareInfoClass ("InfoTest");
-
-   InstallMethod (HallSubgroupOp, "by nice homomorphism",
-      true, [IsGroup and IsHandledByNiceMonomorphism, IsList], 0,
-      function (G, pi)
-         return PreImagesSet (NiceMonomorphism (G), HallSubgroup (NiceObject (G), pi));
-      end);
-fi;
-
 25grps := PiGroups ([2,5]);
 
+if not IsBound (InfoTest) then
+   DeclareInfoClass ("InfoTest");
+fi;
+
 classes := function ()
-   return [
-      SchunckClass (rec (bound := BoundaryFunction (25grps))),
-      SaturatedFormation (rec (locdef := LocalDefinitionFunction (25grps))),
-      GroupClass (rec (\in := MemberFunction (25grps))),
-      OrdinaryFormation (rec (res := function (G)
-         local pi;
-         pi := Difference (Set (Factors (Size (G))), [2,5]);
-         return NormalClosure (G, HallSubgroup (G, pi));
-      end)),
-      FittingClass (rec (rad := G -> Core (G, HallSubgroup (G, [2,5])))),
-      FittingClass (rec (inj := InjectorFunction (25grps))),
-      SchunckClass (rec (proj:= ProjectorFunction (25grps)))
-   ];
+    local cl;
+    cl := [];
+   
+    C := SchunckClass (rec (bound := BoundaryFunction (25grps)));
+    SetName (C, "[2,5]-grps by boundary");
+    Add (cl, C);
+    C := SaturatedFormation (rec (locdef := LocalDefinitionFunction (25grps)));
+    SetName (C, "[2,5]-grps by locdef");
+    Add (cl, C);
+    C := GroupClass (rec (\in := MemberFunction (25grps)));
+    SetName (C, "[2,5]-grps by membersip");
+    Add (cl, C);
+    C := OrdinaryFormation (rec (
+        res := function (G)
+            local pi;
+            pi := Difference (Set (Factors (Size (G))), [1,2,5]);
+            return NormalClosure (G, HallSubgroup (G, pi));
+        end));
+    SetName (C, "[2,5]-grps by res");
+    Add (cl, C);
+    C := FittingClass (rec (rad := G -> Core (G, HallSubgroup (G, [2,5]))));
+    SetName (C, "[2,5]-grps by rad");
+    Add (cl, C);
+    C := FittingClass (rec (inj := InjectorFunction (25grps)));
+    SetName (C, "[2,5]-grps by inj");
+    Add (cl, C);
+    C := SchunckClass (rec (proj:= ProjectorFunction (25grps)));
+    SetName (C, "[2,5]-grps by proj");
+    Add (cl, C);
+    return cl;
 end;
 
 

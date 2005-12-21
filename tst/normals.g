@@ -30,79 +30,95 @@ for G in groups do
 	new := SortedList (List (AllInvariantSubgroupsWithNProperty (H, H, 
 		ReturnTrue, ReturnTrue, rec()), Size));
 	if old <> new then
-		Error ("results don't agree");
+		Error ("AllInvariantSubgroupsWithNProperty: orders of normal subgroups don't agree");
 	fi;
 
 	H := G();
 	new := SortedList (List (AllNormalSubgroupsWithNProperty (H, 
 		ReturnTrue, ReturnTrue, rec()), Size));
 	if old <> new then
-		Error ("results don't agree");
+		Error ("AllNormalSubgroupsWithNProperty: orders of normal subgroups don't agree");
 	fi;
 	
 	H := G();
 	new := SortedList (List (AllInvariantSubgroupsWithQProperty (H, H, 
 		ReturnTrue, ReturnTrue, rec()), Size));
 	if old <> new then
-		Error ("results don't agree");
+		Error ("AllInvariantSubgroupsWithQProperty: orders of normal subgroups don't agree");
 	fi;
 	
 	H := G();
 	new := SortedList (List (AllNormalSubgroupsWithQProperty (H,
 		ReturnTrue, ReturnTrue, rec()), Size));
 	if old <> new then
-		Error ("results don't agree");
+		Error ("AllNormalSubgroupsWithQProperty: orders of normal subgroups don't agree");
 	fi;
 	
 	old := SortedList (List (CharacteristicSubgroups (G()), Order));
 	
 	H := G();
 	new := SortedList (List (AllInvariantSubgroupsWithNProperty (
-		AutomorphismGroup (H), H, 
+		GeneratorsOfGroup (AutomorphismGroup (H)), H, 
 		ReturnTrue, ReturnTrue, rec()), Size));
 	if old <> new then
-		Error ("results don't agree");
+		Error ("AllInvariantSubgroupsWithNProperty: orders of characteristic subgroups don't agree");
 	fi;
 
 	H := G();
 	new := SortedList (List (AllInvariantSubgroupsWithQProperty (
-		AutomorphismGroup (H), H, 
+		GeneratorsOfGroup (AutomorphismGroup (H)), H, 
 		ReturnTrue, ReturnTrue, rec()), Size));
 	if old <> new then
-		Error ("results don't agree");
+		Error ("AllInvariantSubgroupsWithQProperty: orders of characteristic subgroups don't agree");
 	fi;
 	
 	H := G();
-	old := TrivialSubgroup (H);
+	old := DerivedSubgroup (H);
 	new := OneInvariantSubgroupMinWrtQProperty (
-		AutomorphismGroup (H), H, 
-		ReturnTrue, ReturnTrue, rec());
+		GeneratorsOfGroup (AutomorphismGroup (H)), H, 
+		ReturnFail, 
+        function (S, R, data)
+            return IsAbelian (data/S);
+        end, 
+        H);
 	if old <> new then
-		Error ("results don't agree");
+		Error ("OneInvariantSubgroupMinWrtQProperty: derived subgroup doesn't agree");
 	fi;
 	
 	H := G();
-	old := TrivialSubgroup (H);
+	old := DerivedSubgroup (H);
 	new := OneNormalSubgroupMinWrtQProperty (H, 
-		ReturnTrue, ReturnTrue, rec());
+		ReturnFail, 
+        function (S, R, data)
+            return IsAbelian (data/S);
+        end, 
+        H);
 	if old <> new then
-		Error ("results don't agree");
+		Error ("OneNormalSubgroupMinWrtQProperty: derived subgroup doesn't agree");
 	fi;
 	
 	H := G();
-	old := H;
+	old := FittingSubgroup (H);
 	new := OneNormalSubgroupMaxWrtNProperty (H, 
-		ReturnTrue, ReturnTrue, rec());
+		ReturnFail, 
+        function (S, R, data)
+            return IsNilpotentGroup (S);
+        end, 
+        rec());
 	if old <> new then
-		Error ("results don't agree");
+		Error ("OneNormalSubgroupMaxWrtNProperty: Fitting subgroup doesn't agree");
 	fi;
 
 	H := G();
-	old := H;
-	new := OneInvariantSubgroupMaxWrtNProperty (AutomorphismGroup (H), H, 
-		ReturnTrue, ReturnTrue, rec());
+	old := FittingSubgroup (H);
+	new := OneInvariantSubgroupMaxWrtNProperty (GeneratorsOfGroup (AutomorphismGroup (H)), H, 
+		ReturnFail, 
+        function (S, R, data)
+            return IsNilpotentGroup (S);
+        end, 
+        rec());
 	if old <> new then
-		Error ("results don't agree");
+		Error ("OneInvariantSubgroupMaxWrtNProperty: Fitting subgroup doesn't agree");
 	fi;
 od;
 
