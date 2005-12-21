@@ -7,28 +7,28 @@
 ##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
 ##  Friedrich Schiller-Universit\"at Jena, Germany
 ##
-DeclareAutoPackage ("crisp", "1.2.1", true);
+DeclareAutoPackage ("crisp", "1.3", true);
 DeclarePackageAutoDocumentation ("crisp", "doc");
 
-if BANNER then
-	ReadPkg ("crisp", "lib/banner.g");
-fi;
+ReadPackage ("crisp", "lib/classes.gd");
+ReadPackage ("crisp", "lib/grpclass.gd");
+ReadPackage ("crisp", "lib/fitting.gd");
+ReadPackage ("crisp", "lib/schunck.gd");
+ReadPackage ("crisp", "lib/form.gd");
+ReadPackage ("crisp", "lib/projector.gd");
+ReadPackage ("crisp", "lib/injector.gd");
+ReadPackage ("crisp", "lib/normpro.gd");
+ReadPackage ("crisp", "lib/solveeq.gd");
+ReadPackage ("crisp", "lib/compl.gd");
+ReadPackage ("crisp", "lib/radical.gd");
+ReadPackage ("crisp", "lib/residual.gd");
+ReadPackage ("crisp", "lib/util.gd");
+ReadPackage ("crisp", "lib/samples.gd");
+ReadPackage ("crisp", "lib/socle.gd");
 
-ReadPkg ("crisp", "lib/classes.gd");
-ReadPkg ("crisp", "lib/grpclass.gd");
-ReadPkg ("crisp", "lib/fitting.gd");
-ReadPkg ("crisp", "lib/schunck.gd");
-ReadPkg ("crisp", "lib/form.gd");
-ReadPkg ("crisp", "lib/projector.gd");
-ReadPkg ("crisp", "lib/injector.gd");
-ReadPkg ("crisp", "lib/normpro.gd");
-ReadPkg ("crisp", "lib/solveeq.gd");
-ReadPkg ("crisp", "lib/compl.gd");
-ReadPkg ("crisp", "lib/radical.gd");
-ReadPkg ("crisp", "lib/residual.gd");
-ReadPkg ("crisp", "lib/util.gd");
-ReadPkg ("crisp", "lib/samples.gd");
-ReadPkg ("crisp", "lib/socle.gd");
+if not CompareVersionNumbers (GAPInfo.Version, "4.4.7") then
+   ReadPackage ("crisp", "lib/pcgscache.gd");
+fi;
 
 
 ############################################################################

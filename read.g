@@ -7,21 +7,26 @@
 ##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
 ##  Friedrich Schiller-Universit\"at Jena, Germany
 ##
-ReadPkg ("crisp", "lib/classes.gi"); 
-ReadPkg ("crisp", "lib/grpclass.gi"); 
-ReadPkg ("crisp", "lib/fitting.gi");
-ReadPkg ("crisp", "lib/schunck.gi");
-ReadPkg ("crisp", "lib/form.gi");
-ReadPkg ("crisp", "lib/projector.gi");
-ReadPkg ("crisp", "lib/injector.gi");
-ReadPkg ("crisp", "lib/normpro.gi");
-ReadPkg ("crisp", "lib/solveeq.gi");
-ReadPkg ("crisp", "lib/compl.gi");
-ReadPkg ("crisp", "lib/radical.gi");
-ReadPkg ("crisp", "lib/residual.gi");
-ReadPkg ("crisp", "lib/util.gi");
-ReadPkg ("crisp", "lib/samples.gi");
-ReadPkg ("crisp", "lib/socle.gi");
+ReadPackage ("crisp", "lib/classes.gi"); 
+ReadPackage ("crisp", "lib/grpclass.gi"); 
+ReadPackage ("crisp", "lib/fitting.gi");
+ReadPackage ("crisp", "lib/schunck.gi");
+ReadPackage ("crisp", "lib/form.gi");
+ReadPackage ("crisp", "lib/projector.gi");
+ReadPackage ("crisp", "lib/injector.gi");
+ReadPackage ("crisp", "lib/normpro.gi");
+ReadPackage ("crisp", "lib/solveeq.gi");
+ReadPackage ("crisp", "lib/compl.gi");
+ReadPackage ("crisp", "lib/radical.gi");
+ReadPackage ("crisp", "lib/residual.gi");
+ReadPackage ("crisp", "lib/util.gi");
+ReadPackage ("crisp", "lib/samples.gi");
+ReadPackage ("crisp", "lib/socle.gi");
+
+if not IsBound (ComputedInducedPcgses) then
+   ReadPackage ("crisp", "lib/pcgscache.gi");
+fi;
+
 
 
 ############################################################################
