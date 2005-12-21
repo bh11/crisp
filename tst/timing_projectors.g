@@ -60,6 +60,8 @@ TwoThreeGroups := PiGroups ([2,3]);
 tests :=
 [ [tmp -> PcgsElementaryAbelianSeries (tmp), ReturnFail, "elabpc", []],
   [tmp -> Projector (tmp, TwoThreeGroups), Size, "form", [], MTXReset, MTXTime, "mtx"],
+  [tmp -> Projector (tmp, SaturatedFormation (rec (locdef := LocalDefinitionFunction (TwoThreeGroups)
+    ))), Size, "locdef", [], MTXReset, MTXTime, "mtx"],
   [tmp -> Projector (tmp, SchunckClass (rec (
   	bound := G -> not SmallestRootInt (Size (Socle(G))) in [2,3] ))), Size, "bound", [], MTXReset, MTXTime, "mtx"],
   [tmp -> CoveringSubgroup1 (tmp, 23groups), Size, "cov1", [], SpcgsCompute, SpcgsTime, "spcgs"],
