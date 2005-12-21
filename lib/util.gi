@@ -11,26 +11,6 @@ Revision.util_gi :=
     "@(#)$Id$";
 
 
-###################################################################################
-##
-#M  SmallGeneratingSet 
-##
-InstallMethod (SmallGeneratingSet, "for pc groups", true,
-   [IsPcGroup], SUM_FLAGS, 
-   function (G)
-      if Length (GeneratorsOfGroup (G)) < Length (Pcgs(G)) then
-         return GeneratorsOfGroup (G);
-      else
-         return Pcgs (G);
-      fi;
-   end);
-
-
-InstallMethod (SmallGeneratingSet, "for groups with pcgs", true,
-   [IsGroup and CanEasilyComputePcgs], 0, 
-   Pcgs);
-
-
 #############################################################################
 ##
 #M  CentralizesLayer (<list>, <mpcgs>)
@@ -94,10 +74,8 @@ InstallMethod (PrimePowerGensPcSequence,
          if pos <= Length (primes) and primes[pos] = p then
             Add (gens[pos], x^r);
          else #insert a new prime
-            primes{[pos+1..len+1]} := primes{[pos..len]};
-            gens{[pos+1..len+1]} := gens{[pos..len]};
-            primes[pos] := p;
-            gens[pos] := [x^r];
+            Add (primes, p, pos);
+            Add (gens, [x^r], pos);
             len := len + 1;
          fi;
       od;
@@ -127,10 +105,8 @@ InstallMethod (PrimePowerGensPcSequence, "for group with special pcgs", true,
          if pos <= Length (primes) and primes[pos] = p then
             Add (gens[pos], x);
          else #insert a new prime
-            primes{[pos+1..len+1]} := primes{[pos..len]};
-            gens{[pos+1..len+1]} := gens{[pos..len]};
-            primes[pos] := p;
-            gens[pos] := [x];
+            Add (primes, p, pos);
+            Add (gens, [x], pos);
             len := len + 1;
          fi;
       od;
@@ -256,7 +232,7 @@ InstallMethod (IsPrimitiveSolvable, "for generic group", true,
       fi;
       
       # find out if N is a minimal normal subgroup of G
-      mats := LinearActionLayer (G, SmallGeneratingSet (G), pcgs);
+      mats := LinearActionLayer (G, GeneratorsOfGroup (G), pcgs);
 
       if not MTX.IsIrreducible (GModuleByMats (mats, GF(p))) then
          return false;
@@ -421,7 +397,7 @@ InstallGlobalFunction ("PcgsCompositionSeriesElAbModuloPcgsUnderAction",
       p := RelativeOrderOfPcElement (pcgs, pcgs[1]);
          
       if IsGroup (act) then
-         act := SmallGeneratingSet (act);
+         act := GeneratorsOfGroup (act);
       fi;
       
       if Length (act) = 0 then
@@ -439,7 +415,7 @@ InstallGlobalFunction ("PcgsCompositionSeriesElAbModuloPcgsUnderAction",
          t := Runtime() - t0;
       
          for b in bases do
-            new := List (b, ShallowCopy);
+            new := MutableCopyMat (b);
             TriangulizeMat (new);
             Add (bas, new);
          od;
@@ -466,10 +442,8 @@ InstallGlobalFunction ("PcgsCompositionSeriesElAbModuloPcgsUnderAction",
                dp := DepthOfPcElement (ppcgs, y);
                pos := PositionSorted (depth, dp);
             od;
-            gens{[pos+1..len+1]} := gens{[pos..len]};
-            depth{[pos+1..len+1]} := depth{[pos..len]};
-            gens[pos] := y;
-            depth[pos] := dp;
+            Add (gens, y, pos);
+            Add (depth, dp, pos);
             len := len + 1;
          od;
          Add (ser, InducedPcgsByPcSequenceNC (ppcgs, gens));
@@ -841,10 +815,8 @@ InstallMethod (AddPcElementToPcSequence, "generic method",
       return false;
    fi;
    
-   seq{[pos+1..len+1]} := seq{[pos..len]};
-   depths{[pos+1..len+1]} := depths{[pos..len]};
-   seq[pos] := x;
-   depths[pos] := d;
+   Add (seq, x, pos);
+   Add (depths, d, pos);
    return true;
 end);
 
