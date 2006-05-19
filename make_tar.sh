@@ -10,6 +10,8 @@ rm -f $tarfile
 rm -f $tarfile.bz2
 chmod -R a+rX crisp
 
+/Developer/Tools/SplitForks -s crisp
+
 set libfiles = (classes.gd classes.gi compl.gd compl.gi \
        fitting.gd fitting.gi form.gd form.gi grpclass.gd grpclass.gi \
        injector.gd injector.gi normpro.gd normpro.gi \
@@ -21,7 +23,7 @@ set libfiles = (classes.gd classes.gi compl.gd compl.gi \
 set docfiles = (manual.tex classes.tex examples.tex fitting.tex \
        grpclass.tex intro.tex)
     
-set manfiles = (.bbl .ind .idx .six .dvi .pdf .tst .mst)
+set manfiles = (.bbl .ind .idx .six .dvi .pdf .tst .mst .toc)
 
 set testfiles = (test.tst all.g basis.g boundary.g char.g classes.g \
        in.g injectors.g normals.g print.g projectors.g radicals.g \
@@ -30,9 +32,11 @@ set testfiles = (test.tst all.g basis.g boundary.g char.g classes.g \
        timing_projectors.g timing_radicals.g timing_residuals.g \
        timing_samples.g timing_socle.g timing_test.g)
 
-tar -c -f $tarfile crisp/PackageInfo.g 
-tar -r -f $tarfile crisp/init.g 
-tar -r -f $tarfile crisp/read.g 
+set pkgfiles = (PackageInfo.g init.g read.g README)
+
+foreach file ($pkgfiles)
+   tar -r -f $tarfile crisp/$file 
+end
 
 foreach file ($libfiles)
    tar -r -f $tarfile crisp/lib/$file 
@@ -50,13 +54,13 @@ foreach file ($testfiles)
    tar -r -f $tarfile crisp/tst/$file 
 end
 
-foreach file (crisp/htm/*)
-	tar -r -f $tarfile $file 
+foreach file (crisp/htm/*.htm)
+   tar -r -f $tarfile $file 
 end
 
-tar -r -f $tarfile crisp/README 
+/System/Library/CoreServices/FixupResourceForks -q crisp 
 
-bzip2  $tarfile 
+bzip2 $tarfile
 
 
 
