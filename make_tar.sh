@@ -10,7 +10,8 @@ rm -f $tarfile
 rm -f $tarfile.bz2
 chmod -R a+rX crisp
 
-/Developer/Tools/SplitForks -s crisp
+# this suppresses resouce forks in tarballs
+setenv COPY_EXTENDED_ATTRIBUTES_DISABLE 1
 
 set libfiles = (classes.gd classes.gi compl.gd compl.gi \
        fitting.gd fitting.gi form.gd form.gi grpclass.gd grpclass.gi \
@@ -58,7 +59,6 @@ foreach file (crisp/htm/*.htm)
    tar -r -f $tarfile $file 
 end
 
-/System/Library/CoreServices/FixupResourceForks -q crisp 
 
 bzip2 $tarfile
 
