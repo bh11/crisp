@@ -320,10 +320,10 @@ InstallMethod (OneNormalSubgroupMinWrtQProperty,
 	
 #############################################################################
 ##
-#M  Residuaum (<grp>, <class>)
+#M  Residuum (<grp>, <class>)
 ##
-InstallMethod (Residuaum, "for group and group class, call Residual", true, 
-    [IsGroup, IsGroupClass], 0
+InstallMethod (Residuum, "for group and group class, call Residual", true, 
+    [IsGroup, IsGroupClass], 0,
     function (G, C)
         return Residual (G, C);
     end);
