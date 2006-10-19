@@ -687,7 +687,7 @@ InstallMethod (IsSchunckClass, "for generic group class",
 ##
 #P  IsSaturated (<group class>)
 ##
-InstallMethod (IsSaturited, "for generic group class", 
+InstallMethod (IsSaturated, "for generic group class", 
    true, [IsGroupClass], 0, 
    function (C)
       Error ("Sorry, cannot decide if the group class <C> \
