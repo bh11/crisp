@@ -15,7 +15,7 @@ BannerString := "\
 ----------------------------------------------------------------------\n\
                         CRISP Version 1.3.1\n\
   Computing with Radicals, Injectors, Schunck classes and Projectors\n\
-              by Burkhard Hoefling (b.hoefling@tu-bs.de)\n\
+                         by Burkhard Hoefling\n\
 -----------------------------------------------------------------------\n",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
@@ -106,7 +106,6 @@ Persons := [
   FirstNames := "Burkhard",
   IsAuthor := true,
   IsMaintainer := true,
-  Email := "b.hoefling@tu-bs.de",
   WWWHome := "http://www.tu-bs.de/~bhoeflin",
   #PostalAddress := "",           
   Place := "Braunschweig",
