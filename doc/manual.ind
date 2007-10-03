@@ -153,6 +153,7 @@
   `RadicalFunction', 22
   `Residual', 16
   `ResidualFunction', 16
+  `Residuum', 16
 \letter S
   `SaturatedFittingFormation', 20
   `SaturatedFormation', 14
