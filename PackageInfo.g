@@ -13,23 +13,23 @@ PackageName := "CRISP",
 Subtitle := "Computing with Radicals, Injectors, Schunck classes and Projectors",
 BannerString := "\
 ----------------------------------------------------------------------\n\
-                        CRISP Version 1.3.1\n\
+                        CRISP Version 1.3.2\n\
   Computing with Radicals, Injectors, Schunck classes and Projectors\n\
                          by Burkhard Hoefling\n\
 -----------------------------------------------------------------------\n",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers.
-Version := "1.3.1",
+Version := "1.3.2",
 
 ##  Release date of the current version in dd/mm/yyyy format.
-Date := "23/04/2006",
+Date := "08/06/2007",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
 ##  The archive file name *must be changed* with each version of the archive
 ##  (and probably somehow contain the package name and version).
-ArchiveURL := "http://www.tu-bs.de/~bhoeflin/crisp/crisp-1r3n1",
+ArchiveURL := "http://www.tu-bs.de/~bhoeflin/crisp/crisp-1r3n2",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.

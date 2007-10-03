@@ -7,7 +7,7 @@
 ##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
 ##  Friedrich Schiller-Universit\"at Jena, Germany
 ##
-DeclareAutoPackage ("crisp", "1.3.1", true);
+DeclareAutoPackage ("crisp", "1.3.2", true);
 DeclarePackageAutoDocumentation ("crisp", "doc");
 
 ReadPackage ("crisp", "lib/classes.gd");
