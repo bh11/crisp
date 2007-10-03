@@ -22,9 +22,9 @@ set libfiles = (classes.gd classes.gi compl.gd compl.gi \
        util.gd util.gi pcgscache.gd pcgscache.gi )
 
 set docfiles = (manual.tex classes.tex examples.tex fitting.tex \
-       grpclass.tex intro.tex)
+       grpclass.tex intro.tex schunck.tex)
     
-set manfiles = (.bbl .ind .idx .six .dvi .pdf .tst .mst .toc)
+set manfiles = (.bbl .ind .idx .six .pdf .tst .mst .toc)
 
 set testfiles = (test.tst all.g basis.g boundary.g char.g classes.g \
        in.g injectors.g normals.g print.g projectors.g radicals.g \
