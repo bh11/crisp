@@ -29,7 +29,7 @@ Date := "08/06/2007",
 ##  the format extension(s), like '.zoo', which are given next.
 ##  The archive file name *must be changed* with each version of the archive
 ##  (and probably somehow contain the package name and version).
-ArchiveURL := "http://www.tu-bs.de/~bhoeflin/crisp/crisp-1r3n2",
+ArchiveURL := "http://www-public.tu-bs.de:8080/~bhoeflin/crisp/crisp-1r3n2",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -106,7 +106,7 @@ Persons := [
   FirstNames := "Burkhard",
   IsAuthor := true,
   IsMaintainer := true,
-  WWWHome := "http://www.tu-bs.de/~bhoeflin",
+  WWWHome := "http://www-public.tu-bs.de:8080/~bhoeflin",
   #PostalAddress := "",           
   Place := "Braunschweig",
   Institution := "Technical University"
@@ -141,8 +141,8 @@ AcceptDate := "12/2000",
 ##  the updating of package information on the GAP Website, and inclusion
 ##  and updating of the package in the GAP distribution.
 ##  
-README_URL := "http://www.tu-bs.de/~bhoeflin/crisp/README",
-PackageInfoURL := "http://www.tu-bs.de/~bhoeflin/crisp/PackageInfo.g",
+README_URL := "http://www-public.tu-bs.de:8080/~bhoeflin/crisp/README",
+PackageInfoURL := "http://www-public.tu-bs.de:8080/~bhoeflin/crisp/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -171,7 +171,7 @@ normal subgroups of a finite solvable group, its characteristic \
 subgroups, minimal normal subgroups and the socle and \
 <i>p</i>-socles for given primes <i>p</i>.",
 
-PackageWWWHome := "http://www.tu-bs.de/~bhoeflin/crisp/index.htm",
+PackageWWWHome := "http://www-public.tu-bs.de:8080/~bhoeflin/crisp/index.htm",
                   
 ##  On the GAP Website there is an online version of all manuals in the
 ##  GAP distribution. To handle the documentation of a package it is
