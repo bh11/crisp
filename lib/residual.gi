@@ -31,6 +31,37 @@ InstallMethod (NormalSubgroups,
 #M  NormalSubgroups (<grp>)
 ##
 InstallMethod (NormalSubgroups, 
+   "normal complement method for pc groups",
+   true,
+   [IsPcGroup], 
+   1,
+   function (G) 
+      return AllInvariantSubgroupsWithQProperty (G, G, 
+         ReturnTrue, ReturnTrue, rec());
+   end);
+
+
+
+#############################################################################
+##
+#M  NormalSubgroups (<grp>)
+##
+InstallMethod (NormalSubgroups, 
+   "normal complement method for solvable perm groups",
+   true,
+   [IsPermGroup and IsSolvableGroup], 
+   0,
+   function (G) 
+      return AllInvariantSubgroupsWithQProperty (G, G, 
+         ReturnTrue, ReturnTrue, rec());
+   end);
+
+
+#############################################################################
+##
+#M  NormalSubgroups (<grp>)
+##
+InstallMethod (NormalSubgroups, 
    "via IsomorphismPcGroup",
    true,
    [IsGroup and IsFinite and IsSolvableGroup], 
