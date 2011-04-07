@@ -668,8 +668,8 @@ InstallGlobalFunction ("PROJECTOR_FROM_BOUNDARY",
                # centpcgs in such a complement, and any upcgs-invariant
                # complement arises in that way (see crisp.dvi)
             
-               if centind = Length (userinds) and diff = 0 then 
-                  # centind = 0 means that ser[i] = centpcgs, so that
+               if centind = Length (userinds) and i = 1 and diff = 0 then 
+                  # centind = Length (userinds) means that ser[1] = centpcgs, so that
                   # the complement is trivial
                   kpcgs := ser[i+1];
                   Info(InfoProjector, 3, "trivial normal complement");
