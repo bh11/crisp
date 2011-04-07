@@ -1,6 +1,6 @@
 #############################################################################
 ##  
-##  Packageinfo.g for CRISP package                       (Burkhard Hoefling)
+##  Packageinfo.g for CRISP package                       (Burkhard Höfling)
 ##
 ##  adapted from PackageInfo.g template by Frank Luebeck
 ##  
@@ -15,7 +15,7 @@ BannerString := "\
 ----------------------------------------------------------------------\n\
                         CRISP Version 1.3.2\n\
   Computing with Radicals, Injectors, Schunck classes and Projectors\n\
-                         by Burkhard Hoefling\n\
+                         by Burkhard Höfling\n\
 -----------------------------------------------------------------------\n",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
@@ -102,7 +102,7 @@ BinaryFiles := ["doc/manual.dvi", "doc/manual.pdf"],
 ##  
 Persons := [
   rec(
-  LastName := "Hoefling",
+  LastName := "Höfling",
   FirstNames := "Burkhard",
   IsAuthor := true,
   IsMaintainer := true,
@@ -127,7 +127,7 @@ Status := "accepted",
 ##  You must provide the next two entries if and only if the status is 
 ##  "accepted":
 # format: 'name (place)'
-CommunicatedBy := "Joachim Neubueser (Aachen)",
+CommunicatedBy := "Joachim Neubüser (Aachen)",
 # format: mm/yyyy
 AcceptDate := "12/2000",
 
