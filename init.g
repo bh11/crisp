@@ -7,8 +7,6 @@
 ##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
 ##  Friedrich Schiller-Universit\"at Jena, Germany
 ##
-DeclareAutoPackage ("crisp", "1.3.2", true);
-DeclarePackageAutoDocumentation ("crisp", "doc");
 
 ReadPackage ("crisp", "lib/classes.gd");
 ReadPackage ("crisp", "lib/grpclass.gd");
@@ -25,10 +23,6 @@ ReadPackage ("crisp", "lib/residual.gd");
 ReadPackage ("crisp", "lib/util.gd");
 ReadPackage ("crisp", "lib/samples.gd");
 ReadPackage ("crisp", "lib/socle.gd");
-
-if not CompareVersionNumbers (GAPInfo.Version, "4.4.7") then
-   ReadPackage ("crisp", "lib/pcgscache.gd");
-fi;
 
 
 ############################################################################
