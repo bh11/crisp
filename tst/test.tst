@@ -1,4 +1,4 @@
-gap> START_TEST ("$Id$");
+gap> START_TEST("$Id$");
 gap> LoadPackage ("crisp", "", false);
 true
 gap> 
@@ -27,4 +27,4 @@ gap> ReadPackage ("crisp", "tst/residuals.g");
 true
 gap> ReadPackage ("crisp", "tst/socle.g");
 true
-gap> STOP_TEST ("test.tst", 0);
+gap> STOP_TEST("test.tst", 0);
