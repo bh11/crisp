@@ -1,11 +1,11 @@
 #############################################################################
 ##
-##  socle.gi                         CRISP                 Burkhard H\"ofling
+##  socle.gi                         CRISP                  Burkhard Höfling
 ##
 ##  @(#)$Id$
 ##
-##  Copyright (C) 2001 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2001, 2002, 2005 Burkhard Höfling
+
 ##
 Revision.socle_gi :=
     "@(#)$Id$";

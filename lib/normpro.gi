@@ -1,11 +1,10 @@
 #############################################################################
 ##
-##  normpro.gi                      CRISP                 Burkhard H\"ofling
+##  normpro.gi                      CRISP                    Burkhard Höfling
 ##
 ##  @(#)$Id$
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000, 2001, 2003, 2005 Burkhard Höfling
 ##
 Revision.normpro_gi :=
     "@(#)$Id$";

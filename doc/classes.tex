@@ -1,11 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%%  classes.tex              CRISP documentation           Burkhard H\"ofling
+%%  classes.tex              CRISP documentation            Burkhard Höfling
 %%
 %%  @(#)$Id$
 %%
-%%  Copyright (C) 2000, Burkhard H\"ofling, Mathematisches Institut,
-%%  Friedrich Schiller-Universit\"at Jena, Germany
+%%  Copyright (C) 2000, 2011 Burkhard Höfling
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Chapter{Set theoretical classes}
@@ -19,7 +18,7 @@ manual) may also be used as classes.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Creating set theoretical classes}\null
 
-\index{classes!creating}
+\index{classes!creation of}
 
 \>IsClass(<C>) C
 
@@ -41,23 +40,6 @@ element, in the {\GAP} sense; see "ref:objects and elements" in the {\GAP}
 reference manual).
 
 \beginexample
-gap> RequirePackage ("crisp");
-                                                   
-             _____  ___    __  ____   ___        
-            / ___/ / _ \  / / / __/  / _ \       
-           / /__  /   _/ / / _\_ \  / ___/       
-           \___/ /_/\_\ /_/ /____/ /_/           
-                                                    
-                 A GAP 4 package for           
-          Computing with Radicals, Injectors        
-            Schunck classes and Projectors          
-              of finite solvable groups             
-                                                    
-                By Burkhard H\"ofling               
-                                                    
-                For help, type ?CRISP               
-                                                    
-true
 gap> FermatPrimes := Class (p -> IsPrime (p) and p = 2^LogInt (p, 2) + 1); 
 Class (in:=function( p ) ... end)
 \endexample
@@ -161,7 +143,7 @@ a sublist of that list. By default, `INTERSECTION_LIMIT' is 1000.
 gap> Intersection (Class (IsPrimeInt), [1..10]);
 [ 2, 3, 5, 7 ]
 gap> Intersection (Class (IsPrimeInt), Class (n -> n = 2^LogInt (n+1, 2) - 1));
-Intersection ([ Class (in:=function( n ) ... end), 
+Intersection ([ Class (in:=function( N ) ... end), 
   Class (in:=function( n ) ... end) ])
 \endexample
 
@@ -183,7 +165,7 @@ result will be a sublist of <C>.
 \beginexample
 gap> Difference (Class (IsPrimePowerInt), Class (IsPrimeInt));
 Intersection ([ Class (in:=function( n ) ... end), 
-  Complement (Class (in:=function( n ) ... end)) ])
+  Complement (Class (in:=function( N ) ... end)) ])
 gap> Difference ([1..10], Class (IsPrimeInt));
 [ 1, 4, 6, 8, 9, 10 ]
 \endexample

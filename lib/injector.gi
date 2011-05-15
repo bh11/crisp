@@ -1,11 +1,10 @@
 #############################################################################
 ##
-##  injector.gi                      CRISP                 Burkhard H\"ofling
+##  injector.gi                      CRISP                 Burkhard Höfling
 ##
 ##  @(#)$Id$
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000, 2005 Burkhard Höfling
 ##
 Revision.injector_gi :=
     "@(#)$Id$";

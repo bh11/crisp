@@ -1,14 +1,22 @@
 #############################################################################
 ##
-##  schunck.gd                      CRISP                 Burkhard H\"ofling
+##  schunck.gd                      CRISP                    Burkhard Höfling
 ##
 ##  @(#)$Id$
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000 Burkhard Höfling
 ##
 Revision.schunck_gd :=
     "@(#)$Id$";
+
+
+#############################################################################
+##
+#P  IsPrimitiveSolvableGroup (<grp>)
+#P  IsPrimitiveSolvable (<grp>)
+##
+DeclareProperty ("IsPrimitiveSolvableGroup", IsGroup);
+DeclareSynonym ("IsPrimitiveSolvable", IsPrimitiveSolvableGroup);
 
 
 #############################################################################

@@ -1,11 +1,10 @@
 #############################################################################
 ##
-##  grpclass.gi                      CRISP                 Burkhard H\"ofling
+##  grpclass.gi                      CRISP                   Burkhard Höfling
 ##
 ##  @(#)$Id$
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000, 2006 Burkhard Höfling
 ##
 Revision.grpclass_gi :=
     "@(#)$Id$";
@@ -787,7 +786,7 @@ InstallGlobalFunction  ("SetIsSaturatedFittingFormation",
 InstallMethod (Basis, "for group class", true, 
    [IsGroupClass], 0,
    function (H)
-      return GroupClass (G -> IsPrimitiveSolvable (G) and G in H);
+      return GroupClass (G -> IsPrimitiveSolvableGroup (G) and G in H);
    end);
    
 

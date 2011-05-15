@@ -1,11 +1,10 @@
 #############################################################################
 ##
-##  fitting.gi                      CRISP                 Burkhard H\"ofling
+##  fitting.gi                      CRISP                    Burkhard Höfling
 ##
 ##  @(#)$Id$
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000 Burkhard Höfling
 ##
 Revision.fitting_gi :=
     "@(#)$Id$";

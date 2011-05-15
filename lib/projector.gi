@@ -1,11 +1,10 @@
 #############################################################################
 ##
-##  projector.gi                     CRISP                 Burkhard H\"ofling
+##  projector.gi                     CRISP                  Burkhard Höfling
 ##
 ##  @(#)$Id$
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000-2003, 2005, 2011 Burkhard Höfling
 ##
 Revision.projector_gi :=
     "@(#)$Id$";
@@ -301,7 +300,7 @@ InstallGlobalFunction(BFUNC_FROM_TEST_FUNC_FAC,
       # now compute primitive image
       nat := NaturalHomomorphismByNormalSubgroupNC (ImagesSource (hom), cent);
       F := ImagesSource (nat);
-      SetIsPrimitiveSolvable (F, true);
+      SetIsPrimitiveSolvableGroup (F, true);
       SetSocle (F, ImagesSet (nat, N));
       SetSocleComplement (F, 
          ImagesSet (nat, ImagesSet (hom, GroupOfPcgs (cpcgs))));
@@ -331,7 +330,7 @@ InstallGlobalFunction(BFUNC_FROM_TEST_FUNC_MOD,
       
       nat := NaturalHomomorphismByNormalSubgroupNC (H, cent);
       F := ImagesSource (nat);
-      SetIsPrimitiveSolvable (F, true);
+      SetIsPrimitiveSolvableGroup (F, true);
       SetSocle (F, ImagesSet (nat, GroupOfPcgs (npcgs)));
       SetSocleComplement (F, ImagesSet (nat, GroupOfPcgs (cpcgs)));
       return data.test (F, data);

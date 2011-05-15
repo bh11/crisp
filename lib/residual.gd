@@ -1,11 +1,10 @@
 #############################################################################
 ##
-##  residual.gd                      CRISP                 Burkhard H\"ofling
+##  residual.gd                      CRISP                   Burkhard Höfling
 ##
 ##  @(#)$Id$
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000-2002, 2006 by Burkhard Höfling
 ##
 Revision.residual_gd :=
     "@(#)$Id$";

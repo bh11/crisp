@@ -1,11 +1,10 @@
 #############################################################################
 ##
-##  radical.gd                      CRISP                 Burkhard H\"ofling
+##  radical.gd                      CRISP                   Burkhard Höfling
 ##
 ##  @(#)$Id$
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000, 2002 Burkhard Höfling
 ##
 Revision.radical_gd :=
     "@(#)$Id$";
