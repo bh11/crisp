@@ -92,7 +92,7 @@ if not IsBound (InfoTest) then
 fi;
 
 classes := function ()
-    local cl;
+    local cl, C;
     cl := [];
    
     C := SchunckClass (rec (bound := BoundaryFunction (25grps)));
