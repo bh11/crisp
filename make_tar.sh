@@ -24,7 +24,7 @@ libfiles="classes.gd classes.gi compl.gd compl.gi \
 docfiles="manual.tex classes.tex examples.tex fitting.tex \
        grpclass.tex intro.tex schunck.tex"
     
-manexts=".bbl .ind .idx .six .pdf .tst .mst .toc"
+manexts=".bbl .ind .idx .six .pdf .tst .mst .toc .examples.tst"
 
 testfiles="test.tst all.g basis.g boundary.g char.g classes.g \
        in.g injectors.g normals.g print.g projectors.g radicals.g \
@@ -53,7 +53,7 @@ for file in $testfiles
    do tar -r -f $tarfile crisp/tst/$file 
 done
 
-for file in crisp/html/*.html
+for file in crisp/html/*.htm
    do tar -r -f $tarfile $file 
 done
 

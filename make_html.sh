@@ -1,7 +1,6 @@
-rm html/CHAP???.html
-rm html/biblio.html
-rm html/theindex.html
-rm html/chapters.html
+rm html/CHAP???.htm
+rm html/biblio.htm
+rm html/theindex.htm
+rm html/chapters.htm
 perl ../../etc/convert.pl -n CRISP -c -i doc html
-(cd html; for file in *.htm; do mv $file $file"l"; done)
-chmod -R a+r htm
+chmod -R a+r html
