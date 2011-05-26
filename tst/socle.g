@@ -10,7 +10,7 @@
 LoadPackage ("crisp");
 ReadPackage ("crisp", "tst/samples.g");
 
-PrimeFactors := function (n)
+primefacs := function (n)
 
 	if n = 1 then
 		return [];
@@ -50,13 +50,13 @@ for G in groups do
       Error ("different results");
    fi;
    
-   new := Product (PrimeFactors (Size(G())), p -> Size (PSocle (G(), p)));
+   new := Product (primefacs (Size(G())), p -> Size (PSocle (G(), p)));
    if old = fail then
       old := new;
    elif old <> new then
       Error ("different results");
    fi;
-   new := Product (PrimeFactors (Size (G())), p -> 
+   new := Product (primefacs (Size (G())), p -> 
    		Product (PSocleComponents (G(), p), Size));
    if old = fail then
       old := new;
@@ -77,13 +77,13 @@ for G in insolvgroups do
       Error ("different results");
    fi;
    
-   new := Product (PrimeFactors (Size(G())), p -> Size (PSocle (G(), p)));
+   new := Product (primefacs (Size(G())), p -> Size (PSocle (G(), p)));
    if old = fail then
       old := new;
    elif old <> new then
       Error ("different results");
    fi;
-   new := Product (PrimeFactors (Size(G())), p -> 
+   new := Product (primefacs (Size(G())), p -> 
    		Product (PSocleComponents (G(), p), Size));
    if old = fail then
       old := new;

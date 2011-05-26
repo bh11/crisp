@@ -19,13 +19,9 @@ cl := classes();
 for i in [1..Length (cl)] do
    View (cl[i]);
    Print ("\n",cl[i], "\n");
-   for j in [i..Length (cl)] do
+   for j in [i+1..Length (cl)] do
       I := Intersection (cl[i], cl[j]);
-      if InfoLevel (InfoTest) >= 3 then
-         View (I);
-         Print ("\n");
-      fi;
-      View (P);
+      View (I);
       Print ("\n", I, "\n");
    od;
 od;
