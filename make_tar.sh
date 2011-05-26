@@ -24,7 +24,7 @@ libfiles="classes.gd classes.gi compl.gd compl.gi \
 docfiles="manual.tex classes.tex examples.tex fitting.tex \
        grpclass.tex intro.tex schunck.tex"
     
-manexts=".bbl .ind .idx .six .pdf .tst .mst .toc .examples.tst"
+manexts=".bbl .ind .idx .six .pdf .tst .mst .toc"
 
 testfiles="test.tst all.g basis.g boundary.g char.g classes.g \
        in.g injectors.g normals.g print.g projectors.g radicals.g \
@@ -32,6 +32,10 @@ testfiles="test.tst all.g basis.g boundary.g char.g classes.g \
        timing_injectors.g timing_normals.g timing_normpro.g \
        timing_projectors.g timing_radicals.g timing_residuals.g \
        timing_samples.g timing_socle.g timing_test.g"
+
+# extension: automatic version numbers:
+# sed -e s/@VERSION@/.../ -e s/@DATE@/.../ -e s/@ARCHIVE@/.../ crisp/PackageInfo.g | tar -c -f $tarfile 
+
 
 tar -c -f $tarfile crisp/PackageInfo.g 
 tar -r -f $tarfile crisp/init.g 
