@@ -159,14 +159,14 @@ InstallGlobalFunction ("COMPLEMENT_SOLUTION_FUNCTION",
 ##  
 ##  enumerates pairs [1,1], [2,1], [2,2], [3,1], [3,2], [3,3], ...
 ##
-EnumeratorOfTriangle := function (k)
+BindGlobal ("EnumeratorOfTriangle", function (k)
 
 	local i, j;
 	
 	i := QuoInt (1 + RootInt (8*k-1), 2);
 	j := k - i* (i-1)/2;
 	return [i,j];
-end;
+end);
 
 
 #############################################################################
