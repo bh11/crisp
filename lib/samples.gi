@@ -2,12 +2,8 @@
 ##
 ##  samples.gi                      CRISP                    Burkhard Höfling
 ##
-##  @(#)$Id$
+#  Copyright (C) 2000, 2005 Burkhard Höfling
 ##
-##  Copyright (C) 2000, 2005 Burkhard Höfling
-##
-Revision.samples_gi :=
-    "@(#)$Id$";
 
 
 #############################################################################

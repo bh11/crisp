@@ -2,12 +2,8 @@
 ##
 ##  solveeq.gi                      CRISP                    Burkhard Höfling
 ##
-##  @(#)$Id$
-##
 ##  Copyright (C) 2000-2002 Burkhard Höfling
 ##
-Revision.solveeq_gi :=
-    "@(#)$Id$";
 
 
 #############################################################################

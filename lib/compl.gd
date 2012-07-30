@@ -2,12 +2,8 @@
 ##
 ##  compl.gd                         CRISP                   Burkhard Höfling
 ##
-##  @(#)$Id$
-##
 ##  Copyright (C) 2000, 2002 Burkhard Höfling
 ##
-Revision.compl_gi :=
-    "@(#)$Id$";
 
 
 #############################################################################

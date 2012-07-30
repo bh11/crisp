@@ -2,12 +2,8 @@
 ##
 ##  schunck.gi                      CRISP                    Burkhard Höfling
 ##
-##  @(#)$Id$
-##
 ##  Copyright (C) 2000, 2005 Burkhard Höfling
 ##
-Revision.schunck_gi :=
-    "@(#)$Id$";
 
 
 ###################################################################################

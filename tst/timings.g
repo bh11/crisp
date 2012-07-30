@@ -2,8 +2,6 @@
 ##
 ##  timings.g                       CRISP                  Burkhard Höfling
 ##
-##  @(#)$Id$
-##
 ##  Copyright (C) 2000, 2011 by Burkhard Höfling
 ##
 LoadPackage ("crisp");

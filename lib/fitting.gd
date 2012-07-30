@@ -2,12 +2,8 @@
 ##
 ##  fitting.gd                      CRISP                    Burkhard Höfling
 ##
-##  @(#)$Id$
-##
 ##  Copyright (C) 2000 Burkhard Höfling
 ##
-Revision.fitting_gd :=
-    "@(#)$Id$";
 
 
 #############################################################################

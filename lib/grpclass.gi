@@ -2,12 +2,8 @@
 ##
 ##  grpclass.gi                      CRISP                   Burkhard Höfling
 ##
-##  @(#)$Id$
-##
 ##  Copyright (C) 2000, 2006 Burkhard Höfling
 ##
-Revision.grpclass_gi :=
-    "@(#)$Id$";
 
 
 #############################################################################

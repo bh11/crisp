@@ -2,12 +2,8 @@
 ##
 ##  util.gd                         CRISP                   Burkhard Höfling
 ##
-##  @(#)$Id$
-##
 ##  Copyright (C) 2000-2002, 2005 Burkhard Höfling
 ##
-Revision.util_gd :=
-    "@(#)$Id$";
 
 
 #############################################################################

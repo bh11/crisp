@@ -2,12 +2,8 @@
 ##
 ##  residual.gd                      CRISP                   Burkhard Höfling
 ##
-##  @(#)$Id$
-##
 ##  Copyright (C) 2000-2002, 2006 by Burkhard Höfling
 ##
-Revision.residual_gd :=
-    "@(#)$Id$";
 
 
 #############################################################################

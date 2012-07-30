@@ -2,12 +2,8 @@
 ##
 ##  util.gi                         CRISP                   Burkhard Höfling
 ##
-##  @(#)$Id$
-##
 ##  Copyright (C) 2000-2003, 2005 Burkhard Höfling
 ##
-Revision.util_gi :=
-    "@(#)$Id$";
 
 
 #############################################################################

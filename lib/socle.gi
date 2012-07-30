@@ -2,14 +2,8 @@
 ##
 ##  socle.gi                         CRISP                  Burkhard Höfling
 ##
-##  @(#)$Id$
-##
 ##  Copyright (C) 2001, 2002, 2005 Burkhard Höfling
-
 ##
-Revision.socle_gi :=
-    "@(#)$Id$";
-
 
 #############################################################################
 ##

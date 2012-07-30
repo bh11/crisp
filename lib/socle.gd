@@ -2,12 +2,8 @@
 ##
 ##  socle.gd                         CRISP                   Burkhard Höfling
 ##
-##  @(#)$Id$
-##
 ##  Copyright (C) 2001, 2002 Burkhard Höfling
 ##
-Revision.socle_gd :=
-    "@(#)$Id$";
 
 #############################################################################
 ##

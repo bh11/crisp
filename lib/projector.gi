@@ -2,12 +2,8 @@
 ##
 ##  projector.gi                     CRISP                  Burkhard Höfling
 ##
-##  @(#)$Id$
-##
 ##  Copyright (C) 2000-2003, 2005, 2011 Burkhard Höfling
 ##
-Revision.projector_gi :=
-    "@(#)$Id$";
 
 
 #############################################################################
