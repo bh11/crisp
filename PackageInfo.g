@@ -13,10 +13,10 @@ PackageName := "CRISP",
 Subtitle := "Computing with Radicals, Injectors, Schunck classes and Projectors",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers.
-Version := "1.3.5",
+Version := "1.3.6",
 
 ##  Release date of the current version in dd/mm/yyyy format.
-Date := "22/11/2011",
+Date := "today",
 
 BannerString := Concatenation ("\
 ----------------------------------------------------------------------\n\
