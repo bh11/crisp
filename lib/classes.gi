@@ -170,22 +170,6 @@ InstallGlobalFunction ("PrintDefiningAttributes",
 
 #############################################################################
 ##
-#M  String (<class>)
-##
-InstallMethod (String, "for a class", true,
-   [IsClass], 0,
-   function (C)
-      local str, stream;
-      str := "";
-      stream := OutputTextString (str, true);
-      PrintTo (stream, C);
-      CloseStream (stream);
-      return str;
-   end);
-   
-
-#############################################################################
-##
 #M  \< 
 ##
 InstallMethod (\<, "for classes", true, [IsClass, IsClass], 0,
