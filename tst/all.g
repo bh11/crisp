@@ -10,7 +10,7 @@ LoadPackage ("crisp", "", false);
 PRINT_METHODS := false;
 
 #Print ("testing manual examples\n");
-#ReadTest (Filename (DirectoriesPackageLibrary ("crisp", "doc"), "manual.examples.tst"));
+#ReadPackage ("crisp", "tst/manual.g");
 
 Print ("testing class construction \n");
 ReadPackage ("crisp", "tst/classes.g");

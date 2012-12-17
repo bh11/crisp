@@ -1,0 +1,10 @@
+syntax: glob
+doc/manual.aux
+doc/manual.example-2.tst
+doc/manual.example-3.tst
+doc/manual.example-4.tst
+doc/manual.example-5.tst
+doc/manual.idx
+doc/manual.log
+doc/manual.pdf
+doc/manual.toc
