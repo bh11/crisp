@@ -11,7 +11,7 @@
 #A  Residual (<grp>, <class>)
 ##
 KeyDependentOperation ("Residual", IsGroup, IsGroupClass, ReturnTrue);
-DeclareOperation ("Residuum", [IsGroup, IsGroupClass]);
+DeclareSynonym ("Residuum", Residual);
 
 
 #############################################################################

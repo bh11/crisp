@@ -35,7 +35,7 @@ DeclareGlobalFunction ("SetIsOrdinaryFormation");
 ##
 #O  OrdinaryFormation (<obj>)
 ##
-DeclareOperation ("OrdinaryFormation", [IsObject]);
+DeclareAttribute ("OrdinaryFormation", IsObject);
 
 
 #############################################################################
@@ -72,7 +72,7 @@ DeclareGlobalFunction ("SetIsSaturatedFormation");
 ##
 #O  SaturatedFormation (<rec>)
 ##
-DeclareOperation ("SaturatedFormation", [IsObject]);
+DeclareAttribute ("SaturatedFormation", IsObject);
 
 
 #############################################################################
@@ -104,7 +104,7 @@ DeclareGlobalFunction ("SetIsFittingFormation");
 ##
 #O  FittingFormation (<obj>)
 ##
-DeclareOperation ("FittingFormation", [IsObject]);
+DeclareAttribute ("FittingFormation", IsObject);
 
 
 #############################################################################
@@ -150,7 +150,7 @@ DeclareGlobalFunction ("SetIsSaturatedFittingFormation");
 ##
 #O  SaturatedFittingFormation (<obj>)
 ##
-DeclareOperation ("SaturatedFittingFormation", [IsObject]);
+DeclareAttribute ("SaturatedFittingFormation", IsObject);
 
 
 #############################################################################

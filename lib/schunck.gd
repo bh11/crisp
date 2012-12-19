@@ -19,7 +19,7 @@ DeclareSynonym ("IsPrimitiveSolvable", IsPrimitiveSolvableGroup);
 ##
 #O  SchunckClass (<obj>)
 ##
-DeclareOperation ("SchunckClass", [IsObject]);
+DeclareAttribute ("SchunckClass", IsObject);
 
 
 #############################################################################

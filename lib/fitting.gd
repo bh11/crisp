@@ -35,7 +35,7 @@ DeclareGlobalFunction ("SetIsFittingClass");
 ##
 #O  FittingClass (<obj>)
 ##
-DeclareOperation ("FittingClass", [IsObject]);
+DeclareAttribute ("FittingClass", IsObject);
 
 
 #############################################################################

@@ -29,7 +29,7 @@ InstallTrueMethod (IsGroupClass, IsEmpty and IsClass);
 ##
 ##  creates a group class from an object
 ##
-DeclareOperation ("GroupClass", [IsObject]);
+DeclareAttribute ("GroupClass", IsObject);
 
 
 #############################################################################
