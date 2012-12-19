@@ -25,7 +25,8 @@ libfiles="classes.gd classes.gi compl.gd compl.gi \
 docfiles="manual.tex classes.tex examples.tex fitting.tex \
        grpclass.tex intro.tex schunck.tex"
     
-manexts=".bbl .ind .idx .six .pdf .tst .mst .toc"
+manexts=".bbl .ind .idx .six .pdf .ist .toc \
+       .example-2.tst .example-3.tst .example-4.tst .example-5.tst"
 
 testfiles="test.tst all.g basis.g boundary.g char.g classes.g \
        in.g injectors.g normals.g print.g projectors.g radicals.g \
