@@ -11,3 +11,4 @@ doc/manual.toc
 doc/manual.ilg
 doc/manual.ind
 html
+*.bz2
