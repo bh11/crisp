@@ -496,6 +496,10 @@ InstallMethod (InvariantComplementsOfElAbSection,
 
       local cpcgs, complements, pcgs, pcgsL;
       
+      if IsGroup (act) then
+         act := GeneratorsOfGroup (act);
+      fi;
+
       pcgs := ParentPcgs (Pcgs(G));
       pcgsL := InducedPcgs (pcgs, L);
       
