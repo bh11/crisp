@@ -16,7 +16,7 @@ Subtitle := "Computing with Radicals, Injectors, Schunck classes and Projectors"
 Version := "1.3.6",
 
 ##  Release date of the current version in dd/mm/yyyy format.
-Date := "today",
+Date := "13/03/2013",
 
 BannerString := Concatenation ("\
 ----------------------------------------------------------------------\n\
@@ -29,7 +29,7 @@ BannerString := Concatenation ("\
 ##  the format extension(s), like '.zoo', which are given next.
 ##  The archive file name *must be changed* with each version of the archive
 ##  (and probably somehow contain the package name and version).
-ArchiveURL := "http://www.icm.tu-bs.de/~bhoeflin/crisp/crisp-1r3n5",
+ArchiveURL := "http://www.icm.tu-bs.de/~bhoeflin/crisp/crisp-1r3n6",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
