@@ -17,11 +17,11 @@ This includes an improved method to compute the set of all normal subgroups
 of a finite solvable group, its characteristic subgroups, and the socle and 
 p-socles for given primes p.
 
-This version of CRISP requires at least GAP 4.4.12.
+This version of CRISP requires at least GAP 4.5.
 
 In order to install CRISP, you have to get the current package archive file 
 
-`crisp-1r3n5.tar.gz', 
+`crisp-1r3n7.tar.gz', 
 
 or any other package format suitable for your system.
 
