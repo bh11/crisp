@@ -22,7 +22,7 @@ libfiles="classes.gd classes.gi compl.gd compl.gi \
        schunck.gd schunck.gi socle.gd socle.gi solveeq.gd solveeq.gi \
        util.gd util.gi pcgscache.gd pcgscache.gi"
 
-docfiles="manual.tex classes.tex examples.tex fitting.tex \
+docfiles="manual.tex copyright.tex classes.tex examples.tex fitting.tex \
        grpclass.tex intro.tex schunck.tex"
     
 manexts=".bbl .ind .idx .six .pdf .ist .toc \
