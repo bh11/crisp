@@ -13,3 +13,5 @@ doc/manual.ind
 html
 *.bz2
 manual.synctex.gz
+private
+crisp (CVS).zip
