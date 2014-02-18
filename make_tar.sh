@@ -63,6 +63,9 @@ for file in crisp/html/*.htm
    do tar -r -f $tarfile $file 
 done
 
+tar -r -f $tarfile crisp/README
+tar -r -f $tarfile crisp/LICENSE
+
 
 bzip2 $tarfile
 
