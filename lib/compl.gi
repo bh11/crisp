@@ -2,7 +2,7 @@
 ##
 ##  compl.gi                         CRISP                   Burkhard Höfling
 ##
-##  Copyright (C) 2000-2002, 2005 Burkhard Höfling
+##  Copyright (C) 2000-2002, 2005, 2015 Burkhard Höfling
 ##
 
 

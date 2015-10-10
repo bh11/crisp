@@ -2,7 +2,7 @@
 ##
 ##  util.gi                         CRISP                   Burkhard Höfling
 ##
-##  Copyright (C) 2000-2003, 2005 Burkhard Höfling
+##  Copyright (C) 2000-2003, 2005, 2015 Burkhard Höfling
 ##
 
 
