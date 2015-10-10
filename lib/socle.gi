@@ -290,7 +290,7 @@ InstallMethod (SolvableSocle,
       socdepths := [];
       
       for L in SocleComponents (G) do
-         for x in Pcgs (L) do
+         for x in Reversed(Pcgs (L)) do
             if not AddPcElementToPcSequence (pcgs, pcgssoc, socdepths, x) then
                Error ("Internal error in method for `Socle' for soluble gorups");
             fi;

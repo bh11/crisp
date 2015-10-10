@@ -38,12 +38,23 @@ InstallGlobalFunction ("PcgsComplementOfChiefFactor",
    q := RelativeOrderOfPcElement (pcgs, hpcgs[first]);
    Assert (1, p <> q);
    field := GF(p);
-   
-   # compute a pc sequence qpcgs (of length 1) for a Sylow q-subgroup of N/K 
+
+   # compute a pc sequence qpcgs (of length 1) for the full preimage of a Sylow q-subgroup of N/K
    # in the group <hpcgs[Length(hpcgs)], N>/K
 
+   qpcgs := [];
+   depths := [];
+
+   for g in Reversed(kpcgs) do
+      if not AddPcElementToPcSequence (pcgs, qpcgs, depths, g) then
+         Error ("Internal Error: PcgsComplementOfChiefFactor, error in kpcgs");
+      fi;
+   od;
+
    r := Gcdex (p, q).coeff1 * p;
-   qpcgs := [hpcgs[Length(hpcgs)]^r];
+   if not AddPcElementToPcSequence (pcgs, qpcgs, depths, hpcgs[Length(hpcgs)]^r) then
+         Error ("Internal Error: PcgsComplementOfChiefFactor, error in qpcgs");
+   fi;
    depths := [DepthOfPcElement (pcgs, qpcgs[1])]; # depths of elements of qpcgs
    
    # complement and Sylow subgroup coincide
@@ -89,14 +100,18 @@ InstallGlobalFunction ("PcgsComplementOfChiefFactor",
       
       if j >= first then # we are computing a pcgs for Q and C
          g := g^r;
-         AddPcElementToPcSequence (pcgs, qpcgs, depths, g);
+         if not AddPcElementToPcSequence (pcgs, qpcgs, depths, g) then
+            Error ("Internal Error: PcgsComplementOfChiefFactor, wrong solution");
+         fi;
       else # Q is found, we only extend C
          if not copied then
             cpcgs := ShallowCopy (qpcgs);
             cdepths := ShallowCopy (depths);
             copied := true;
          fi;
-         AddPcElementToPcSequence (pcgs, cpcgs, cdepths, g);
+         if not AddPcElementToPcSequence (pcgs, cpcgs, cdepths, g) then
+            Error ("Internal Error: PcgsComplementOfChiefFactor, wrong solution");
+         fi;
       fi;
    od;
 
@@ -104,48 +119,45 @@ InstallGlobalFunction ("PcgsComplementOfChiefFactor",
       cpcgs := qpcgs;
       cdepths := depths;
    fi;
-   
-   for g in kpcgs do
-      AddPcElementToPcSequence (pcgs, cpcgs, cdepths, g);
-   od;
-   
+
    tmp := InducedPcgsByPcSequenceNC (pcgs, cpcgs);
    Assert (1, CanonicalPcgs (tmp) = CanonicalPcgs (InducedPcgsByGenerators (pcgs, cpcgs)),
-      Error ("cpcgs is not a pc sequence"));
+      Error ("Internal Error: PcgsComplementOfChiefFactor, cpcgs is not a pc sequence"));
    return tmp;
 end);
 
 
 #############################################################################
 ##
-#F  COMPLEMENT_SOLUTION_FUNCTION (<complements>, <i>)
+#F  COMPLEMENT_SOLUTION_FUNCTION (<complements>, <pos>)
 ##
 InstallGlobalFunction ("COMPLEMENT_SOLUTION_FUNCTION",
-   function (complements, i)
+    function (complements, pos)
    
-      local s, w, depth, len, gens;
-      s := Length (complements.mpcgs);
-      gens := List (complements.nden);
-      w := complements.oneSolution + complements.solutionSpace[i];
-      len := Length (gens);
-      if not IsBound (complements.denomDepths) then
-         complements.denomDepths := List (gens, x -> DepthOfPcElement (complements.pcgs, x));
-      fi;
-      depth := ShallowCopy (complements.denomDepths);
+        local s, w, depth, len, gens, i;
+        s := Length (complements.mpcgs);
+        gens := List (complements.nden);
+        w := complements.oneSolution + complements.solutionSpace[pos];
+        len := Length (gens);
+        if not IsBound (complements.denomDepths) then
+            complements.denomDepths := List (gens, x -> DepthOfPcElement (complements.pcgs, x));
+        fi;
+        depth := ShallowCopy (complements.denomDepths);
       
-      for i in [1..s] do
-         AddPcElementToPcSequence (complements.pcgs, gens, depth,
-            complements.mpcgs[i] 
-               * PcElementByExponents (complements.npcgs, 
-                  w{[i,i+s..i+(Length (complements.npcgs)-1)*s]}));
-      od;
-      gens := InducedPcgsByPcSequenceNC (complements.pcgs, gens);
+        for i in [s, s-1..1] do
+            if not AddPcElementToPcSequence (complements.pcgs, gens, depth,
+                    complements.mpcgs[i]
+                    * PcElementByExponents (complements.npcgs,
+                    w{[i,i+s..i+(Length (complements.npcgs)-1)*s]})) then
+                Error ("Internal Error: COMPLEMENT_SOLUTION_FUNCTION, wrong solution");
+            fi;
+        od;
+        gens := InducedPcgsByPcSequenceNC (complements.pcgs, gens);
 
-      Assert (1, CanonicalPcgs (gens) 
+        Assert (1, CanonicalPcgs (gens)
             = CanonicalPcgs (InducedPcgsByGenerators (complements.pcgs, gens)),
-         Error ("gens is not a pc sequence"));
-      return gens;
-      
+            Error ("Internal Error: COMPLEMENT_SOLUTION_FUNCTION, gens is not a pc sequence"));
+        return gens;
    end);
 
 
@@ -276,7 +288,7 @@ InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
                for l in [1..n] do
                   y := npcgs[l]^act[j];
                   Assert (1, y in Group (Concatenation (npcgs, kpcgs)), 
-                     Error("npcgs[l]^act[j] must be in N"));
+                     Error("Internal Error: npcgs[l]^act[j] must be in N"));
                   e[j][l] := ExponentsOfPcElement (npcgs, y) * One(field);
                od;
             fi;
@@ -288,7 +300,7 @@ InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
             delta := exp * One (field);
             y := LeftQuotient (PcElementByExponents (gpcgs, exp), y);
             Assert (1, y in Group (Concatenation (npcgs, kpcgs)), 
-               Error ("gpcgs[i]^act[j]/... must be in N"));
+               Error ("Internal Error: gpcgs[i]^act[j]/... must be in N"));
             d := ExponentsOfPcElement (npcgs, y) * One(field);
 
             # translate into a linear equation
@@ -319,7 +331,7 @@ InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
                y := LeftQuotient (PcElementByExponents (gpcgs, exp), y);
         
                Assert (1, y in Group (NumeratorOfModuloPcgs(npcgs)), 
-                  Error ("gpcgs[i]^p/... must be in N"));
+                  Error ("Internal Error: gpcgs[i]^p/... must be in N"));
 	           
 	           exp[i] := - p;
 	           gamma := exp * One (field);
@@ -343,7 +355,7 @@ InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
                exp := ExponentsOfPcElement (gpcgs, y);
                y := LeftQuotient (PcElementByExponents (gpcgs, exp), y);
                Assert (1, y in Group (Concatenation (npcgs, kpcgs)), 
-                  Error ("Comm (gpcgs[i], gpcgs[j])/... must be in N"));
+                  Error ("Internal Error: Comm (gpcgs[i], gpcgs[j])/... must be in N"));
                exp[i] := exp[i]-1;
                gamma := exp * One (field);
                c := ExponentsOfPcElement (npcgs, y) * One(field);
@@ -448,7 +460,7 @@ InstallMethod (ComplementsOfCentralSectionUnderActionNC,
             and NormalIntersection (C, N) = L 
             and Index (G, C) * Index (G, N) = Index (G, L)
             and ForAll (act, a -> Image (a, C) = C)),
-         Error ("wrong invariant complement(s)"));
+         Error ("Internal Error: wrong invariant complement(s)"));
       if all then
          return complements;
       else
@@ -508,10 +520,6 @@ InstallMethod (InvariantComplementsOfElAbSection,
       
       complements := List (cpcgs, c -> SubgroupByPcgs (G, c));
       
-      if complements = fail then
-         complements := [];
-      fi;
-      
       Assert (2, ForAll (complements, C ->
          IsNormal (G, C) 
             and NormalIntersection (C, N) = L 
@@ -519,7 +527,7 @@ InstallMethod (InvariantComplementsOfElAbSection,
             and ( (FamilyObj(act)=FamilyObj(C) and ForAll (act, a -> C^a = C))
                or (FamilyObj(act)<>FamilyObj(C) and ForAll (act, a -> Image (a, C) = C))
                )),
-         Error ("wrong normal complement(s)"));
+         Error ("Internal Error: wrong normal complement(s)"));
       if all then
          return complements;
       else

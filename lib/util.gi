@@ -432,7 +432,7 @@ InstallGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs",
          od;
          
          if n < i then 
-            Error ("internal error!");
+            Error ("internal error: PcgsElementaryAbelianSeriesFromGenericPcgs, wrong depth");
          elif n = i then # no abelian normal section found - change pcgs
             Info (InfoPcGroup, 2, "changing pcgs");
             npcgs := InducedPcgsByPcSequenceNC (pcgs, pcgs{[i..Length (pcgs)]});
@@ -442,7 +442,9 @@ InstallGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs",
             dpcgs := List (dpcgs);
             depths := List (dpcgs, x -> DepthOfPcElement (pcgs, x));
             for x in Reversed (m) do
-               AddPcElementToPcSequence (pcgs, dpcgs, depths, x^p);
+               if not AddPcElementToPcSequence (pcgs, dpcgs, depths, x^p) then
+                    Error ("Internal Error: PcgsElementaryAbelianSeriesFromGenericPcgs, wrong pcgs");
+               fi;
             od;
             dpcgs := CanonicalPcgs (
                InducedPcgsByPcSequenceNC (pcgs, dpcgs));
