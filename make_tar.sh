@@ -20,7 +20,7 @@ libfiles="classes.gd classes.gi compl.gd compl.gi \
        projector.gd projector.gi radical.gd radical.gi \
        residual.gd residual.gi samples.gd samples.gi \
        schunck.gd schunck.gi socle.gd socle.gi solveeq.gd solveeq.gi \
-       util.gd util.gi pcgscache.gd pcgscache.gi"
+       util.gd util.gi"
 
 docfiles="manual.tex copyright.tex classes.tex examples.tex fitting.tex \
        grpclass.tex intro.tex schunck.tex"

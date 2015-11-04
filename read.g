@@ -1,9 +1,8 @@
 ############################################################################
 ##
-##  read.g                          CRISP                 Burkhard H\"ofling
+##  read.g                          CRISP                  Burkhard Höfling
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000, 2015 by Burkhard Höfling
 ##
 ReadPackage ("crisp", "lib/classes.gi"); 
 ReadPackage ("crisp", "lib/grpclass.gi"); 
@@ -20,10 +19,6 @@ ReadPackage ("crisp", "lib/residual.gi");
 ReadPackage ("crisp", "lib/util.gi");
 ReadPackage ("crisp", "lib/samples.gi");
 ReadPackage ("crisp", "lib/socle.gi");
-
-if not IsBound (ComputedInducedPcgses) then
-   ReadPackage ("crisp", "lib/pcgscache.gi");
-fi;
 
 
 ############################################################################
