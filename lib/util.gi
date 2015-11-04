@@ -262,8 +262,8 @@ InstallGlobalFunction ("PcgsCompositionSeriesElAbModuloPcgsUnderAction",
          gens := List (DenominatorOfModuloPcgs (pcgs));
          len := Length (gens);
          depth := ShallowCopy (ddepth);
-         
-         for v in b do
+
+         for v in Reversed(b) do
             y := PcElementByExponentsNC (pcgs, v);
             dp := DepthOfPcElement (ppcgs, y);
             pos := PositionSorted (depth, dp);
