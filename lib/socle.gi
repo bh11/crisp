@@ -22,6 +22,8 @@ InstallGlobalFunction (SolvableSocleComponentsBySeries,
          Info (InfoComplement, 1, "starting step ",i);
          L := ComplementsMaximalUnderAction (G, ser, i, i+1, n, false);
          if L <> fail then
+            Assert (1, IsElementaryAbelian(L));
+            SetIsElementaryAbelian (L, true);
             Add (components, L);
          fi;
       od;
@@ -278,7 +280,7 @@ InstallMethod (SolvableSocle,
    0,
    function( G )
 
-      local i, pcgs, pcgssoc, socdepths, L, x, ser, n;
+      local i, pcgs, pcgssoc, socdepths, L, x, ser, n, S;
       
       if IsTrivial (G) then
          return G;
@@ -297,7 +299,10 @@ InstallMethod (SolvableSocle,
          od;
       od;
       pcgssoc := InducedPcgsByPcSequenceNC (pcgs, pcgssoc);
-      return GroupOfPcgs (pcgssoc);
+      S := GroupOfPcgs (pcgssoc);
+      Assert (1, IsAbelian(S));
+      SetIsAbelian (S, true);
+      return S;
    end);
 
 
@@ -318,6 +323,8 @@ InstallMethod (SolvableSocle,
       for L in SolvableSocleComponents (G) do
          S := ClosureGroup (S, L);
       od;
+      Assert (1, IsAbelian(S));
+      SetIsAbelian (S, true);
       return S;
    end);
 
@@ -391,52 +398,58 @@ RedispatchOnCondition (Socle, true,
 #M  PSocleOp (<G>, <p>) 
 ##
 InstallMethod (PSocleOp, 
-   "for pcgs computable group", true, 
-   [IsGroup and CanEasilyComputePcgs and IsFinite, IsPosInt], 
-   0,
-   function( G, p )
+    "for pcgs computable group", true,
+    [IsGroup and CanEasilyComputePcgs and IsFinite, IsPosInt],
+    0,
+    function( G, p )
 
-      local i, pcgs, pcgssoc, socdepths, L, x, ser, n;
-      
-      if IsTrivial (G) then
-         return G;
-      fi;
-      
-      pcgs := ParentPcgs (Pcgs (G));
-      
-      pcgssoc := [];
-      socdepths := [];
-      
-      for L in PSocleComponents (G, p) do
-         for x in Pcgs (L) do
-            if not AddPcElementToPcSequence (pcgs, pcgssoc, socdepths, x) then
-               Error ("Internal error in method for `Socle' for soluble gorups");
-            fi;
-         od;
-      od;
-      pcgssoc := InducedPcgsByPcSequenceNC (pcgs, pcgssoc);
-      return GroupOfPcgs (pcgssoc);
-   end);
+        local i, pcgs, pcgssoc, socdepths, L, x, ser, n, S;
+
+        if IsTrivial (G) then
+            return G;
+        fi;
+
+        pcgs := ParentPcgs (Pcgs (G));
+
+        pcgssoc := [];
+        socdepths := [];
+
+        for L in PSocleComponents (G, p) do
+            for x in Pcgs (L) do
+                if not AddPcElementToPcSequence (pcgs, pcgssoc, socdepths, x) then
+                    Error ("Internal error in method for `Socle' for soluble gorups");
+                fi;
+            od;
+        od;
+
+        pcgssoc := InducedPcgsByPcSequenceNC (pcgs, pcgssoc);
+        S := GroupOfPcgs (pcgssoc);
+        Assert (1, IsElementaryAbelian(S));
+        SetIsElementaryAbelian (S, true);
+        return S;
+    end);
 
 
 #############################################################################
 ##
-#M  PSocleOp (<G>, <p>) 
+#M  PSocleOp (<G>, <p>)
 ##
-InstallMethod (PSocleOp, 
-   "for finite group", true, 
-   [IsGroup and IsFinite, IsPosInt], 
-   0,
-   function( G, p )
+InstallMethod (PSocleOp,
+    "for finite group", true,
+    [IsGroup and IsFinite, IsPosInt],
+    0,
+    function( G, p )
 
-      local S, L;
+        local S, L;
       
-      S := TrivialSubgroup (G);
+        S := TrivialSubgroup (G);
       
-      for L in PSocleComponents (G, p) do
-         S := ClosureGroup (S, L);
-      od;
-       return S;
+        for L in PSocleComponents (G, p) do
+            S := ClosureGroup (S, L);
+        od;
+        Assert (1, IsElementaryAbelian(S));
+        SetIsElementaryAbelian (S, true);
+        return S;
    end);
 
 
@@ -495,7 +508,7 @@ InstallMethod (AbelianMinimalNormalSubgroups,
     true, [IsGroup and CanEasilyComputePcgs and IsFinite], 0,	
 	function (G)
 
-    local norms, k;
+    local norms, k, N;
 
     norms := AllInvariantSubgroupsWithNProperty (G, G,
        function (U, V, R, data)
@@ -511,6 +524,10 @@ InstallMethod (AbelianMinimalNormalSubgroups,
        k := k - 1;
     od;
     Remove (norms, k);
+    for N in norms do
+        Assert (1, IsElementaryAbelian(N));
+        SetIsElementaryAbelian (N, true);
+    od;
     return norms;
 end);
 
@@ -525,7 +542,7 @@ InstallMethod (AbelianMinimalNormalSubgroups,
     true, [IsGroup and CanEasilyComputePcgs and HasFittingSubgroup and IsFinite], 0,	
 	function (G)
 
-    local norms, k;
+    local norms, k, N;
 
     norms := AllInvariantSubgroupsWithNProperty (G, FittingSubgroup (G),
        function (U, V, R, data)
@@ -541,6 +558,10 @@ InstallMethod (AbelianMinimalNormalSubgroups,
        k := k - 1;
     od;
     Remove (norms, k);
+    for N in norms do
+        Assert (1, IsElementaryAbelian(N));
+        SetIsElementaryAbelian (N, true);
+    od;
     return norms;
 end);
 
@@ -555,7 +576,7 @@ InstallMethod (AbelianMinimalNormalSubgroups,
     true, [IsGroup and IsFinite], 0,	
 	function (G)
 
-    local norms, k;
+    local norms, k, N;
 
     norms := AllInvariantSubgroupsWithNProperty (G, FittingSubgroup (G),
        function (U, V, R, data)
@@ -571,6 +592,10 @@ InstallMethod (AbelianMinimalNormalSubgroups,
        k := k - 1;
     od;
     Remove (norms, k);
+    for N in norms do
+        Assert (1, IsElementaryAbelian(N));
+        SetIsElementaryAbelian (N, true);
+    od;
     return norms;
 end);
 
