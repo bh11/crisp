@@ -442,9 +442,8 @@ InstallGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs",
             dpcgs := List (dpcgs);
             depths := List (dpcgs, x -> DepthOfPcElement (pcgs, x));
             for x in Reversed (m) do
-               if not AddPcElementToPcSequence (pcgs, dpcgs, depths, x^p) then
-                    Error ("Internal Error: PcgsElementaryAbelianSeriesFromGenericPcgs, wrong pcgs");
-               fi;
+               # elements may already be contained in the subgroup, so don't check return values'
+               AddPcElementToPcSequence (pcgs, dpcgs, depths, x^p);
             od;
             dpcgs := CanonicalPcgs (
                InducedPcgsByPcSequenceNC (pcgs, dpcgs));
