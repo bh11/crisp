@@ -21,16 +21,16 @@ fi;
 
 ############################################################################
 ##
-#F  SilentRead (g1, g2)
+#F  SilentRead (g1, g2, g3)
 ##
-##  if g1 is a function, this simply returns g1 (g2). 
+##  if g1 is a function, this simply assigns g1 (g2) to the global varable g3.
 ##  Otherwise, it behaves like ReadPackage (pkg fname), but suppresses anything 
 ##  printed while reading the file
 ##
-SilentRead := function (g1, g2)
+SilentRead := function (g1, g2, g3)
 
    if IsFunction (g1) then
-      CallFuncList (g1, g2);
+      BindGlobal (g3, CallFuncList (g1, g2));
    else
       MakeReadWriteGlobal ("Print");
       Print := Ignore;
@@ -98,9 +98,12 @@ DoTests := function (groups, tests)
    Print ("\n");
    for g in groups do
       if IsBoundGlobal (g[3]) then
+         if IsReadOnlyGlobal (g[3]) then
+            MakeReadWriteGlobal (g[3]);
+         fi;
          UnbindGlobal (g[3]);
       fi;
-      SilentRead (g[1],g[2]);
+      SilentRead (g[1],g[2],g[3]);
       if IsBound (g[4]) then
          name := g[4];
       else
@@ -111,6 +114,9 @@ DoTests := function (groups, tests)
       size := Size (tmp);
       Print (String (LogInt (Size (tmp), 10), 8));
       Print (String (Length (Pcgs(tmp)), 8), "\c");
+      if IsReadOnlyGlobal (g[3]) then
+         MakeReadWriteGlobal (g[3]);
+      fi;
       UnbindGlobal (g[3]);
       prevres := fail;
       
@@ -118,7 +124,7 @@ DoTests := function (groups, tests)
          if name in t[4] then
             t1 := "n/a";
          else
-            SilentRead (g[1],g[2]);
+            SilentRead (g[1],g[2], g[3]);
             tmp := ValueGlobal (g[3]);
             if IsBound (t[5]) then
                t[5](tmp);
@@ -129,13 +135,20 @@ DoTests := function (groups, tests)
             t0 := Runtime();
             res := t[1](tmp);
             t1 := Runtime() - t0;
-            res := t[2](res);
+            if res = fail then
+                t1 := "n/a";
+            else
+                res := t[2](res);
+            fi;
             if prevres <> fail then
                if res <> fail and res <> prevres then
                   Error ("results do not match");
                fi;
             else
                prevres := res;
+            fi;
+            if IsReadOnlyGlobal (g[3]) then
+               MakeReadWriteGlobal (g[3]);
             fi;
             UnbindGlobal (g[3]);
          fi;
