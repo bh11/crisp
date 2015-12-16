@@ -377,10 +377,14 @@ RedispatchOnCondition (SolvableSocle, true,
 #M  Socle (<G>) 
 ##
 InstallMethod (Socle, "for finite soluble group, via SolvableSocle", true,
-   [IsGroup and IsSolvableGroup and IsFinite],
-   0,
+   [IsGroup and IsFinite],
+   RankFilter (IsGroup and IsSolvableGroup and IsFinite) - RankFilter(IsGroup and IsFinite),
    function( grp )
-      return SolvableSocle (grp);
+      if IsSolvableGroup (grp) then
+         return SolvableSocle (grp);
+      else
+         TryNextMethod();
+      fi;
    end);
    
    
