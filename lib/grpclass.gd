@@ -39,8 +39,7 @@ DeclareAttribute ("GroupClass", IsObject);
 ##  creates a group class from a list of groups and an isomorphism function
 ##
 DeclareOperation ("GroupClass", 
-   [IsList and IsMultiplicativeElementWithInverseCollColl,
-      IsFunction]);
+    [IsList and IsMultiplicativeElementWithInverseCollColl, IsFunction]);
 
 
 #############################################################################

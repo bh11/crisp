@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  classes.gi                       CRISP                   Burkhard Höfling
+##  classes.gi                        CRISP                  Burkhard Höfling
 ##
 ##  Copyright (C) 2000, 2003 Burkhard Höfling
 ##
@@ -16,15 +16,15 @@
 ##  in IsAttributeStoringRep.
 ##
 InstallMethod (\in, "for class, delegate to IsMember", true, 
-   [IsObject, IsClass], 0, 
-   function (x, C)
-      if IsMember (x, C) then
-         SetIsEmpty (C, false);
-         return true;
-      else
-         return false;
-      fi;
-   end);
+    [IsObject, IsClass], 0, 
+    function (x, C)
+        if IsMember (x, C) then
+            SetIsEmpty (C, false);
+            return true;
+        else
+            return false;
+        fi;
+    end);
 
 
 #############################################################################
@@ -32,8 +32,8 @@ InstallMethod (\in, "for class, delegate to IsMember", true,
 #M  \in
 ##
 InstallMethod (\in, "empty class", true, 
-   [IsObject, IsClass and IsEmpty], 0, 
-   ReturnFalse);
+    [IsObject, IsClass and IsEmpty], 0, 
+    ReturnFalse);
 
 
 #############################################################################
@@ -65,20 +65,20 @@ BindGlobal ("INTERSECTION_LIMIT", 1000);
 ##
 InstallGlobalFunction (NewClass, function (famname, rep, data)
 
-   local fam, class;
-   
-   MakeReadWriteGlobal ("CLASS_ID_COUNT");
-   CLASS_ID_COUNT := CLASS_ID_COUNT + 1;
-   MakeReadOnlyGlobal ("CLASS_ID_COUNT");
-   
-   if IsString (famname) then
-      fam := NewFamily (famname, IsClass, IsClass);
-   else
-      fam := famname;
-   fi;
-   class := Objectify (NewType (fam, rep), data);
-   class!.classId := CLASS_ID_COUNT;
-   return class;
+    local fam, class;
+    
+    MakeReadWriteGlobal ("CLASS_ID_COUNT");
+    CLASS_ID_COUNT := CLASS_ID_COUNT + 1;
+    MakeReadOnlyGlobal ("CLASS_ID_COUNT");
+    
+    if IsString (famname) then
+        fam := NewFamily (famname, IsClass, IsClass);
+    else
+        fam := famname;
+    fi;
+    class := Objectify (NewType (fam, rep), data);
+    class!.classId := CLASS_ID_COUNT;
+    return class;
 end);
 
 
@@ -87,33 +87,33 @@ end);
 #F  InstallDefiningAttributes (<cls>, <rec>)  . . . . . . . . . . . . . local
 ##
 InstallGlobalFunction ("InstallDefiningAttributes",
-   function (class, record)
-   
-      local r, f, undef;
+    function (class, record)
+    
+        local r, f, undef;
 
-      r := ShallowCopy (record);
-      undef := true;
-      
-      if IsBound (r.name) then
-         SetName (class, r.name);
-         Unbind (r.name);
-      fi;
-      
-      for f in class!.definingAttributes do
-         if IsBound (r.(f[1])) then
-            Setter (f[2]) (class, r.(f[1]));
-            Unbind (r.(f[1]));
-            undef := false;
-         fi;
-      od;
-      if undef then
-         Error ("The record components do not define <class>.");
-      fi;
-      if not IsEmpty (RecNames (r)) then
-         Error ("The components ", RecNames(r), " of r could not be used");
-      fi;
-   end);
-   
+        r := ShallowCopy (record);
+        undef := true;
+        
+        if IsBound (r.name) then
+            SetName (class, r.name);
+            Unbind (r.name);
+        fi;
+        
+        for f in class!.definingAttributes do
+            if IsBound (r.(f[1])) then
+                Setter (f[2]) (class, r.(f[1]));
+                Unbind (r.(f[1]));
+                undef := false;
+            fi;
+        od;
+        if undef then
+            Error ("The record components do not define <class>.");
+        fi;
+        if not IsEmpty (RecNames (r)) then
+            Error ("The components ", RecNames(r), " of r could not be used");
+        fi;
+    end);
+    
 
 #############################################################################
 ##
@@ -121,24 +121,24 @@ InstallGlobalFunction ("InstallDefiningAttributes",
 ##
 InstallGlobalFunction ("ViewDefiningAttributes",
 
-   function (C)
-   
-      local sep, a;
-      
-      sep := false;
-      
-      for a in C!.definingAttributes do
-         if Tester (a[2])(C) then
-            if sep then
-               Print (", ");
-            else
-               sep := true;
+    function (C)
+    
+        local sep, a;
+        
+        sep := false;
+        
+        for a in C!.definingAttributes do
+            if Tester (a[2])(C) then
+                if sep then
+                    Print (", ");
+                else
+                    sep := true;
+                fi;
+                Print (a[1], ":=");
+                ViewObj (a[2](C));
             fi;
-            Print (a[1], ":=");
-            ViewObj (a[2](C));
-         fi;
-      od;
-   end);
+        od;
+    end);
 
 
 #############################################################################
@@ -147,25 +147,25 @@ InstallGlobalFunction ("ViewDefiningAttributes",
 ##
 InstallGlobalFunction ("PrintDefiningAttributes",
 
-   function (C)
-   
-      local sep, a;
-      
-      sep := false;
+    function (C)
+    
+        local sep, a;
+        
+        sep := false;
 
-      Print ("rec (\n");
-      for a in C!.definingAttributes do
-         if Tester (a[2])(C) then
-            if sep then
-               Print (", \n");
-            else
-               sep := true;
+        Print ("rec (\n");
+        for a in C!.definingAttributes do
+            if Tester (a[2])(C) then
+                if sep then
+                    Print (", \n");
+                else
+                    sep := true;
+                fi;
+                Print (a[1], " := ", a[2](C));
             fi;
-            Print (a[1], " := ", a[2](C));
-         fi;
-      od;
-      Print (")");
-   end);
+        od;
+        Print (")");
+    end);
 
 
 #############################################################################
@@ -173,21 +173,21 @@ InstallGlobalFunction ("PrintDefiningAttributes",
 #M  \< 
 ##
 InstallMethod (\<, "for classes", true, [IsClass, IsClass], 0,
-   function (C, D)
-      return C!.classId < D!.classId;
-   end);
-   
-   
+    function (C, D)
+        return C!.classId < D!.classId;
+    end);
+    
+    
 #############################################################################
 ##
 #M  \=
 ##
 InstallMethod (\=, "for classes", true, [IsClass, IsClass], 0,
-   function (C, D)
-      return C!.classId = D!.classId;
-   end);
-   
-   
+    function (C, D)
+        return C!.classId = D!.classId;
+    end);
+    
+    
 #############################################################################
 ##
 #R  IsClassByPropertyRep (<func>)
@@ -196,8 +196,8 @@ InstallMethod (\=, "for classes", true, [IsClass, IsClass], 0,
 ##  for which f returns true
 ##
 DeclareRepresentation ("IsClassByPropertyRep", 
-   IsClass and IsComponentObjectRep and IsAttributeStoringRep, 
-   ["classId", "definingAttributes"]);
+    IsClass and IsComponentObjectRep and IsAttributeStoringRep, 
+    ["classId", "definingAttributes"]);
 
 
 #############################################################################
@@ -207,13 +207,13 @@ DeclareRepresentation ("IsClassByPropertyRep",
 ##  returns the class defined by rec
 ##
 InstallMethod (Class, "defined by property function", true, [IsRecord], 0, 
-   function (r) 
-      local class;
-      class := NewClass ("class family", IsClassByPropertyRep, 
-         rec(definingAttributes := [["in", MemberFunction]]));
-      InstallDefiningAttributes (class, r);
-      return class;
-   end); 
+    function (r) 
+        local class;
+        class := NewClass ("class family", IsClassByPropertyRep, 
+            rec(definingAttributes := [["in", MemberFunction]]));
+        InstallDefiningAttributes (class, r);
+        return class;
+    end); 
 
 
 #############################################################################
@@ -223,9 +223,9 @@ InstallMethod (Class, "defined by property function", true, [IsRecord], 0,
 ##  returns the class consisting of all elements for which func returns true
 ##
 InstallMethod (Class, "defined by property function", true, [IsFunction], 0, 
-   function (prop) 
-      return Class (rec (\in := prop));
-   end); 
+    function (prop) 
+        return Class (rec (\in := prop));
+    end); 
 
 
 #############################################################################
@@ -233,13 +233,13 @@ InstallMethod (Class, "defined by property function", true, [IsFunction], 0,
 #M  ViewObj (<class>)
 ##
 InstallMethod (ViewObj, "for IsClassByPropertyRep", true, 
-   [IsClassByPropertyRep], 0,
-   function (C) 
-      local sep;
-      Print ("Class (");
-      ViewDefiningAttributes (C);      
-      Print (")");
-   end);
+    [IsClassByPropertyRep], 0,
+    function (C) 
+        local sep;
+        Print ("Class (");
+        ViewDefiningAttributes (C);        
+        Print (")");
+    end);
 
 
 #############################################################################
@@ -247,12 +247,12 @@ InstallMethod (ViewObj, "for IsClassByPropertyRep", true,
 #M  PrintObj (<class>)
 ##
 InstallMethod (PrintObj, "for IsClassByPropertyRep", true, 
-   [IsClassByPropertyRep], 0,
-   function (C) 
-      Print ("Class (");
-      PrintDefiningAttributes (C);
-      Print (")");
-   end);
+    [IsClassByPropertyRep], 0,
+    function (C) 
+        Print ("Class (");
+        PrintDefiningAttributes (C);
+        Print (")");
+    end);
 
 
 #############################################################################
@@ -260,12 +260,12 @@ InstallMethod (PrintObj, "for IsClassByPropertyRep", true,
 #M  IsMemberOp (<obj>, <class>)
 ##
 InstallMethod (IsMemberOp, "for class with member function", true, 
-   [IsObject, IsClass and HasMemberFunction], SUM_FLAGS, 
-      # raise priority so that MemberFunction is preferred over other 
-      # methods trying to do without MemberFunction
-   function (x, C)
-      return MemberFunction (C)(x);
-   end);
+    [IsObject, IsClass and HasMemberFunction], SUM_FLAGS, 
+        # raise priority so that MemberFunction is preferred over other 
+        # methods trying to do without MemberFunction
+    function (x, C)
+        return MemberFunction (C)(x);
+    end);
 
 
 #############################################################################
@@ -275,8 +275,8 @@ InstallMethod (IsMemberOp, "for class with member function", true,
 ##  classes which are defined as complements of other classes
 ##
 DeclareRepresentation ("IsClassByComplementRep", 
-   IsClass and IsComponentObjectRep and IsAttributeStoringRep, 
-   ["classId", "complement"]);
+    IsClass and IsComponentObjectRep and IsAttributeStoringRep, 
+    ["classId", "complement"]);
 
 
 #############################################################################
@@ -284,10 +284,10 @@ DeclareRepresentation ("IsClassByComplementRep",
 #M  Complement (<cl>)
 ##
 InstallMethod (Complement, "for a class", true, [IsClass], 0, 
-   function (C) 
-      return NewClass ("class complement fam", IsClassByComplementRep,
-         rec (complement := C));
-   end);
+    function (C) 
+        return NewClass ("class complement fam", IsClassByComplementRep,
+            rec (complement := C));
+    end);
 
 
 #############################################################################
@@ -295,10 +295,10 @@ InstallMethod (Complement, "for a class", true, [IsClass], 0,
 #M  Complement (<cl>)
 ##
 InstallMethod (Complement, "for a class complement", true, 
-   [IsClassByComplementRep], 0, 
-   function (C) 
-      return C!.complement;
-   end);
+    [IsClassByComplementRep], 0, 
+    function (C) 
+        return C!.complement;
+    end);
 
 
 #############################################################################
@@ -306,10 +306,10 @@ InstallMethod (Complement, "for a class complement", true,
 #M  Complement (<list>)
 ##
 InstallMethod (Complement, "for a list/collection", true, [IsListOrCollection], 0, 
-   function (list) 
-      return NewClass ("class complement fam", IsClassByComplementRep,
-         rec (complement := list));
-   end);
+    function (list) 
+        return NewClass ("class complement fam", IsClassByComplementRep,
+            rec (complement := list));
+    end);
 
 
 #############################################################################
@@ -317,12 +317,12 @@ InstallMethod (Complement, "for a list/collection", true, [IsListOrCollection], 
 #M  ViewObj (<class>)
 ##
 InstallMethod (ViewObj, "for IsClassByComplementRep", true, 
-   [IsClassByComplementRep], 0,
-   function (C) 
-      Print ("Complement (");
-      View (C!.complement);
-      Print (")");
-   end);
+    [IsClassByComplementRep], 0,
+    function (C) 
+        Print ("Complement (");
+        View (C!.complement);
+        Print (")");
+    end);
 
 
 #############################################################################
@@ -330,12 +330,12 @@ InstallMethod (ViewObj, "for IsClassByComplementRep", true,
 #M  PrintObj (<class>)
 ##
 InstallMethod (PrintObj, "for IsClassByComplementRep", true, 
-   [IsClassByComplementRep], 0,
-   function (C) 
-      Print ("Complement (");
-      Print (C!.complement);
-      Print (")");
-   end);
+    [IsClassByComplementRep], 0,
+    function (C) 
+        Print ("Complement (");
+        Print (C!.complement);
+        Print (")");
+    end);
 
 
 #############################################################################
@@ -343,10 +343,10 @@ InstallMethod (PrintObj, "for IsClassByComplementRep", true,
 #M  IsMemberOp (<obj>, <class>)
 ##
 InstallMethod (IsMemberOp, "for IsClassByComplementRep", true, 
-   [IsObject, IsClassByComplementRep], 0, 
-   function (x, C)
-      return not x in C!.complement;
-   end);
+    [IsObject, IsClassByComplementRep], 0, 
+    function (x, C)
+        return not x in C!.complement;
+    end);
 
 
 #############################################################################
@@ -354,26 +354,26 @@ InstallMethod (IsMemberOp, "for IsClassByComplementRep", true,
 #P  IsEmpty (<class>)
 ##
 InstallMethod (IsEmpty, "for generic class", 
-   true, [IsClass], 0, 
-   function (C)
-      Error ("Sorry, cannot decide if the class <C> \
-         is empty.");
-   end);
+    true, [IsClass], 0, 
+    function (C)
+        Error ("Sorry, cannot decide if the class <C> \
+            is empty.");
+    end);
 
-      
+        
 #############################################################################
 ##
 #M  IsEmpty (<class>)
 ##
 InstallImmediateMethod (IsEmpty, IsClassByComplementRep, 0,
-   function (C)
-      if HasContainsTrivialGroup(C!.complement) 
-         and not ContainsTrivialGroup (C!.complement) then
-         return false;
-      else
-         TryNextMethod();
-      fi;
-   end);
+    function (C)
+        if HasContainsTrivialGroup(C!.complement) 
+            and not ContainsTrivialGroup (C!.complement) then
+            return false;
+        else
+            TryNextMethod();
+        fi;
+    end);
 
 
 #############################################################################
@@ -383,8 +383,8 @@ InstallImmediateMethod (IsEmpty, IsClassByComplementRep, 0,
 ##  classes which are defined as intersections of other classes
 ##
 DeclareRepresentation ("IsClassByIntersectionRep", 
-   IsClass and IsComponentObjectRep and IsAttributeStoringRep, 
-   ["classId", "intersected"]);
+    IsClass and IsComponentObjectRep and IsAttributeStoringRep, 
+    ["classId", "intersected"]);
 
 
 #############################################################################
@@ -392,11 +392,11 @@ DeclareRepresentation ("IsClassByIntersectionRep",
 #M  ViewObj (<class>)
 ##
 InstallMethod (ViewObj, "for IsClassByIntersectionRep", true, [IsClassByIntersectionRep], 0,
-   function (C) 
-      Print ("Intersection (");
-      View (C!.intersected);
-      Print (")");
-   end);
+    function (C) 
+        Print ("Intersection (");
+        View (C!.intersected);
+        Print (")");
+    end);
 
 
 #############################################################################
@@ -404,12 +404,12 @@ InstallMethod (ViewObj, "for IsClassByIntersectionRep", true, [IsClassByIntersec
 #M  PrintObj (<class>)
 ##
 InstallMethod (PrintObj, "for IsClassByIntersectionRep", true, 
-   [IsClassByIntersectionRep], 0,
-   function (C) 
-      Print ("Intersection (");
-      Print (C!.intersected);
-      Print (")");
-   end);
+    [IsClassByIntersectionRep], 0,
+    function (C) 
+        Print ("Intersection (");
+        Print (C!.intersected);
+        Print (")");
+    end);
 
 
 #############################################################################
@@ -417,10 +417,10 @@ InstallMethod (PrintObj, "for IsClassByIntersectionRep", true,
 #M  IsMemberOp (<obj>, <class>)
 ##
 InstallMethod (IsMemberOp, "for IsClassByIntersectionRep", true, 
-   [IsObject, IsClassByIntersectionRep], 0, 
-   function (x, C)
-      return ForAll (C!.intersected, D -> x in D);
-   end);
+    [IsObject, IsClassByIntersectionRep], 0, 
+    function (x, C)
+        return ForAll (C!.intersected, D -> x in D);
+    end);
 
 
 #############################################################################
@@ -428,39 +428,39 @@ InstallMethod (IsMemberOp, "for IsClassByIntersectionRep", true,
 #M  IsEmpty (<class>)
 ##
 InstallImmediateMethod (IsEmpty, IsClassByIntersectionRep, 0,
-   function (C)
-      if ForAny (C!.intersected, C -> HasIsEmpty (C) and IsEmpty (C)) then
-         return true;
-      else
-         TryNextMethod();
-      fi;
-   end);
-   
-   
+    function (C)
+        if ForAny (C!.intersected, C -> HasIsEmpty (C) and IsEmpty (C)) then
+            return true;
+        else
+            TryNextMethod();
+        fi;
+    end);
+    
+    
 #############################################################################
 ##
 #M  IsFinite (<class>)
 ##
 InstallImmediateMethod (IsFinite, IsClassByIntersectionRep, 0,
-   function (C)
-      if ForAny (C!.intersected, C -> HasIsFinite (C) and IsFinite (C)) then
-         return true;
-      else
-         TryNextMethod();
-      fi;
-   end);
-   
-   
+    function (C)
+        if ForAny (C!.intersected, C -> HasIsFinite (C) and IsFinite (C)) then
+            return true;
+        else
+            TryNextMethod();
+        fi;
+    end);
+    
+    
 #############################################################################
 ##
 #M  Intersection2 (<class1>, <class2>)
 ##
 InstallMethod (Intersection2, "of two class intersections", true, 
-   [IsClassByIntersectionRep, IsClassByIntersectionRep], 0, 
-   function (C, D)
-      return NewClass ("class intersection fam", IsClassByIntersectionRep,
-         rec (intersected := Concatenation (C!.intersected, D!.intersected)));
-   end);
+    [IsClassByIntersectionRep, IsClassByIntersectionRep], 0, 
+    function (C, D)
+        return NewClass ("class intersection fam", IsClassByIntersectionRep,
+            rec (intersected := Concatenation (C!.intersected, D!.intersected)));
+    end);
 
 
 #############################################################################
@@ -468,11 +468,11 @@ InstallMethod (Intersection2, "of two class intersections", true,
 #M  Intersection2 (<obj>, <class>)
 ##
 InstallMethod (Intersection2, "of class/list/coll and class intersection", true, 
-   [IsListOrCollection, IsClassByIntersectionRep], 0, 
-   function (C, D)
-      return NewClass ("class intersection fam", IsClassByIntersectionRep,
-         rec (intersected := Concatenation ([C], D!.intersected)));
-   end);
+    [IsListOrCollection, IsClassByIntersectionRep], 0, 
+    function (C, D)
+        return NewClass ("class intersection fam", IsClassByIntersectionRep,
+            rec (intersected := Concatenation ([C], D!.intersected)));
+    end);
 
 
 #############################################################################
@@ -480,11 +480,11 @@ InstallMethod (Intersection2, "of class/list/coll and class intersection", true,
 #M  Intersection2 (<class>, <obj>)
 ##
 InstallMethod (Intersection2, "of class intersection and class/list/coll", true, 
-   [IsClassByIntersectionRep, IsListOrCollection], 0, 
-   function (C, D)
-      return NewClass ("class intersection fam", IsClassByIntersectionRep,
-         rec (intersected := Concatenation (C!.intersected, [D])));
-   end);
+    [IsClassByIntersectionRep, IsListOrCollection], 0, 
+    function (C, D)
+        return NewClass ("class intersection fam", IsClassByIntersectionRep,
+            rec (intersected := Concatenation (C!.intersected, [D])));
+    end);
 
 
 #############################################################################
@@ -492,14 +492,14 @@ InstallMethod (Intersection2, "of class intersection and class/list/coll", true,
 #M  Intersection2 (<coll>, <class>)
 ##
 InstallMethod (Intersection2, "of small list/coll and class" , true, 
-   [IsListOrCollection and IsFinite and HasSize, IsClass], 0, 
-   function (C, D)
-      if Size (C) < INTERSECTION_LIMIT then
-         return Filtered (C, x -> x in D);
-      else
-         TryNextMethod();
-      fi;
-   end);
+    [IsListOrCollection and IsFinite and HasSize, IsClass], 0, 
+    function (C, D)
+        if Size (C) < INTERSECTION_LIMIT then
+            return Filtered (C, x -> x in D);
+        else
+            TryNextMethod();
+        fi;
+    end);
 
 
 #############################################################################
@@ -507,14 +507,14 @@ InstallMethod (Intersection2, "of small list/coll and class" , true,
 #M  Intersection2 (<list>, <class>)
 ##
 InstallMethod (Intersection2, "of small list and class/list/coll", true, 
-   [IsList and IsFinite, IsListOrCollection], 0, 
-   function (C, D)
-      if Length (C) < INTERSECTION_LIMIT then
-         return Filtered (C, x -> x in D);
-      else
-         TryNextMethod();
-      fi;
-   end);
+    [IsList and IsFinite, IsListOrCollection], 0, 
+    function (C, D)
+        if Length (C) < INTERSECTION_LIMIT then
+            return Filtered (C, x -> x in D);
+        else
+            TryNextMethod();
+        fi;
+    end);
 
 
 #############################################################################
@@ -522,14 +522,14 @@ InstallMethod (Intersection2, "of small list and class/list/coll", true,
 #M  Intersection2 (<class>, <coll>)
 ##
 InstallMethod (Intersection2, "of class and small list/coll", true, 
-   [IsClass, IsListOrCollection and IsFinite and HasSize], 0, 
-   function (C, D)
-      if Size (D) < INTERSECTION_LIMIT then
-         return Filtered (D, x -> x in C);
-      else
-         TryNextMethod();
-      fi;
-   end);
+    [IsClass, IsListOrCollection and IsFinite and HasSize], 0, 
+    function (C, D)
+        if Size (D) < INTERSECTION_LIMIT then
+            return Filtered (D, x -> x in C);
+        else
+            TryNextMethod();
+        fi;
+    end);
 
 
 #############################################################################
@@ -537,14 +537,14 @@ InstallMethod (Intersection2, "of class and small list/coll", true,
 #M  Intersection2 (<obj>, <list>)
 ##
 InstallMethod (Intersection2, "of class and small list", true, 
-   [IsClass, IsList and IsFinite], 0, 
-   function (C, D)
-      if Length (D) < INTERSECTION_LIMIT then
-         return Filtered (D, x -> x in C);
-      else
-         TryNextMethod();
-      fi;
-   end);
+    [IsClass, IsList and IsFinite], 0, 
+    function (C, D)
+        if Length (D) < INTERSECTION_LIMIT then
+            return Filtered (D, x -> x in C);
+        else
+            TryNextMethod();
+        fi;
+    end);
 
 
 #############################################################################
@@ -552,11 +552,11 @@ InstallMethod (Intersection2, "of class and small list", true,
 #M  Intersection2 (<class1>, <class2>)
 ##
 InstallMethod (Intersection2, "of two classes", true, 
-   [IsClass, IsClass], 0, 
-   function (C, D)
-      return NewClass ("class intersection fam", IsClassByIntersectionRep,
-         rec (intersected := [C,D]));
-   end);
+    [IsClass, IsClass], 0, 
+    function (C, D)
+        return NewClass ("class intersection fam", IsClassByIntersectionRep,
+            rec (intersected := [C,D]));
+    end);
 
 
 #############################################################################
@@ -564,11 +564,11 @@ InstallMethod (Intersection2, "of two classes", true,
 #M  Intersection2 (<list/coll>, <ist/coll>)
 ##
 InstallMethod (Intersection2, "of list/collection and list/collection", true, 
-   [IsListOrCollection, IsListOrCollection], 0, 
-   function (C, D)
-      return NewClass ("class intersection fam", IsClassByIntersectionRep,
-         rec (intersected := [C,D]));
-   end);
+    [IsListOrCollection, IsListOrCollection], 0, 
+    function (C, D)
+        return NewClass ("class intersection fam", IsClassByIntersectionRep,
+            rec (intersected := [C,D]));
+    end);
 
 
 #############################################################################
@@ -576,11 +576,11 @@ InstallMethod (Intersection2, "of list/collection and list/collection", true,
 #M  Intersection2 (<obj>, <class>)
 ##
 InstallMethod (Intersection2, "of list/collection and class", true, 
-   [IsListOrCollection, IsClass], 0, 
-   function (C, D)
-      return NewClass ("class intersection fam", IsClassByIntersectionRep,
-         rec (intersected := [C,D]));
-   end);
+    [IsListOrCollection, IsClass], 0, 
+    function (C, D)
+        return NewClass ("class intersection fam", IsClassByIntersectionRep,
+            rec (intersected := [C,D]));
+    end);
 
 
 #############################################################################
@@ -590,8 +590,8 @@ InstallMethod (Intersection2, "of list/collection and class", true,
 ##  classes which are defined as unions of other classes
 ##
 DeclareRepresentation ("IsClassByUnionRep", 
-   IsClass and IsComponentObjectRep and IsAttributeStoringRep, 
-   ["classId", "united"]);
+    IsClass and IsComponentObjectRep and IsAttributeStoringRep, 
+    ["classId", "united"]);
 
 
 #############################################################################
@@ -599,11 +599,11 @@ DeclareRepresentation ("IsClassByUnionRep",
 #M  ViewObj (<class>)
 ##
 InstallMethod (ViewObj, "for IsClassByUnionRep", true, [IsClassByUnionRep], 0,
-   function (C) 
-      Print ("Union (");
-      View (C!.united);
-      Print (")");
-   end);
+    function (C) 
+        Print ("Union (");
+        View (C!.united);
+        Print (")");
+    end);
 
 
 #############################################################################
@@ -611,12 +611,12 @@ InstallMethod (ViewObj, "for IsClassByUnionRep", true, [IsClassByUnionRep], 0,
 #M  PrintObj (<class>)
 ##
 InstallMethod (PrintObj, "for IsClassByUnionRep", true, 
-   [IsClassByUnionRep], 0,
-   function (C) 
-      Print ("Union (");
-      Print (C!.united);
-      Print (")");
-   end);
+    [IsClassByUnionRep], 0,
+    function (C) 
+        Print ("Union (");
+        Print (C!.united);
+        Print (")");
+    end);
 
 
 #############################################################################
@@ -624,10 +624,10 @@ InstallMethod (PrintObj, "for IsClassByUnionRep", true,
 #M  IsMemberOp (<obj>, <class>)
 ##
 InstallMethod (IsMemberOp, "for IsClassByUnionRep", true, 
-   [IsObject, IsClassByUnionRep], 0, 
-   function (x, C)
-      return ForAny (C!.united, D -> x in D);
-   end);
+    [IsObject, IsClassByUnionRep], 0, 
+    function (x, C)
+        return ForAny (C!.united, D -> x in D);
+    end);
 
 
 #############################################################################
@@ -635,19 +635,19 @@ InstallMethod (IsMemberOp, "for IsClassByUnionRep", true,
 #M  IsEmpty (<class>)
 ##
 InstallImmediateMethod (IsEmpty, IsClassByUnionRep, 0,
-   function (cl)
-      local C;
-      for C in cl!.united do
-         if HasIsEmpty(C) then
-            if not IsEmpty(C) then
-               return false;
+    function (cl)
+        local C;
+        for C in cl!.united do
+            if HasIsEmpty(C) then
+                if not IsEmpty(C) then
+                    return false;
+                fi;
+            else
+                TryNextMethod();
             fi;
-         else
-            TryNextMethod();
-         fi;
-      od;
-      return true;
-   end);
+        od;
+        return true;
+    end);
 
 
 #############################################################################
@@ -655,11 +655,11 @@ InstallImmediateMethod (IsEmpty, IsClassByUnionRep, 0,
 #M  Union2 (<class>, <class>)
 ##
 InstallMethod (Union2, "for two class unions", true, 
-   [IsClassByUnionRep, IsClassByUnionRep], 0, 
-   function (C, D)
-      return NewClass ("class union fam", IsClassByUnionRep,
-         rec (united := Concatenation (C!.united, D!.united)));
-   end);
+    [IsClassByUnionRep, IsClassByUnionRep], 0, 
+    function (C, D)
+        return NewClass ("class union fam", IsClassByUnionRep,
+            rec (united := Concatenation (C!.united, D!.united)));
+    end);
 
 
 #############################################################################
@@ -667,11 +667,11 @@ InstallMethod (Union2, "for two class unions", true,
 #M  Union2 (<obj>, <class>)
 ##
 InstallMethod (Union2, "for class/list/collection and class union", true, 
-   [IsListOrCollection, IsClassByUnionRep], 0, 
-   function (C, D)
-      return NewClass ("class union fam", IsClassByUnionRep,
-         rec (united := Concatenation ([C], D!.united)));
-   end);
+    [IsListOrCollection, IsClassByUnionRep], 0, 
+    function (C, D)
+        return NewClass ("class union fam", IsClassByUnionRep,
+            rec (united := Concatenation ([C], D!.united)));
+    end);
 
 
 #############################################################################
@@ -679,11 +679,11 @@ InstallMethod (Union2, "for class/list/collection and class union", true,
 #M  Union2 (<class>, <obj>)
 ##
 InstallMethod (Union2, "for class union and class/list/collection", true, 
-   [IsClassByUnionRep, IsListOrCollection], 0, 
-   function (C, D)
-      return NewClass ("class union fam", IsClassByUnionRep,
-         rec (united := Concatenation (C!.united, [D])));
-   end);
+    [IsClassByUnionRep, IsListOrCollection], 0, 
+    function (C, D)
+        return NewClass ("class union fam", IsClassByUnionRep,
+            rec (united := Concatenation (C!.united, [D])));
+    end);
 
 
 #############################################################################
@@ -691,11 +691,11 @@ InstallMethod (Union2, "for class union and class/list/collection", true,
 #M  Union2 (<obj1>, <obj2>)
 ##
 InstallMethod (Union2, "for two classes/lists/collections", true, 
-   [IsListOrCollection, IsListOrCollection], 0, 
-   function (C, D)
-      return NewClass ("class union fam", IsClassByUnionRep,
-         rec (united := [C,D]));
-   end);
+    [IsListOrCollection, IsListOrCollection], 0, 
+    function (C, D)
+        return NewClass ("class union fam", IsClassByUnionRep,
+            rec (united := [C,D]));
+    end);
 
 
 #############################################################################
@@ -703,10 +703,10 @@ InstallMethod (Union2, "for two classes/lists/collections", true,
 #M  Difference (<obj1>, <obj2>)
 ##
 InstallMethod (Difference, "for two classes/lists/collections", true, 
-   [IsListOrCollection, IsListOrCollection], 0, 
-   function (C, D)
-      return Intersection2 (C, Complement (D));
-   end);
+    [IsListOrCollection, IsListOrCollection], 0, 
+    function (C, D)
+        return Intersection2 (C, Complement (D));
+    end);
 
 
 #############################################################################

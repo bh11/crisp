@@ -31,7 +31,7 @@ DeclareAttribute ("CharacteristicSubgroups", IsGroup);
 ##  See the manual.
 ##
 DeclareOperation ("OneInvariantSubgroupMinWrtQProperty", 
-   [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject]);
+    [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject]);
 
 
 ############################################################################
@@ -42,7 +42,7 @@ DeclareOperation ("OneInvariantSubgroupMinWrtQProperty",
 ##  See the manual.
 ##
 DeclareOperation ("AllInvariantSubgroupsWithQProperty", 
-   [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject]);
+    [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject]);
 
 
 #############################################################################
@@ -52,7 +52,7 @@ DeclareOperation ("AllInvariantSubgroupsWithQProperty",
 ##  See the manual.
 ##
 DeclareOperation ("OneNormalSubgroupMinWrtQProperty", 
-   [IsGroup, IsFunction, IsFunction, IsObject]);
+    [IsGroup, IsFunction, IsFunction, IsObject]);
 
 
 ############################################################################
@@ -62,7 +62,7 @@ DeclareOperation ("OneNormalSubgroupMinWrtQProperty",
 ##  See the manual.
 ##
 DeclareOperation ("AllNormalSubgroupsWithQProperty", 
-   [IsGroup, IsFunction, IsFunction, IsObject]);
+    [IsGroup, IsFunction, IsFunction, IsObject]);
 
 
 ############################################################################

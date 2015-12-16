@@ -11,8 +11,8 @@
 #F  IsOrdinaryFormation (<group class>)
 ##
 DeclareSynonym ("IsOrdinaryFormation", 
-   IsGroupClass and ContainsTrivialGroup 
-      and IsQuotientClosed and IsResiduallyClosed);
+    IsGroupClass and ContainsTrivialGroup
+        and IsQuotientClosed and IsResiduallyClosed);
 
 
 #############################################################################
@@ -20,8 +20,8 @@ DeclareSynonym ("IsOrdinaryFormation",
 #F  HasIsOrdinaryFormation (<group class>)
 ##
 DeclareSynonym ("HasIsOrdinaryFormation", 
-   HasIsGroupClass and HasContainsTrivialGroup 
-      and HasIsQuotientClosed and HasIsResiduallyClosed);
+    HasIsGroupClass and HasContainsTrivialGroup
+        and HasIsQuotientClosed and HasIsResiduallyClosed);
 
 
 #############################################################################
@@ -43,7 +43,7 @@ DeclareAttribute ("OrdinaryFormation", IsObject);
 #O  FormationProduct (<form1>, <form2>)
 ##
 DeclareOperation ("FormationProduct", 
-   [IsOrdinaryFormation, IsOrdinaryFormation]);
+    [IsOrdinaryFormation, IsOrdinaryFormation]);
 
 
 #############################################################################
@@ -58,7 +58,7 @@ DeclareSynonym ("IsSaturatedFormation", IsOrdinaryFormation and IsSaturated);
 #F  HasIsSaturatedFormation (<group class>)
 ##
 DeclareSynonym ("HasIsSaturatedFormation", 
-   HasIsOrdinaryFormation and HasIsSaturated);
+    HasIsOrdinaryFormation and HasIsSaturated);
 
 
 #############################################################################
@@ -80,7 +80,7 @@ DeclareAttribute ("SaturatedFormation", IsObject);
 #F  HasIsFittingFormation(<group class>)
 ##
 DeclareSynonym ("HasIsFittingFormation", 
-   HasIsFittingClass and HasIsOrdinaryFormation);
+    HasIsFittingClass and HasIsOrdinaryFormation);
 
 
 #############################################################################
@@ -88,7 +88,7 @@ DeclareSynonym ("HasIsFittingFormation",
 #F  IsFittingFormation(<group class>)
 ##
 DeclareSynonym ("IsFittingFormation", 
-   IsFittingClass and IsOrdinaryFormation);
+    IsFittingClass and IsOrdinaryFormation);
 
 
 #############################################################################
@@ -118,15 +118,15 @@ DeclareAttribute ("FittingFormation", IsObject);
 ##  name). 
 ##
 DeclareOperation ("FittingFormationProduct", 
-   [IsFittingFormation, IsFittingFormation]);
+    [IsFittingFormation, IsFittingFormation]);
 
 
 #############################################################################
 ##
 #F  IsSaturatedFittingFormation (<group class>)
 ##
-DeclareSynonym ("IsSaturatedFittingFormation", 
-   IsFittingFormation and IsSaturated);
+DeclareSynonym ("IsSaturatedFittingFormation",
+    IsFittingFormation and IsSaturated);
 
 
 #############################################################################
@@ -134,7 +134,7 @@ DeclareSynonym ("IsSaturatedFittingFormation",
 #F  HasIsSaturatedFittingFormation (<group class>)
 ##
 DeclareSynonym ("HasIsSaturatedFittingFormation", 
-   HasIsFittingFormation and HasIsSaturated);
+    HasIsFittingFormation and HasIsSaturated);
 
 
 #############################################################################

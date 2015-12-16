@@ -25,7 +25,7 @@ KeyDependentOperation ("Projector", IsGroup, IsGroupClass, ReturnTrue);
 #M  CoveringSubgroup (<grp>, <class>)
 ##
 KeyDependentOperation ("CoveringSubgroup", IsGroup, IsGroupClass,
-      ReturnTrue);
+    ReturnTrue);
 
 
 #############################################################################
@@ -40,7 +40,7 @@ KeyDependentOperation ("CoveringSubgroup", IsGroup, IsGroupClass,
 ##  See PROJECTOR_FROM_BOUNDARY below for the meaning of <data>.
 ##
 DeclareOperation ("ProjectorFromExtendedBoundaryFunction",
-   [IsGroup, IsRecord, IsBool]);
+    [IsGroup, IsRecord, IsBool]);
 
 
 #############################################################################

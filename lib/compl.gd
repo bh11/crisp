@@ -106,7 +106,7 @@ DeclareGlobalFunction ("PcgsComplementsOfCentralModuloPcgsUnderActionNC");
 ##  list is returned if all is true, and fail is returned if all is false.
 ##
 DeclareOperation ("InvariantComplementsOfElAbSection", 
-   [IsListOrCollection, IsGroup, IsGroup, IsGroup, IsBool]);
+    [IsListOrCollection, IsGroup, IsGroup, IsGroup, IsBool]);
 
 #############################################################################
 ##
@@ -120,7 +120,7 @@ DeclareOperation ("InvariantComplementsOfElAbSection",
 DeclareGlobalFunction ("ComplementsOfCentralSectionUnderAction");
    
 DeclareOperation ("ComplementsOfCentralSectionUnderActionNC", 
-   [IsListOrCollection, IsGroup, IsGroup, IsGroup, IsBool]);
+    [IsListOrCollection, IsGroup, IsGroup, IsGroup, IsBool]);
 
    
 #############################################################################

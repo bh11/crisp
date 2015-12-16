@@ -11,8 +11,8 @@
 #F  IsFittingClass (<group class>) 
 ##
 DeclareSynonym ("IsFittingClass", 
-   ContainsTrivialGroup and IsGroupClass and IsNormalSubgroupClosed 
-   and IsNormalProductClosed);
+    ContainsTrivialGroup and IsGroupClass and IsNormalSubgroupClosed
+    and IsNormalProductClosed);
 
 
 #############################################################################
@@ -20,8 +20,8 @@ DeclareSynonym ("IsFittingClass",
 #F  HasIsFittingClass (<group class>) 
 ##
 DeclareSynonym ("HasIsFittingClass", 
-   HasContainsTrivialGroup and HasIsGroupClass and HasIsNormalSubgroupClosed 
-   and HasIsNormalProductClosed);
+    HasContainsTrivialGroup and HasIsGroupClass and HasIsNormalSubgroupClosed
+    and HasIsNormalProductClosed);
 
 
 #############################################################################

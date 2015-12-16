@@ -23,7 +23,7 @@ KeyDependentOperation ("Radical", IsGroup, IsClass, ReturnTrue);
 ##  See the manual.
 ##
 DeclareOperation ("OneInvariantSubgroupMaxWrtNProperty", 
-   [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject]);
+    [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject]);
 
 
 #############################################################################
@@ -45,7 +45,7 @@ DeclareOperation ("AllInvariantSubgroupsWithNProperty",
 ##  See the manual.
 ##
 DeclareOperation ("OneNormalSubgroupMaxWrtNProperty", 
-   [IsGroup, IsFunction, IsFunction, IsObject]);
+    [IsGroup, IsFunction, IsFunction, IsObject]);
 
 
 #############################################################################

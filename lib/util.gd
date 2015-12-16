@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  util.gd                         CRISP                   Burkhard Höfling
+##  util.gd                           CRISP                  Burkhard Höfling
 ##
 ##  Copyright (C) 2000-2002, 2005 Burkhard Höfling
 ##
@@ -85,8 +85,8 @@ DeclareGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs");
 ##  in seq its depth wrt. <pcgs>.
 ##
 DeclareOperation ("SiftedPcElementWrtPcSequence", 
-   [IsPcgs, IsListOrCollection, IsList, IsMultiplicativeElementWithInverse]);
-   
+    [IsPcgs, IsListOrCollection, IsList, IsMultiplicativeElementWithInverse]);
+    
 #############################################################################
 ##
 #O  AddPcElementToPcSequence (<pcgs>, <seq>, <depths>, <x>)
@@ -100,7 +100,7 @@ DeclareOperation ("SiftedPcElementWrtPcSequence",
 ##  true. Otherwise it returns false. 
 ##
 DeclareOperation ("AddPcElementToPcSequence", 
-   [IsPcgs, IsListOrCollection, IsList, IsMultiplicativeElementWithInverse]);
+    [IsPcgs, IsListOrCollection, IsList, IsMultiplicativeElementWithInverse]);
 
 
 #############################################################################
@@ -124,35 +124,35 @@ DeclareAttribute ("PrimePowerGensPcSequence", IsGroup);
 ##
 ##  install method for oper taking a group and a class
 BindGlobal( "InstallMethodByNiceMonomorphismForGroupAndClass", 
-   function( oper, filt1, filt2)
-   InstallMethod (oper,
-      "handled by nice monomorphism",
-      true,
-      [IsGroup and IsHandledByNiceMonomorphism and filt1, filt2],
-      0,
-      function( grp, class)
-         return PreImagesSet (NiceMonomorphism (grp), 
-            oper (NiceObject (grp), class) );
-      end);
-   end);
+    function( oper, filt1, filt2)
+    InstallMethod (oper,
+        "handled by nice monomorphism",
+        true,
+        [IsGroup and IsHandledByNiceMonomorphism and filt1, filt2],
+        0,
+        function( grp, class)
+            return PreImagesSet (NiceMonomorphism (grp), 
+                oper (NiceObject (grp), class) );
+        end);
+    end);
 
 
 #############################################################################
 ##
 #F  InstallMethodByNiceMonomorphismForGroupAndClassReturningBool (
-##      <oper>, <filt1>, <filt2>)
+##        <oper>, <filt1>, <filt2>)
 ##
 BindGlobal( "InstallMethodByNiceMonomorphismForGroupAndBool", 
-   function( oper, filt1, filt2)
-   InstallMethod (oper,
-      "handled by nice monomorphism",
-      true,
-      [IsGroup and IsHandledByNiceMonomorphism and filt1, filt2],
-      0,
-      function( grp, class)
-         return oper (NiceObject (grp), class);
-      end);
-   end);
+    function( oper, filt1, filt2)
+    InstallMethod (oper,
+        "handled by nice monomorphism",
+        true,
+        [IsGroup and IsHandledByNiceMonomorphism and filt1, filt2],
+        0,
+        function( grp, class)
+            return oper (NiceObject (grp), class);
+        end);
+    end);
 
 
 #############################################################################
@@ -161,43 +161,43 @@ BindGlobal( "InstallMethodByNiceMonomorphismForGroupAndBool",
 ##
 ##  install method for oper taking a group and a class
 BindGlobal( "InstallMethodByIsomorphismPcGroupForGroupAndClass", 
-   function( oper, filt1, filt2)
-   InstallMethod (oper,
-      "handled by IsomorphismPcGroup",
-      true,
-      [IsGroup and IsSolvableGroup and filt1, filt2],
-      0,
-      function( grp, class)
-         local iso;
-         if CanEasilyComputePcgs (grp) then
-            TryNextMethod();
-         fi;
-         iso := IsomorphismPcGroup (grp);
-         return PreImagesSet (iso, 
-            oper (ImagesSource (iso), class) );
-      end);
-   end);
+    function( oper, filt1, filt2)
+    InstallMethod (oper,
+        "handled by IsomorphismPcGroup",
+        true,
+        [IsGroup and IsSolvableGroup and filt1, filt2],
+        0,
+        function( grp, class)
+            local iso;
+            if CanEasilyComputePcgs (grp) then
+                TryNextMethod();
+            fi;
+            iso := IsomorphismPcGroup (grp);
+            return PreImagesSet (iso, 
+                oper (ImagesSource (iso), class) );
+        end);
+    end);
 
 
 #############################################################################
 ##
 #F  InstallMethodByIsomorphismPcGroupForGroupAndClassReturningBool (
-##      <oper>, <filt1>, <filt2>)
+##        <oper>, <filt1>, <filt2>)
 ##
 BindGlobal( "InstallMethodByIsomorphismPcGroupForGroupAndClassReturningBool", 
-   function( oper, filt1, filt2)
-   InstallMethod (oper,
-      "handled by IsomorphismPcGroup",
-      true,
-      [IsGroup and IsSolvableGroup and filt1, filt2],
-      0,
-      function( grp, class)
-         if CanEasilyComputePcgs (grp) then
-            TryNextMethod();
-         fi;
-         return oper (ImagesSource (IsomorphismPcGroup (grp)), class);
-      end);
-   end);
+    function( oper, filt1, filt2)
+    InstallMethod (oper,
+        "handled by IsomorphismPcGroup",
+        true,
+        [IsGroup and IsSolvableGroup and filt1, filt2],
+        0,
+        function( grp, class)
+            if CanEasilyComputePcgs (grp) then
+                TryNextMethod();
+            fi;
+            return oper (ImagesSource (IsomorphismPcGroup (grp)), class);
+        end);
+    end);
 
 
 #############################################################################
