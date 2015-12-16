@@ -4,10 +4,10 @@ K.~Doerk and T.~O. Hawkes.
 \newblock Walter de Gruyter, 1992.
 
 
-\bibitem[EW99]{EW99}
+\bibitem[EW02]{EW99}
 B.~Eick and C.~R.~B. Wright.
 \newblock Computing subgroups by exhibition in finite solvable groups.
-\newblock To appear in {\em J. Symbolic Comp}.
+\newblock To appear in {\em J. Symbolic Comp} 33:129--143, 2002.
 
 
 \bibitem[FGH67]{FGH67}
@@ -23,7 +23,7 @@ W.~Gasch\accent127utz.
 \newblock {\em Math. Z.}, 80:300 -- 305, 1963.
 
 
-\bibitem[H\accent127of99]{Hof99}
+\bibitem[H\accent127of01]{Hof99}
 B.~H\accent127oflling.
 \newblock Computing projectors, injectors, residuals and radicals  of finite
 soluble groups.
