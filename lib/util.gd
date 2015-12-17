@@ -65,13 +65,13 @@ DeclareOperation ("CompositionSeriesUnderAction",
 
 #############################################################################
 ##
-#F  PcgsElementaryAbelianSeriesFromGenericPcgs (<G>)
+#F  PcgsElementaryAbelianSeriesFromPrimeOrdersPcgs (<G>)
 ##
 ##  computes a pcgs exhibiting an elementary abelian series of G
 ##  from a given pcgs, avoiding SpecialPcgs. In particular returns the family 
 ##  pcgs if it has the required property
 ##
-DeclareGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs");
+DeclareGlobalFunction ("PcgsElementaryAbelianSeriesFromPrimeOrdersPcgs");
 
 
 #############################################################################

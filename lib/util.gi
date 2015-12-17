@@ -370,9 +370,9 @@ RedispatchOnCondition (CompositionSeriesUnderAction,
 
 ###################################################################################
 ##
-#F  PcgsElementaryAbelianSeriesFromGenericPcgs
+#F  PcgsElementaryAbelianSeriesFromPrimeOrdersPcgs
 ##
-InstallGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs",
+InstallGlobalFunction ("PcgsElementaryAbelianSeriesFromPrimeOrdersPcgs",
     function (pcgs)
     
         local ro, p, new, i, nsteps, j, k,  n, d, 
@@ -432,7 +432,7 @@ InstallGlobalFunction ("PcgsElementaryAbelianSeriesFromGenericPcgs",
             od;
             
             if n < i then 
-                Error ("internal error: PcgsElementaryAbelianSeriesFromGenericPcgs, wrong depth");
+                Error ("internal error: PcgsElementaryAbelianSeriesFromPrimeOrdersPcgs, wrong depth");
             elif n = i then # no abelian normal section found - change pcgs
                 Info (InfoPcGroup, 2, "changing pcgs");
                 npcgs := InducedPcgsByPcSequenceNC (pcgs, pcgs{[i..Length (pcgs)]});
@@ -481,7 +481,7 @@ InstallMethod (PcgsElementaryAbelianSeries, "CRISP method for pc group",
         if not IsPrimeOrdersPcgs (pcgs) then
 	      TryNextMethod();
         fi;
-        return PcgsElementaryAbelianSeriesFromGenericPcgs (pcgs);
+        return PcgsElementaryAbelianSeriesFromPrimeOrdersPcgs (pcgs);
     end);
 
 
@@ -532,7 +532,7 @@ InstallMethod (PcgsElementaryAbelianSeries, "generic method", true,
         if not IsSolvable (G) then
             Error ("The group <G> must be solvable");
         elif IsPrimeOrdersPcgs (Pcgs(G)) then
-            return PcgsElementaryAbelianSeriesFromGenericPcgs (Pcgs(G));
+            return PcgsElementaryAbelianSeriesFromPrimeOrdersPcgs (Pcgs(G));
         else
             TryNextMethod();
         fi;
