@@ -214,7 +214,7 @@ InstallGlobalFunction (ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction,
         t := Runtime();
         
         if IsGroup (act) then
-            act := GeneratorsOfGroup (act);
+            act := SmallGeneratingSet (act);
         fi;
         r := Length (act);
         s := Length (gpcgs);    
@@ -480,8 +480,8 @@ InstallMethod (ComplementsOfCentralSectionUnderActionNC,
 InstallGlobalFunction ("ComplementsOfCentralSectionUnderAction",
     function (act, G, N, L, all)
         
-        if ForAll (GeneratorsOfGroup (G), g ->
-            ForAll (GeneratorsOfGroup (N), n -> Comm (g, n) in L)) then
+        if ForAll (SmallGeneratingSet (G), g ->
+            ForAll (SmallGeneratingSet (N), n -> Comm (g, n) in L)) then
                 return ComplementsOfCentralSectionUnderActionNC (
                     act, G, N, L, all);
         else
@@ -509,7 +509,7 @@ InstallMethod (InvariantComplementsOfElAbSection,
         local cpcgs, complements, pcgs, pcgsL;
         
         if IsGroup (act) then
-            act := GeneratorsOfGroup (act);
+            act := SmallGeneratingSet (act);
         fi;
 
         pcgs := ParentPcgs (Pcgs(G));
