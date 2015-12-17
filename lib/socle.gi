@@ -377,24 +377,21 @@ RedispatchOnCondition (SolvableSocle, true,
 #M  Socle (<G>) 
 ##
 InstallMethod (Socle, "for finite soluble group, via SolvableSocle", true,
-    [IsGroup and IsFinite],
-    RankFilter (IsGroup and IsSolvableGroup and IsFinite) - RankFilter(IsGroup and IsFinite),
-    function( grp )
-        if IsSolvableGroup (grp) then
-            return SolvableSocle (grp);
-        else
-            TryNextMethod();
-        fi;
-    end);
-    
-    
+   [IsGroup and IsSolvableGroup and IsFinite],
+   0,
+   function( grp )
+      return SolvableSocle (grp);
+   end);
+   
+   
 #############################################################################
 ##
 #M  Socle (<G>) 
 ##
 RedispatchOnCondition (Socle, true, 
     [IsGroup], 
-    [IsFinite and IsSolvableGroup], 0);
+    [IsFinite and IsSolvableGroup],
+    RankFilter(IsGroup and IsSolvableGroup and IsFinite));
     
     
 #############################################################################
@@ -658,9 +655,15 @@ InstallMethod (MinimalNormalSubgroups,
 	"for solvable groups: use AbelianMinimalNormalSubgroups",
 	true, [IsGroup and IsFinite and IsSolvableGroup], 0,
 	AbelianMinimalNormalSubgroups);
-	
-RedispatchOnCondition (MinimalNormalSubgroups, 
-	true, [IsGroup], [IsSolvableGroup], 0);
+
+
+#############################################################################
+##
+#M  MinimalNormalSubgroups (<G>) 
+##
+RedispatchOnCondition (MinimalNormalSubgroups,
+	true, [IsGroup], [IsFinite and IsSolvableGroup],
+    RankFilter (IsGroup and IsSolvableGroup and IsFinite));
 
 
 ############################################################################
