@@ -2,91 +2,235 @@
 ##
 ##  socle.gi                           CRISP                 Burkhard Höfling
 ##
-##  Copyright (C) 2001, 2002, 2005 Burkhard Höfling
+##  Copyright (C) 2001, 2002, 2005, 2015 Burkhard Höfling
 ##
 
 #############################################################################
 ##
-#F  SolvableSocleComponentsBySeries (<G>, <ser>) 
+#M  PSocleComponentsOp (<G>, <p>) 
 ##
-InstallGlobalFunction (SolvableSocleComponentsBySeries, 
+InstallMethod (PSocleComponentsOp, 
+    "for finite group", true,
+    [IsGroup and IsFinite, IsPosInt], 
+    0,
+    function( G, p )
 
-    function (G, ser)
-	
-	  local n, components, L, i;
-        
-        components := [];
-        n := Length (ser);
+        local P, O, ser, j, N, res;
 
-        for i in [n-1, n-2..1] do
-            Info (InfoComplement, 1, "starting step ",i);
-            L := ComplementsMaximalUnderAction (G, ser, i, i+1, n, false);
-            if L <> fail then
-                Assert (1, IsElementaryAbelian(L));
-                SetIsElementaryAbelian (L, true);
-                Add (components, L);
+        if Size(G) mod p <> 0 then
+            return [];
+        fi;
+
+        P := PCore (G,p);
+
+        if IsTrivial (P) then
+            return [];
+        fi;
+
+        O := Omega (Center (P),p,1);
+
+        ser := CompositionSeriesUnderAction (G, O);
+
+        res := [ser[Length (ser)-1]];
+        for j in [Length (ser)-2, Length (ser)-3..1] do
+            N := ComplementsOfCentralSectionUnderActionNC (G, ser[j], ser[j+1], TrivialSubgroup (G), false);
+            if N <> fail then
+                Add (res, N);
             fi;
         od;
-        return components;
+        return res;
     end);
 
 
 #############################################################################
 ##
-#M  SolvableSocleComponents (<G>) 
+#M  PSocleComponentsOp (<G>, <p>) 
 ##
-InstallMethod (SolvableSocleComponents, 
-    "for finite groups", true, 
-    [IsGroup and IsFinite], 
+InstallMethod (PSocleComponentsOp, 
+    "for finite group with SolvableSocleComponents", true, 
+    [IsGroup and IsFinite and HasSolvableSocleComponents, 
+        IsPosInt], 
     0,
-    function( G )
-        local F;
-        F := FittingSubgroup (G);
-        if IsTrivial (F) then
-            return [];
-        else
-            return SolvableSocleComponentsBySeries (G, CompositionSeriesUnderAction (G, F));
-        fi;
-    end);        
-
-
-#############################################################################
-##
-#M  SolvableSocleComponents (<G>) 
-##
-InstallMethod (SolvableSocleComponents, 
-    "for solvable group", true, 
-    [IsGroup and IsFinite and CanEasilyComputePcgs], 
-    0,
-    function( G ) 
-        if IsTrivial (G) then
-            return [];
-        else
-            return SolvableSocleComponentsBySeries (G, ChiefSeries (G));
-        fi;
+    function( G, p ) 
+        return Filtered (SolvableSocleComponents (G), L -> PrimePGroup (L) = p);
     end);
 
 
 #############################################################################
 ##
-#M  SolvableSocleComponents (<G>) 
+#M  PSocleComponentsOp (<G>, <p>) 
 ##
-InstallMethod (SolvableSocleComponents, 
-    "for solvable group with known Fitting subgroup", true, 
-    [IsGroup and CanEasilyComputePcgs and IsFinite and HasFittingSubgroup], 
+RedispatchOnCondition (PSocleComponentsOp, true, 
+    [IsGroup, IsPosInt], 
+    [IsFinite, ],
+    0);
+    
+    
+#############################################################################
+##
+#M  PSocleComponentsOp (<G>, <p>) 
+##
+InstallMethod (PSocleComponentsOp,
+    "via IsomorphismPcGroup",
+    true,
+    [IsGroup and IsSolvableGroup and IsFinite, IsPosInt],
     0,
-    function( G )
-        local F;
-        F := FittingSubgroup (G);
-        if IsTrivial (F) then
-            return [];
-        else
-            return SolvableSocleComponentsBySeries (G, CompositionSeriesUnderAction (G, F));
+    function( grp, p)
+        local hom;
+        if CanEasilyComputePcgs (grp) then
+            TryNextMethod();
         fi;
-    end);        
+        hom := IsomorphismPcGroup (grp);
+        return List (PSocleComponentsOp (ImagesSource (hom), p),
+            L -> PreImagesSet (hom, L));
+    end);
+    
+    
+#############################################################################
+##
+#M  PSocleComponentsOp (<G>, <p>) 
+##
+InstallMethod (PSocleComponentsOp,
+    "handled by nice monomorphism",
+    true,
+    [IsGroup and IsHandledByNiceMonomorphism and IsFinite, 
+        IsPosInt],
+    0,
+    function( grp, p )
+        local hom;
+        hom := NiceMonomorphism (grp);
+        return List (PSocleComponentsOp (NiceObject (grp), p),
+            L -> PreImagesSet (hom, L));
+    end);
+    
+    
+#############################################################################
+##
+#M  PSocleOp (<G>, <p>) 
+##
+InstallMethod (PSocleOp, 
+     "for pcgs computable group", true,
+     [IsGroup and CanEasilyComputePcgs and IsFinite, IsPosInt],
+     0,
+     function( G, p )
+
+          local i, pcgs, pcgssoc, socdepths, L, x, ser, n, S;
+
+          if IsTrivial (G) then
+                return G;
+          fi;
+
+          pcgs := ParentPcgs (Pcgs (G));
+
+          pcgssoc := [];
+          socdepths := [];
+
+          for L in PSocleComponents (G, p) do
+                for x in Reversed (Pcgs (L)) do
+                     if not AddPcElementToPcSequence (pcgs, pcgssoc, socdepths, x) then
+                          Error ("Internal error in method for `Socle' for soluble gorups");
+                     fi;
+                od;
+          od;
+
+          pcgssoc := InducedPcgsByPcSequenceNC (pcgs, pcgssoc);
+          S := GroupOfPcgs (pcgssoc);
+          Assert (1, IsElementaryAbelian(S));
+          SetIsElementaryAbelian (S, true);
+          return S;
+     end);
 
 
 #############################################################################
+##
+#M  PSocleOp (<G>, <p>)
+##
+InstallMethod (PSocleOp,
+     "for finite group", true,
+     [IsGroup and IsFinite, IsPosInt],
+     0,
+     function( G, p )
+
+          local S, L;
+        
+          S := TrivialSubgroup (G);
+        
+          for L in PSocleComponents (G, p) do
+                S := ClosureGroup (S, L);
+          od;
+          Assert (1, IsElementaryAbelian(S));
+          SetIsElementaryAbelian (S, true);
+          return S;
+    end);
+
+
+#############################################################################
+##
+#M  PSocleOp (<G>, <p>) 
+##
+InstallMethod (PSocleOp,
+    "handled by nice monomorphism",
+    true,
+    [IsGroup and IsHandledByNiceMonomorphism and IsFinite,
+        IsPosInt],
+    0,
+    function( grp, p )
+        local hom;
+        return PreImagesSet (NiceMonomorphism (grp), PSocle (NiceObject (grp), p));
+    end);
+    
+    
+#############################################################################
+##
+#M  PSocleOp (<G>, <p>) 
+##
+InstallMethod (PSocleOp,
+    "handled by nice monomorphism",
+    true,
+    [IsGroup and IsSolvableGroup and IsFinite,
+        IsPosInt],
+    0,
+    function( grp, p )
+        local hom;
+        if CanEasilyComputePcgs (grp) then
+            TryNextMethod();
+        fi;
+        hom := IsomorphismPcGroup (grp);
+        return PreImagesSet (hom, PSocle (ImagesSource (hom), p));
+    end);
+    
+    
+#############################################################################
+##
+#M  PSocleOp (<G>, <p>) 
+##
+RedispatchOnCondition (PSocleOp, true, 
+    [IsGroup, IsPosInt], 
+    [IsFinite, ], 0);
+    
+
+##############################################################################
+##
+#M  SolvableSocleComponents (<G>) 
+##
+InstallMethod (SolvableSocleComponents,
+    "concatenate PSocleComponents",
+    true,
+    [IsGroup and IsFinite],
+    0,
+    function(G)
+        local p, res;
+        res := [];
+        if not IsTrivial (G) then
+            for p in Set (Factors (Size(G))) do
+                Append (res, PSocleComponents (G, p));
+            od;
+        fi;
+        return res;
+    end);
+
+
+##############################################################################
 ##
 #M  SolvableSocleComponents (<G>) 
 ##
@@ -191,91 +335,10 @@ InstallMethod (SocleComponents,
     
 #############################################################################
 ##
-#M  PSocleComponentsOp (<G>, <p>) 
-##
-InstallMethod (PSocleComponentsOp, 
-    "for finite group", true, 
-    [IsGroup and IsFinite, IsPosInt], 
-    0,
-    function( G, p ) 
-        local P;
-        P := PCore (G, p);
-        if IsTrivial (P) then
-            return [];
-        else
-            return SolvableSocleComponentsBySeries (G, 
-                CompositionSeriesUnderAction (G, P));
-        fi;
-    end);
-
-
-#############################################################################
-##
-#M  PSocleComponentsOp (<G>, <p>) 
-##
-InstallMethod (PSocleComponentsOp, 
-    "for finite group with SolvableSocleComponents", true, 
-    [IsGroup and IsFinite and HasSolvableSocleComponents, 
-        IsPosInt], 
-    0,
-    function( G, p ) 
-        return Filtered (SolvableSocleComponents (G), L -> PrimePGroup (L) = p);
-    end);
-
-
-#############################################################################
-##
-#M  PSocleComponentsOp (<G>, <p>) 
-##
-RedispatchOnCondition (PSocleComponentsOp, true, 
-    [IsGroup, IsPosInt], 
-    [IsFinite, ], 0);
-    
-    
-#############################################################################
-##
-#M  PSocleComponentsOp (<G>, <p>) 
-##
-InstallMethod (PSocleComponentsOp,
-    "via IsomorphismPcGroup",
-    true,
-    [IsGroup and IsSolvableGroup and IsFinite, IsPosInt],
-    0,
-    function( grp, p)
-        local hom;
-        if CanEasilyComputePcgs (grp) then
-            TryNextMethod();
-        fi;
-        hom := IsomorphismPcGroup (grp);
-        return List (PSocleComponentsOp (ImagesSource (hom), p),
-            L -> PreImagesSet (hom, L));
-    end);
-    
-    
-#############################################################################
-##
-#M  PSocleComponentsOp (<G>, <p>) 
-##
-InstallMethod (PSocleComponentsOp,
-    "handled by nice monomorphism",
-    true,
-    [IsGroup and IsHandledByNiceMonomorphism and IsFinite, 
-        IsPosInt],
-    0,
-    function( grp, p )
-        local hom;
-        hom := NiceMonomorphism (grp);
-        return List (PSocleComponentsOp (NiceObject (grp), p),
-            L -> PreImagesSet (hom, L));
-    end);
-    
-    
-#############################################################################
-##
 #M  SolvableSocle (<G>) 
 ##
 InstallMethod (SolvableSocle, 
-    "for solvable group", true, 
+    "for solvable group, product of socle components", true,
     [IsGroup and CanEasilyComputePcgs and IsFinite], 
     0,
     function( G )
@@ -306,13 +369,12 @@ InstallMethod (SolvableSocle,
     end);
 
 
-
 #############################################################################
 ##
 #M  SolvableSocle (<G>) 
 ##
 InstallMethod (SolvableSocle, 
-    "for finite group", true, 
+    "for finite group, product of socle components", true,
     [IsGroup and IsFinite], 
     0,
     function( G )
@@ -377,129 +439,22 @@ RedispatchOnCondition (SolvableSocle, true,
 #M  Socle (<G>) 
 ##
 InstallMethod (Socle, "for finite soluble group, via SolvableSocle", true,
-   [IsGroup and IsSolvableGroup and IsFinite],
-   0,
-   function( grp )
-      return SolvableSocle (grp);
-   end);
-   
-   
+    [IsGroup and IsFinite and IsSolvableGroup],
+    0,
+    SolvableSocle);
+    
+    
 #############################################################################
 ##
 #M  Socle (<G>) 
 ##
 RedispatchOnCondition (Socle, true, 
-    [IsGroup], 
+    [IsGroup],
     [IsFinite and IsSolvableGroup],
-    RankFilter(IsGroup and IsSolvableGroup and IsFinite));
+    RankFilter (IsGroup and IsFinite and IsSolvableGroup));
     
     
-#############################################################################
-##
-#M  PSocleOp (<G>, <p>) 
-##
-InstallMethod (PSocleOp, 
-     "for pcgs computable group", true,
-     [IsGroup and CanEasilyComputePcgs and IsFinite, IsPosInt],
-     0,
-     function( G, p )
-
-          local i, pcgs, pcgssoc, socdepths, L, x, ser, n, S;
-
-          if IsTrivial (G) then
-                return G;
-          fi;
-
-          pcgs := ParentPcgs (Pcgs (G));
-
-          pcgssoc := [];
-          socdepths := [];
-
-          for L in PSocleComponents (G, p) do
-                for x in Pcgs (L) do
-                     if not AddPcElementToPcSequence (pcgs, pcgssoc, socdepths, x) then
-                          Error ("Internal error in method for `Socle' for soluble gorups");
-                     fi;
-                od;
-          od;
-
-          pcgssoc := InducedPcgsByPcSequenceNC (pcgs, pcgssoc);
-          S := GroupOfPcgs (pcgssoc);
-          Assert (1, IsElementaryAbelian(S));
-          SetIsElementaryAbelian (S, true);
-          return S;
-     end);
-
-
-#############################################################################
-##
-#M  PSocleOp (<G>, <p>)
-##
-InstallMethod (PSocleOp,
-     "for finite group", true,
-     [IsGroup and IsFinite, IsPosInt],
-     0,
-     function( G, p )
-
-          local S, L;
-        
-          S := TrivialSubgroup (G);
-        
-          for L in PSocleComponents (G, p) do
-                S := ClosureGroup (S, L);
-          od;
-          Assert (1, IsElementaryAbelian(S));
-          SetIsElementaryAbelian (S, true);
-          return S;
-    end);
-
-
-#############################################################################
-##
-#M  PSocleOp (<G>, <p>) 
-##
-InstallMethod (PSocleOp,
-    "handled by nice monomorphism",
-    true,
-    [IsGroup and IsHandledByNiceMonomorphism and IsFinite,
-        IsPosInt],
-    0,
-    function( grp, p )
-        local hom;
-        return PreImagesSet (NiceMonomorphism (grp), PSocle (NiceObject (grp), p));
-    end);
-    
-    
-#############################################################################
-##
-#M  PSocleOp (<G>, <p>) 
-##
-InstallMethod (PSocleOp,
-    "handled by nice monomorphism",
-    true,
-    [IsGroup and IsSolvableGroup and IsFinite,
-        IsPosInt],
-    0,
-    function( grp, p )
-        local hom;
-        if CanEasilyComputePcgs (grp) then
-            TryNextMethod();
-        fi;
-        hom := IsomorphismPcGroup (grp);
-        return PreImagesSet (hom, PSocle (ImagesSource (hom), p));
-    end);
-    
-    
-#############################################################################
-##
-#M  PSocleOp (<G>, <p>) 
-##
-RedispatchOnCondition (PSocleOp, true, 
-    [IsGroup, IsPosInt], 
-    [IsFinite, ], 0);
-    
-    
-#############################################################################
+############################################################################
 ##
 #M  AbelianMinimalNormalSubgroups (<G>) 
 ##
@@ -655,15 +610,10 @@ InstallMethod (MinimalNormalSubgroups,
 	"for solvable groups: use AbelianMinimalNormalSubgroups",
 	true, [IsGroup and IsFinite and IsSolvableGroup], 0,
 	AbelianMinimalNormalSubgroups);
-
-
-#############################################################################
-##
-#M  MinimalNormalSubgroups (<G>) 
-##
-RedispatchOnCondition (MinimalNormalSubgroups,
+	
+RedispatchOnCondition (MinimalNormalSubgroups, 
 	true, [IsGroup], [IsFinite and IsSolvableGroup],
-    RankFilter (IsGroup and IsSolvableGroup and IsFinite));
+    RankFilter (IsGroup and IsFinite and IsSolvableGroup));
 
 
 ############################################################################
