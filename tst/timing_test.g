@@ -43,6 +43,68 @@ end;
 
 ############################################################################
 ##
+#F  UTF8String (str, len)
+##
+UTF8String := function (str, len)
+
+    local new, w, i;
+
+    if not IsString (str) then
+        str := String (str);
+    fi;
+    w := WidthUTF8String (str);
+    if len > 0 and w < len then
+        new := [];
+        new{[len-w+1..Length(str)+len-w]} := str;
+        for i in [1..len-w] do
+            new[i] := ' ';
+        od;
+    elif len < 0 and w < -len then
+        new := ShallowCopy (str);
+        for i in [Length(str)+1..Length(str)-len-w] do
+            new[i] := ' ';
+        od;
+    else
+        new := ShallowCopy (str);
+    fi;
+    return new;
+end;
+
+
+############################################################################
+##
+#F  StringFactorsInt (n)
+##
+StringFactorsInt := function (n)
+
+    local facs, str, dot, f;
+
+    if n < 0 then
+        str := "-";
+        n := -n;
+    else
+        str := "";
+    fi;
+
+    facs := Collected (FactorsInt(n));
+    dot := false;
+
+    for f in facs do
+        if dot then
+            Add (str, '.');
+        fi;
+        Append (str, String(f[1]));
+        if f[2] > 1 then
+            Add (str, '^');
+            Append (str, String(f[2]));
+        fi;
+        dot := true;
+    od;
+    return str;
+end;
+
+############################################################################
+##
 #F  DoTests (groups, tests)
 ##
 ##  performs a series of tests with a list of sample groups, comparing 
@@ -64,9 +126,9 @@ end;
 ##
 ##  tests consists of a list of tests to be performed. Each entry t is a list.
 ##  t[1] must be the function to be tested. t[2] is a function to be applied
-##  to the result of t[1]. t[3] is a string describing the test. This string
-##  should be short (7 chars max.) because it will be used as a column heading
-##  if DO_TIMING is true.
+##  to the result of t[1]. The results of t[2] will be compared between tests.
+##  t[3] is a string describing the test. This string should be short because
+##  it will be used as a column heading if DO_TIMING is true.
 ##  t[4] contains a list of the names of those groups for which the test
 ##  should be skipped. t[5], if bound, must contain a function which will be
 ##  called with the test group as the argument *before* the test function
@@ -82,19 +144,37 @@ end;
 ##
 DoTests := function (groups, tests)
 
-   local g, name, tmp, t, t0, t1, res, prevres, size;
-   
-   Print (String ("group",-10));
-   Print (String ("logsize", 8));
-   Print (String ("complen", 8));
+   local g, name, tmp, t, t0, t1, res, prevres, size, widths;
+
+   colwidth := [-12,8,8];
+   Print (String ("group", colwidth[1]));
+   Print (String ("logsize", colwidth[2]));
+   Print (String ("complen", colwidth[3]));
+   col := 4;
    if IsBound (DO_TIMING) and DO_TIMING then
       for t in tests do
-         Print (String(t[3],8),"\c");
+         w := WidthUTF8String(t[3]);
+         if w < 8 then
+            colwidth[col] := 8;
+         else
+            colwidth[col] := w+1;
+         fi;
+         Print (UTF8String(t[3],colwidth[col]),"\c");
+         col := col + 1;
          if IsBound (t[6]) then
-            Print (String (t[7],8), "\c");
+            w := WidthUTF8String(t[7]);
+            if w < 8 then
+                colwidth[col] := 8;
+            else
+                colwidth[col] := w+1;
+            fi;
+            Print (UTF8String (t[7],colwidth[col]), "\c");
+            col := col + 1;
          fi;
       od;
    fi;
+   Append (colwidth, [16, 16]);
+   
    Print ("\n");
    for g in groups do
       if IsBoundGlobal (g[3]) then
@@ -109,16 +189,17 @@ DoTests := function (groups, tests)
       else
          name := g[3];
       fi;
-      Print (String (name,-10));
+      Print (UTF8String (name,colwidth[1]));
       tmp := ValueGlobal (g[3]);
       size := Size (tmp);
-      Print (String (LogInt (Size (tmp), 10), 8));
-      Print (String (Length (Pcgs(tmp)), 8), "\c");
+      Print (String (LogInt (Size (tmp), 10), colwidth[2]));
+      Print (String (Length (Pcgs(tmp)), colwidth[3]), "\c");
       if IsReadOnlyGlobal (g[3]) then
          MakeReadWriteGlobal (g[3]);
       fi;
       UnbindGlobal (g[3]);
       prevres := fail;
+      col := 4;
       
       for t in tests do
          if name in t[4] then
@@ -154,17 +235,21 @@ DoTests := function (groups, tests)
          fi;
          
          if IsBound (DO_TIMING) and DO_TIMING then
-            Print (String(t1,8), "\c");
+            Print (String(t1,colwidth[col]), "\c");
+            col := col + 1;
             if IsBound (t[6]) then
-               Print (String(t[6](),8), "\c");
+                Print (String(t[6](),colwidth[col]), "\c");
+                col := col + 1;
             fi;
          fi;
       od;
       Print ("  ");
       if IsInt (prevres) then # assume that it is the order of a subgroup
-         PrintFactorsInt (prevres);
+         Print (String (StringFactorsInt (prevres),colwidth[col]));
+         col := col + 1;
          Print ("  ");
-         PrintFactorsInt (size/prevres);
+         Print (String (StringFactorsInt (size/prevres),colwidth[col]));
+         col := col + 1;
       elif IsList (prevres) then # assume that it is a list of subgroups
          Print (Length (prevres));
       else
@@ -182,7 +267,7 @@ end;
 ##  return a pc group isomorphic with grp whose family pcgs is a special 
 ##  pcgs
 ##
-SpecialPcGroup := G -> Image (IsomorphismSpecialPcGroup (G));
+SpecialPcGroup := G -> Image (IsomorphismsSpecialPcGroup (G));
 
 ############################################################################
 ##
