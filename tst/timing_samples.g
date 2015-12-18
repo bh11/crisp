@@ -1,9 +1,8 @@
 ############################################################################
 ##
-##  timing_samples.g                CRISP                 Burkhard H\"ofling
+##  timing_samples.g                CRISP                   Burkhard Höfling
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000 Burkhard Höfling
 ##
 LoadPackage ("format");
 
@@ -19,7 +18,7 @@ groups := [
 ];
 
 if IsBound (FAST_TEST) and FAST_TEST then
-   groups := groups{[1..3]};
+    groups := groups{[1..3]};
 fi;
 
 

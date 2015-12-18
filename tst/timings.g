@@ -1,8 +1,8 @@
 ############################################################################
 ##
-##  timings.g                       CRISP                  Burkhard Höfling
+##  timings.g                        CRISP                  Burkhard Höfling
 ##
-##  Copyright (C) 2000, 2011 by Burkhard Höfling
+##  Copyright (C) 2000, 2011 Burkhard Höfling
 ##
 LoadPackage ("crisp");
 

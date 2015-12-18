@@ -1,9 +1,8 @@
 ############################################################################
 ##
-##  timing_socle.g                 CRISP                 Burkhard H\"ofling
+##  timing_socle.g                  CRISP                   Burkhard Höfling
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000 Burkhard Höfling
 ##
 
 LoadPackage ("crisp");
@@ -14,12 +13,12 @@ ReadPackage ("crisp", "tst/timing_samples.g");
 
 tests :=
 [ 
-  [Socle, Size, "new", []],
-  [Socle, Size, "Fit", [], FittingSubgroup],
-  [G -> List (Set (FactorsInt (Size (G))), p -> PSocle (G, p)), 
-  	l -> Product (l, Size), "psoc", []],
-  [G -> List (Set (FactorsInt (Size (G))), p -> PSocle (G, p)), 
-  	l -> Product (l, Size), "psoc", [], Socle],
+    [Socle, Size, "new", []],
+    [Socle, Size, "Fit", [], FittingSubgroup],
+    [G -> List (Set (FactorsInt (Size (G))), p -> PSocle (G, p)), 
+        l -> Product (l, Size), "psoc", []],
+    [G -> List (Set (FactorsInt (Size (G))), p -> PSocle (G, p)), 
+        l -> Product (l, Size), "psoc", [], Socle],
 ];
 
 

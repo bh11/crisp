@@ -1,9 +1,8 @@
 ############################################################################
 ##
-##  timing_injectors.g              CRISP                 Burkhard H\"ofling
+##  timing_injectors.g                CRISP                BBurkhard Höfling
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000 Burkhard Höfling
 ##
 LoadPackage ("crisp");
 ReadPackage ("crisp", "tst/timing_test.g");
@@ -13,88 +12,88 @@ nilpFormat := Formation ("Nilpotent");
 
 
 InjectorFromRadicalFunctionFormat :=  
-   function (G, radfunc, hom)
-   
-      # same as usual injector method, but uses CoveringSubgroupWrtFormation
-      # from the package FORMAT to compute the Carter subgroups
+    function (G, radfunc, hom)
+    
+        # same as usual injector method, but uses CoveringSubgroupWrtFormation
+        # from the package FORMAT to compute the Carter subgroups
 
-      local natQ, I, J, nat, H, N, C, W, i, gens, nilpser;
-         
-      I := radfunc (G);
-      if hom then
-         natQ := NaturalHomomorphismByNormalSubgroup (G, I);
-         H := Image (natQ);
-      else
-         H := G;
-      fi;
-      
-      # compute a normal series from I to G with nilpotent factors
-      nilpser := [];
-      while not IsTrivial (H) do
-         Add (nilpser, H);
-         H := Residual (H, NilpotentGroups);
-      od;
-   
-      if hom then
-         nilpser := Reversed (nilpser);
-      else
-         nilpser := List (Reversed (nilpser), H -> 
-         ClosureGroup (I, H));
-      fi;
-      
-      # treat the nilpotent factors
-   
-      for i in [2..Length (nilpser)] do
-   
-         Info (InfoInjector, 1, "starting step ",i-1);
-         H := nilpser[i];
-   
-         # I is an F-injector of H
-   
-         Info (InfoInjector, 2, "computing normalizer");
-   
-         if i > 2 then 
+        local natQ, I, J, nat, H, N, C, W, i, gens, nilpser;
+            
+        I := radfunc (G);
+        if hom then
+            natQ := NaturalHomomorphismByNormalSubgroup (G, I);
+            H := Image (natQ);
+        else
+            H := G;
+        fi;
+        
+        # compute a normal series from I to G with nilpotent factors
+        nilpser := [];
+        while not IsTrivial (H) do
+            Add (nilpser, H);
+            H := Residual (H, NilpotentGroups);
+        od;
+    
+        if hom then
+            nilpser := Reversed (nilpser);
+        else
+            nilpser := List (Reversed (nilpser), H -> 
+            ClosureGroup (I, H));
+        fi;
+        
+        # treat the nilpotent factors
+    
+        for i in [2..Length (nilpser)] do
+    
+            Info (InfoInjector, 1, "starting step ",i-1);
+            H := nilpser[i];
+    
+            # I is an F-injector of H
+    
+            Info (InfoInjector, 2, "computing normalizer");
+    
+            if i > 2 then 
+                if hom then
+                    J := ImagesSet (natQ, I);
+                    nat := NaturalHomomorphismByNormalSubgroup (
+                        NormalizerOfPronormalSubgroup (H, J), J);
+                    N := ImagesSource (nat);
+                else
+                    N := NormalizerOfPronormalSubgroup (H, I);
+                fi;
+            else # otherwise I is trivial
+                N := H;
+            fi;
+            
+            Info (InfoInjector, 3, " normalizer has order ", 
+                Size (N));
+    
+            Info (InfoInjector, 2, "computing Carter subgroup");
+            C := CoveringSubgroupWrtFormation (N, nilpFormat);
+            Info (InfoInjector, 3, " carter subgroup has order ", 
+                Size (C));
+    
             if hom then
-               J := ImagesSet (natQ, I);
-               nat := NaturalHomomorphismByNormalSubgroup (
-                  NormalizerOfPronormalSubgroup (H, J), J);
-               N := ImagesSource (nat);
+                if i > 2 then
+                    W := PreImagesSet (nat, C);
+                else 
+                    W := C;
+                fi;
+                W := PreImagesSet (natQ, W);
             else
-               N := NormalizerOfPronormalSubgroup (H, I);
+                W := ClosureGroup (I, C);
             fi;
-         else # otherwise I is trivial
-            N := H;
-         fi;
-         
-         Info (InfoInjector, 3, " normalizer has order ", 
-            Size (N));
-   
-         Info (InfoInjector, 2, "computing Carter subgroup");
-         C := CoveringSubgroupWrtFormation (N, nilpFormat);
-         Info (InfoInjector, 3, " carter subgroup has order ", 
-            Size (C));
-   
-         if hom then
-            if i > 2 then
-               W := PreImagesSet (nat, C);
-            else 
-               W := C;
-            fi;
-            W := PreImagesSet (natQ, W);
-         else
-            W := ClosureGroup (I, C);
-         fi;
-         Info (InfoInjector, 3, " preimage of carter subgroup has order ", 
-            Size (W));
-         
-         Info (InfoInjector, 2, " computing radical");
-   
-         # the radical has to be computed in the full group
-         I := radfunc (W);
-         Info (InfoInjector, 3, " injector has order ", Size (I));
-      od;
-      return I;
-   end;
+            Info (InfoInjector, 3, " preimage of carter subgroup has order ", 
+                Size (W));
+            
+            Info (InfoInjector, 2, " computing radical");
+    
+            # the radical has to be computed in the full group
+            I := radfunc (W);
+            Info (InfoInjector, 3, " injector has order ", Size (I));
+        od;
+        return I;
+    end;
 IsHypercentral := function (G, H)
 
 	local C;
@@ -117,7 +116,7 @@ O235hypercentralWithRad := FittingClass ( rec (
 			C := G;
 			M := Core (G, HallSubgroup (G,[2,3,5]));
 			if IsTrivial (M) then
-			   return G;
+			    return G;
 			fi;
 			comp := ChiefSeriesUnderAction (G, M);
 			for j in [2..Length (comp)] do

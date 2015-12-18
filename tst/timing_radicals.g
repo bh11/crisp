@@ -1,9 +1,8 @@
 ############################################################################
 ##
-##  timing_radicals.g               CRISP                 Burkhard H\"ofling
+##  timing_radicals.g                CRISP                  Burkhard Höfling
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000 Burkhard Höfling
 ##
 LoadPackage ("crisp");
 ReadPackage ("crisp", "tst/timing_test.g");
@@ -11,13 +10,13 @@ ReadPackage ("crisp", "tst/timing_samples.g");
 
 IsHypercentral := function (G, H)
 
-	local C;
+    local C;
 
-	repeat
-		C := H;
-		H := CommutatorSubgroup (G, H);
-	until C = H;
-	return IsTrivial (H);
+    repeat
+        C := H;
+        H := CommutatorSubgroup (G, H);
+    until C = H;
+    return IsTrivial (H);
 end;
 
 O235hypercentralWithoutRad := FittingClass ( rec (
@@ -25,21 +24,23 @@ O235hypercentralWithoutRad := FittingClass ( rec (
 ));
 
 O235hypercentralWithRad := FittingClass ( rec (
-	\in := G -> IsHypercentral (G, Core (G, HallSubgroup (G,[2,3,5]))),
-	rad := function (G)
-			local C, ser, comp, i, j, M, N, F, nat;
-			C := G;
-			M := Core (G, HallSubgroup (G,[2,3,5]));
-			if IsTrivial (M) then 
-			   return C;
-			   fi;
-			comp := ChiefSeriesUnderAction (G, M);
-			for j in [2..Length (comp)] do
-				nat:= NaturalHomomorphismByNormalSubgroup (C, comp[j]);
-				C := PreImage (nat, Centralizer (Image (nat), Image (nat, comp[j-1])));
-			od;
-			return C;
-		end));
+    \in := G -> IsHypercentral (G, Core (G, HallSubgroup (G,[2,3,5]))),
+    rad := function (G)
+
+        local C, ser, comp, i, j, M, N, F, nat;
+
+        C := G;
+        M := Core (G, HallSubgroup (G,[2,3,5]));
+        if IsTrivial (M) then
+            return C;
+        fi;
+        comp := ChiefSeriesUnderAction (G, M);
+        for j in [2..Length (comp)] do
+            nat:= NaturalHomomorphismByNormalSubgroup (C, comp[j]);
+            C := PreImage (nat, Centralizer (Image (nat), Image (nat, comp[j-1])));
+        od;
+        return C;
+    end));
 
 
 tests :=
@@ -54,24 +55,24 @@ DoTests (groups, tests);
 
 nilp := FittingClass (rec (\in := IsNilpotent));
 fit := function (G)
-   local pcgs, p, newpcgs, pcser, depths, x;
+    local pcgs, p, newpcgs, pcser, depths, x;
    
-   pcgs := Pcgs (G);
-   pcser := [];
-   depths := [];
-   for p in Set (Factors (Size (G))) do
-      newpcgs := Pcgs (OneInvariantSubgroupMaxWrtNProperty (G, G, 
-           function (U, V, R, data) 
-              return Index (U, V) mod data = 0;
-           end, 
-           ReturnFail, 
-           p));
+    pcgs := Pcgs (G);
+    pcser := [];
+    depths := [];
+    for p in Set (Factors (Size (G))) do
+        newpcgs := Pcgs (OneInvariantSubgroupMaxWrtNProperty (G, G,
+            function (U, V, R, data)
+                return Index (U, V) mod data = 0;
+            end,
+            ReturnFail,
+            p));
         for x in newpcgs do
-           AddPcElementToPcSequence (pcgs, pcser, depths, x);
+            AddPcElementToPcSequence (pcgs, pcser, depths, x);
         od;
     od;
     return GroupOfPcgs (InducedPcgsByPcSequenceNC (
-       pcgs, pcser));
+        pcgs, pcser));
 end;
 
 tests :=
@@ -114,28 +115,28 @@ tests :=
 [ [tmp -> Radical (tmp, 2groups2), Size, "in", []],
   [tmp -> Radical (tmp, 2groups),  Size, "core", []],
   [tmp -> OneInvariantSubgroupMaxWrtNProperty (tmp, tmp, 
-     function (U, V, R, data) 
-        return Index (U, V) mod 2 = 0;
-     end, 
-     ReturnFail, 
-     rec ()), Size, "Nprop", []],
+        function (U, V, R, data)
+            return Index (U, V) mod 2 = 0;
+        end,
+        ReturnFail,
+        rec ()), Size, "Nprop", []],
 ];
 Print ("2-radical\n");
 DoTests (groups, tests);
 
 5groups := PGroups (5);
 5groups5 := FittingClass (rec(\in := MemberFunction (5groups),
-  char := [5]));
+    char := [5]));
   
 tests := 
 [ [tmp -> Radical (tmp, 5groups5), Size, "in", []],
   [tmp -> Radical (tmp, 5groups),  Size, "core", []],
   [tmp -> OneInvariantSubgroupMaxWrtNProperty (tmp, tmp, 
-     function (U, V, R, data) 
+    function (U, V, R, data)
         return Index (U, V) mod 5 = 0;
-     end, 
-     ReturnFail, 
-     rec ()), Size, "Nprop", []],
+    end,
+    ReturnFail,
+    rec ()), Size, "Nprop", []],
 ];
 Print ("5-radical\n");
 DoTests (groups, tests);

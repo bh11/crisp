@@ -1,9 +1,8 @@
 ############################################################################
 ##
-##  normals.g                       CRISP                 Burkhard H\"ofling
+##  normals.g                        CRISP                  Burkhard Höfling
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000 Burkhard Höfling
 ##
 LoadPackage ("crisp");
 ReadPackage ("crisp", "tst/samples.g");

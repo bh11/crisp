@@ -1,8 +1,8 @@
 ############################################################################
 ##
-##  manual.g                        CRISP                 Burkhard Höfling
+##  manual.g                        CRISP                  BBurkhard Höfling
 ##
-##  Copyright (C) 2012 by Burkhard H\"ofling
+##  Copyright (C) 2000 Burkhard Höfling
 ##
 LoadPackage ("crisp");
 

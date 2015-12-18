@@ -1,9 +1,8 @@
 ############################################################################
 ##
-##  Readme-Tests.txt                CRISP                 Burkhard H\"ofling
+##  Readme-Tests.txt                CRISP                   Burkhard Höfling
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000 Burkhard Höfling
 ##
 To run these test files, simply read the file "all.g" into GAP using `Read'
 (not `ReadTest'). Their output is for information only, and can safely be

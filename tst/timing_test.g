@@ -1,9 +1,8 @@
 ############################################################################
 ##
-##  timing_test.g                  CRISP                 Burkhard H\"ofling
+##  timing_test.g                   CRISP                   Burkhard Höfling
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000, 2015 Burkhard Höfling
 ##
 
 
@@ -14,8 +13,8 @@
 ##  global variable storing the original value of `Print'
 ##
 if not IsBound (PRINT) then
-   PRINT := Print;
-   MakeReadOnlyGlobal ("PRINT");
+    PRINT := Print;
+    MakeReadOnlyGlobal ("PRINT");
 fi;
 
 
@@ -29,15 +28,15 @@ fi;
 ##
 SilentRead := function (g1, g2, g3)
 
-   if IsFunction (g1) then
-      BindGlobal (g3, CallFuncList (g1, g2));
-   else
-      MakeReadWriteGlobal ("Print");
-      Print := Ignore;
-      ReadPackage (g1, g2);
-      Print := PRINT;
-      MakeReadOnlyGlobal ("Print");
-   fi;
+    if IsFunction (g1) then
+        BindGlobal (g3, CallFuncList (g1, g2));
+    else
+        MakeReadWriteGlobal ("Print");
+        Print := Ignore;
+        ReadPackage (g1, g2);
+        Print := PRINT;
+        MakeReadOnlyGlobal ("Print");
+    fi;
 end;
 
 
@@ -144,119 +143,119 @@ end;
 ##
 DoTests := function (groups, tests)
 
-   local g, name, tmp, t, t0, t1, res, prevres, size, widths;
+    local g, name, tmp, t, t0, t1, res, prevres, size, widths;
 
-   colwidth := [-12,8,8];
-   Print (String ("group", colwidth[1]));
-   Print (String ("logsize", colwidth[2]));
-   Print (String ("complen", colwidth[3]));
-   col := 4;
-   if IsBound (DO_TIMING) and DO_TIMING then
-      for t in tests do
-         w := WidthUTF8String(t[3]);
-         if w < 8 then
-            colwidth[col] := 8;
-         else
-            colwidth[col] := w+1;
-         fi;
-         Print (UTF8String(t[3],colwidth[col]),"\c");
-         col := col + 1;
-         if IsBound (t[6]) then
-            w := WidthUTF8String(t[7]);
+    colwidth := [-12,8,8];
+    Print (String ("group", colwidth[1]));
+    Print (String ("logsize", colwidth[2]));
+    Print (String ("complen", colwidth[3]));
+    col := 4;
+    if IsBound (DO_TIMING) and DO_TIMING then
+        for t in tests do
+            w := WidthUTF8String(t[3]);
             if w < 8 then
                 colwidth[col] := 8;
             else
                 colwidth[col] := w+1;
             fi;
-            Print (UTF8String (t[7],colwidth[col]), "\c");
-            col := col + 1;
-         fi;
-      od;
-   fi;
-   Append (colwidth, [16, 16]);
-   
-   Print ("\n");
-   for g in groups do
-      if IsBoundGlobal (g[3]) then
-         if IsReadOnlyGlobal (g[3]) then
-            MakeReadWriteGlobal (g[3]);
-         fi;
-         UnbindGlobal (g[3]);
-      fi;
-      SilentRead (g[1],g[2],g[3]);
-      if IsBound (g[4]) then
-         name := g[4];
-      else
-         name := g[3];
-      fi;
-      Print (UTF8String (name,colwidth[1]));
-      tmp := ValueGlobal (g[3]);
-      size := Size (tmp);
-      Print (String (LogInt (Size (tmp), 10), colwidth[2]));
-      Print (String (Length (Pcgs(tmp)), colwidth[3]), "\c");
-      if IsReadOnlyGlobal (g[3]) then
-         MakeReadWriteGlobal (g[3]);
-      fi;
-      UnbindGlobal (g[3]);
-      prevres := fail;
-      col := 4;
-      
-      for t in tests do
-         if name in t[4] then
-            t1 := "n/a";
-         else
-            SilentRead (g[1],g[2], g[3]);
-            tmp := ValueGlobal (g[3]);
-            if IsBound (t[5]) then
-               t[5](tmp);
-            fi;
-            if IsBound (DO_TIMING) and DO_TIMING then
-               GASMAN ("collect");
-            fi;
-            t0 := Runtime();
-            res := t[1](tmp);
-            t1 := Runtime() - t0;
-            if res = fail then
-                t1 := "n/a";
-            else
-                res := t[2](res);
-            fi;
-            if prevres <> fail then
-               if res <> fail and res <> prevres then
-                  Error ("results do not match");
-               fi;
-            else
-               prevres := res;
-            fi;
-            if IsReadOnlyGlobal (g[3]) then
-               MakeReadWriteGlobal (g[3]);
-            fi;
-            UnbindGlobal (g[3]);
-         fi;
-         
-         if IsBound (DO_TIMING) and DO_TIMING then
-            Print (String(t1,colwidth[col]), "\c");
+            Print (UTF8String(t[3],colwidth[col]),"\c");
             col := col + 1;
             if IsBound (t[6]) then
-                Print (String(t[6](),colwidth[col]), "\c");
+                w := WidthUTF8String(t[7]);
+                if w < 8 then
+                    colwidth[col] := 8;
+                else
+                    colwidth[col] := w+1;
+                fi;
+                Print (UTF8String (t[7],colwidth[col]), "\c");
                 col := col + 1;
             fi;
-         fi;
-      od;
-      Print ("  ");
-      if IsInt (prevres) then # assume that it is the order of a subgroup
-         Print (String (StringFactorsInt (prevres),colwidth[col]));
-         col := col + 1;
-         Print ("  ");
-         Print (String (StringFactorsInt (size/prevres),colwidth[col]));
-         col := col + 1;
-      elif IsList (prevres) then # assume that it is a list of subgroups
-         Print (Length (prevres));
-      else
-         Print (prevres);
-      fi;
-      Print ("\n");
-   od;
+        od;
+    fi;
+    Append (colwidth, [16, 16]);
+   
+    Print ("\n");
+    for g in groups do
+        if IsBoundGlobal (g[3]) then
+            if IsReadOnlyGlobal (g[3]) then
+                MakeReadWriteGlobal (g[3]);
+            fi;
+            UnbindGlobal (g[3]);
+        fi;
+        SilentRead (g[1],g[2],g[3]);
+        if IsBound (g[4]) then
+            name := g[4];
+        else
+            name := g[3];
+        fi;
+        Print (UTF8String (name,colwidth[1]));
+        tmp := ValueGlobal (g[3]);
+        size := Size (tmp);
+        Print (String (LogInt (Size (tmp), 10), colwidth[2]));
+        Print (String (Length (Pcgs(tmp)), colwidth[3]), "\c");
+        if IsReadOnlyGlobal (g[3]) then
+            MakeReadWriteGlobal (g[3]);
+        fi;
+        UnbindGlobal (g[3]);
+        prevres := fail;
+        col := 4;
+
+        for t in tests do
+            if name in t[4] then
+                t1 := "n/a";
+            else
+                SilentRead (g[1],g[2], g[3]);
+                tmp := ValueGlobal (g[3]);
+                if IsBound (t[5]) then
+                    t[5](tmp);
+                fi;
+                if IsBound (DO_TIMING) and DO_TIMING then
+                    GASMAN ("collect");
+                fi;
+                t0 := Runtime();
+                res := t[1](tmp);
+                t1 := Runtime() - t0;
+                if res = fail then
+                    t1 := "n/a";
+                else
+                    res := t[2](res);
+                fi;
+                if prevres <> fail then
+                    if res <> fail and res <> prevres then
+                        Error ("results do not match");
+                    fi;
+                else
+                    prevres := res;
+                fi;
+                if IsReadOnlyGlobal (g[3]) then
+                    MakeReadWriteGlobal (g[3]);
+                fi;
+                UnbindGlobal (g[3]);
+            fi;
+         
+            if IsBound (DO_TIMING) and DO_TIMING then
+                Print (String(t1,colwidth[col]), "\c");
+                col := col + 1;
+                if IsBound (t[6]) then
+                    Print (String(t[6](),colwidth[col]), "\c");
+                    col := col + 1;
+                fi;
+            fi;
+        od;
+        Print ("  ");
+        if IsInt (prevres) then # assume that it is the order of a subgroup
+            Print (String (StringFactorsInt (prevres),colwidth[col]));
+            col := col + 1;
+            Print ("  ");
+            Print (String (StringFactorsInt (size/prevres),colwidth[col]));
+            col := col + 1;
+        elif IsList (prevres) then # assume that it is a list of subgroups
+            Print (Length (prevres));
+        else
+            Print (prevres);
+        fi;
+        Print ("\n");
+    od;
 end;
 
 
