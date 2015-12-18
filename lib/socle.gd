@@ -14,6 +14,13 @@ KeyDependentOperation ("PSocleComponents", IsGroup, IsPosInt, "prime");
 
 #############################################################################
 ##
+#A  PSocleComponents (<G>) 
+##
+KeyDependentOperation ("PSocleSeries", IsGroup, IsPosInt, "prime");
+
+
+#############################################################################
+##
 #A  PSocle (<G>) 
 ##
 KeyDependentOperation ("PSocle", IsGroup, IsPosInt, "prime");
@@ -39,6 +46,13 @@ DeclareAttribute ("SocleComponents", IsGroup);
 ##
 DeclareAttribute ("SolvableSocleComponents", IsGroup);
 DeclareSynonym ("AbelianSocleComponents", SolvableSocleComponents);
+
+
+#############################################################################
+##
+#A  MinimalNormalPSubgroups (<G>)
+##
+KeyDependentOperation ("MinimalNormalPSubgroups", IsGroup, IsPosInt, "prime");
 
 
 #############################################################################

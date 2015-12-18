@@ -106,108 +106,135 @@ InstallMethod (PSocleComponentsOp,
     
 #############################################################################
 ##
-#M  PSocleOp (<G>, <p>) 
+#M  PSocleSeriesOp (<G>, <p>)
 ##
-InstallMethod (PSocleOp, 
-     "for pcgs computable group", true,
-     [IsGroup and CanEasilyComputePcgs and IsFinite, IsPosInt],
-     0,
-     function( G, p )
+InstallMethod (PSocleSeriesOp,
+    "for pcgs computable group, compute from components", true,
+    [IsGroup and CanEasilyComputePcgs and IsFinite, IsPosInt],
+    0,
+    function( G, p )
 
-          local i, pcgs, pcgssoc, socdepths, L, x, ser, n, S;
+        local i, pcgs, pcgssoc, socdepths, L, x, ser, n, S;
 
-          if IsTrivial (G) then
-                return G;
-          fi;
+        pcgs := ParentPcgs (Pcgs (G));
 
-          pcgs := ParentPcgs (Pcgs (G));
+        pcgssoc := [];
+        socdepths := [];
+        ser := [TrivialSubgroup(G)];
 
-          pcgssoc := [];
-          socdepths := [];
+        for L in PSocleComponents (G, p) do
+            for x in Reversed (Pcgs (L)) do
+                if not AddPcElementToPcSequence (pcgs, pcgssoc, socdepths, x) then
+                    Error ("Internal error in method for `PSocleOp' for pcgs computable group");
+                fi;
+            od;
+            S := GroupOfPcgs (InducedPcgsByPcSequenceNC (pcgs, pcgssoc));
+            Assert (1, IsElementaryAbelian(S));
+            SetIsElementaryAbelian (S, true);
+            Add (ser, S);
+        od;
+        return ser;
+    end);
 
-          for L in PSocleComponents (G, p) do
-                for x in Reversed (Pcgs (L)) do
-                     if not AddPcElementToPcSequence (pcgs, pcgssoc, socdepths, x) then
-                          Error ("Internal error in method for `Socle' for soluble gorups");
-                     fi;
-                od;
-          od;
 
-          pcgssoc := InducedPcgsByPcSequenceNC (pcgs, pcgssoc);
-          S := GroupOfPcgs (pcgssoc);
-          Assert (1, IsElementaryAbelian(S));
-          SetIsElementaryAbelian (S, true);
-          return S;
-     end);
+#############################################################################
+##
+#M  PSocleSeriesOp (<G>, <p>)
+##
+InstallMethod (PSocleSeriesOp,
+    "for finite group, compute from components", true,
+    [IsGroup and IsFinite, IsPosInt],
+    0,
+    function( G, p )
 
+        local S, ser, L;
+        
+        S := TrivialSubgroup (G);
+        ser := [S];
+
+        for L in PSocleComponents (G, p) do
+            S := ClosureGroup (S, L);
+            Assert (1, IsElementaryAbelian(S));
+            SetIsElementaryAbelian (S, true);
+            Add (ser, S);
+        od;
+        return ser;
+    end);
+
+
+#############################################################################
+##
+#M  PSocleSeriesOp (<G>, <p>)
+##
+RedispatchOnCondition (PSocleSeriesOp, true,
+    [IsGroup, IsPosInt], 
+    [IsFinite, ],
+    0);
+    
+    
+#############################################################################
+##
+#M  PSocleSeriesOp (<G>, <p>)
+##
+InstallMethod (PSocleSeriesOp,
+    "via IsomorphismPcGroup",
+    true,
+    [IsGroup and IsSolvableGroup and IsFinite, IsPosInt],
+    0,
+    function( grp, p)
+        local hom;
+        if CanEasilyComputePcgs (grp) then
+            TryNextMethod();
+        fi;
+        hom := IsomorphismPcGroup (grp);
+        return List (PSocleSeries (ImagesSource (hom), p),
+            L -> PreImagesSet (hom, L));
+    end);
+    
+    
+#############################################################################
+##
+#M  PSocleSeriesOp (<G>, <p>)
+##
+InstallMethod (PSocleSeriesOp,
+    "handled by nice monomorphism",
+    true,
+    [IsGroup and IsHandledByNiceMonomorphism and IsFinite, 
+        IsPosInt],
+    0,
+    function( grp, p )
+        local hom;
+        hom := NiceMonomorphism (grp);
+        return List (PSocleSeries (NiceObject (grp), p),
+            L -> PreImagesSet (hom, L));
+    end);
+    
+    
+#############################################################################
+##
+#M  PSocleOp (<G>, <p>)
+##
+RedispatchOnCondition (PSocleOp, true, 
+    [IsGroup, IsPosInt], 
+    [IsFinite, ], 0);
+    
 
 #############################################################################
 ##
 #M  PSocleOp (<G>, <p>)
 ##
 InstallMethod (PSocleOp,
-     "for finite group", true,
-     [IsGroup and IsFinite, IsPosInt],
-     0,
-     function( G, p )
-
-          local S, L;
-        
-          S := TrivialSubgroup (G);
-        
-          for L in PSocleComponents (G, p) do
-                S := ClosureGroup (S, L);
-          od;
-          Assert (1, IsElementaryAbelian(S));
-          SetIsElementaryAbelian (S, true);
-          return S;
-    end);
-
-
-#############################################################################
-##
-#M  PSocleOp (<G>, <p>) 
-##
-InstallMethod (PSocleOp,
-    "handled by nice monomorphism",
+    "last term of PSocleSeriesOp",
     true,
-    [IsGroup and IsHandledByNiceMonomorphism and IsFinite,
+    [IsGroup and IsFinite,
         IsPosInt],
     0,
     function( grp, p )
-        local hom;
-        return PreImagesSet (NiceMonomorphism (grp), PSocle (NiceObject (grp), p));
+        local ser;
+        ser := PSocleSeries(grp, p);
+        return ser[Length(ser)];
     end);
-    
-    
-#############################################################################
-##
-#M  PSocleOp (<G>, <p>) 
-##
-InstallMethod (PSocleOp,
-    "handled by nice monomorphism",
-    true,
-    [IsGroup and IsSolvableGroup and IsFinite,
-        IsPosInt],
-    0,
-    function( grp, p )
-        local hom;
-        if CanEasilyComputePcgs (grp) then
-            TryNextMethod();
-        fi;
-        hom := IsomorphismPcGroup (grp);
-        return PreImagesSet (hom, PSocle (ImagesSource (hom), p));
-    end);
-    
-    
-#############################################################################
-##
-#M  PSocleOp (<G>, <p>) 
-##
-RedispatchOnCondition (PSocleOp, true, 
-    [IsGroup, IsPosInt], 
-    [IsFinite, ], 0);
-    
+
 
 ##############################################################################
 ##
@@ -221,11 +248,9 @@ InstallMethod (SolvableSocleComponents,
     function(G)
         local p, res;
         res := [];
-        if not IsTrivial (G) then
-            for p in Set (Factors (Size(G))) do
-                Append (res, PSocleComponents (G, p));
-            od;
-        fi;
+        for p in PrimeDivisors (Size(G)) do
+            Append (res, PSocleComponents (G, p));
+        od;
         return res;
     end);
 
@@ -454,105 +479,100 @@ RedispatchOnCondition (Socle, true,
     RankFilter (IsGroup and IsFinite and IsSolvableGroup));
     
     
+#############################################################################
+##
+#M  MinimalNormalPSubgroupsOp (<G>, <p>)
+##
+InstallMethod (MinimalNormalPSubgroupsOp, 
+    "for finite group", true,
+    [IsGroup and IsFinite, IsPosInt], 
+    0,
+    function( G, p )
+
+        local P, O, ser, j, res, N;
+
+        if Size(G) mod p <> 0 then
+            return [];
+        fi;
+
+        P := PCore (G,p);
+
+        if IsTrivial (P) then
+            return [];
+        fi;
+
+        O := Omega (Center (P),p,1);
+
+        ser := CompositionSeriesUnderAction (G, O);
+
+        res := [ser[Length (ser)-1]];
+        for j in [Length (ser)-2, Length (ser)-3..1] do
+            Append (res, ComplementsOfCentralSectionUnderActionNC (G, ser[j], ser[j+1], TrivialSubgroup (G), true));
+        od;
+        for N in res do
+            Assert (1, IsElementaryAbelian (N));
+            SetIsElementaryAbelian (N, true);
+        od;
+        return res;
+    end);
+
+
+#############################################################################
+##
+#M  MinimalNormalPSubgroupsOp (<G>)
+##
+InstallMethod (MinimalNormalPSubgroupsOp,
+    "handled by nice monomorphism",
+    true,
+    [IsGroup and IsHandledByNiceMonomorphism and IsFinite, IsPosInt],
+    0,
+    function( grp, p )
+        local hom;
+        hom := NiceMonomorphism (grp);
+        return List (MinimalNormalPSubgroups (NiceObject (grp), p),
+        	N -> PreImagesSet (hom, N));
+    end);
+    
+    
+#############################################################################
+##
+#M  MinimalNormalPSubgroupsOp (<G>)
+##
+InstallMethod (MinimalNormalPSubgroupsOp,
+    "handled by IsomorphismPcGroup",
+    true,
+    [IsGroup and IsSolvableGroup and IsFinite, IsPosInt],
+    0,
+    function( grp, p )
+        local hom;
+        if CanEasilyComputePcgs (grp) then
+            TryNextMethod();
+        fi;
+        hom := IsomorphismPcGroup (grp);
+        return List (MinimalNormalPSubgroups (ImagesSource (hom), p),
+        	N -> PreImagesSet (hom, N));
+    end);
+    
+    
 ############################################################################
 ##
 #M  AbelianMinimalNormalSubgroups (<G>) 
 ##
 
 InstallMethod (AbelianMinimalNormalSubgroups, 
-	"complements of chief factors, for finite groups",
-     true, [IsGroup and CanEasilyComputePcgs and IsFinite], 0,	
+	"concatenate MinimalNormalPSubgroups",
+    true, [IsGroup and IsFinite], 0,
 	function (G)
 
-     local norms, k, N;
+    local p, norms;
 
-     norms := AllInvariantSubgroupsWithNProperty (G, G,
-         function (U, V, R, data)
-             return IsTrivial(R);
-         end,
-         ReturnFail,
-         []);
+    norms := [];
 
-     # remove trivial subgroup - in the current implementation, this is always
-     # the last group in the list, but better check...
-     k := Length (norms);
-     while not IsTrivial (norms[k]) do
-         k := k - 1;
-     od;
-     Remove (norms, k);
-     for N in norms do
-          Assert (1, IsElementaryAbelian(N));
-          SetIsElementaryAbelian (N, true);
-     od;
-     return norms;
-end);
+    for p in PrimeDivisors(Size(G)) do
+        Append (norms, MinimalNormalPSubgroups (G, p));
+    od;
 
-
-#############################################################################
-##
-#M  AbelianMinimalNormalSubgroups (<G>) 
-##
-
-InstallMethod (AbelianMinimalNormalSubgroups, 
-	"complements of chief factors, for finite groups",
-     true, [IsGroup and CanEasilyComputePcgs and HasFittingSubgroup and IsFinite], 0,	
-	function (G)
-
-     local norms, k, N;
-
-     norms := AllInvariantSubgroupsWithNProperty (G, FittingSubgroup (G),
-         function (U, V, R, data)
-             return IsTrivial(R);
-         end,
-         ReturnFail,
-         []);
-
-     # remove trivial subgroup - in the current implementation, this is always
-     # the last group in the list, but better check...
-     k := Length (norms);
-     while not IsTrivial (norms[k]) do
-         k := k - 1;
-     od;
-     Remove (norms, k);
-     for N in norms do
-          Assert (1, IsElementaryAbelian(N));
-          SetIsElementaryAbelian (N, true);
-     od;
-     return norms;
-end);
-
-
-#############################################################################
-##
-#M  AbelianMinimalNormalSubgroups (<G>) 
-##
-
-InstallMethod (AbelianMinimalNormalSubgroups, 
-	"complements of chief factors, for finite groups",
-     true, [IsGroup and IsFinite], 0,	
-	function (G)
-
-     local norms, k, N;
-
-     norms := AllInvariantSubgroupsWithNProperty (G, FittingSubgroup (G),
-         function (U, V, R, data)
-             return IsTrivial(R);
-         end,
-         ReturnFail,
-         []);
-
-     # remove trivial subgroup - in the current implementation, this is always
-     # the last group in the list, but better check...
-     k := Length (norms);
-     while not IsTrivial (norms[k]) do
-         k := k - 1;
-     od;
-     Remove (norms, k);
-     for N in norms do
-          Assert (1, IsElementaryAbelian(N));
-          SetIsElementaryAbelian (N, true);
-     od;
-     return norms;
+    return norms;
 end);
 
 
@@ -567,51 +587,19 @@ RedispatchOnCondition (AbelianMinimalNormalSubgroups, true,
 
 #############################################################################
 ##
-#M  AbelianMinimalNormalSubgroups (<G>) 
-##
-InstallMethod (AbelianMinimalNormalSubgroups,
-    "handled by nice monomorphism",
-    true,
-    [IsGroup and IsHandledByNiceMonomorphism and IsFinite],
-    0,
-    function( grp )
-        local hom;
-        hom := NiceMonomorphism (grp);
-        return List (AbelianMinimalNormalSubgroups (NiceObject (grp)), 
-        	N -> PreImagesSet (hom, N));
-    end);
-    
-    
-#############################################################################
-##
-#M  AbelianMinimalNormalSubgroups (<G>) 
-##
-InstallMethod (AbelianMinimalNormalSubgroups,
-    "handled by IsomorphismPcGroup",
-    true,
-    [IsGroup and IsSolvableGroup and IsFinite],
-    0,
-    function( grp )
-        local hom;
-        if CanEasilyComputePcgs (grp) then
-            TryNextMethod();
-        fi;
-        hom := IsomorphismPcGroup (grp);
-        return List (AbelianMinimalNormalSubgroups (ImagesSource (hom)), 
-        	N -> PreImagesSet (hom, N));
-    end);
-    
-    
-#############################################################################
-##
 #M  MinimalNormalSubgroups (<G>) 
 ##
 InstallMethod (MinimalNormalSubgroups, 
 	"for solvable groups: use AbelianMinimalNormalSubgroups",
 	true, [IsGroup and IsFinite and IsSolvableGroup], 0,
 	AbelianMinimalNormalSubgroups);
-	
-RedispatchOnCondition (MinimalNormalSubgroups, 
+
+
+#############################################################################
+##
+#M  MinimalNormalSubgroups (<G>) 
+##
+RedispatchOnCondition (MinimalNormalSubgroups,
 	true, [IsGroup], [IsFinite and IsSolvableGroup],
     RankFilter (IsGroup and IsFinite and IsSolvableGroup));
 
