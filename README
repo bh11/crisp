@@ -1,5 +1,5 @@
                        The CRISP package
-                          Version 1.3
+                          Version 1.4
 
 The GAP package CRISP provides algorithms for computing subgroups of
 finite solvable groups related to a group class C. In particular, it
@@ -21,7 +21,7 @@ This version of CRISP requires at least GAP 4.5.
 
 In order to install CRISP, you have to get the current package archive file 
 
-`crisp-1r3n9.tar.gz', 
+`crisp-1r4n0.tar.bz2',
 
 or any other package format suitable for your system.
 
