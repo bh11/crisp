@@ -357,30 +357,12 @@ be called by the user.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Functions for normal and characteristic subgroups}\null
-
-\>NormalSubgroups(<grp>) A
-
-{\CRISP} provides an improved method for `NormalSubgroups' (see
-"ref:NormalSubgroups") for groups <grp> which are finite and  solvable.
-This method simply calls `AllInvSgrsWithQPropUnderAction' with
-$<act> = <grp>$, `ReturnTrue'
-as <pretest> and `ReturnFail' as <test>. Note that, since
-<pretest> always returns `true', <test> is never actually called.
-This is usually significantly faster than the methods in the {\GAP} library.
-
-\>CharacteristicSubgroups(<grp>) A
-
-returns a list containing all characteristic subgroups of <grp>. 
-`CharacteristicSubgroups' calls `AllInvSgrsWithQPropUnderAction'.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Low level functions for normal subgroups related to residuals}\null
 
 \index{normal subgroups!with properties inherited by normal subgroups above}
 \index{invariant normal subgroups!with properties inherited by normal subgroups above}
-\index{factor groups!with properties inherited by factor groups}
-\index{quotient groups!with properties inherited by quotients}
+\index{normal subgroups!with properties inherited by factor groups}
+\index{normal subgroups!with properties inherited by quotients}
 
 \>OneInvariantSubgroupMinWrtQProperty(<act>, <grp>, <pretest>, <test>, <data>) O
 
