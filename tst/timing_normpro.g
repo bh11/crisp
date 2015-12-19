@@ -43,26 +43,50 @@ test := function (H)  # computes normalizers of the Sylow subgroups of H
             GASMAN ("collect");
         fi;
         t0 := Runtime();
-        norm1 := NormalizerOfPronormalSubgroup (H, P);
-        t1 := Runtime() - t0;
+        if IsBound (TIMEOUT) and IsBound (CallWithTimeout) then
+            norm1 := CallWithTimeout (TIMEOUT, NormalizerOfPronormalSubgroup, H, P);
+            if IsList (norm1) then
+                norm1 := norm1[1];
+            fi;
+        else
+            norm1 := NormalizerOfPronormalSubgroup(H, P);
+        fi;
+        if norm1 = fail then
+            t1 := "n/a";
+        else
+            t1 := Runtime() - t0;
+        fi;
+        if IsBound (DO_TIMING) and DO_TIMING then
+            Print ("  ", t1, "\c");
+        fi;
         if IsBound (DO_TIMING) and DO_TIMING then
             GASMAN ("collect");
         fi;
         t0 := Runtime();
-        norm2 := Normalizer (H, P); 
-        t2 := Runtime() - t0;
-        if norm1 <> norm2 then
-            Error ("wrong normalizer  \n");
+        if IsBound (TIMEOUT) and IsBound (CallWithTimeout) then
+            norm2 := CallWithTimeout (TIMEOUT, Normalizer, H, P);
+            if IsList (norm2) then
+                norm2 := norm2[1];
+            fi;
+        else
+            norm2 := Normalizer (H, P);
         fi;
-        if norm1 <> norm2 then
-            Error ("normalizer not self-normalising \n");
+        if norm2 = fail then
+            t2 := "n/a";
+        else
+            t2 := Runtime() - t0;
+        fi;
+        if IsBound (DO_TIMING) and DO_TIMING then
+            Print ("  ", t2, "\c");
+        fi;
+        if norm1 <> fail and norm2 <> fail and norm1 <> norm2 then
+            Error ("wrong normalizer  \n");
         fi;
         if Index (H, norm1) mod p <> 1 then
             Error ("wrong index \n");
         fi;
         if IsBound (DO_TIMING) and DO_TIMING then
-            Print ("  ", t1, "    ", t2,
-                "  |N_G(P):P| = ", Size (norm1)/Size(P),
+            Print ("  |N_G(P):P| = ", Size (norm1)/Size(P),
                 "  |G:N_G(P)| =  ", Size (H)/Size(norm1), "\n");
         else
         	 Print ("\n");

@@ -213,7 +213,14 @@ DoTests := function (groups, tests)
                     GASMAN ("collect");
                 fi;
                 t0 := Runtime();
-                res := t[1](tmp);
+                if IsBound (TIMEOUT) and IsBound (CallWithTimeout) then
+                    res := CallWithTimeout (TIMEOUT, t[1], tmp);
+                    if IsList (res) then
+                        res := res[1];
+                    fi;
+                else
+                    res := t[1](tmp);
+                fi;
                 t1 := Runtime() - t0;
                 if res = fail then
                     t1 := "n/a";
