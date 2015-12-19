@@ -18,9 +18,9 @@ Sizes := l -> Collected (List (l, Size));
 tests :=
 [ 
     [tmp -> NormalSubgroups (tmp), Sizes, "CRISP", ["UPP"]],
-    [tmp -> NormalSubgroupsSolvableOld (tmp), Sizes, "old lib", ["LUX2_12", "UPP", "LUXwrS3"]],
     [tmp -> NormalSubgroupsCalc (tmp), Sizes, "new lib", ["UPP"]],
-    [tmp -> NormalSubgroupsAbove( tmp, TrivialSubgroup( tmp ), []),  Sizes, "class",
+    [tmp -> NormalSubgroupsSolvableOld( tmp, TrivialSubgroup( tmp ), []),  Sizes, "old lib",
+    [tmp -> NormalSubgroupsAbove( tmp, TrivialSubgroup( tmp ), []),  Sizes, "ccl",
         ["DARK/6", "DARK", "UPP", "LUXwrS3"]],
 ];
 
