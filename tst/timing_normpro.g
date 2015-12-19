@@ -30,7 +30,7 @@ test := function (H)  # computes normalizers of the Sylow subgroups of H
     Print ("testing group of size ");
     PrintFactorsInt (Size (H));
     Print ("\n");
-    primes := Set (FactorsInt (Size(H)));
+    primes := PrimeDivisors (Size(H));
     res := [];
     SpecialPcgs (H);
     PcgsElementaryAbelianSeries (H);

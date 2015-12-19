@@ -104,7 +104,7 @@ classes := function ()
     C := OrdinaryFormation (rec (
         res := function (G)
             local pi;
-            pi := Difference (Set (Factors (Size (G))), [1,2,5]);
+            pi := Difference (PrimeDivisors (Size (G)), [2,5]);
             return NormalClosure (G, HallSubgroup (G, pi));
         end));
     SetName (C, "[2,5]-grps by res");

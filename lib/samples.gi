@@ -155,7 +155,7 @@ InstallGlobalFunction ("AbelianGroupsOfExponent", function (exp)
     form := OrdinaryFormation ( rec(
         res := G -> ClosureGroup (DerivedSubgroup (G), 
                 List (GeneratorsOfGroup (G), x -> x^exp)),
-        char := Set(Factors(exp))
+        char := PrimeDivisors(exp)
         ));
     SetIsSubgroupClosed (form, true);
     SetName (form, Concatenation (
@@ -180,10 +180,9 @@ InstallGlobalFunction ("PiGroups",
                                          # which returns "" for an empty list
         fi;
         class := SaturatedFittingFormation ( rec(
-            \in := G -> IsTrivial (G) 
-            	or ForAll (Set(Factors (Size(G))), p -> p in pi),
-            proj := G -> HallSubgroup (G, Filtered (Set(Factors (Size(G))), p -> p in pi)),
-            inj  := G -> HallSubgroup (G, Filtered (Set(Factors (Size(G))), p -> p in pi)),
+            \in := G -> ForAll (PrimeDivisors (Size(G)), p -> p in pi),
+            proj := G -> HallSubgroup (G, Filtered (PrimeDivisors (Size(G)), p -> p in pi)),
+            inj  := G -> HallSubgroup (G, Filtered (PrimeDivisors (Size(G)), p -> p in pi)),
             locdef := function (G, p) 
                 if p in pi then
                     return [];

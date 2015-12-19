@@ -60,7 +60,7 @@ fit := function (G)
     pcgs := Pcgs (G);
     pcser := [];
     depths := [];
-    for p in Set (Factors (Size (G))) do
+    for p in PrimeDivisors(Size (G)) do
         newpcgs := Pcgs (OneInvariantSubgroupMaxWrtNProperty (G, G,
             function (U, V, R, data)
                 return Index (U, V) mod data = 0;
