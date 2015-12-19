@@ -101,15 +101,21 @@ end;
 
 for g in groups do
     if IsBoundGlobal (g[3]) then
+        if IsReadOnlyGlobal (g[3]) then
+            MakeReadWriteGlobal (g[3]);
+        fi;
         UnbindGlobal (g[3]);
     fi;
-    SilentRead (g[1],g[2]);
+    SilentRead (g[1],g[2],g[3]);
     if IsBound (g[4]) then
         name := g[4];
     else
         name := g[3];
     fi;
     tmp := ValueGlobal (g[3]);
+    if IsReadOnlyGlobal (g[3]) then
+        MakeReadWriteGlobal (g[3]);
+    fi;
     UnbindGlobal (g[3]);
 
     # test2 uses random subgroups, so it makes sense to run it a few times
