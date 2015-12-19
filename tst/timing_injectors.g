@@ -145,7 +145,7 @@ MetaNilpotentGroups := FittingProduct (NilpotentGroups, NilpotentGroups);
 
 
 tests :=
-[ [tmp -> Injector (tmp, metanilp), Size,  "in", []],
+[ [tmp -> Injector (tmp, metanilp), Size,  "in", ["UPP", "DARK"]],
   [tmp -> Injector (tmp, MetaNilpotentGroups),  Size, "rad", []],
   [tmp -> InjectorFromRadicalFunctionFormat (tmp, 
   		G -> Radical (G, MetaNilpotentGroups), true), Size, "radF", []],
