@@ -143,7 +143,7 @@ end;
 ##
 DoTests := function (groups, tests)
 
-    local g, name, tmp, t, t0, t1, res, prevres, size, widths;
+    local g, name, tmp, t, t0, t1, res, prevres, size, w, colwidth, col;
 
     colwidth := [-12,8,8];
     Print (String ("group", colwidth[1]));
@@ -266,7 +266,7 @@ end;
 ##  return a pc group isomorphic with grp whose family pcgs is a special 
 ##  pcgs
 ##
-SpecialPcGroup := G -> Image (IsomorphismsSpecialPcGroup (G));
+SpecialPcGroup := G -> Image (IsomorphismSpecialPcGroup (G));
 
 ############################################################################
 ##
