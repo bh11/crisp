@@ -1,4 +1,3 @@
-manual.aux
 doc/manual.example-2.tst
 doc/manual.example-3.tst
 doc/manual.example-4.tst
@@ -8,8 +7,11 @@ doc/manual.ilg
 doc/manual.ind
 doc/manual.log
 doc/manual.pdf
+manual.aux
 manual.toc
 manual.six
+manual.lab
+manual.example-7.tst
 html
 html/biblio.htm
 html/CHAP001.htm
@@ -22,6 +24,5 @@ html/chapters.htm
 html/theindex.htm
 crisp-1r3n9.tar.bz2
 private
-manual.lab
-manual.example-7.tst
 manual.synctex.gz
+*tar.bz2
