@@ -361,9 +361,10 @@ InstallMethod (CompositionSeriesUnderAction, "for solvable group",
 ##
 #M  CompositionSeriesUnderAction (<act>, <grp>)
 ##
-RedispatchOnCondition (CompositionSeriesUnderAction,     
+CRISP_RedispatchOnCondition (CompositionSeriesUnderAction,     
+    "redispatch if group is finite or soluble",
     true,
-    [IsListOrCollection, IsGroup], 
+    [IsListOrCollection, IsGroup],
     [, IsFinite and IsSolvableGroup], # no conditions on first argument
     0);
 

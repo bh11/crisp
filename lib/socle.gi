@@ -60,7 +60,9 @@ InstallMethod (PSocleComponentsOp,
 ##
 #M  PSocleComponentsOp (<G>, <p>) 
 ##
-RedispatchOnCondition (PSocleComponentsOp, true, 
+CRISP_RedispatchOnCondition (PSocleComponentsOp,
+    "redispatch if group is finite",
+    true,
     [IsGroup, IsPosInt], 
     [IsFinite, ],
     0);
@@ -166,7 +168,9 @@ InstallMethod (PSocleSeriesOp,
 ##
 #M  PSocleSeriesOp (<G>, <p>)
 ##
-RedispatchOnCondition (PSocleSeriesOp, true,
+CRISP_RedispatchOnCondition (PSocleSeriesOp,
+    "redispatch if group is finite",
+    true,
     [IsGroup, IsPosInt], 
     [IsFinite, ],
     0);
@@ -214,7 +218,9 @@ InstallMethod (PSocleSeriesOp,
 ##
 #M  PSocleOp (<G>, <p>)
 ##
-RedispatchOnCondition (PSocleOp, true, 
+CRISP_RedispatchOnCondition (PSocleOp,
+    "redispatch if group is finite",
+    true,
     [IsGroup, IsPosInt], 
     [IsFinite, ], 0);
     
@@ -296,7 +302,9 @@ InstallMethod (SolvableSocleComponents,
 ##
 #M  SolvableSocleComponents (<G>) 
 ##
-RedispatchOnCondition (SolvableSocleComponents, true, 
+CRISP_RedispatchOnCondition (SolvableSocleComponents,
+    "redispatch if group is finite",
+    true,
     [IsGroup], 
     [IsFinite], 0);
     
@@ -315,7 +323,9 @@ InstallMethod (SocleComponents,
 ##
 #M  SocleComponents (<G>) 
 ##
-RedispatchOnCondition (SocleComponents, true, 
+CRISP_RedispatchOnCondition (SocleComponents,
+    "redispatch if group is finite or soluble",
+    true,
     [IsGroup], 
     [IsFinite and IsSolvableGroup], 0);
     
@@ -454,7 +464,9 @@ InstallMethod (SolvableSocle,
 ##
 #M  SolvableSocle (<G>) 
 ##
-RedispatchOnCondition (SolvableSocle, true, 
+CRISP_RedispatchOnCondition (SolvableSocle,
+    "redispatch if group is finite",
+    true,
     [IsGroup], 
     [IsFinite], 0);
     
@@ -473,7 +485,9 @@ InstallMethod (Socle, "for finite soluble group, via SolvableSocle", true,
 ##
 #M  Socle (<G>) 
 ##
-RedispatchOnCondition (Socle, true, 
+CRISP_RedispatchOnCondition (Socle,
+    "redispatch if group is finite or soluble",
+    true,
     [IsGroup],
     [IsFinite and IsSolvableGroup],
     RankFilter (IsGroup and IsFinite and IsSolvableGroup)-1);
@@ -580,7 +594,9 @@ end);
 ##
 #M  AbelianMinimalNormalSubgroups (<G>) 
 ##
-RedispatchOnCondition (AbelianMinimalNormalSubgroups, true, 
+CRISP_RedispatchOnCondition (AbelianMinimalNormalSubgroups,
+    "redispatch if group is finite",
+    true,
     [IsGroup], 
     [IsFinite], 0);
 
@@ -599,8 +615,11 @@ InstallMethod (MinimalNormalSubgroups,
 ##
 #M  MinimalNormalSubgroups (<G>) 
 ##
-RedispatchOnCondition (MinimalNormalSubgroups,
-	true, [IsGroup], [IsFinite and IsSolvableGroup],
+CRISP_RedispatchOnCondition (MinimalNormalSubgroups,
+    "redispatch if group is finite or soluble",
+	true,
+    [IsGroup],
+    [IsFinite and IsSolvableGroup],
     RankFilter (IsGroup and IsFinite and IsSolvableGroup)-1);
 
 

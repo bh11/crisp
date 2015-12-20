@@ -77,8 +77,11 @@ InstallMethod (NilpotentProjector, "for finite solvable groups", true,
 ##
 #M  NilpotentProjector (<grp>)
 ##
-RedispatchOnCondition (NilpotentProjector, true, 
-    [IsGroup], [IsFinite and IsSolvableGroup], 0);
+CRISP_RedispatchOnCondition (NilpotentProjector,
+    "redispatch if group is finite or soluble",
+    true, 
+    [IsGroup],
+    [IsFinite and IsSolvableGroup], 0);
 
 
 #############################################################################
@@ -127,8 +130,12 @@ InstallMethod (SupersolvableProjector, "for finite solvable groups", true,
 ##
 #M  SupersolvableProjector (<grp>)
 ##
-RedispatchOnCondition (SupersolvableProjector, true, 
-    [IsGroup], [IsFinite and IsSolvableGroup], 0);
+CRISP_RedispatchOnCondition (SupersolvableProjector,
+    "redispatch if group is finite or soluble",
+    true,
+    [IsGroup],
+    [IsFinite and IsSolvableGroup],
+    0);
 
 
 #############################################################################
@@ -240,17 +247,25 @@ InstallGlobalFunction ("PGroups",
 ##
 ##  make sure that HallSubgroupOp works for arbitrary solvable groups
 ##
-RedispatchOnCondition(HallSubgroupOp,true,[IsGroup,IsList],
-  [IsSolvableGroup and IsFinite,],1);
+CRISP_RedispatchOnCondition(HallSubgroupOp,
+    "redispatch if group is finite or soluble",
+    true,
+    [IsGroup,IsList],
+    [IsSolvableGroup and IsFinite,],
+    1);
 
 
 ############################################################################
 ##
 #M  SylowComplementOp (<grp>, <p>)
 ##
-RedispatchOnCondition(SylowComplementOp,true,[IsGroup,IsPosInt],
-  [IsSolvableGroup and IsFinite,
-  IsPosInt ],1);
+CRISP_RedispatchOnCondition(SylowComplementOp,
+    "redispatch if group is finite or soluble",
+    true,
+    [IsGroup,IsPosInt],
+    [IsSolvableGroup and IsFinite,
+    IsPosInt],
+    1);
   
   
 ############################################################################

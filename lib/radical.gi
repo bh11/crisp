@@ -92,7 +92,9 @@ InstallMethod (AllInvariantSubgroupsWithNProperty,
 ##
 #M  AllInvariantSubgroupsWithNProperty
 ##
-RedispatchOnCondition (AllInvariantSubgroupsWithNProperty, true, 
+CRISP_RedispatchOnCondition (AllInvariantSubgroupsWithNProperty,
+    "redispatch if group is finite or soluble",
+    true,
     [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject], 
     [, IsFinite and IsSolvableGroup], # no conditions on other arguments
     0);
@@ -174,7 +176,9 @@ InstallMethod (OneInvariantSubgroupMaxWrtNProperty,
 ##
 #M  OneInvariantSubgroupMaxWrtNProperty
 ##
-RedispatchOnCondition (OneInvariantSubgroupMaxWrtNProperty, true, 
+CRISP_RedispatchOnCondition (OneInvariantSubgroupMaxWrtNProperty,
+    "redispatch if group is finite or soluble",
+    true,
     [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject], 
     [, IsFinite and IsSolvableGroup], # no conditions on other arguments
     0);
@@ -387,7 +391,9 @@ InstallMethod (RadicalOp, "for FittingSetRep with radical function",
 ##
 #M  RadicalOp
 ##
-RedispatchOnCondition (RadicalOp, true, 
+CRISP_RedispatchOnCondition (RadicalOp,
+    "redispatch if group is finite or soluble",
+    true,
     [IsGroup, IsGroupClass], [IsFinite and IsSolvableGroup],
     RankFilter (IsGroup) + RankFilter (IsGroupClass));
     

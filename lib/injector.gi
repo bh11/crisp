@@ -84,8 +84,11 @@ InstallMethodByIsomorphismPcGroupForGroupAndClass (InjectorOp,
 ##
 #M  InjectorOp (<grp>, <class>)
 ##
-RedispatchOnCondition (InjectorOp, true, 
-    [IsGroup, IsGroupClass], [IsFinite and IsSolvableGroup],
+CRISP_RedispatchOnCondition (InjectorOp,
+    "redispatch if group is finite or soluble",
+    true,
+    [IsGroup, IsGroupClass],
+    [IsFinite and IsSolvableGroup],
     RankFilter (IsGroup) + RankFilter (IsGroupClass));
 
 

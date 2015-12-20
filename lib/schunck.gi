@@ -282,8 +282,11 @@ InstallMethod (IsMemberOp, "compute from boundary", true,
 ##
 #M  IsMemberOp (<grp>, <class>)
 ##
-RedispatchOnCondition (IsMemberOp, true, 
-    [IsGroup, IsSchunckClass], [IsFinite and IsSolvableGroup],
+CRISP_RedispatchOnCondition (IsMemberOp,
+    "redispatch if group is finite or soluble",
+    true,
+    [IsGroup, IsSchunckClass],
+    [IsFinite and IsSolvableGroup],
     RankFilter (IsGroup) + RankFilter (IsClass));
 
 

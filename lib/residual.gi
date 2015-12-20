@@ -93,8 +93,11 @@ InstallMethod (NormalSubgroups,
 ##
 #M  NormalSubgroups (<grp>)
 ##
-RedispatchOnCondition (NormalSubgroups, 
-    true, [IsGroup],  [IsFinite and IsSolvableGroup], 
+CRISP_RedispatchOnCondition (NormalSubgroups,
+    "redispatch if group is finite or soluble",
+    true,
+    [IsGroup],
+    [IsFinite and IsSolvableGroup],
     # rank this method fairly high - presumably all fast methods for computing
     # the normal subgroups need to know if the group is finite and solvable
     RankFilter (IsPcGroup and IsPermGroup and IsSolvableGroup));
@@ -158,10 +161,13 @@ InstallMethod (CharacteristicSubgroups,
 ##
 #M  CharacteristicSubgroups (<grp>)
 ##
-RedispatchOnCondition (CharacteristicSubgroups, 
-    true, [IsGroup],  [IsFinite and IsSolvableGroup], 
-    0);
-    
+CRISP_RedispatchOnCondition (CharacteristicSubgroups,
+    "redispatch if group is finite or soluble",
+    true,
+    [IsGroup],
+    [IsFinite and IsSolvableGroup],
+    RankFilter (IsGroup and IsFinite and IsSolvableGroup)-1);
+
 
 #############################################################################
 ##
@@ -238,7 +244,8 @@ InstallMethod (AllInvariantSubgroupsWithQProperty,
 #M  AllInvariantSubgroupsWithQProperty
 #M                     (<act>, <grp>, <pretest>, <test>, <data>)
 ##
-RedispatchOnCondition (AllInvariantSubgroupsWithQProperty,
+CRISP_RedispatchOnCondition (AllInvariantSubgroupsWithQProperty,
+    "redispatch if group is finite or soluble",
     true,
     [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject], 
     [, IsFinite and IsSolvableGroup], # no conditions on other arguments
@@ -314,7 +321,9 @@ InstallMethod (OneInvariantSubgroupMinWrtQProperty,
 #M  OneInvariantSubgroupMinWrtQProperty 
 #M                                              (<act>, <grp>, <pretest>, <test>, <data>)
 ##
-RedispatchOnCondition (OneInvariantSubgroupMinWrtQProperty, true,
+CRISP_RedispatchOnCondition (OneInvariantSubgroupMinWrtQProperty,
+    "redispatch if group is finite or soluble",
+    true,
     [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject], 
     [,IsFinite and IsSolvableGroup], # no conditions on other arguments
     0);
@@ -480,7 +489,9 @@ InstallMethodByIsomorphismPcGroupForGroupAndClass (ResidualOp,
 ##
 #M  ResidualOp (<grp>, <class>)
 ##
-RedispatchOnCondition (ResidualOp, true, 
+CRISP_RedispatchOnCondition (ResidualOp,
+    "redispatch if group is finite or soluble",
+    true,
     [IsGroup, IsGroupClass], 
     [IsFinite and IsSolvableGroup],
     RankFilter (IsGroup) + RankFilter (IsGroupClass));

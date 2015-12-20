@@ -270,7 +270,9 @@ InstallMethodByIsomorphismPcGroupForGroupAndClass (ProjectorOp,
 ##
 #M  ProjectorOp (<grp>, <class>)
 ##
-RedispatchOnCondition (ProjectorOp, true, 
+CRISP_RedispatchOnCondition (ProjectorOp,
+    "redispatch if group is finite or soluble",
+    true,
     [IsGroup, IsGroupClass], [IsFinite and IsSolvableGroup],
     RankFilter (IsGroup) + RankFilter (IsGroupClass));
 
@@ -476,7 +478,8 @@ InstallMethod (ProjectorFromExtendedBoundaryFunction, "for solvable groups",
 ##
 #M  ProjectorFromExtendedBoundaryFunction (<grp>, <rec>, <inonly>) 
 ##
-RedispatchOnCondition (ProjectorFromExtendedBoundaryFunction, 
+CRISP_RedispatchOnCondition (ProjectorFromExtendedBoundaryFunction, 
+    "redispatch if group is finite or soluble",
     true,
     [IsGroup, IsRecord, IsBool], 
     [IsGroup and IsSolvableGroup],
