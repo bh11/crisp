@@ -434,8 +434,6 @@ InstallGlobalFunction ("PcgsInvariantComplementsOfElAbModuloPcgs",
 ##
 #M  ComplementsOfCentralSectionUnderActionNC (<act>,<G>,<N>,<L>,<all>)
 ##
-##  version where <act> is a list of maps G -> G (which are supposed to
-##  induce automorphisms on G/L)
 ##
 InstallMethod (ComplementsOfCentralSectionUnderActionNC,
      "for section of solvable group",
@@ -458,8 +456,7 @@ InstallMethod (ComplementsOfCentralSectionUnderActionNC,
         Assert (2, ForAll (complements, C ->
             IsNormal (G, C) 
                 and NormalIntersection (C, N) = L 
-                and Index (G, C) * Index (G, N) = Index (G, L)
-                and ForAll (act, a -> Image (a, C) = C)),
+                and Index (G, C) * Index (G, N) = Index (G, L)),
             Error ("Internal Error: wrong invariant complement(s)"));
         if all then
             return complements;
@@ -476,6 +473,8 @@ InstallMethod (ComplementsOfCentralSectionUnderActionNC,
 #############################################################################
 ##
 #F  ComplementsOfCentralSectionUnderAction (<act>, <G>, <N>, <L>, <all>)
+##
+##  <act> must be a list or group whose elements act on G via ^
 ##
 InstallGlobalFunction ("ComplementsOfCentralSectionUnderAction",
     function (act, G, N, L, all)
