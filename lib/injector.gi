@@ -85,8 +85,8 @@ InstallMethodByIsomorphismPcGroupForGroupAndClass (InjectorOp,
 #M  InjectorOp (<grp>, <class>)
 ##
 RedispatchOnCondition (InjectorOp, true, 
-    [IsGroup, IsClass], [IsFinite and IsSolvableGroup],
-    RankFilter (IsGroup) + RankFilter (IsClass));
+    [IsGroup, IsGroupClass], [IsFinite and IsSolvableGroup],
+    RankFilter (IsGroup) + RankFilter (IsGroupClass));
 
 
 #############################################################################

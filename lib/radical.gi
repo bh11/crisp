@@ -388,8 +388,8 @@ InstallMethod (RadicalOp, "for FittingSetRep with radical function",
 #M  RadicalOp
 ##
 RedispatchOnCondition (RadicalOp, true, 
-    [IsGroup, IsClass], [IsFinite and IsSolvableGroup],
-    RankFilter (IsGroup) + RankFilter (IsClass));
+    [IsGroup, IsGroupClass], [IsFinite and IsSolvableGroup],
+    RankFilter (IsGroup) + RankFilter (IsGroupClass));
     
 
 ############################################################################
