@@ -476,7 +476,7 @@ InstallMethod (Socle, "for finite soluble group, via SolvableSocle", true,
 RedispatchOnCondition (Socle, true, 
     [IsGroup],
     [IsFinite and IsSolvableGroup],
-    RankFilter (IsGroup and IsFinite and IsSolvableGroup));
+    RankFilter (IsGroup and IsFinite and IsSolvableGroup)-1);
     
     
 #############################################################################
@@ -601,7 +601,7 @@ InstallMethod (MinimalNormalSubgroups,
 ##
 RedispatchOnCondition (MinimalNormalSubgroups,
 	true, [IsGroup], [IsFinite and IsSolvableGroup],
-    RankFilter (IsGroup and IsFinite and IsSolvableGroup));
+    RankFilter (IsGroup and IsFinite and IsSolvableGroup)-1);
 
 
 ############################################################################
