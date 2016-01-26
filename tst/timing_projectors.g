@@ -5,8 +5,8 @@
 ##  Copyright (C) 2000 Burkhard Höfling
 ##
 LoadPackage ("crisp");
-ReadPackage ("crisp", "tst/timing_test.g");
-ReadPackage ("crisp", "tst/timing_samples.g");
+CRISP_Read("tst/timing_test.g");
+CRISP_Read("tst/timing_samples.g");
 
 nilp := Formation ("Nilpotent");
 

@@ -6,21 +6,27 @@
 ##  Friedrich Schiller-Universit\"at Jena, Germany
 ##
 
-ReadPackage ("crisp", "lib/classes.gd");
-ReadPackage ("crisp", "lib/grpclass.gd");
-ReadPackage ("crisp", "lib/fitting.gd");
-ReadPackage ("crisp", "lib/schunck.gd");
-ReadPackage ("crisp", "lib/form.gd");
-ReadPackage ("crisp", "lib/projector.gd");
-ReadPackage ("crisp", "lib/injector.gd");
-ReadPackage ("crisp", "lib/normpro.gd");
-ReadPackage ("crisp", "lib/solveeq.gd");
-ReadPackage ("crisp", "lib/compl.gd");
-ReadPackage ("crisp", "lib/radical.gd");
-ReadPackage ("crisp", "lib/residual.gd");
-ReadPackage ("crisp", "lib/util.gd");
-ReadPackage ("crisp", "lib/samples.gd");
-ReadPackage ("crisp", "lib/socle.gd");
+BindGlobal ("CRISP_Read", function (path)
+    if not ReadPackage("crisp", path) then
+        Error("CRISP package: Can't read file ",path, ". The package may be damaged");
+    fi;
+end);
+
+CRISP_Read("lib/classes.gd");
+CRISP_Read("lib/grpclass.gd");
+CRISP_Read("lib/fitting.gd");
+CRISP_Read("lib/schunck.gd");
+CRISP_Read("lib/form.gd");
+CRISP_Read("lib/projector.gd");
+CRISP_Read("lib/injector.gd");
+CRISP_Read("lib/normpro.gd");
+CRISP_Read("lib/solveeq.gd");
+CRISP_Read("lib/compl.gd");
+CRISP_Read("lib/radical.gd");
+CRISP_Read("lib/residual.gd");
+CRISP_Read("lib/util.gd");
+CRISP_Read("lib/samples.gd");
+CRISP_Read("lib/socle.gd");
 
 
 ############################################################################

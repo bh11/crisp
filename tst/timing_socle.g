@@ -6,8 +6,8 @@
 ##
 
 LoadPackage ("crisp");
-ReadPackage ("crisp", "tst/timing_test.g");
-ReadPackage ("crisp", "tst/timing_samples.g");
+CRISP_Read("tst/timing_test.g");
+CRISP_Read("tst/timing_samples.g");
 
 SolvableSocleFromPCores := function (G)
 

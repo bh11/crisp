@@ -9,43 +9,43 @@ LoadPackage ("crisp", "", false);
 PRINT_METHODS := false;
 
 #Print ("testing manual examples\n");
-#ReadPackage ("crisp", "tst/manual.g");
+#CRISP_Read("tst/manual.g");
 
 Print ("testing class construction \n");
-ReadPackage ("crisp", "tst/classes.g");
+CRISP_Read("tst/classes.g");
 
 Print ("testing bases of classes \n");
-ReadPackage ("crisp", "tst/basis.g");
+CRISP_Read("tst/basis.g");
 
 Print ("testing boundaries of classes  \n");
-ReadPackage ("crisp", "tst/boundary.g");
+CRISP_Read("tst/boundary.g");
 
 Print ("testing characteristics of classes  \n");
-ReadPackage ("crisp", "tst/char.g");
+CRISP_Read("tst/char.g");
 
 Print ("testing membership for classes  \n");
-ReadPackage ("crisp", "tst/in.g");
+CRISP_Read("tst/in.g");
 
 Print ("testing injectors \n");
-ReadPackage ("crisp", "tst/injectors.g");
+CRISP_Read("tst/injectors.g");
 
 Print ("testing normal subgroups \n");
-ReadPackage ("crisp", "tst/normals.g");
+CRISP_Read("tst/normals.g");
 
 Print ("testing projectors routines \n");
-ReadPackage ("crisp", "tst/projectors.g");
+CRISP_Read("tst/projectors.g");
 
 Print ("testing radicals \n");
-ReadPackage ("crisp", "tst/radicals.g");
+CRISP_Read("tst/radicals.g");
 
 Print ("testing residuals \n");
-ReadPackage ("crisp", "tst/residuals.g");
+CRISP_Read("tst/residuals.g");
 
 Print ("testing socles \n");
-ReadPackage ("crisp", "tst/socle.g");
+CRISP_Read("tst/socle.g");
 
 Print ("testing print routines \n");
-ReadPackage ("crisp", "tst/print.g");
+CRISP_Read("tst/print.g");
 
 ############################################################################
 ##

@@ -5,7 +5,7 @@
 ##  Copyright (C) 2000 Burkhard Höfling
 ##
 LoadPackage ("crisp");
-ReadPackage ("crisp", "tst/samples.g");
+CRISP_Read("tst/samples.g");
 
 if PRINT_METHODS then
     TraceMethods (ResidualOp);

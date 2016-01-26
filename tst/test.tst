@@ -1,7 +1,7 @@
 gap> START_TEST("crisp");
 gap> LoadPackage ("crisp", "", false);
 true
-gap> ReadPackage ("crisp", "tst/all.g");
+gap> CRISP_Read("tst/all.g");
 testing class construction 
 testing bases of classes 
 testing boundaries of classes  
