@@ -1,9 +1,8 @@
 ############################################################################
 ##
-##  init.g                          CRISP                 Burkhard H\"ofling
+##  init.g                          CRISP                   Burkhard Höfling
 ##
-##  Copyright (C) 2000 by Burkhard H\"ofling, Mathematisches Institut,
-##  Friedrich Schiller-Universit\"at Jena, Germany
+##  Copyright (C) 2000, 2016 by Burkhard Höfling
 ##
 
 BindGlobal ("CRISP_Read", function (path)
