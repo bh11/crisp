@@ -2,7 +2,7 @@
 ##
 ##  projector.gd                     CRISP                   Burkhard Höfling
 ##
-##  Copyright (C) 2000 Burkhard Höfling
+##  Copyright © 2000 Burkhard Höfling
 ##
 
 
@@ -10,27 +10,27 @@
 ##
 #V  InfoProjector 
 ##
-DeclareInfoClass ("InfoProjector");
+DeclareInfoClass("InfoProjector");
 
 
 #############################################################################
 ##
-#O  Projector (<grp>, <class>)
+#O  Projector(<grp>, <class>)
 ##
-KeyDependentOperation ("Projector", IsGroup, IsGroupClass, ReturnTrue);
+KeyDependentOperation("Projector", IsGroup, IsGroupClass, ReturnTrue);
 
 
 #############################################################################
 ##
-#M  CoveringSubgroup (<grp>, <class>)
+#M  CoveringSubgroup(<grp>, <class>)
 ##
-KeyDependentOperation ("CoveringSubgroup", IsGroup, IsGroupClass,
+KeyDependentOperation("CoveringSubgroup", IsGroup, IsGroupClass,
     ReturnTrue);
 
 
 #############################################################################
 ##
-#O  ProjectorFromExtendedBoundaryFunction (<grp>, <data>, <inonly>) 
+#O  ProjectorFromExtendedBoundaryFunction(<grp>, <data>, <inonly>) 
 ##
 ##  if inonly is false, this computes a projector of <grp> for the 
 ##  Schunck class described by <data>.
@@ -39,19 +39,19 @@ KeyDependentOperation ("CoveringSubgroup", IsGroup, IsGroupClass,
 ##
 ##  See PROJECTOR_FROM_BOUNDARY below for the meaning of <data>.
 ##
-DeclareOperation ("ProjectorFromExtendedBoundaryFunction",
+DeclareOperation("ProjectorFromExtendedBoundaryFunction",
     [IsGroup, IsRecord, IsBool]);
 
 
 #############################################################################
 ##
-#F  PROJECTOR_FROM_BOUNDARY (<gpcgs>, <data>, <inonly>, <hom>, <conv>)
+#F  PROJECTOR_FROM_BOUNDARY(<gpcgs>, <data>, <inonly>, <hom>, <conv>)
 ##
 ##  <gpcgs> is a pcgs of the group G for which the computation will be 
 ##  performed.
 ##
 ##  If the boolean inonly is true, the function returns true if G belongs to 
-##  H, and false otherwise. If inonly is false, it returns the pcgs (an  
+##  H, and false otherwise. If inonly is false, it returns the pcgs(an  
 ##  induced pcgs wrt. gpcgs) of a projector of G. 
 ##
 ##  hom and conv are booleans. If hom is true, computations will be carried 
@@ -68,7 +68,7 @@ DeclareOperation ("ProjectorFromExtendedBoundaryFunction",
 ##  U/N belongs to the Schunck class H. data is just the argument of
 ##  PROJECTOR_FROM_BOUNDARY. data.dfunc may return true, false, or fail.
 ##  data.dfunc may  return true if U/L does not belong to H, and false if 
-##  U/L belongs to H. (An example may be to use information on whether 
+##  U/L belongs to H.(An example may be to use information on whether 
 ##  groups in H can have order divisible by p).
 ## 
 ##  - data.cfunc takes five arguments, upcgs, npcgs, p, cent, and data.
@@ -77,7 +77,7 @@ DeclareOperation ("ProjectorFromExtendedBoundaryFunction",
 ##  available: the subgroup D of U represented by upcgs{[cent..
 ##  Length(upcgs)]} centralises npcgs, and if D < U, then there exists a 
 ##  normal subgroup R of U such that R/D is elementary abelian and R does 
-##  not centralise npcgs. (The obvious interpretation is that npcgs is 
+##  not centralise npcgs.(The obvious interpretation is that npcgs is 
 ##  central iff cent = 1). data.cfunc is only called when data.dfunc has
 ##  returned fail.
 ##
@@ -86,7 +86,7 @@ DeclareOperation ("ProjectorFromExtendedBoundaryFunction",
 ##  In addition, kpcgs is a pcgs induced from upcgs for a normal subgroup K
 ##  of U such that K/L is a complement of N/L in D/L. Note that the 
 ##  existence of K implies that K/L is a complemented chief factor of U/L
-##  (see the accompanying article "crisp.dvi" for details). data.kfunc is 
+##  (see the accompanying article "crisp.dvi" for details). data.kfunc is
 ##  only called when cfunc and dfunc have both returned fail, and if K 
 ##  exists. One possible application is that if H is a local formation
 ##  defined by a formation function f, then U/L belongs to H if and only if 
@@ -101,7 +101,7 @@ DeclareOperation ("ProjectorFromExtendedBoundaryFunction",
 ##    \   D     known that U/Core_U(C) is a primitive group with socle 
 ##     \ / \    N Core_U(C)/Core_U(C) which is U-isomorphic with N/L; 
 ##      K   N   moreover Core_U(C) = C_C(N/L) contains K. Also, U/L belongs 
-##       \ /    to H if and only if U/Core_U(C) belongs to (the basis of) H, 
+##       \ /    to H if and only if U/Core_U(C) belongs to(the basis of) H, 
 ##        L     and otherwise U/Core_U(C) is in the boundary of H. Therefore 
 ##              information about the basis or boundary of H is sufficient 
 ##              for the test to be performed by bfunc.
@@ -109,38 +109,38 @@ DeclareOperation ("ProjectorFromExtendedBoundaryFunction",
 ##  Note that it is a good idea only to perform cheap tests by data.dfunc and
 ##  data.cfunc, and leave expensive tests to data.kfunc and data.bfunc, 
 ##  because in that case, the expensive tests are only carried out if it is 
-##  known that N/L is complemented in U. (Otherwise N/L is a Frattini chief 
+##  known that N/L is complemented in U.(Otherwise N/L is a Frattini chief 
 ##  factor, and U/L must belong to H - no further test is required.)
 ##
-DeclareGlobalFunction ("PROJECTOR_FROM_BOUNDARY");
+DeclareGlobalFunction("PROJECTOR_FROM_BOUNDARY");
 
 
 #############################################################################
 ##
-#F  DFUNC_FROM_CHARACTERISTIC (<upcgs>, <npcgs>, <p>, <data>)
+#F  DFUNC_FROM_CHARACTERISTIC(<upcgs>, <npcgs>, <p>, <data>)
 ##
 ##  standard function to pass to PcgsProjectorFromExtendedBoundaryFunction
 ##  as data.dfunc, where the argument data must have a component char 
 ##  containing the characteristic of the formation. Every prime divisor of 
 ##  any group in the class must be in the characteristic. 
 ##
-DeclareGlobalFunction ("DFUNC_FROM_CHARACTERISTIC");
+DeclareGlobalFunction("DFUNC_FROM_CHARACTERISTIC");
 
 
 #############################################################################
 ##
-#F  DFUNC_FROM_MEMBER_FUNCTION (<upcgs>, <npcgs>, <p>, <data>)
+#F  DFUNC_FROM_MEMBER_FUNCTION(<upcgs>, <npcgs>, <p>, <data>)
 ##
 ##  standard function to pass to PcgsProjectorFromExtendedBoundaryFunction
 ##  as data.cfunc, where the argument data must have a component memberf 
 ##  containing a function which decides membership in the Schunck class.
 ##
-DeclareGlobalFunction ("DFUNC_FROM_MEMBER_FUNCTION");
+DeclareGlobalFunction("DFUNC_FROM_MEMBER_FUNCTION");
 
 
 #############################################################################
 ##
-#F  CFUNC_FROM_CHARACTERISTIC (<upcgs>, <npcgs>, <p>, <centind>, <data>)
+#F  CFUNC_FROM_CHARACTERISTIC(<upcgs>, <npcgs>, <p>, <centind>, <data>)
 ##
 ##  standard function to pass to PcgsProjectorFromExtendedBoundaryFunction
 ##  as data.cfunc, where the argument data must have a component char 
@@ -148,12 +148,12 @@ DeclareGlobalFunction ("DFUNC_FROM_MEMBER_FUNCTION");
 ##  group in the class must be in the characteristic. Otherwise 
 ##  CFUNC_FROM_CHARACTERISTIC_SCHUNCK may be used.
 ##
-DeclareGlobalFunction ("CFUNC_FROM_CHARACTERISTIC");
+DeclareGlobalFunction("CFUNC_FROM_CHARACTERISTIC");
 
 
 #############################################################################
 ##
-#F  KFUNC_FROM_LOCAL_DEFINITION (<upcgs>, <kpcgs>, <npcgs>, <p>, 
+#F  KFUNC_FROM_LOCAL_DEFINITION(<upcgs>, <kpcgs>, <npcgs>, <p>, 
 ##     <centind>, <data>)
 ##
 ##  standard function to pass to PcgsProjectorFromExtendedBoundaryFunction
@@ -166,24 +166,24 @@ DeclareGlobalFunction ("CFUNC_FROM_CHARACTERISTIC");
 ##  PcgsProjectorFromExtendedBoundaryFunction will be in r when lfunc is 
 ##  called.
 ##
-DeclareGlobalFunction ("KFUNC_FROM_LOCAL_DEFINITION");
+DeclareGlobalFunction("KFUNC_FROM_LOCAL_DEFINITION");
 
 
 #############################################################################
 ##
-#F  CFUNC_FROM_CHARACTERISTIC_SCHUNCK (<upcgs>, <npcgs>, <p>, 
+#F  CFUNC_FROM_CHARACTERISTIC_SCHUNCK(<upcgs>, <npcgs>, <p>, 
 ##     <centind>, <data>)
 ##
 ##  standard function to pass to PcgsProjectorFromExtendedBoundaryFunction
 ##  as data.dfunc, where the argument data must have a component char 
 ##  containing the characteristic of the Schunck class 
 ##
-DeclareGlobalFunction ("CFUNC_FROM_CHARACTERISTIC_SCHUNCK");
+DeclareGlobalFunction("CFUNC_FROM_CHARACTERISTIC_SCHUNCK");
 
 
 #############################################################################
 ##
-#F  BFUNC_FROM_TEST_FUNC_FAC (<upcgs>, <cpcgs>, <kpcgs>, <npcgs>, <p>, 
+#F  BFUNC_FROM_TEST_FUNC_FAC(<upcgs>, <cpcgs>, <kpcgs>, <npcgs>, <p>, 
 ##     <centind>, <data>)
 ##
 ##  standard function to pass to PcgsProjectorFromExtendedBoundaryFunction
@@ -193,12 +193,12 @@ DeclareGlobalFunction ("CFUNC_FROM_CHARACTERISTIC_SCHUNCK");
 ##  data.test must return true if G is in the boundary of the Schunck class 
 ##  H, and false if it belongs to H.
 ##
-DeclareGlobalFunction ("BFUNC_FROM_TEST_FUNC_FAC");
+DeclareGlobalFunction("BFUNC_FROM_TEST_FUNC_FAC");
 
 
 #############################################################################
 ##
-#F  BFUNC_FROM_TEST_FUNC_MOD (<upcgs>, <cpcgs>, <kpcgs>, <npcgs>, <p>, 
+#F  BFUNC_FROM_TEST_FUNC_MOD(<upcgs>, <cpcgs>, <kpcgs>, <npcgs>, <p>, 
 ##     <centind>, <data>)
 ##
 ##  this is the same as BFUNC_FROM_TEST_FUNC, except that it uses
@@ -209,18 +209,18 @@ DeclareGlobalFunction ("BFUNC_FROM_TEST_FUNC_FAC");
 ##  same for pc groups, while it might work better for perm groups because
 ##  one does not have to work in factor groups. 
 ##
-DeclareGlobalFunction ("BFUNC_FROM_TEST_FUNC_MOD");
+DeclareGlobalFunction("BFUNC_FROM_TEST_FUNC_MOD");
 
 
 #############################################################################
 ##
-#F  BFUNC_FROM_TEST_FUNC (<upcgs>, <cpcgs>, <kpcgs>, <npcgs>, <p>, 
+#F  BFUNC_FROM_TEST_FUNC(<upcgs>, <cpcgs>, <kpcgs>, <npcgs>, <p>, 
 ##     <centind>, <data>)
 ##
 ##  Presently, we only use BFUNC_FROM_TEST_FUNC_FAC because of a bug in 
-##  CentralizerModulo in the released version  (4.2 fix 5) of GAP.
+##  CentralizerModulo in the released version (4.2 fix 5) of GAP.
 ##
-DeclareSynonym ("BFUNC_FROM_TEST_FUNC", BFUNC_FROM_TEST_FUNC_FAC);
+DeclareSynonym("BFUNC_FROM_TEST_FUNC", BFUNC_FROM_TEST_FUNC_FAC);
 
 
 ############################################################################

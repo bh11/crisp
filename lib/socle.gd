@@ -2,64 +2,64 @@
 ##
 ##  socle.gd                         CRISP                   Burkhard Höfling
 ##
-##  Copyright (C) 2001, 2002, 2015 Burkhard Höfling
+##  Copyright © 2001, 2002, 2015 Burkhard Höfling
 ##
 
 #############################################################################
 ##
-#A  PSocleComponents (<G>) 
+#A  PSocleComponents(<G>) 
 ##
-KeyDependentOperation ("PSocleComponents", IsGroup, IsPosInt, "prime");
+KeyDependentOperation("PSocleComponents", IsGroup, IsPosInt, "prime");
 
 
 #############################################################################
 ##
-#A  PSocleComponents (<G>) 
+#A  PSocleComponents(<G>) 
 ##
-KeyDependentOperation ("PSocleSeries", IsGroup, IsPosInt, "prime");
+KeyDependentOperation("PSocleSeries", IsGroup, IsPosInt, "prime");
 
 
 #############################################################################
 ##
-#A  PSocle (<G>) 
+#A  PSocle(<G>) 
 ##
-KeyDependentOperation ("PSocle", IsGroup, IsPosInt, "prime");
+KeyDependentOperation("PSocle", IsGroup, IsPosInt, "prime");
 
 
 #############################################################################
 ##
-#A  SolvableSocle (<G>) 
+#A  SolvableSocle(<G>) 
 ##
-DeclareAttribute ("SolvableSocle", IsGroup);
-DeclareSynonym ("AbelianSocle", SolvableSocle);
+DeclareAttribute("SolvableSocle", IsGroup);
+DeclareSynonym("AbelianSocle", SolvableSocle);
 
 #############################################################################
 ##
-#A  SocleComponents (<G>) 
+#A  SocleComponents(<G>) 
 ##
-DeclareAttribute ("SocleComponents", IsGroup);
-
-
-#############################################################################
-##
-#A  SolvableSocleComponents (<G>) 
-##
-DeclareAttribute ("SolvableSocleComponents", IsGroup);
-DeclareSynonym ("AbelianSocleComponents", SolvableSocleComponents);
+DeclareAttribute("SocleComponents", IsGroup);
 
 
 #############################################################################
 ##
-#A  MinimalNormalPSubgroups (<G>)
+#A  SolvableSocleComponents(<G>) 
 ##
-KeyDependentOperation ("MinimalNormalPSubgroups", IsGroup, IsPosInt, "prime");
+DeclareAttribute("SolvableSocleComponents", IsGroup);
+DeclareSynonym("AbelianSocleComponents", SolvableSocleComponents);
 
 
 #############################################################################
 ##
-#A  SolvableMinimalNormalSubgroups (<G>) 
+#A  MinimalNormalPSubgroups(<G>)
 ##
-DeclareAttribute ("AbelianMinimalNormalSubgroups", IsGroup);
+KeyDependentOperation("MinimalNormalPSubgroups", IsGroup, IsPosInt, "prime");
+
+
+#############################################################################
+##
+#A  SolvableMinimalNormalSubgroups(<G>) 
+##
+DeclareAttribute("AbelianMinimalNormalSubgroups", IsGroup);
 
 
 

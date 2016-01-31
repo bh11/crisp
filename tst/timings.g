@@ -2,9 +2,9 @@
 ##
 ##  timings.g                        CRISP                  Burkhard Höfling
 ##
-##  Copyright (C) 2000, 2011 Burkhard Höfling
+##  Copyright © 2000, 2011 Burkhard Höfling
 ##
-LoadPackage ("crisp");
+LoadPackage("crisp");
 
 FAST_TEST := true;
 TIMEOUT := 10^7;

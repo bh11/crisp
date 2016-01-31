@@ -2,37 +2,37 @@
 ##
 ##  grpclass.gi                      CRISP                   Burkhard Höfling
 ##
-##  Copyright (C) 2000, 2006 Burkhard Höfling
+##  Copyright © 2000, 2006 Burkhard Höfling
 ##
 
 
 #############################################################################
 ##
-#M  GroupClass (<rec>)
+#M  GroupClass(<rec>)
 ##
-InstallMethod (GroupClass, "for record", true, [IsRecord], 0, 
-    function (record)
+InstallMethod(GroupClass, "for record", true, [IsRecord], 0, 
+    function(record)
         local class, r;
-        r := ShallowCopy (record);
-        class := NewClass ("ClassFamily", 
+        r := ShallowCopy(record);
+        class := NewClass("ClassFamily", 
             IsClassByPropertyRep and IsGroupClass, 
             rec(definingAttributes := [["in", MemberFunction]]));
-          if IsBound (r.char) then
-              SetCharacteristic (class, r.char);
-              Unbind (r.char);
+          if IsBound(r.char) then
+              SetCharacteristic(class, r.char);
+              Unbind(r.char);
           fi;
-        InstallDefiningAttributes (class, r);
+        InstallDefiningAttributes(class, r);
         return class;
     end);
 
 
 #############################################################################
 ##
-#M  GroupClass (<func>)
+#M  GroupClass(<func>)
 ##
-InstallMethod (GroupClass, "for property function", true, [IsFunction], 0, 
-    function (prop)
-        return GroupClass (rec (\in := prop));
+InstallMethod(GroupClass, "for property function", true, [IsFunction], 0, 
+    function(prop)
+        return GroupClass(rec(\in := prop));
     end);
 
 
@@ -43,12 +43,12 @@ InstallMethod (GroupClass, "for property function", true, [IsFunction], 0,
 ##  We install a method for "in" because we need not store the result
 ##  (via IsMember) if the object is not a group
 ##
-InstallMethod (\in, "for group class", true, 
+InstallMethod(\in, "for group class", true, 
     [IsObject, IsGroupClass], 0,
-    function (x, C)
-        if IsGroup (x) then
-            if IsMember (x, C) then
-                SetIsEmpty (C, false);
+    function(x, C)
+        if IsGroup(x) then
+            if IsMember(x, C) then
+                SetIsEmpty(C, false);
                 return true;
             fi;
         fi;
@@ -58,49 +58,49 @@ InstallMethod (\in, "for group class", true,
 
 #############################################################################
 ##
-#M  IsMemberOp (<obj>, <class>)
+#M  IsMemberOp(<obj>, <class>)
 ##
-InstallMethod (IsMemberOp, "handled by nice monomorphism", true,
+InstallMethod(IsMemberOp, "handled by nice monomorphism", true,
     [IsGroup and IsHandledByNiceMonomorphism, IsGroupClass], 0,
     function( grp, class)
-        return IsMemberOp (NiceObject (grp), class);
+        return IsMemberOp(NiceObject(grp), class);
     end);
     
     
 #############################################################################
 ##
-#M  ViewObj (<class>)
+#M  ViewObj(<class>)
 ##
-InstallMethod (ViewObj, "for IsGroupClass and IsClassByPropertyRep", true, 
+InstallMethod(ViewObj, "for IsGroupClass and IsClassByPropertyRep", true, 
     [IsGroupClass and IsClassByPropertyRep], 0,
-    function (C) 
-        Print ("GroupClass (");
-        ViewDefiningAttributes (C);
-        Print (")");
+    function(C) 
+        Print("GroupClass(");
+        ViewDefiningAttributes(C);
+        Print(")");
     end);
 
 
 #############################################################################
 ##
-#M  PrintObj (<class>)
+#M  PrintObj(<class>)
 ##
-InstallMethod (PrintObj, "for IsGroupClass and IsClassByPropertyRep", true, 
+InstallMethod(PrintObj, "for IsGroupClass and IsClassByPropertyRep", true, 
     [IsGroupClass and IsClassByPropertyRep], 0,
-    function (C) 
-        Print ("GroupClass (");
-        PrintDefiningAttributes (C);
-        Print (")");
+    function(C) 
+        Print("GroupClass(");
+        PrintDefiningAttributes(C);
+        Print(")");
     end);
 
 
 #############################################################################
 ##
-#M  IsGroupClass (<cl>)
+#M  IsGroupClass(<cl>)
 ##
-InstallImmediateMethod (IsGroupClass, IsClassByComplementRep, 0,
-    function (cl)
-        if HasIsGroupClass (cl!.complement) then
-            return IsGroupClass (cl!.complement);
+InstallImmediateMethod(IsGroupClass, IsClassByComplementRep, 0,
+    function(cl)
+        if HasIsGroupClass(cl!.complement) then
+            return IsGroupClass(cl!.complement);
         else
             TryNextMethod();
         fi;
@@ -109,11 +109,11 @@ InstallImmediateMethod (IsGroupClass, IsClassByComplementRep, 0,
     
 #############################################################################
 ##
-#M  IsGroupClass (<class>)
+#M  IsGroupClass(<class>)
 ##
-InstallImmediateMethod (IsGroupClass, IsClassByIntersectionRep, 0,
-    function (cl)
-        if ForAll (cl!.intersected, 
+InstallImmediateMethod(IsGroupClass, IsClassByIntersectionRep, 0,
+    function(cl)
+        if ForAll(cl!.intersected, 
                 C -> HasIsGroupClass(C) and IsGroupClass(C)) then
             return true;
         else
@@ -124,11 +124,11 @@ InstallImmediateMethod (IsGroupClass, IsClassByIntersectionRep, 0,
 
 #############################################################################
 ##
-#M  ContainsTrivialGroup (<group class>)
+#M  ContainsTrivialGroup(<group class>)
 ##
-InstallImmediateMethod (ContainsTrivialGroup, 
+InstallImmediateMethod(ContainsTrivialGroup, 
     IsClassByIntersectionRep and IsGroupClass, 0,
-    function (cl)
+    function(cl)
         local C;
         for C in cl!.intersected do
             if HasContainsTrivialGroup(C) then
@@ -146,12 +146,12 @@ InstallImmediateMethod (ContainsTrivialGroup,
 
 #############################################################################
 ##
-#M  ContainsTrivialGroup (<group class>)
+#M  ContainsTrivialGroup(<group class>)
 ##
-InstallImmediateMethod (ContainsTrivialGroup, 
+InstallImmediateMethod(ContainsTrivialGroup, 
     IsClassByUnionRep and IsGroupClass, 0,
-    function (cl)
-        if ForAny (cl!.united, 
+    function(cl)
+        if ForAny(cl!.united, 
                 C -> HasContainsTrivialGroup(C) 
                     and ContainsTrivialGroup(C)) then
             return true;
@@ -163,12 +163,12 @@ InstallImmediateMethod (ContainsTrivialGroup,
      
 #############################################################################
 ##
-#M  ContainsTrivialGroup (<group class>)
+#M  ContainsTrivialGroup(<group class>)
 ##
-InstallImmediateMethod (ContainsTrivialGroup, 
+InstallImmediateMethod(ContainsTrivialGroup, 
     IsGroupClass and HasIsEmpty and IsNormalSubgroupClosed, 0,
-    function (C)
-        if not IsEmpty (C) then
+    function(C)
+        if not IsEmpty(C) then
             return true;
         else
             TryNextMethod();
@@ -178,12 +178,12 @@ InstallImmediateMethod (ContainsTrivialGroup,
 
 #############################################################################
 ##
-#M  ContainsTrivialGroup (<group class>)
+#M  ContainsTrivialGroup(<group class>)
 ##
-InstallImmediateMethod (ContainsTrivialGroup, 
+InstallImmediateMethod(ContainsTrivialGroup, 
     IsGroupClass and HasIsEmpty and IsQuotientClosed, 0,
-    function (C)
-        if not IsEmpty (C) then
+    function(C)
+        if not IsEmpty(C) then
             return true;
         else
             TryNextMethod();
@@ -193,12 +193,12 @@ InstallImmediateMethod (ContainsTrivialGroup,
 
 #############################################################################
 ##
-#M  IsEmpty (<group class>)
+#M  IsEmpty(<group class>)
 ##
-InstallImmediateMethod (IsEmpty, 
+InstallImmediateMethod(IsEmpty, 
     IsGroupClass and HasContainsTrivialGroup, 0,
-    function (C)
-        if ContainsTrivialGroup (C) then
+    function(C)
+        if ContainsTrivialGroup(C) then
             return false;
         else
             TryNextMethod();
@@ -208,12 +208,12 @@ InstallImmediateMethod (IsEmpty,
 
 #############################################################################
 ##
-#M  IsSubgroupClosed (<group class>)
+#M  IsSubgroupClosed(<group class>)
 ##
-InstallImmediateMethod (IsSubgroupClosed, 
+InstallImmediateMethod(IsSubgroupClosed, 
     IsClassByIntersectionRep and IsGroupClass and IsNormalSubgroupClosed, 0,
-    function (cl)
-        if ForAll (cl!.intersected, 
+    function(cl)
+        if ForAll(cl!.intersected, 
                 C -> HasIsSubgroupClosed(C) and IsSubgroupClosed(C)) then
             return true;
         else
@@ -224,12 +224,12 @@ InstallImmediateMethod (IsSubgroupClosed,
 
 #############################################################################
 ##
-#M  IsNormalSubgroupClosed (<group class>)
+#M  IsNormalSubgroupClosed(<group class>)
 ##
-InstallImmediateMethod (IsNormalSubgroupClosed, 
+InstallImmediateMethod(IsNormalSubgroupClosed, 
     IsClassByIntersectionRep and IsGroupClass, 0,
-    function (cl)
-        if ForAll (cl!.intersected, 
+    function(cl)
+        if ForAll(cl!.intersected, 
                 C -> HasIsNormalSubgroupClosed(C) and IsNormalSubgroupClosed(C)) then
             return true;
         else
@@ -240,12 +240,12 @@ InstallImmediateMethod (IsNormalSubgroupClosed,
 
 #############################################################################
 ##
-#M  IsQuotientClosed (<group class>)
+#M  IsQuotientClosed(<group class>)
 ##
-InstallImmediateMethod (IsQuotientClosed, 
+InstallImmediateMethod(IsQuotientClosed, 
     IsClassByIntersectionRep and IsGroupClass, 0,
-    function (cl)
-        if ForAll (cl!.intersected, 
+    function(cl)
+        if ForAll(cl!.intersected, 
                 C -> HasIsQuotientClosed(C) and IsQuotientClosed(C)) then
             return true;
         else
@@ -256,12 +256,12 @@ InstallImmediateMethod (IsQuotientClosed,
 
 #############################################################################
 ##
-#M  IsResiduallyClosed (<group class>)
+#M  IsResiduallyClosed(<group class>)
 ##
-InstallImmediateMethod (IsResiduallyClosed, 
+InstallImmediateMethod(IsResiduallyClosed, 
     IsClassByIntersectionRep and IsGroupClass and IsDirectProductClosed, 0,
-    function (cl)
-        if ForAll (cl!.intersected, 
+    function(cl)
+        if ForAll(cl!.intersected, 
                 C -> HasIsResiduallyClosed(C) and IsResiduallyClosed(C)) then
             return true;
         else
@@ -272,12 +272,12 @@ InstallImmediateMethod (IsResiduallyClosed,
 
 #############################################################################
 ##
-#M  IsNormalProductClosed (<group class>)
+#M  IsNormalProductClosed(<group class>)
 ##
-InstallImmediateMethod (IsNormalProductClosed, 
+InstallImmediateMethod(IsNormalProductClosed, 
     IsClassByIntersectionRep and IsGroupClass and IsDirectProductClosed, 0,
-    function (cl)
-        if ForAll (cl!.intersected, 
+    function(cl)
+        if ForAll(cl!.intersected, 
                 C -> HasIsNormalProductClosed(C) and IsNormalProductClosed(C)) then
             return true;
         else
@@ -288,12 +288,12 @@ InstallImmediateMethod (IsNormalProductClosed,
 
 #############################################################################
 ##
-#M  IsDirectProductClosed (<group class>)
+#M  IsDirectProductClosed(<group class>)
 ##
-InstallImmediateMethod (IsDirectProductClosed, 
+InstallImmediateMethod(IsDirectProductClosed, 
     IsClassByIntersectionRep and IsGroupClass, 0,
-    function (cl)
-        if ForAll (cl!.intersected, 
+    function(cl)
+        if ForAll(cl!.intersected, 
                 C -> HasIsDirectProductClosed(C) 
                     and IsDirectProductClosed(C)) then
             return true;
@@ -305,14 +305,14 @@ InstallImmediateMethod (IsDirectProductClosed,
 
 #############################################################################
 ##
-#M  IsSchunckClass (<group class>)
+#M  IsSchunckClass(<group class>)
 ##
-InstallImmediateMethod (IsSchunckClass, 
+InstallImmediateMethod(IsSchunckClass, 
     IsClassByIntersectionRep and IsGroupClass 
         and IsSaturated and IsQuotientClosed and IsDirectProductClosed, 
     0,
-    function (cl)
-        if ForAll (cl!.intersected, 
+    function(cl)
+        if ForAll(cl!.intersected, 
                 C -> HasIsSchunckClass(C) and IsSchunckClass(C)) then
             return true;
         else
@@ -323,12 +323,12 @@ InstallImmediateMethod (IsSchunckClass,
 
 #############################################################################
 ##
-#M  IsSaturated (<group class>)
+#M  IsSaturated(<group class>)
 ##
-InstallImmediateMethod (IsSaturated, 
+InstallImmediateMethod(IsSaturated, 
     IsClassByIntersectionRep and IsGroupClass, 0,
-    function (cl)
-        if ForAll (cl!.intersected, 
+    function(cl)
+        if ForAll(cl!.intersected, 
                 C -> HasIsSaturated(C) and IsSaturated(C)) then
             return true;
         else
@@ -339,12 +339,12 @@ InstallImmediateMethod (IsSaturated,
 
 #############################################################################
 ##
-#M  IsGroupClass (<class>)
+#M  IsGroupClass(<class>)
 ##
-InstallImmediateMethod (IsGroupClass, 
+InstallImmediateMethod(IsGroupClass, 
     IsClassByUnionRep, 0,
-    function (cl)
-        if ForAll (cl!.united, 
+    function(cl)
+        if ForAll(cl!.united, 
                 C -> HasIsGroupClass(C) and IsGroupClass(C)) then
             return true;
         else
@@ -355,9 +355,9 @@ InstallImmediateMethod (IsGroupClass,
 
 #############################################################################
 ##
-#M  ContainsTrivialGroup (<group class>)
+#M  ContainsTrivialGroup(<group class>)
 ##
-InstallMethod (ContainsTrivialGroup, "for generic group class - test membership",
+InstallMethod(ContainsTrivialGroup, "for generic group class - test membership",
     ReturnTrue,
     [IsGroupClass], 
     0,
@@ -366,12 +366,12 @@ InstallMethod (ContainsTrivialGroup, "for generic group class - test membership"
 
 #############################################################################
 ##
-#M  ContainsTrivialGroup (<group class>)
+#M  ContainsTrivialGroup(<group class>)
 ##
-InstallImmediateMethod (ContainsTrivialGroup, 
+InstallImmediateMethod(ContainsTrivialGroup, 
     IsClassByUnionRep and IsGroupClass, 0,
-    function (cl)
-        if ForAny (cl!.united, 
+    function(cl)
+        if ForAny(cl!.united, 
                 C -> HasContainsTrivialGroup(C) and ContainsTrivialGroup(C)) then
             return true;
         else
@@ -382,12 +382,12 @@ InstallImmediateMethod (ContainsTrivialGroup,
 
 #############################################################################
 ##
-#M  IsSubgroupClosed (<group class>)
+#M  IsSubgroupClosed(<group class>)
 ##
-InstallImmediateMethod (IsSubgroupClosed, 
+InstallImmediateMethod(IsSubgroupClosed, 
     IsClassByUnionRep and IsGroupClass and IsNormalSubgroupClosed, 0,
-    function (cl)
-        if ForAll (cl!.united, 
+    function(cl)
+        if ForAll(cl!.united, 
                 C -> HasIsSubgroupClosed(C) and IsSubgroupClosed(C)) then
             return true;
         else
@@ -398,12 +398,12 @@ InstallImmediateMethod (IsSubgroupClosed,
 
 #############################################################################
 ##
-#M  IsNormalSubgroupClosed (<group class>)
+#M  IsNormalSubgroupClosed(<group class>)
 ##
-InstallImmediateMethod (IsNormalSubgroupClosed, 
+InstallImmediateMethod(IsNormalSubgroupClosed, 
     IsClassByUnionRep and IsGroupClass, 0,
-    function (cl)
-        if ForAll (cl!.united, 
+    function(cl)
+        if ForAll(cl!.united, 
                 C -> HasIsNormalSubgroupClosed(C) and IsNormalSubgroupClosed(C)) then
             return true;
         else
@@ -414,12 +414,12 @@ InstallImmediateMethod (IsNormalSubgroupClosed,
 
 #############################################################################
 ##
-#M  IsQuotientClosed (<group class>)
+#M  IsQuotientClosed(<group class>)
 ##
-InstallImmediateMethod (IsQuotientClosed, 
+InstallImmediateMethod(IsQuotientClosed, 
     IsClassByUnionRep and IsGroupClass, 0,
-    function (cl)
-        if ForAll (cl!.united, 
+    function(cl)
+        if ForAll(cl!.united, 
                 C -> HasIsQuotientClosed(C) and IsQuotientClosed(C)) then
             return true;
         else
@@ -430,12 +430,12 @@ InstallImmediateMethod (IsQuotientClosed,
 
 #############################################################################
 ##
-#M  IsSaturated (<group class>)
+#M  IsSaturated(<group class>)
 ##
-InstallImmediateMethod (IsSaturated, 
+InstallImmediateMethod(IsSaturated, 
     IsClassByUnionRep and IsGroupClass, 0,
-    function (cl)
-        if ForAll (cl!.united, 
+    function(cl)
+        if ForAll(cl!.united, 
                 C -> HasIsSaturated(C) and IsSaturated(C)) then
             return true;
         else
@@ -446,10 +446,10 @@ InstallImmediateMethod (IsSaturated,
 
 #############################################################################
 ##
-#F  DEFAULT_ISO_FUNC (<grp1>, <grp2>)
+#F  DEFAULT_ISO_FUNC(<grp1>, <grp2>)
 ##
-InstallGlobalFunction (DEFAULT_ISO_FUNC,
-    function (G, H) 
+InstallGlobalFunction(DEFAULT_ISO_FUNC,
+    function(G, H) 
         return IsomorphismGroups(G, H) <> fail;
     end);
     
@@ -458,46 +458,46 @@ InstallGlobalFunction (DEFAULT_ISO_FUNC,
 ##
 #R  IsGroupClassByListRep
 ##
-DeclareRepresentation ("IsGroupClassByListRep", 
+DeclareRepresentation("IsGroupClassByListRep", 
     IsClass and IsGroupClass, ["classId", "list", "isofunc"]);
 
 
 #############################################################################
 ##
-#M  GroupClass (<list>)
+#M  GroupClass(<list>)
 ##
-InstallOtherMethod (GroupClass, "for group defined by list", true, 
+InstallOtherMethod(GroupClass, "for group defined by list", true, 
     [IsList], 0, 
-    function (l) 
-        return GroupClass (l, DEFAULT_ISO_FUNC);
+    function(l) 
+        return GroupClass(l, DEFAULT_ISO_FUNC);
     end);
 
 
 #############################################################################
 ##
-#M  GroupClass (<list>, <func>)
+#M  GroupClass(<list>, <func>)
 ##
-InstallOtherMethod (GroupClass, " for list and function", true, 
+InstallOtherMethod(GroupClass, " for list and function", true, 
     [IsList, IsFunction], 0, 
-    function (l, iso) 
+    function(l, iso) 
         local class;
-        class := NewClass ("group class fam", IsGroupClassByListRep,
-            rec (list := l, 
+        class := NewClass("group class fam", IsGroupClassByListRep,
+            rec(list := l, 
                 isofunc := iso));
-        SetIsGroupClass (class, true);
+        SetIsGroupClass(class, true);
         return class;
     end);
 
 
 #############################################################################
 ##
-#M  IsMemberOp <grp>, (<class>)
+#M  IsMemberOp <grp>,(<class>)
 ##
-InstallMethod (IsMemberOp, " for group class by list", true, 
+InstallMethod(IsMemberOp, " for group class by list", true, 
     [IsGroup, IsGroupClassByListRep], 0, 
-    function (x, C)
-        if IsGroup (x) then
-            return ForAny (C!.list, y -> C!.isofunc (y, x));
+    function(x, C)
+        if IsGroup(x) then
+            return ForAny(C!.list, y -> C!.isofunc(y, x));
         else
             return false;
         fi;
@@ -506,307 +506,307 @@ InstallMethod (IsMemberOp, " for group class by list", true,
 
 #############################################################################
 ##
-#M  ViewObj (<class>)
+#M  ViewObj(<class>)
 ##
-InstallMethod (ViewObj, " for IsGroupClassByListRep", true, 
+InstallMethod(ViewObj, " for IsGroupClassByListRep", true, 
     [IsGroupClassByListRep], 0,
-    function (C) 
-        Print ("GroupClass (");
-        View (C!.list);
+    function(C) 
+        Print("GroupClass(");
+        View(C!.list);
         if C!.isofunc <> DEFAULT_ISO_FUNC then
-            Print (", ");
-            View (C!.isofunc);
+            Print(", ");
+            View(C!.isofunc);
         fi;
-        Print (")");
+        Print(")");
     end);
 
 
 #############################################################################
 ##
-#M  PrintObj (<class>)
+#M  PrintObj(<class>)
 ##
-InstallMethod (PrintObj, " for IsGroupClassByListRep", true, 
+InstallMethod(PrintObj, " for IsGroupClassByListRep", true, 
     [IsGroupClassByListRep], 0,
-    function (C) 
-        Print ("GroupClass (");
-        Print (C!.list);
-        Print (", ");
+    function(C) 
+        Print("GroupClass(");
+        Print(C!.list);
+        Print(", ");
         if C!.isofunc = DEFAULT_ISO_FUNC then
-            Print ("<default isomorphism test>");
+            Print("<default isomorphism test>");
         else
-            Print (C!.isofunc);
+            Print(C!.isofunc);
         fi;
-        Print (")");
+        Print(")");
     end);
 
 
 #############################################################################
 ##
-#M  Intersection2 (<class1>, <class2>)
+#M  Intersection2(<class1>, <class2>)
 ##
-InstallMethod (Intersection2, "for two group classes by list", 
+InstallMethod(Intersection2, "for two group classes by list", 
      true, [IsGroupClassByListRep, IsGroupClassByListRep], 0, 
-    function (C, D)
+    function(C, D)
         local iso;
 
         iso := C!.isofunc;
         if iso = DEFAULT_ISO_FUNC then
             iso := D!.isofunc;
         elif D!.isofunc <> iso and D!.isofunc <> DEFAULT_ISO_FUNC then
-            Info (InfoWarning ,1,
+            Info(InfoWarning ,1,
                 "Don't know which isomorphism function to choose");
         fi;
         
-        return GroupClass (Filtered (C!.list, x -> x in D), iso);
+        return GroupClass(Filtered(C!.list, x -> x in D), iso);
     end);
 
 
 #############################################################################
 ##
-#M  Intersection2 (<class1>, <class2>)
+#M  Intersection2(<class1>, <class2>)
 ##
-InstallMethod (Intersection2, "for group class by list and group class", 
+InstallMethod(Intersection2, "for group class by list and group class", 
      true, [IsGroupClassByListRep, IsGroupClass], 0, 
-    function (C, D)
-        return GroupClass (Filtered (C!.list, x -> x in D), C!.isofunc);
+    function(C, D)
+        return GroupClass(Filtered(C!.list, x -> x in D), C!.isofunc);
     end);
 
 
 #############################################################################
 ##
-#M  Intersection2 (<class1>, <class2>)
+#M  Intersection2(<class1>, <class2>)
 ##
-InstallMethod (Intersection2, "for grp class and group class by list",
+InstallMethod(Intersection2, "for grp class and group class by list",
     true, [IsGroupClass, IsGroupClassByListRep], 0, 
-    function (C, D)
-        return GroupClass (Filtered (D!.list, x -> x in C), D!.isofunc);
+    function(C, D)
+        return GroupClass(Filtered(D!.list, x -> x in C), D!.isofunc);
     end);
 
 
 #############################################################################
 ##
-#M  Difference (<class1>, <class2>)
+#M  Difference(<class1>, <class2>)
 ##
-InstallMethod (Difference, "for group class by list and group class", true, 
+InstallMethod(Difference, "for group class by list and group class", true, 
     [IsGroupClassByListRep, IsGroupClass], 0, 
-    function (C, D)
-        return GroupClass (Filtered (C!.list, x -> not x in D), C!.isofunc);
+    function(C, D)
+        return GroupClass(Filtered(C!.list, x -> not x in D), C!.isofunc);
     end);
 
 
 #############################################################################
 ##
-#M  IsSubgroupClosed (<group class>)
+#M  IsSubgroupClosed(<group class>)
 ##
-InstallMethod (IsSubgroupClosed, "for generic group class", 
+InstallMethod(IsSubgroupClosed, "for generic group class", 
     true, [IsGroupClass], 0, 
-    function (C)
-        Error ("Sorry, cannot decide if the group class <C> \
+    function(C)
+        Error("Sorry, cannot decide if the group class <C> \
             is subgroup closed.");
     end);
     
     
 #############################################################################
 ##
-#M  IsNormalSubgroupClosed (<group class>)
+#M  IsNormalSubgroupClosed(<group class>)
 ##
-InstallMethod (IsNormalSubgroupClosed, "for generic group class", 
+InstallMethod(IsNormalSubgroupClosed, "for generic group class", 
     true, [IsGroupClass], 0, 
-    function (C)
-        Error ("Sorry, cannot decide if the group class <C> \
+    function(C)
+        Error("Sorry, cannot decide if the group class <C> \
             is normal subgroup closed.");
     end);
     
     
 #############################################################################
 ##
-#M  IsQuotientClosed (<group class>)
+#M  IsQuotientClosed(<group class>)
 ##
-InstallMethod (IsQuotientClosed, "for generic group class", 
+InstallMethod(IsQuotientClosed, "for generic group class", 
     true, [IsGroupClass], 0, 
-    function (C)
-        Error ("Sorry, cannot decide if the group class <C> \
+    function(C)
+        Error("Sorry, cannot decide if the group class <C> \
             is quotient closed.");
     end);
     
     
 #############################################################################
 ##
-#M  IsResiduallyClosed (<group class>)
+#M  IsResiduallyClosed(<group class>)
 ##
-InstallMethod (IsResiduallyClosed, "for generic group class", 
+InstallMethod(IsResiduallyClosed, "for generic group class", 
     true, [IsGroupClass], 0, 
-    function (C)
-        Error ("Sorry, cannot decide if the group class <C> \
+    function(C)
+        Error("Sorry, cannot decide if the group class <C> \
             is residually closed.");
     end);
     
     
 #############################################################################
 ##
-#M  IsNormalProductClosed (<group class>)
+#M  IsNormalProductClosed(<group class>)
 ##
-InstallMethod (IsNormalProductClosed, "for generic group class", 
+InstallMethod(IsNormalProductClosed, "for generic group class", 
     true, [IsGroupClass], 0, 
-    function (C)
-        Error ("Sorry, cannot decide if the group class <C> \
+    function(C)
+        Error("Sorry, cannot decide if the group class <C> \
             is closed under products of normal subgroups.");
     end);
     
     
 #############################################################################
 ##
-#M  IsDirectProductClosed (<group class>)
+#M  IsDirectProductClosed(<group class>)
 ##
-InstallMethod (IsDirectProductClosed, "for generic group class", 
+InstallMethod(IsDirectProductClosed, "for generic group class", 
     true, [IsGroupClass], 0, 
-    function (C)
-        Error ("Sorry, cannot decide if the group class <C> \
+    function(C)
+        Error("Sorry, cannot decide if the group class <C> \
             is closed under direct products.");
     end);
 
     
 #############################################################################
 ##
-#M  IsSchunckClass (<group class>)
+#M  IsSchunckClass(<group class>)
 ##
-InstallMethod (IsSchunckClass, "for generic group class", 
+InstallMethod(IsSchunckClass, "for generic group class", 
     true, [IsGroupClass], 0, 
-    function (C)
-        Error ("Sorry, cannot decide if the group class <C> \
+    function(C)
+        Error("Sorry, cannot decide if the group class <C> \
             is a Schunck class.");
     end);
 
     
 #############################################################################
 ##
-#P  IsSaturated (<group class>)
+#P  IsSaturated(<group class>)
 ##
-InstallMethod (IsSaturated, "for generic group class", 
+InstallMethod(IsSaturated, "for generic group class", 
     true, [IsGroupClass], 0, 
-    function (C)
-        Error ("Sorry, cannot decide if the group class <C> \
+    function(C)
+        Error("Sorry, cannot decide if the group class <C> \
             is saturated.");
     end);
 
         
 #############################################################################
 ##
-#F  SetIsOrdinaryFormation (<group class>)
+#F  SetIsOrdinaryFormation(<group class>)
 ##
 ##  fake setter function
 ##
-InstallGlobalFunction ("SetIsOrdinaryFormation", 
-    function (C, b)
-        if not IsGroupClass (C) or b <> true then
-            Error ("<C> must be a group class and <b> must be true");
+InstallGlobalFunction("SetIsOrdinaryFormation", 
+    function(C, b)
+        if not IsGroupClass(C) or b <> true then
+            Error("<C> must be a group class and <b> must be true");
         fi;
-        SetContainsTrivialGroup (C, b);
-        SetIsQuotientClosed (C, b);
-        SetIsResiduallyClosed (C, b);
+        SetContainsTrivialGroup(C, b);
+        SetIsQuotientClosed(C, b);
+        SetIsResiduallyClosed(C, b);
     end);
     
     
 #############################################################################
 ##
-#F  SetIsFittingClass (<group class>)
+#F  SetIsFittingClass(<group class>)
 ##
 ##  fake setter function
 ##
-InstallGlobalFunction ("SetIsFittingClass", 
-    function (C, b)
-        if not IsGroupClass (C) or b <> true then
-            Error ("<C> must be a group class and <b> must be true");
+InstallGlobalFunction("SetIsFittingClass", 
+    function(C, b)
+        if not IsGroupClass(C) or b <> true then
+            Error("<C> must be a group class and <b> must be true");
         fi;
-        SetContainsTrivialGroup (C, b);
-        SetIsNormalSubgroupClosed (C, b);
-        SetIsNormalProductClosed (C, b);
+        SetContainsTrivialGroup(C, b);
+        SetIsNormalSubgroupClosed(C, b);
+        SetIsNormalProductClosed(C, b);
     end);
 
     
 #############################################################################
 ##
-#F  SetIsFittingFormation (<group class>)
+#F  SetIsFittingFormation(<group class>)
 ##
 ##  fake setter function
 ##
-InstallGlobalFunction ("SetIsFittingFormation", 
-    function (C, b)
-        if not IsGroupClass (C) or b <> true then
-            Error ("<C> must be a group class and <b> must be true");
+InstallGlobalFunction("SetIsFittingFormation", 
+    function(C, b)
+        if not IsGroupClass(C) or b <> true then
+            Error("<C> must be a group class and <b> must be true");
         fi;
-        SetIsFittingClass (C, b);
-        SetIsOrdinaryFormation (C, b);
+        SetIsFittingClass(C, b);
+        SetIsOrdinaryFormation(C, b);
     end);
 
     
 #############################################################################
 ##
-#F  SetIsSaturatedFormation (<group class>)
+#F  SetIsSaturatedFormation(<group class>)
 ##
 ##  fake setter function
 ##
-InstallGlobalFunction ("SetIsSaturatedFormation", 
-    function (C, b)
-        if not IsGroupClass (C) or b <> true then
-            Error ("<C> must be a group class and <b> must be true");
+InstallGlobalFunction("SetIsSaturatedFormation", 
+    function(C, b)
+        if not IsGroupClass(C) or b <> true then
+            Error("<C> must be a group class and <b> must be true");
         fi;
-        SetIsOrdinaryFormation (C, b);
-        SetIsSaturated (C, b);
+        SetIsOrdinaryFormation(C, b);
+        SetIsSaturated(C, b);
     end);
 
     
 #############################################################################
 ##
-#F  SetIsSaturatedFittingFormation (<group class>)
+#F  SetIsSaturatedFittingFormation(<group class>)
 ##
 ##  fake setter function
 ##
-InstallGlobalFunction  ("SetIsSaturatedFittingFormation", 
-    function (C, b)
-        if not IsGroupClass (C) or b <> true then
-            Error ("<C> must be a group class and <b> must be true");
+InstallGlobalFunction("SetIsSaturatedFittingFormation",
+    function(C, b)
+        if not IsGroupClass(C) or b <> true then
+            Error("<C> must be a group class and <b> must be true");
         fi;
-        SetIsFittingFormation (C, b);
-        SetIsSaturated (C, b);
+        SetIsFittingFormation(C, b);
+        SetIsSaturated(C, b);
     end);
 
 
 #############################################################################
 ##
-#M  Basis (<class>)
+#M  Basis(<class>)
 ##
 ##  the basis of a group class <class> consists of the primitive solvable 
 ##  groups in <class>
 ##
-InstallMethod (Basis, "for group class", true, 
+InstallMethod(Basis, "for group class", true, 
     [IsGroupClass], 0,
-    function (H)
-        return GroupClass (G -> IsPrimitiveSolvableGroup (G) and G in H);
+    function(H)
+        return GroupClass(G -> IsPrimitiveSolvableGroup(G) and G in H);
     end);
     
 
 #############################################################################
 ##
-#M  Characteristic (<class>)
+#M  Characteristic(<class>)
 ##
-InstallMethod (Characteristic, "for generic grp class", true, 
+InstallMethod(Characteristic, "for generic grp class", true, 
     [IsGroupClass], 0,
-    function (H)
-         return Class (p -> IsPosInt (p) and IsPrime (Integers, p) 
-             and CyclicGroup (p) in H);
+    function(H)
+         return Class(p -> IsPosInt(p) and IsPrime(Integers, p) 
+             and CyclicGroup(p) in H);
     end);
 
 
 #############################################################################
 ##
-#M  Characteristic (<class>)
+#M  Characteristic(<class>)
 ##
-InstallMethod (Characteristic, "for intersection of group classes", true, 
+InstallMethod(Characteristic, "for intersection of group classes", true, 
     [IsGroupClass and IsClassByIntersectionRep], 0,
-    function (H)
-        if ForAll (H!.intersected, IsGroupClass) then
-            return Intersection (List (H!.intersected, Characteristic));
+    function(H)
+        if ForAll(H!.intersected, IsGroupClass) then
+            return Intersection(List(H!.intersected, Characteristic));
         else
             TryNextMethod();
         fi;
@@ -815,13 +815,13 @@ InstallMethod (Characteristic, "for intersection of group classes", true,
 
 #############################################################################
 ##
-#M  Characteristic (<class>)
+#M  Characteristic(<class>)
 ##
-InstallMethod (Characteristic, "for union of group classes", true, 
+InstallMethod(Characteristic, "for union of group classes", true, 
     [IsGroupClass and IsClassByUnionRep], 0,
-    function (H)
-        if ForAll (H!.united, C -> IsGroupClass (C)) then
-            return Union (List (H!.united, Characteristic));
+    function(H)
+        if ForAll(H!.united, C -> IsGroupClass(C)) then
+            return Union(List(H!.united, Characteristic));
         else
             TryNextMethod();
         fi;

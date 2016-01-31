@@ -2,148 +2,148 @@
 ##
 ##  grpclass.gd                      CRISP                   Burkhard Höfling
 ##
-##  Copyright (C) 2000 Burkhard Höfling
+##  Copyright © 2000 Burkhard Höfling
 ##
 
 
 #############################################################################
 ##
-#P  IsGroupClass (<class>)
+#P  IsGroupClass(<class>)
 ##
 ##  A class is a group classes if it consists of groups and is closed
 ##  under group isomorphisms
 ##
-DeclareProperty ("IsGroupClass", IsClass);
+DeclareProperty("IsGroupClass", IsClass);
 
 
 #############################################################################
 ##
-#M  IsGroupClass (<class>)
+#M  IsGroupClass(<class>)
 ##
-InstallTrueMethod (IsGroupClass, IsEmpty and IsClass);
+InstallTrueMethod(IsGroupClass, IsEmpty and IsClass);
 
 
 #############################################################################
 ##
-#O  GroupClass (<obj>)
+#O  GroupClass(<obj>)
 ##
 ##  creates a group class from an object
 ##
-DeclareAttribute ("GroupClass", IsObject);
+DeclareAttribute("GroupClass", IsObject);
 
 
 #############################################################################
 ##
-#O  GroupClass (<list>, <func>)
+#O  GroupClass(<list>, <func>)
 ##
 ##  creates a group class from a list of groups and an isomorphism function
 ##
-DeclareOperation ("GroupClass", 
+DeclareOperation("GroupClass", 
     [IsList and IsMultiplicativeElementWithInverseCollColl, IsFunction]);
 
 
 #############################################################################
 ##
-#P  ContainsTrivialGroup (<group class>)
+#P  ContainsTrivialGroup(<group class>)
 ##
-DeclareProperty ("ContainsTrivialGroup", IsGroupClass);
+DeclareProperty("ContainsTrivialGroup", IsGroupClass);
 
 
 #############################################################################
 ##
-#P  IsSubgroupClosed (<group class>)
-#P  IsNormalSubgroupClosed (<group class>)
-#P  IsQuotientClosed (<group class>)
-#P  IsResiduallyClosed (<group class>)
-#P  IsNormalProductClosed (<group class>)
-#P  IsDirectProductClosed (<group class>)
-#P  IsSchunckClass (<group class>)
-#P  IsSaturated (<group class>)
+#P  IsSubgroupClosed(<group class>)
+#P  IsNormalSubgroupClosed(<group class>)
+#P  IsQuotientClosed(<group class>)
+#P  IsResiduallyClosed(<group class>)
+#P  IsNormalProductClosed(<group class>)
+#P  IsDirectProductClosed(<group class>)
+#P  IsSchunckClass(<group class>)
+#P  IsSaturated(<group class>)
 ##
 ##  primitive closure properties of group classes
 ##
-DeclareProperty ("IsSubgroupClosed", IsGroupClass);
-DeclareProperty ("IsNormalSubgroupClosed", IsGroupClass);
-DeclareProperty ("IsQuotientClosed", IsGroupClass);
-DeclareProperty ("IsResiduallyClosed", IsGroupClass);
-DeclareProperty ("IsNormalProductClosed", IsGroupClass);
-DeclareProperty ("IsDirectProductClosed", IsGroupClass);
-DeclareProperty ("IsSchunckClass", IsGroupClass);
-DeclareProperty ("IsSaturated", IsGroupClass);
+DeclareProperty("IsSubgroupClosed", IsGroupClass);
+DeclareProperty("IsNormalSubgroupClosed", IsGroupClass);
+DeclareProperty("IsQuotientClosed", IsGroupClass);
+DeclareProperty("IsResiduallyClosed", IsGroupClass);
+DeclareProperty("IsNormalProductClosed", IsGroupClass);
+DeclareProperty("IsDirectProductClosed", IsGroupClass);
+DeclareProperty("IsSchunckClass", IsGroupClass);
+DeclareProperty("IsSaturated", IsGroupClass);
 
 
 #############################################################################
 ##
-#M  IsNormalSubgroupClosed (<class>)
+#M  IsNormalSubgroupClosed(<class>)
 ##
-InstallTrueMethod (IsNormalSubgroupClosed, IsSubgroupClosed);
+InstallTrueMethod(IsNormalSubgroupClosed, IsSubgroupClosed);
 
 
 #############################################################################
 ##
-#M  IsDirectProductClosed (<class>)
+#M  IsDirectProductClosed(<class>)
 ##
-InstallTrueMethod (IsDirectProductClosed, IsResiduallyClosed);
+InstallTrueMethod(IsDirectProductClosed, IsResiduallyClosed);
 
 
 #############################################################################
 ##
-#M  IsDirectProductClosed (<class>)
+#M  IsDirectProductClosed(<class>)
 ##
-InstallTrueMethod (IsDirectProductClosed, IsNormalProductClosed);
+InstallTrueMethod(IsDirectProductClosed, IsNormalProductClosed);
 
 
 #############################################################################
 ##
-#M  ContainsTrivialGroup (<class>)
+#M  ContainsTrivialGroup(<class>)
 ##
-InstallTrueMethod (ContainsTrivialGroup, IsSchunckClass);
+InstallTrueMethod(ContainsTrivialGroup, IsSchunckClass);
 
 
 #############################################################################
 ##
-#M  IsDirectProductClosed (<class>)
+#M  IsDirectProductClosed(<class>)
 ##
-InstallTrueMethod (IsDirectProductClosed, IsSchunckClass);
+InstallTrueMethod(IsDirectProductClosed, IsSchunckClass);
 
 
 #############################################################################
 ##
-#M  IsQuotientClosed (<class>)
+#M  IsQuotientClosed(<class>)
 ##
-InstallTrueMethod (IsQuotientClosed, IsSchunckClass);
+InstallTrueMethod(IsQuotientClosed, IsSchunckClass);
 
 
 #############################################################################
 ##
-#M  IsSaturated (<class>)
+#M  IsSaturated(<class>)
 ##
-InstallTrueMethod (IsSaturated, IsSchunckClass);
+InstallTrueMethod(IsSaturated, IsSchunckClass);
 
 
 #############################################################################
 ##
-#M  IsSchunckClass (<class>)
+#M  IsSchunckClass(<class>)
 ##
-InstallTrueMethod (IsSchunckClass, 
+InstallTrueMethod(IsSchunckClass, 
    ContainsTrivialGroup and IsQuotientClosed and IsResiduallyClosed and IsSaturated);
 
 
 #############################################################################
 ##
-#M  IsResiduallyClosed (<class>)
+#M  IsResiduallyClosed(<class>)
 ##
-InstallTrueMethod (IsResiduallyClosed, 
+InstallTrueMethod(IsResiduallyClosed, 
    IsDirectProductClosed and IsSubgroupClosed);
 
 
 #############################################################################
 ##
-#F  DEFAULT_ISO_FUNC (<grp1>, <grp2>)
+#F  DEFAULT_ISO_FUNC(<grp1>, <grp2>)
 ##
 ##  default function used to test if two groups are isomorphic
 ##
-DeclareGlobalFunction ("DEFAULT_ISO_FUNC");
+DeclareGlobalFunction("DEFAULT_ISO_FUNC");
 
 
 #############################################################################

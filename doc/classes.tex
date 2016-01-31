@@ -5,7 +5,7 @@
 %%
 %%  classes.tex              CRISP documentation            Burkhard Höfling
 %%
-%%  Copyright (C) 2000, 2011 Burkhard Höfling
+%%  Copyright © 2000, 2011 Burkhard Höfling
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Chapter{Set theoretical classes}
@@ -40,8 +40,8 @@ element, in the {\GAP} sense; see "ref:Objects and Elements" in the {\GAP}
 reference manual).
 
 \beginexample
-gap> FermatPrimes := Class (p -> IsPrime (p) and p = 2^LogInt (p, 2) + 1); 
-Class (in:=function( p ) ... end)
+gap> FermatPrimes := Class(p -> IsPrime(p) and p = 2^LogInt(p, 2) + 1); 
+Class(in:=function( p ) ... end)
 \endexample
 
 \>View(<class>)!{for classes}
@@ -51,8 +51,8 @@ information defining <class> which has been supplied by the user. If the
 class has a name, only its name will be printed.
 
 \begintt
-gap> View (FermatPrimes);
-Class (in:=function( p ) ... end)
+gap> View(FermatPrimes);
+Class(in:=function( p ) ... end)
 \endtt
 
 \>Print(<class>)!{for classes}
@@ -61,8 +61,8 @@ Class (in:=function( p ) ... end)
 information is being printed in a more explicit way if possible.
 
 \begintt
-gap> Print (FermatPrimes);
-Class (rec ( in = function ( p )
+gap> Print(FermatPrimes);
+Class(rec( in = function( p )
     return IsPrime( p ) and p = 2 ^ LogInt( p, 2 ) + 1;
 end))
 \endtt
@@ -126,8 +126,8 @@ of all objects not in <C>. <C> may also be a set.
 
 \beginexample
 gap> cmpl := Complement([1,2]);
-Complement ([ 1, 2 ])
-gap> Complement (cmpl);
+Complement([ 1, 2 ])
+gap> Complement(cmpl);
 [ 1, 2 ]
 \endexample
 
@@ -141,11 +141,11 @@ returns the intersection of the groups in <list>, resp. of the classes
 a sublist of that list. By default, `INTERSECTION_LIMIT' is 1000. 
 
 \beginexample
-gap> Intersection (Class (IsPrimeInt), [1..10]);
+gap> Intersection(Class(IsPrimeInt), [1..10]);
 [ 2, 3, 5, 7 ]
-gap> Intersection (Class (IsPrimeInt), Class (n -> n = 2^LogInt (n+1, 2) - 1));
-Intersection ([ Class (in:=function( N ) ... end), 
-  Class (in:=function( n ) ... end) ])
+gap> Intersection(Class(IsPrimeInt), Class(n -> n = 2^LogInt(n+1, 2) - 1));
+Intersection([ Class(in:=function( N ) ... end), 
+  Class(in:=function( n ) ... end) ])
 \endexample
 
 \>Union(<C>, <D>) F
@@ -153,8 +153,8 @@ Intersection ([ Class (in:=function( N ) ... end),
 returns the union of <C> and <D>.  
 
 \beginexample
-gap> Union (Class (n -> n mod 2 = 0), Class (n -> n mod 3 = 0));
-Union ([ Class (in:=function( n ) ... end), Class (in:=function( n ) ... end) 
+gap> Union(Class(n -> n mod 2 = 0), Class(n -> n mod 3 = 0));
+Union([ Class(in:=function( n ) ... end), Class(in:=function( n ) ... end) 
  ])
 \endexample
 
@@ -164,10 +164,10 @@ returns the difference of <C> and <D>. If <C> is a list, then the
 result will be a sublist of <C>.
 
 \beginexample
-gap> Difference (Class (IsPrimePowerInt), Class (IsPrimeInt));
-Intersection ([ Class (in:=function( n ) ... end), 
-  Complement (Class (in:=function( N ) ... end)) ])
-gap> Difference ([1..10], Class (IsPrimeInt));
+gap> Difference(Class(IsPrimePowerInt), Class(IsPrimeInt));
+Intersection([ Class(in:=function( n ) ... end), 
+  Complement(Class(in:=function( N ) ... end)) ])
+gap> Difference([1..10], Class(IsPrimeInt));
 [ 1, 4, 6, 8, 9, 10 ]
 \endexample
 

@@ -2,7 +2,7 @@
 ##
 ##  samples.gi                       CRISP                   Burkhard Höfling
 ##
-##  Copyright (C) 2000, 2005 Burkhard Höfling
+##  Copyright © 2000, 2005 Burkhard Höfling
 ##
 
 
@@ -10,15 +10,15 @@
 ##  
 #V  AllPrimes
 ##
-InstallValue (AllPrimes, Class (x -> IsInt (x) and IsPrimeInt (x)));
-SetName (AllPrimes, "<set of all primes>");
+InstallValue(AllPrimes, Class(x -> IsInt(x) and IsPrimeInt(x)));
+SetName(AllPrimes, "<set of all primes>");
 
 
 #############################################################################
 ##  
 #V  TrivialGroups
 ##
-InstallValue (TrivialGroups, SaturatedFittingFormation ( rec(
+InstallValue(TrivialGroups, SaturatedFittingFormation( rec(
     \in := IsTrivial,
     rad := TrivialSubgroup,
     res := G -> G,
@@ -27,46 +27,46 @@ InstallValue (TrivialGroups, SaturatedFittingFormation ( rec(
     char := [],
     bound := ReturnTrue
     )));
-SetIsSubgroupClosed (TrivialGroups, true);
-SetName (TrivialGroups, "<class of all trivial groups>");
+SetIsSubgroupClosed(TrivialGroups, true);
+SetName(TrivialGroups, "<class of all trivial groups>");
 
 
 #############################################################################
 ##  
 #V  NilpotentGroups
 ##
-InstallValue (NilpotentGroups, SaturatedFittingFormation ( rec(
+InstallValue(NilpotentGroups, SaturatedFittingFormation( rec(
     \in := IsNilpotentGroup,
     rad := FittingSubgroup,
-    res := G -> NormalClosure (G, 
-        SubgroupNC (G, NormalGeneratorsOfNilpotentResidual (G))),
+    res := G -> NormalClosure(G, 
+        SubgroupNC(G, NormalGeneratorsOfNilpotentResidual(G))),
     proj := NilpotentProjector,
-    locdef := function (G, p) return GeneratorsOfGroup (G); end,
+    locdef := function(G, p) return GeneratorsOfGroup(G); end,
     char := AllPrimes,
-    bound := G -> G <> Socle (G)
+    bound := G -> G <> Socle(G)
     )));
-SetIsSubgroupClosed (NilpotentGroups, true);
-SetName (NilpotentGroups, "<class of all nilpotent groups>");
+SetIsSubgroupClosed(NilpotentGroups, true);
+SetName(NilpotentGroups, "<class of all nilpotent groups>");
 
 
 #############################################################################
 ##  
 #M  NilpotentProjector
 ##
-InstallMethod (NilpotentProjector, "for finite solvable groups", true, 
+InstallMethod(NilpotentProjector, "for finite solvable groups", true, 
     [IsFinite and IsGroup and IsSolvableGroup], 0,
-    function (G)
-        return ProjectorFromExtendedBoundaryFunction (
+    function(G)
+        return ProjectorFromExtendedBoundaryFunction(
             G,
-            rec (
-                dfunc := function (gpcgs, npcgs, p, data)
-                    if Length (npcgs) > 1 then 
+            rec(
+                dfunc := function(gpcgs, npcgs, p, data)
+                    if Length(npcgs) > 1 then 
                         return true;
                     else
                         return fail;
                     fi;
                 end,
-                cfunc := function (gpcgs, npcgs, p, cent, data)
+                cfunc := function(gpcgs, npcgs, p, cent, data)
                     return cent > 1;
                 end),
             false);
@@ -75,9 +75,9 @@ InstallMethod (NilpotentProjector, "for finite solvable groups", true,
 
 #############################################################################
 ##
-#M  NilpotentProjector (<grp>)
+#M  NilpotentProjector(<grp>)
 ##
-CRISP_RedispatchOnCondition (NilpotentProjector,
+CRISP_RedispatchOnCondition(NilpotentProjector,
     "redispatch if group is finite or soluble",
     true, 
     [IsGroup],
@@ -88,39 +88,39 @@ CRISP_RedispatchOnCondition (NilpotentProjector,
 ##
 #V  SupersolvableGroups
 ##
-InstallValue (SupersolvableGroups, SaturatedFormation ( rec(
+InstallValue(SupersolvableGroups, SaturatedFormation( rec(
     res := SupersolvableResiduum,
     proj := SupersolvableProjector,
-    locdef := function (G, p) 
+    locdef := function(G, p) 
         local gens, res, i, j;
-        gens := GeneratorsOfGroup (G);
-        res := List (gens, x -> x^(p-1)); 
-        for i in [1..Length (gens)] do
-            for j in [i+1..Length (gens)] do
-                Add (res, Comm(gens[i], gens[j]));
+        gens := GeneratorsOfGroup(G);
+        res := List(gens, x -> x^(p-1)); 
+        for i in [1..Length(gens)] do
+            for j in [i+1..Length(gens)] do
+                Add(res, Comm(gens[i], gens[j]));
             od;
         od;
         return res;
     end,
     char := AllPrimes,
-    bound := G -> not IsPrime (Size (Socle (G)))
+    bound := G -> not IsPrime(Size(Socle(G)))
     )));
-SetIsSubgroupClosed (SupersolvableGroups, true);
-SetName (SupersolvableGroups, "<class of all supersolvable groups>");
+SetIsSubgroupClosed(SupersolvableGroups, true);
+SetName(SupersolvableGroups, "<class of all supersolvable groups>");
 
 
 #############################################################################
 ##  
-#M  SupersolvableProjector (<grp>)
+#M  SupersolvableProjector(<grp>)
 ##
-InstallMethod (SupersolvableProjector, "for finite solvable groups", true, 
+InstallMethod(SupersolvableProjector, "for finite solvable groups", true, 
     [IsFinite and IsGroup and IsSolvableGroup], 0,
-    function (G)
-        return ProjectorFromExtendedBoundaryFunction (
+    function(G)
+        return ProjectorFromExtendedBoundaryFunction(
             G,
-            rec (
-                dfunc := function (gpcgs, npcgs, p, data)
-                    return Length (npcgs) > 1;
+            rec(
+                dfunc := function(gpcgs, npcgs, p, data)
+                    return Length(npcgs) > 1;
                 end),
             false);
     end);
@@ -128,9 +128,9 @@ InstallMethod (SupersolvableProjector, "for finite solvable groups", true,
 
 #############################################################################
 ##
-#M  SupersolvableProjector (<grp>)
+#M  SupersolvableProjector(<grp>)
 ##
-CRISP_RedispatchOnCondition (SupersolvableProjector,
+CRISP_RedispatchOnCondition(SupersolvableProjector,
     "redispatch if group is finite or soluble",
     true,
     [IsGroup],
@@ -142,55 +142,55 @@ CRISP_RedispatchOnCondition (SupersolvableProjector,
 ##
 #V  AbelianGroups
 ##
-InstallValue (AbelianGroups, OrdinaryFormation ( rec(
+InstallValue(AbelianGroups, OrdinaryFormation( rec(
     res := DerivedSubgroup,
     char := AllPrimes
     )));
-SetIsSubgroupClosed (AbelianGroups, true);
-SetName (AbelianGroups, "<class of all abelian groups>");
+SetIsSubgroupClosed(AbelianGroups, true);
+SetName(AbelianGroups, "<class of all abelian groups>");
 
 
 #############################################################################
 ##
-#F  AbelianGroupsOfExponent (<exp>)
+#F  AbelianGroupsOfExponent(<exp>)
 ##
-InstallGlobalFunction ("AbelianGroupsOfExponent", function (exp)
+InstallGlobalFunction("AbelianGroupsOfExponent", function(exp)
     local form;
-    if not IsPosInt (exp) then
-        Error ("<exp> must be a positive integer");
+    if not IsPosInt(exp) then
+        Error("<exp> must be a positive integer");
     fi;
-    form := OrdinaryFormation ( rec(
-        res := G -> ClosureGroup (DerivedSubgroup (G), 
-                List (GeneratorsOfGroup (G), x -> x^exp)),
+    form := OrdinaryFormation( rec(
+        res := G -> ClosureGroup(DerivedSubgroup(G), 
+                List(GeneratorsOfGroup(G), x -> x^exp)),
         char := PrimeDivisors(exp)
         ));
-    SetIsSubgroupClosed (form, true);
-    SetName (form, Concatenation (
+    SetIsSubgroupClosed(form, true);
+    SetName(form, Concatenation(
         "<class of all abelian groups of exponent dividing ",
-        String (exp), ">"));
+        String(exp), ">"));
         return form;
 end);
 
 
 #############################################################################
 ##
-#F  PiGroups (<list>)
+#F  PiGroups(<list>)
 ##
-InstallGlobalFunction ("PiGroups", 
-    function (pi)
+InstallGlobalFunction("PiGroups", 
+    function(pi)
         local class;
-        if not IsListOrCollection (pi) then
-            Error ("<pi> must be a list or collection or class");
+        if not IsListOrCollection(pi) then
+            Error("<pi> must be a list or collection or class");
         fi;
-        if HasIsEmpty (pi) and IsEmpty (pi) then
+        if HasIsEmpty(pi) and IsEmpty(pi) then
             return TrivialGroups; # this also avoids a problem with String
                                          # which returns "" for an empty list
         fi;
-        class := SaturatedFittingFormation ( rec(
-            \in := G -> ForAll (PrimeDivisors (Size(G)), p -> p in pi),
-            proj := G -> HallSubgroup (G, Filtered (PrimeDivisors (Size(G)), p -> p in pi)),
-            inj  := G -> HallSubgroup (G, Filtered (PrimeDivisors (Size(G)), p -> p in pi)),
-            locdef := function (G, p) 
+        class := SaturatedFittingFormation( rec(
+            \in := G -> ForAll(PrimeDivisors(Size(G)), p -> p in pi),
+            proj := G -> HallSubgroup(G, Filtered(PrimeDivisors(Size(G)), p -> p in pi)),
+            inj  := G -> HallSubgroup(G, Filtered(PrimeDivisors(Size(G)), p -> p in pi)),
+            locdef := function(G, p) 
                 if p in pi then
                     return [];
                 else
@@ -198,33 +198,33 @@ InstallGlobalFunction ("PiGroups",
                 fi;
             end,
             char := pi,
-            bound := G -> not SmallestRootInt (Size(Socle (G))) in pi
+            bound := G -> not SmallestRootInt(Size(Socle(G))) in pi
             ));
-        SetIsSubgroupClosed (class, true);
+        SetIsSubgroupClosed(class, true);
         
         # the following may cause trouble if there is no String method for pi
-        SetName (class, Concatenation (
-            "<class of all ",String (pi), "-groups>"));
+        SetName(class, Concatenation(
+            "<class of all ",String(pi), "-groups>"));
         return class;
     end);
 
 
 #############################################################################
 ##
-#F  PGroups (<p>)
+#F  PGroups(<p>)
 ##
-InstallGlobalFunction ("PGroups", 
-    function (p)
+InstallGlobalFunction("PGroups", 
+    function(p)
         local class;
-        if not IsInt (p) or not IsPrimeInt (p) then
-            Error ("<p> must be a prime integer");
+        if not IsInt(p) or not IsPrimeInt(p) then
+            Error("<p> must be a prime integer");
         fi;
-        class := SaturatedFittingFormation ( rec(
-            \in := G -> IsTrivial (G) 
-            	or SmallestRootInt (Size(G)) = p,
-            proj := G -> SylowSubgroup (G, p),
-            inj := G -> SylowSubgroup (G, p),
-            locdef := function (G, q) 
+        class := SaturatedFittingFormation( rec(
+            \in := G -> IsTrivial(G) 
+            	or SmallestRootInt(Size(G)) = p,
+            proj := G -> SylowSubgroup(G, p),
+            inj := G -> SylowSubgroup(G, p),
+            locdef := function(G, q) 
                 if p = q then
                     return [];
                 else
@@ -232,18 +232,18 @@ InstallGlobalFunction ("PGroups",
                 fi;
             end,
             char := [p],
-            bound := G -> Factors (Size(Socle (G)))[1] <> p
+            bound := G -> Factors(Size(Socle(G)))[1] <> p
             ));
-        SetIsSubgroupClosed (class, true);
-        SetName (class, Concatenation (
-            "<class of all ",String (p), "-groups"));
+        SetIsSubgroupClosed(class, true);
+        SetName(class, Concatenation(
+            "<class of all ",String(p), "-groups"));
         return class;
     end);
   
   
 ############################################################################
 ##
-#M  HallSubgroupOp (<grp>, <pi>)
+#M  HallSubgroupOp(<grp>, <pi>)
 ##
 ##  make sure that HallSubgroupOp works for arbitrary solvable groups
 ##
@@ -257,7 +257,7 @@ CRISP_RedispatchOnCondition(HallSubgroupOp,
 
 ############################################################################
 ##
-#M  SylowComplementOp (<grp>, <p>)
+#M  SylowComplementOp(<grp>, <p>)
 ##
 CRISP_RedispatchOnCondition(SylowComplementOp,
     "redispatch if group is finite or soluble",

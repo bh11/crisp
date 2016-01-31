@@ -2,13 +2,13 @@
 ##
 ##  solveeq.gd                      CRISP                   Burkhard Höfling
 ##
-##  Copyright (C) 2000,2001 Burkhard Höfling
+##  Copyright © 2000,2001 Burkhard Höfling
 ##
 
 
 #############################################################################
 ##
-#F  LinearSystem (nrvars, nrsolutions, field, conv, convsol)
+#F  LinearSystem(nrvars, nrsolutions, field, conv, convsol)
 ##
 ##  LinearSystem returns a linear system of equations over the field <field>
 ##  with <nrvars> variables. Each equation has <nrsolutions> right hand 
@@ -21,12 +21,12 @@
 ##  of the left hand side and the solutions on the right hand side will
 ##  be stored as compressed vectors if possible.
 ##
-DeclareGlobalFunction ("LinearSystem");
+DeclareGlobalFunction("LinearSystem");
 
 
 #############################################################################
 ##
-#F  AddEquation (sys, row, sol)
+#F  AddEquation(sys, row, sol)
 ##
 ##  This function adds a new row to a system of linear equations <sys> 
 ##  obtained from LinearSystem. <row> is a vector containing the coefficents
@@ -40,49 +40,49 @@ DeclareGlobalFunction ("LinearSystem");
 ##
 ##  AddEquation may change sys, but does not change row or sol.
 ##
-DeclareGlobalFunction ("AddEquation");
+DeclareGlobalFunction("AddEquation");
 
 
 #############################################################################
 ##
-#F  HasSolution (sys, n)
+#F  HasSolution(sys, n)
 ##
 ##  This function returns true or false, depending whether sys has a solution
 ##  or not, using the linear system whose right hand side consists of the 
 ##  <n>-th entries of the solutions added via AddEquation.
 ##
-DeclareGlobalFunction ("HasSolution");
+DeclareGlobalFunction("HasSolution");
 
 
 #############################################################################
 ##
-#F  DimensionOfNullspace (sys)
+#F  DimensionOfNullspace(sys)
 ##
 ##  This function returns the dimension of the nullspace of sys.
 ##
-DeclareGlobalFunction ("DimensionOfNullspace");
+DeclareGlobalFunction("DimensionOfNullspace");
 
 
 #############################################################################
 ##
-#F  OneSolution (sys, n)
+#F  OneSolution(sys, n)
 ##
 ##  This function returns fail if sys has no solutions. Otherwise it returns
 ##  a vector which is a solution for the linear system whose right hand side 
 ##  consists of the <n>-th entries of the solutions added via AddEquation.
 ##
-DeclareGlobalFunction ("OneSolution");
+DeclareGlobalFunction("OneSolution");
 
 
 #############################################################################
 ##
-#F  BasisNullspaceSolution (sys)
+#F  BasisNullspaceSolution(sys)
 ##
 ##  This function returns list of row vectors representing a basis of the 
 ##  vector space of all solutions of the homogeneous system corresponding 
 ##  to sys. Note that this also works if sys does not have a solution.
 ##
-DeclareGlobalFunction ("BasisNullspaceSolution");
+DeclareGlobalFunction("BasisNullspaceSolution");
 
 
 ############################################################################

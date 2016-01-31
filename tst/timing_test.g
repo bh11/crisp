@@ -2,7 +2,7 @@
 ##
 ##  timing_test.g                   CRISP                   Burkhard Höfling
 ##
-##  Copyright (C) 2000, 2015 Burkhard Höfling
+##  Copyright © 2000, 2015 Burkhard Höfling
 ##
 
 
@@ -12,46 +12,46 @@
 ##
 ##  global variable storing the original value of `Print'
 ##
-if not IsBound (PRINT) then
+if not IsBound(PRINT) then
     PRINT := Print;
-    MakeReadOnlyGlobal ("PRINT");
+    MakeReadOnlyGlobal("PRINT");
 fi;
 
 
 ############################################################################
 ##
-#F  SilentRead (g1, g2, g3)
+#F  SilentRead(g1, g2, g3)
 ##
-##  if g1 is a function, this simply assigns g1 (g2) to the global varable g3.
-##  Otherwise, it behaves like ReadPackage (pkg fname), but suppresses anything 
+##  if g1 is a function, this simply assigns g1(g2) to the global varable g3.
+##  Otherwise, it behaves like ReadPackage(pkg fname), but suppresses anything 
 ##  printed while reading the file
 ##
-SilentRead := function (g1, g2, g3)
+SilentRead := function(g1, g2, g3)
 
-    if IsFunction (g1) then
-        BindGlobal (g3, CallFuncList (g1, g2));
+    if IsFunction(g1) then
+        BindGlobal(g3, CallFuncList(g1, g2));
     else
-        MakeReadWriteGlobal ("Print");
+        MakeReadWriteGlobal("Print");
         Print := Ignore;
-        ReadPackage (g1, g2);
+        ReadPackage(g1, g2);
         Print := PRINT;
-        MakeReadOnlyGlobal ("Print");
+        MakeReadOnlyGlobal("Print");
     fi;
 end;
 
 
 ############################################################################
 ##
-#F  UTF8String (str, len)
+#F  UTF8String(str, len)
 ##
-UTF8String := function (str, len)
+UTF8String := function(str, len)
 
     local new, w, i;
 
-    if not IsString (str) then
-        str := String (str);
+    if not IsString(str) then
+        str := String(str);
     fi;
-    w := WidthUTF8String (str);
+    w := WidthUTF8String(str);
     if len > 0 and w < len then
         new := [];
         new{[len-w+1..Length(str)+len-w]} := str;
@@ -59,12 +59,12 @@ UTF8String := function (str, len)
             new[i] := ' ';
         od;
     elif len < 0 and w < -len then
-        new := ShallowCopy (str);
+        new := ShallowCopy(str);
         for i in [Length(str)+1..Length(str)-len-w] do
             new[i] := ' ';
         od;
     else
-        new := ShallowCopy (str);
+        new := ShallowCopy(str);
     fi;
     return new;
 end;
@@ -72,9 +72,9 @@ end;
 
 ############################################################################
 ##
-#F  StringFactorsInt (n)
+#F  StringFactorsInt(n)
 ##
-StringFactorsInt := function (n)
+StringFactorsInt := function(n)
 
     local facs, str, dot, f;
 
@@ -85,17 +85,17 @@ StringFactorsInt := function (n)
         str := "";
     fi;
 
-    facs := Collected (FactorsInt(n));
+    facs := Collected(FactorsInt(n));
     dot := false;
 
     for f in facs do
         if dot then
-            Add (str, '.');
+            Add(str, '.');
         fi;
-        Append (str, String(f[1]));
+        Append(str, String(f[1]));
         if f[2] > 1 then
-            Add (str, '^');
-            Append (str, String(f[2]));
+            Add(str, '^');
+            Append(str, String(f[2]));
         fi;
         dot := true;
     od;
@@ -104,7 +104,7 @@ end;
 
 ############################################################################
 ##
-#F  DoTests (groups, tests)
+#F  DoTests(groups, tests)
 ##
 ##  performs a series of tests with a list of sample groups, comparing 
 ##  the results of the various tests. if the global Boolean DO_TIMING is
@@ -141,16 +141,16 @@ end;
 ##  The idea is to allow partial timings during the call to t[1] or a
 ##  call to t[5] to be displayed.
 ##
-DoTests := function (groups, tests)
+DoTests := function(groups, tests)
 
     local g, name, tmp, t, t0, t1, res, prevres, size, w, colwidth, col;
 
     colwidth := [-12,8,8];
-    Print (String ("group", colwidth[1]));
-    Print (String ("logsize", colwidth[2]));
-    Print (String ("complen", colwidth[3]));
+    Print(String("group", colwidth[1]));
+    Print(String("logsize", colwidth[2]));
+    Print(String("complen", colwidth[3]));
     col := 4;
-    if IsBound (DO_TIMING) and DO_TIMING then
+    if IsBound(DO_TIMING) and DO_TIMING then
         for t in tests do
             w := WidthUTF8String(t[3]);
             if w < 8 then
@@ -158,45 +158,45 @@ DoTests := function (groups, tests)
             else
                 colwidth[col] := w+1;
             fi;
-            Print (UTF8String(t[3],colwidth[col]),"\c");
+            Print(UTF8String(t[3],colwidth[col]),"\c");
             col := col + 1;
-            if IsBound (t[6]) then
+            if IsBound(t[6]) then
                 w := WidthUTF8String(t[7]);
                 if w < 8 then
                     colwidth[col] := 8;
                 else
                     colwidth[col] := w+1;
                 fi;
-                Print (UTF8String (t[7],colwidth[col]), "\c");
+                Print(UTF8String(t[7],colwidth[col]), "\c");
                 col := col + 1;
             fi;
         od;
     fi;
-    Append (colwidth, [16, 16]);
+    Append(colwidth, [16, 16]);
    
-    Print ("\n");
+    Print("\n");
     for g in groups do
-        if IsBoundGlobal (g[3]) then
-            if IsReadOnlyGlobal (g[3]) then
-                MakeReadWriteGlobal (g[3]);
+        if IsBoundGlobal(g[3]) then
+            if IsReadOnlyGlobal(g[3]) then
+                MakeReadWriteGlobal(g[3]);
             fi;
-            UnbindGlobal (g[3]);
+            UnbindGlobal(g[3]);
         fi;
-        SilentRead (g[1],g[2],g[3]);
-        if IsBound (g[4]) then
+        SilentRead(g[1],g[2],g[3]);
+        if IsBound(g[4]) then
             name := g[4];
         else
             name := g[3];
         fi;
-        Print (UTF8String (name,colwidth[1]));
-        tmp := ValueGlobal (g[3]);
-        size := Size (tmp);
-        Print (String (LogInt (Size (tmp), 10), colwidth[2]));
-        Print (String (Length (Pcgs(tmp)), colwidth[3]), "\c");
-        if IsReadOnlyGlobal (g[3]) then
-            MakeReadWriteGlobal (g[3]);
+        Print(UTF8String(name,colwidth[1]));
+        tmp := ValueGlobal(g[3]);
+        size := Size(tmp);
+        Print(String(LogInt(Size(tmp), 10), colwidth[2]));
+        Print(String(Length(Pcgs(tmp)), colwidth[3]), "\c");
+        if IsReadOnlyGlobal(g[3]) then
+            MakeReadWriteGlobal(g[3]);
         fi;
-        UnbindGlobal (g[3]);
+        UnbindGlobal(g[3]);
         prevres := fail;
         col := 4;
 
@@ -204,18 +204,18 @@ DoTests := function (groups, tests)
             if name in t[4] then
                 t1 := "n/a";
             else
-                SilentRead (g[1],g[2], g[3]);
-                tmp := ValueGlobal (g[3]);
-                if IsBound (t[5]) then
+                SilentRead(g[1],g[2], g[3]);
+                tmp := ValueGlobal(g[3]);
+                if IsBound(t[5]) then
                     t[5](tmp);
                 fi;
-                if IsBound (DO_TIMING) and DO_TIMING then
-                    GASMAN ("collect");
+                if IsBound(DO_TIMING) and DO_TIMING then
+                    GASMAN("collect");
                 fi;
                 t0 := Runtime();
-                if IsBound (TIMEOUT) and IsBound (CallWithTimeout) then
-                    res := CallWithTimeout (TIMEOUT, t[1], tmp);
-                    if IsList (res) then
+                if IsBound(TIMEOUT) and IsBound(CallWithTimeout) then
+                    res := CallWithTimeout(TIMEOUT, t[1], tmp);
+                    if IsList(res) then
                         res := res[1];
                     fi;
                 else
@@ -229,51 +229,51 @@ DoTests := function (groups, tests)
                 fi;
                 if prevres <> fail then
                     if res <> fail and res <> prevres then
-                        Error ("results do not match");
+                        Error("results do not match");
                     fi;
                 else
                     prevres := res;
                 fi;
-                if IsReadOnlyGlobal (g[3]) then
-                    MakeReadWriteGlobal (g[3]);
+                if IsReadOnlyGlobal(g[3]) then
+                    MakeReadWriteGlobal(g[3]);
                 fi;
-                UnbindGlobal (g[3]);
+                UnbindGlobal(g[3]);
             fi;
          
-            if IsBound (DO_TIMING) and DO_TIMING then
-                Print (String(t1,colwidth[col]), "\c");
+            if IsBound(DO_TIMING) and DO_TIMING then
+                Print(String(t1,colwidth[col]), "\c");
                 col := col + 1;
-                if IsBound (t[6]) then
-                    Print (String(t[6](),colwidth[col]), "\c");
+                if IsBound(t[6]) then
+                    Print(String(t[6](),colwidth[col]), "\c");
                     col := col + 1;
                 fi;
             fi;
         od;
-        Print ("  ");
-        if IsInt (prevres) then # assume that it is the order of a subgroup
-            Print (String (StringFactorsInt (prevres),colwidth[col]));
+        Print("  ");
+        if IsInt(prevres) then # assume that it is the order of a subgroup
+            Print(String(StringFactorsInt(prevres),colwidth[col]));
             col := col + 1;
-            Print ("  ");
-            Print (String (StringFactorsInt (size/prevres),colwidth[col]));
+            Print("  ");
+            Print(String(StringFactorsInt(size/prevres),colwidth[col]));
             col := col + 1;
-        elif IsList (prevres) then # assume that it is a list of subgroups
-            Print (Length (prevres));
+        elif IsList(prevres) then # assume that it is a list of subgroups
+            Print(Length(prevres));
         else
-            Print (prevres);
+            Print(prevres);
         fi;
-        Print ("\n");
+        Print("\n");
     od;
 end;
 
 
 ############################################################################
 ##
-#F  SpecialPcGroup (grp)
+#F  SpecialPcGroup(grp)
 ##
 ##  return a pc group isomorphic with grp whose family pcgs is a special 
 ##  pcgs
 ##
-SpecialPcGroup := G -> Image (IsomorphismSpecialPcGroup (G));
+SpecialPcGroup := G -> Image(IsomorphismSpecialPcGroup(G));
 
 ############################################################################
 ##
@@ -286,28 +286,28 @@ tSpcgs := 0;
 
 ############################################################################
 ##
-#F  SpcgsCompute (grp)
+#F  SpcgsCompute(grp)
 ##
 ##  compute a special pcgs and store the time needed in the global variable
 ##  tSpcgs
 ##
-SpcgsCompute  := function (tmp)
+SpcgsCompute  := function(tmp)
 	local t0;
-	if IsBound (DO_TIMING) and DO_TIMING then
-		GASMAN ("collect");
+	if IsBound(DO_TIMING) and DO_TIMING then
+		GASMAN("collect");
 	fi;
 	t0 := Runtime();
-	IsomorphismSpecialPcGroup (tmp);
+	IsomorphismSpecialPcGroup(tmp);
 	tSpcgs := Runtime() - t0;
 end;
 
 ############################################################################
 ##
-#F  SpcgsTime ()
+#F  SpcgsTime()
 ##
 ##  return time needed to compute special pcgs
 ##
-SpcgsTime := function ()
+SpcgsTime := function()
 	return tSpcgs;
 end;
 
@@ -323,22 +323,22 @@ mtxinfo := [];
 
 ############################################################################
 ##
-#F  MTXTime (grp)
+#F  MTXTime(grp)
 ##
 ##  compute time needed by meataxe
 ##
-MTXTime := function ()
-   return Sum (mtxinfo, x -> x[2]);
+MTXTime := function()
+   return Sum(mtxinfo, x -> x[2]);
 end;
 
 
 ############################################################################
 ##
-#F  MTXTime (grp)
+#F  MTXTime(grp)
 ##
 ##  reset time measurement by meataxe
 ##
-MTXReset := function (tmp)
+MTXReset := function(tmp)
    mtxinfo := [];
 end;
 

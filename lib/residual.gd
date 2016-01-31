@@ -2,56 +2,56 @@
 ##
 ##  residual.gd                      CRISP                   Burkhard Höfling
 ##
-##  Copyright (C) 2000-2002, 2006 by Burkhard Höfling
+##  Copyright © 2000-2002, 2006 by Burkhard Höfling
 ##
 
 
 #############################################################################
 ##
-#A  Residual (<grp>, <class>)
+#A  Residual(<grp>, <class>)
 ##
-KeyDependentOperation ("Residual", IsGroup, IsGroupClass, ReturnTrue);
-DeclareSynonym ("Residuum", Residual);
+KeyDependentOperation("Residual", IsGroup, IsGroupClass, ReturnTrue);
+DeclareSynonym("Residuum", Residual);
 
 
 #############################################################################
 ##
-#A  CharacteristicSubgroups (<grp>)
+#A  CharacteristicSubgroups(<grp>)
 ##
 ##  See the manual.
 ##
-DeclareAttribute ("CharacteristicSubgroups", IsGroup);
+DeclareAttribute("CharacteristicSubgroups", IsGroup);
 
 
 #############################################################################
 ##
 #O  OneInvariantSubgroupMinWrtQProperty 
-#O                                  (<act>, <grp>, <pretest>, <test>, <data>)
+#O                                 (<act>, <grp>, <pretest>, <test>, <data>)
 ##
 ##  See the manual.
 ##
-DeclareOperation ("OneInvariantSubgroupMinWrtQProperty", 
+DeclareOperation("OneInvariantSubgroupMinWrtQProperty", 
     [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject]);
 
 
 ############################################################################
 ##
 #O  AllInvariantSubgroupsWithQProperty 
-#O                                 (<act>, <grp>, <pretest>, <test>, <data>)
+#O                                (<act>, <grp>, <pretest>, <test>, <data>)
 ##
 ##  See the manual.
 ##
-DeclareOperation ("AllInvariantSubgroupsWithQProperty", 
+DeclareOperation("AllInvariantSubgroupsWithQProperty", 
     [IsListOrCollection, IsGroup, IsFunction, IsFunction, IsObject]);
 
 
 #############################################################################
 ##
-#O  OneNormalSubgroupMinWrtQProperty (<grp>, <pretest>, <test>, <data>)
+#O  OneNormalSubgroupMinWrtQProperty(<grp>, <pretest>, <test>, <data>)
 ##
 ##  See the manual.
 ##
-DeclareOperation ("OneNormalSubgroupMinWrtQProperty", 
+DeclareOperation("OneNormalSubgroupMinWrtQProperty", 
     [IsGroup, IsFunction, IsFunction, IsObject]);
 
 
@@ -61,7 +61,7 @@ DeclareOperation ("OneNormalSubgroupMinWrtQProperty",
 ##
 ##  See the manual.
 ##
-DeclareOperation ("AllNormalSubgroupsWithQProperty", 
+DeclareOperation("AllNormalSubgroupsWithQProperty", 
     [IsGroup, IsFunction, IsFunction, IsObject]);
 
 

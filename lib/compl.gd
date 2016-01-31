@@ -2,13 +2,13 @@
 ##
 ##  compl.gd                         CRISP                   Burkhard Höfling
 ##
-##  Copyright (C) 2000, 2002 Burkhard Höfling
+##  Copyright © 2000, 2002 Burkhard Höfling
 ##
 
 
 #############################################################################
 ##
-#F  PcgsComplementOfChiefFactor (<pcgs>, <hpcgs>, <first>, <npcgs>, <kpcgs>)
+#F  PcgsComplementOfChiefFactor(<pcgs>, <hpcgs>, <first>, <npcgs>, <kpcgs>)
 ##
 ##  The arguments of PcgsComplementOfChiefFactor represent the following 
 ##            situation. Let H be a group, K < N < R, such that N/K is a
@@ -31,7 +31,7 @@
 ##  Q/K is a Sylow q-subgroup of R/K, which will be computed in the course
 ##  of the algorithm.
 ##
-DeclareGlobalFunction ("PcgsComplementOfChiefFactor");
+DeclareGlobalFunction("PcgsComplementOfChiefFactor");
 
 
 #############################################################################
@@ -39,12 +39,12 @@ DeclareGlobalFunction ("PcgsComplementOfChiefFactor");
 #F  COMPLEMENT_SOLUTION_FUNCTION
 ##
 ##  function used to compute a particular invariant complement 
-DeclareGlobalFunction ("COMPLEMENT_SOLUTION_FUNCTION");
+DeclareGlobalFunction("COMPLEMENT_SOLUTION_FUNCTION");
 
 
 #############################################################################
 ##
-#F  ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction (
+#F  ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction(
 ##      <act>, <pcgs>, <gpcgs>, <npcgs>, <kpcgs>, <all>)
 ##
 ##  Let G be a group and <act> a set which acts on G via the caret operator.
@@ -60,16 +60,16 @@ DeclareGlobalFunction ("COMPLEMENT_SOLUTION_FUNCTION");
 ##
 ##  ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction returns a
 ##  record <rec> with components nrSolutions and solutionFunction.
-##  Each call <rec>.solutionFunction (<rec>, n) with an integer n
+##  Each call <rec>.solutionFunction(<rec>, n) with an integer n
 ##  with 1 <= n <= <rec>.nrSolutions gives the pcgs (induced wrt. to
 ##  <pcgs>) of one possible subgroup C.
 ##
-DeclareGlobalFunction ("ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction");
+DeclareGlobalFunction("ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction");
 
 
 #############################################################################
 ##
-#F  PcgsInvariantComplementsOfElAbModuloPcgs (
+#F  PcgsInvariantComplementsOfElAbModuloPcgs(
 ##      <act>, <numpcgs>, <pcgs>, <mpcgs>, <denpcgs>, <all>)
 ##
 ##  computes invariant complements of the elementary abelian section 
@@ -79,24 +79,24 @@ DeclareGlobalFunction ("ExtendedPcgsComplementsOfCentralModuloPcgsUnderAction");
 ##  If all is true, all such complements are computed, otherwise just one.
 ##  If no complement exists, an empty list is returned.
 ##
-DeclareGlobalFunction ("PcgsInvariantComplementsOfElAbModuloPcgs"); 
+DeclareGlobalFunction("PcgsInvariantComplementsOfElAbModuloPcgs"); 
    
 
 #############################################################################
 ##
-#F  PcgsComplementsOfCentralModuloPcgsUnderActionNC (<act>,<pcgs>, <mpcgs>,<all>)
+#F  PcgsComplementsOfCentralModuloPcgsUnderActionNC(<act>,<pcgs>, <mpcgs>,<all>)
 ##
 ##  similar to PcgsInvariantComplementsOfElAbModuloPcgs, except that it
 ##  presumes that pcgs centralises mpcgs (and will probably produce an
 ##  error if not).
 ##  
-DeclareGlobalFunction ("PcgsComplementsOfCentralModuloPcgsUnderActionNC");
+DeclareGlobalFunction("PcgsComplementsOfCentralModuloPcgsUnderActionNC");
 #   [IsListOrCollection, IsModuloPcgs, IsModuloPcgs, IsBool]);
    
    
 #############################################################################
 ##
-#O  InvariantComplementsOfElAbSection (<act>,<G>,<N>,<L>,<all>)
+#O  InvariantComplementsOfElAbSection(<act>,<G>,<N>,<L>,<all>)
 ##
 ##  computes complements of N/L in G/L which are invariant under act.
 ##  act can be a collection of elements of a supergroup of G, or a collection 
@@ -105,27 +105,27 @@ DeclareGlobalFunction ("PcgsComplementsOfCentralModuloPcgsUnderActionNC");
 ##  If no complement exists, or if N/L is not central in G/L, an empty 
 ##  list is returned if all is true, and fail is returned if all is false.
 ##
-DeclareOperation ("InvariantComplementsOfElAbSection", 
+DeclareOperation("InvariantComplementsOfElAbSection", 
     [IsListOrCollection, IsGroup, IsGroup, IsGroup, IsBool]);
 
 #############################################################################
 ##
-#F  ComplementsOfCentralSectionUnderAction (<act>,<G>,<N>,<L>,<all>)
-#O  ComplementsOfCentralSectionUnderActionNC (<act>,<G>,<N>,<L>,<all>)
+#F  ComplementsOfCentralSectionUnderAction(<act>,<G>,<N>,<L>,<all>)
+#O  ComplementsOfCentralSectionUnderActionNC(<act>,<G>,<N>,<L>,<all>)
 ##
 ##  similar to ComplementsOfElAbSectionUnderAction; however G is expected
 ##  to act centrally on N/L. ComplementsOfCentralSectionUnderActionNC
 ##  does not check this.
 ##
-DeclareGlobalFunction ("ComplementsOfCentralSectionUnderAction");
+DeclareGlobalFunction("ComplementsOfCentralSectionUnderAction");
    
-DeclareOperation ("ComplementsOfCentralSectionUnderActionNC", 
+DeclareOperation("ComplementsOfCentralSectionUnderActionNC", 
     [IsListOrCollection, IsGroup, IsGroup, IsGroup, IsBool]);
 
    
 #############################################################################
 ##
-#F  ComplementsMaximalUnderAction (<act>, <ser>, <i>, <j>, <k>, <all>) 
+#F  ComplementsMaximalUnderAction(<act>, <ser>, <i>, <j>, <k>, <all>) 
 ## 
 ##  computes subgroups C of ser[i] such that C/ser[k] is a act-invariant 
 ##  complement of ser[j]/ser[k] in ser[i]/ser[k], where i <= j <= k.
@@ -137,16 +137,16 @@ DeclareOperation ("ComplementsOfCentralSectionUnderActionNC",
 ##  If all is true, it returns a list containing all such C.
 ##  Otherwise it returns one C if it exists, or fail if no such C exists. 
 ##
-DeclareGlobalFunction ("ComplementsMaximalUnderAction");
+DeclareGlobalFunction("ComplementsMaximalUnderAction");
 
 
 #############################################################################
 ##
-#F  PcgsComplementsMaximalUnderAction (<act>, <U>, <ser>,  <j>, <k>, <all>) 
+#F  PcgsComplementsMaximalUnderAction(<act>, <U>, <ser>,  <j>, <k>, <all>) 
 ## 
 ##  does the nontrivial work for ComplementsMaximalUnderAction above
 ##
-DeclareGlobalFunction ("PcgsComplementsMaximalUnderAction");
+DeclareGlobalFunction("PcgsComplementsMaximalUnderAction");
 
 
 ############################################################################

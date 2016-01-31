@@ -2,7 +2,7 @@
 ##
 ##  samples.gd                      CRISP                    Burkhard Höfling
 ##
-##  Copyright (C) 2000 Burkhard Höfling
+##  Copyright © 2000 Burkhard Höfling
 ##
 
 
@@ -10,70 +10,70 @@
 ##  
 #V  TrivialGroups
 ##
-DeclareGlobalVariable ("TrivialGroups");
+DeclareGlobalVariable("TrivialGroups");
 
 
 #############################################################################
 ##  
 #V  NilpotentGroups
 ##
-DeclareGlobalVariable ("NilpotentGroups");
+DeclareGlobalVariable("NilpotentGroups");
 
 
 #############################################################################
 ##  
-#A  NilpotentProjector (<grp>)
+#A  NilpotentProjector(<grp>)
 ##
-DeclareAttribute ("NilpotentProjector", IsGroup);
+DeclareAttribute("NilpotentProjector", IsGroup);
 
 
 #############################################################################
 ##
 #V  SupersolvableGroups
 ##
-DeclareGlobalVariable ("SupersolvableGroups");
+DeclareGlobalVariable("SupersolvableGroups");
 
 
 #############################################################################
 ##
-#A  SupersolvableProjector (<grp>)
+#A  SupersolvableProjector(<grp>)
 ##
-DeclareAttribute ("SupersolvableProjector", IsGroup);
+DeclareAttribute("SupersolvableProjector", IsGroup);
 
 
 #############################################################################
 ##
 #V  AbelianGroups
 ##
-DeclareGlobalVariable ("AbelianGroups");
+DeclareGlobalVariable("AbelianGroups");
 
 
 #############################################################################
 ##
-#F  AbelianGroupsOfExponent (<exp>)
+#F  AbelianGroupsOfExponent(<exp>)
 ##
-DeclareGlobalFunction ("AbelianGroupsOfExponent");
+DeclareGlobalFunction("AbelianGroupsOfExponent");
 
 
 #############################################################################
 ##
-#F  PiGroups (<primes>)
+#F  PiGroups(<primes>)
 ##
-DeclareGlobalFunction ("PiGroups");
+DeclareGlobalFunction("PiGroups");
 
 
 #############################################################################
 ##
-#F  PGroups (<p>)
+#F  PGroups(<p>)
 ##
-DeclareGlobalFunction ("PGroups");
+DeclareGlobalFunction("PGroups");
 
 
 #############################################################################
 ##
 #V  AllPrimes
 ##
-DeclareGlobalVariable ("AllPrimes");
+DeclareGlobalVariable("AllPrimes");
 
 
 ############################################################################

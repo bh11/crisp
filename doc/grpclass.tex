@@ -5,7 +5,7 @@
 %%
 %%  grpclass.tex            CRISP documentation              Burkhard Höfling
 %%
-%%  Copyright (C) 2000, Burkhard Höfling
+%%  Copyright © 2000, Burkhard Höfling
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Chapter{Generic group classes}
@@ -79,29 +79,29 @@ the isomorphism test. Note that even for relatively small groups,
 
 \beginexample
 gap> GroupClass(IsNilpotent);
-GroupClass (in:=<Operation "IsNilpotent">)
+GroupClass(in:=<Operation "IsNilpotent">)
 gap> GroupClass([CyclicGroup(2), CyclicGroup(3)]);
-GroupClass ([ <pc group of size 2 with 1 generators>, 
+GroupClass([ <pc group of size 2 with 1 generators>, 
   <pc group of size 3 with 1 generators> ])
-gap> AbelianIsomorphismTest := function (A,B)
->     if IsAbelian (A) then
->         if IsAbelian (B) then
->             return AbelianInvariants (A) = AbelianInvariants (B);
+gap> AbelianIsomorphismTest := function(A,B)
+>     if IsAbelian(A) then
+>         if IsAbelian(B) then
+>             return AbelianInvariants(A) = AbelianInvariants(B);
 >         else
 >             return false;
 >         fi;
->     elif IsAbelian (B) then
+>     elif IsAbelian(B) then
 >         return false;
 >     else # this will not happen if called from GroupClass
->         Error ("At least one of the groups <A> and <B> must be abelian");
+>         Error("At least one of the groups <A> and <B> must be abelian");
 >     fi;
 > end;
 function( A, B ) ... end
-gap> cl := GroupClass ([AbelianGroup ([2,2]), AbelianGroup ([3,5])],
+gap> cl := GroupClass([AbelianGroup([2,2]), AbelianGroup([3,5])],
 > AbelianIsomorphismTest);
-GroupClass ([ <pc group of size 4 with 2 generators>, 
+GroupClass([ <pc group of size 4 with 2 generators>, 
   <pc group of size 15 with 2 generators> ], function( A, B ) ... end)
-gap> Group ((1,2), (3,4)) in cl;
+gap> Group((1,2),(3,4)) in cl;
 true
 \endexample
 
@@ -230,11 +230,11 @@ If <bool> is `true', this fake setter function sets the properties
 indeed a Fitting class.
 
 \beginexample
-gap> nilp := GroupClass (IsNilpotent);
-GroupClass (in:=<Operation "IsNilpotent">)
-gap> SetIsFittingClass (nilp, true);
+gap> nilp := GroupClass(IsNilpotent);
+GroupClass(in:=<Operation "IsNilpotent">)
+gap> SetIsFittingClass(nilp, true);
 gap> nilp;
-FittingClass (in:=<Operation "IsNilpotent">)
+FittingClass(in:=<Operation "IsNilpotent">)
 \endexample
 
 \>HasIsOrdinaryFormation(<obj>) F
