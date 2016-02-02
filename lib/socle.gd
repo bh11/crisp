@@ -28,10 +28,11 @@ KeyDependentOperation("PSocle", IsGroup, IsPosInt, "prime");
 
 #############################################################################
 ##
-#A  SolvableSocle(<G>) 
+#A  SolubleSocle(<G>)
 ##
-DeclareAttribute("SolvableSocle", IsGroup);
-DeclareSynonym("AbelianSocle", SolvableSocle);
+DeclareAttribute("SolubleSocle", IsGroup);
+DeclareSynonymAttr("SolvableSocle", SolubleSocle);
+DeclareSynonymAttr("AbelianSocle", SolubleSocle);
 
 #############################################################################
 ##
@@ -42,10 +43,11 @@ DeclareAttribute("SocleComponents", IsGroup);
 
 #############################################################################
 ##
-#A  SolvableSocleComponents(<G>) 
+#A  SolubleSocleComponents(<G>)
 ##
-DeclareAttribute("SolvableSocleComponents", IsGroup);
-DeclareSynonym("AbelianSocleComponents", SolvableSocleComponents);
+DeclareAttribute("SolubleSocleComponents", IsGroup);
+DeclareSynonymAttr("SolvableSocleComponents", SolubleSocleComponents);
+DeclareSynonymAttr("AbelianSocleComponents", SolubleSocleComponents);
 
 
 #############################################################################
@@ -57,7 +59,7 @@ KeyDependentOperation("MinimalNormalPSubgroups", IsGroup, IsPosInt, "prime");
 
 #############################################################################
 ##
-#A  SolvableMinimalNormalSubgroups(<G>) 
+#A  AbelianMinimalNormalSubgroups(<G>)
 ##
 DeclareAttribute("AbelianMinimalNormalSubgroups", IsGroup);
 

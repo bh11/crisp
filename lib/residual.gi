@@ -42,7 +42,7 @@ InstallMethod(NormalSubgroups,
 #M  NormalSubgroups(<grp>)
 ##
 InstallMethod(NormalSubgroups, 
-    "normal complement method for solvable perm groups",
+    "normal complement method for soluble perm groups",
     true,
     [IsPermGroup and IsSolvableGroup], 
     0,
@@ -99,7 +99,7 @@ CRISP_RedispatchOnCondition(NormalSubgroups,
     [IsGroup],
     [IsFinite and IsSolvableGroup],
     # rank this method fairly high - presumably all fast methods for computing
-    # the normal subgroups need to know if the group is finite and solvable
+    # the normal subgroups need to know if the group is finite and soluble
     RankFilter(IsPcGroup and IsPermGroup and IsSolvableGroup));
     
 
@@ -176,7 +176,7 @@ CRISP_RedispatchOnCondition(CharacteristicSubgroups,
 ##  note that act must induce the full inner automorphism group
 ##
 InstallMethod(AllInvariantSubgroupsWithQProperty, 
-    "for solvable group",
+    "for soluble group",
     true,
     [IsListOrCollection, IsGroup and IsSolvableGroup and IsFinite, IsFunction, IsFunction, IsObject], 
     RankFilter(IsPcGroup), 
@@ -255,7 +255,7 @@ CRISP_RedispatchOnCondition(AllInvariantSubgroupsWithQProperty,
 #M  OneInvariantSubgroupMinWrtQProperty(<act>, <grp>, <pretest>, <test>, <data>)
 ##
 InstallMethod(OneInvariantSubgroupMinWrtQProperty, 
-    "for solvable group",
+    "for soluble group",
      true,
      [IsListOrCollection, IsGroup and IsSolvableGroup and IsFinite, 
         IsFunction, IsFunction, IsObject], 

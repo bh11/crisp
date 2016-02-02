@@ -8,9 +8,9 @@
 
 ###################################################################################
 ##
-#M  IsPrimitiveSolvableGroup
+#M  IsPrimitiveSolubleGroup
 ##
-InstallMethod(IsPrimitiveSolvableGroup, "for generic group", true,
+InstallMethod(IsPrimitiveSolubleGroup, "for generic group", true,
     [IsGroup], 0,
     function(G)
     
@@ -99,20 +99,20 @@ InstallMethod(IsPrimitiveSolvableGroup, "for generic group", true,
 ##
 #M  SocleComplement
 ##
-InstallMethod(SocleComplement, "for primitive solvable group", true,
-    [IsGroup and IsPrimitiveSolvableGroup], 0,
+InstallMethod(SocleComplement, "for primitive soluble group", true,
+    [IsGroup and IsPrimitiveSolubleGroup], 0,
     function(G)
     
         local N, ds, p, pcgs, mats, R, Q, M, m, k, q, c, i;
         
         if IsTrivial(G) then
-            Error("G must be primitive and solvable");
+            Error("G must be primitive and soluble");
         fi;
         
         ds := DerivedSeries(G);
         
         if not IsTrivial(ds[Length(ds)]) then
-             Error("G must be primitive and solvable");
+             Error("G must be primitive and soluble");
         fi; 
         
         N := ds[Length(ds)-1];
@@ -131,7 +131,7 @@ InstallMethod(SocleComplement, "for primitive solvable group", true,
         p := RelativeOrderOfPcElement(pcgs, pcgs[1]);
         
         if ForAny(pcgs, x -> x^p <> One(G)) then
-             Error("G must be primitive and solvable");
+             Error("G must be primitive and soluble");
         fi;
         
         R := ds[Length(ds)-2];
@@ -299,7 +299,7 @@ InstallMethod(Boundary, "if BoundaryFunction is known", true,
     function(H)
          return GroupClass(
              function(G)
-                 if not IsPrimitiveSolvableGroup(G) then
+                 if not IsPrimitiveSolubleGroup(G) then
                      return false;
                  fi;
                  Socle(G);
@@ -324,7 +324,7 @@ InstallMethod(Boundary, "for Schunck class with local definition", true,
              
                  local soc, p;
                  
-                 if not IsPrimitiveSolvableGroup(G) then
+                 if not IsPrimitiveSolubleGroup(G) then
                      return false;
                  fi;
                  if SocleComplement(G) in H then
@@ -349,7 +349,7 @@ InstallMethod(Boundary, "for Schunck class with local definition", true,
 InstallMethod(Boundary, "for generic grp class", true, 
     [IsGroupClass], 0,
     function(H)
-         return GroupClass(G -> IsPrimitiveSolvableGroup(G) 
+         return GroupClass(G -> IsPrimitiveSolubleGroup(G)
              and not G in H
              and SocleComplement(G) in H);
     end);

@@ -29,16 +29,17 @@ DeclareAttribute("NilpotentProjector", IsGroup);
 
 #############################################################################
 ##
-#V  SupersolvableGroups
+#V  SupersolubleGroups
 ##
-DeclareGlobalVariable("SupersolvableGroups");
-
+DeclareGlobalVariable("SupersolubleGroups");
+DeclareSynonym("SupersolvableGroups", SupersolubleGroups);
 
 #############################################################################
 ##
-#A  SupersolvableProjector(<grp>)
+#A  SupersolubleProjector(<grp>)
 ##
-DeclareAttribute("SupersolvableProjector", IsGroup);
+DeclareAttribute("SupersolubleProjector", IsGroup);
+DeclareSynonymAttr("SupersolvableProjector", SupersolubleProjector);
 
 
 #############################################################################

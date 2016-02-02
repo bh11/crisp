@@ -68,7 +68,7 @@ InstallGlobalFunction(InvariantSubgroupsCA,
 #O                                (<act>, <G>, <pretest>, <test>, <data>) 
 ##
 InstallMethod(AllInvariantSubgroupsWithNProperty, 
-    "for solvable group", true, 
+    "for soluble group", true,
     [IsListOrCollection, IsGroup and IsSolvableGroup and IsFinite, 
         IsFunction, IsFunction, IsObject], 
     0,
@@ -106,7 +106,7 @@ CRISP_RedispatchOnCondition(AllInvariantSubgroupsWithNProperty,
 #M                  <act>, <G>, <pretest>, <test>, <data>) 
 ##
 InstallMethod(OneInvariantSubgroupMaxWrtNProperty, 
-    "for solvable group", true, 
+    "for soluble group", true, 
     [IsListOrCollection, IsGroup and IsSolvableGroup and IsFinite, 
         IsFunction, IsFunction, IsObject], 
     0,

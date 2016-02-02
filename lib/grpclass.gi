@@ -776,13 +776,13 @@ InstallGlobalFunction("SetIsSaturatedFittingFormation",
 ##
 #M  Basis(<class>)
 ##
-##  the basis of a group class <class> consists of the primitive solvable 
+##  the basis of a group class <class> consists of the primitive soluble
 ##  groups in <class>
 ##
 InstallMethod(Basis, "for group class", true, 
     [IsGroupClass], 0,
     function(H)
-        return GroupClass(G -> IsPrimitiveSolvableGroup(G) and G in H);
+        return GroupClass(G -> IsPrimitiveSolubleGroup(G) and G in H);
     end);
     
 

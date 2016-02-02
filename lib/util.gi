@@ -315,7 +315,7 @@ InstallMethod(ChiefSeries,
 ##
 #M  CompositionSeriesUnderAction(<act>, <grp>)
 ##
-InstallMethod(CompositionSeriesUnderAction, "for solvable group", 
+InstallMethod(CompositionSeriesUnderAction, "for soluble group",
     true,
     [IsListOrCollection, IsGroup and IsSolvableGroup], 0,
     function(act, G)
@@ -530,8 +530,8 @@ InstallMethod(PcgsElementaryAbelianSeries, "for pc group with parent group", tru
 InstallMethod(PcgsElementaryAbelianSeries, "generic method", true,
     [IsGroup], 0, 
     function(G) 
-        if not IsSolvable(G) then
-            Error("The group <G> must be solvable");
+        if not IsSolvableGroup(G) then
+            Error("The group <G> must be soluble");
         elif IsPrimeOrdersPcgs(Pcgs(G)) then
             return PcgsElementaryAbelianSeriesFromPrimeOrdersPcgs(Pcgs(G));
         else

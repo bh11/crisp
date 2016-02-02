@@ -8,11 +8,13 @@
 
 #############################################################################
 ##
-#P  IsPrimitiveSolvableGroup(<grp>)
-#P  IsPrimitiveSolvable(<grp>)
+#P  IsPrimitiveSolubleGroup(<grp>)
+#P  IsPrimitiveSoluble(<grp>)
 ##
-DeclareProperty("IsPrimitiveSolvableGroup", IsGroup);
-DeclareSynonym("IsPrimitiveSolvable", IsPrimitiveSolvableGroup);
+DeclareProperty("IsPrimitiveSolubleGroup", IsGroup);
+DeclareSynonymAttr("IsPrimitiveSoluble", IsPrimitiveSolubleGroup);
+DeclareSynonymAttr("IsPrimitiveSolvableGroup", IsPrimitiveSolubleGroup);
+DeclareSynonymAttr("IsPrimitiveSolvable", IsPrimitiveSolubleGroup);
 
 
 #############################################################################
@@ -26,7 +28,7 @@ DeclareAttribute("SchunckClass", IsObject);
 ##
 #A  Boundary(<class>)
 ##
-##  compute the boundary of <class>, i.e., the set of all primitive solvable
+##  compute the boundary of <class>, i.e., the set of all primitive soluble
 ##  groups which do not belong to <class> but whose proper factor groups do.
 ##
 DeclareAttribute("Boundary", IsGroupClass);
@@ -36,7 +38,7 @@ DeclareAttribute("Boundary", IsGroupClass);
 ##
 #A  Basis(<class>)
 ##
-##  the basis of a Schunck class <class> consists of the primitive solvable 
+##  the basis of a Schunck class <class> consists of the primitive soluble 
 ##  groups in <class>
 ##
 DeclareAttribute("Basis", IsGroupClass);

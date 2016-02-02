@@ -188,7 +188,7 @@ DeclareGlobalFunction("CFUNC_FROM_CHARACTERISTIC_SCHUNCK");
 ##
 ##  standard function to pass to PcgsProjectorFromExtendedBoundaryFunction
 ##  as data.bfunc. The argument data must have a component test containing 
-##  a function taking two arguments, a primitive solvable group G such that
+##  a function taking two arguments, a primitive soluble group G such that
 ##  G/Socle(G) belongs to the Schunck class H in question, and a record r. 
 ##  data.test must return true if G is in the boundary of the Schunck class 
 ##  H, and false if it belongs to H.

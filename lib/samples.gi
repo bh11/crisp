@@ -53,7 +53,7 @@ SetName(NilpotentGroups, "<class of all nilpotent groups>");
 ##  
 #M  NilpotentProjector
 ##
-InstallMethod(NilpotentProjector, "for finite solvable groups", true, 
+InstallMethod(NilpotentProjector, "for finite soluble groups", true,
     [IsFinite and IsGroup and IsSolvableGroup], 0,
     function(G)
         return ProjectorFromExtendedBoundaryFunction(
@@ -86,11 +86,11 @@ CRISP_RedispatchOnCondition(NilpotentProjector,
 
 #############################################################################
 ##
-#V  SupersolvableGroups
+#V  SupersolubleGroups
 ##
-InstallValue(SupersolvableGroups, SaturatedFormation( rec(
+InstallValue(SupersolubleGroups, SaturatedFormation( rec(
     res := SupersolvableResiduum,
-    proj := SupersolvableProjector,
+    proj := SupersolubleProjector,
     locdef := function(G, p) 
         local gens, res, i, j;
         gens := GeneratorsOfGroup(G);
@@ -105,15 +105,15 @@ InstallValue(SupersolvableGroups, SaturatedFormation( rec(
     char := AllPrimes,
     bound := G -> not IsPrime(Size(Socle(G)))
     )));
-SetIsSubgroupClosed(SupersolvableGroups, true);
-SetName(SupersolvableGroups, "<class of all supersolvable groups>");
+SetIsSubgroupClosed(SupersolubleGroups, true);
+SetName(SupersolubleGroups, "<class of all supersoluble groups>");
 
 
 #############################################################################
 ##  
-#M  SupersolvableProjector(<grp>)
+#M  SupersolubleProjector(<grp>)
 ##
-InstallMethod(SupersolvableProjector, "for finite solvable groups", true, 
+InstallMethod(SupersolubleProjector, "for finite soluble groups", true,
     [IsFinite and IsGroup and IsSolvableGroup], 0,
     function(G)
         return ProjectorFromExtendedBoundaryFunction(
@@ -128,9 +128,9 @@ InstallMethod(SupersolvableProjector, "for finite solvable groups", true,
 
 #############################################################################
 ##
-#M  SupersolvableProjector(<grp>)
+#M  SupersolubleProjector(<grp>)
 ##
-CRISP_RedispatchOnCondition(SupersolvableProjector,
+CRISP_RedispatchOnCondition(SupersolubleProjector,
     "redispatch if group is finite or soluble",
     true,
     [IsGroup],
@@ -245,7 +245,7 @@ InstallGlobalFunction("PGroups",
 ##
 #M  HallSubgroupOp(<grp>, <pi>)
 ##
-##  make sure that HallSubgroupOp works for arbitrary solvable groups
+##  make sure that HallSubgroupOp works for arbitrary soluble groups
 ##
 CRISP_RedispatchOnCondition(HallSubgroupOp,
     "redispatch if group is finite or soluble",

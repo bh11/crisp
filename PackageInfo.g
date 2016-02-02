@@ -49,7 +49,7 @@ PackageInfoURL := "http://www.icm.tu-bs.de/~bhoeflin/crisp/PackageInfo.g",
 
 AbstractHTML := "The <span class=\"pkgname\">GAP</span> package <span \
 class=\"pkgname\">CRISP</span> provides algorithms for computing \
-subgroups of finite solvable groups related to a group class \
+subgroups of finite soluble groups related to a group class \
 <i>C</i>. In particular, it allows to compute <i>C</i>-radicals and \
 <i>C</i>-injectors for Fitting classes (and Fitting sets) <i>C</i>, \
 <i>C</i>-residuals for formations <i>C</i>, and <i>C</i>-projectors \
@@ -63,7 +63,7 @@ prescribed set of automorphisms and belonging to a given group \
 class.</p> \
  \
 <p>This includes an improved method to compute the set of all \
-normal subgroups of a finite solvable group, its characteristic \
+normal subgroups of a finite soluble group, its characteristic \
 subgroups, minimal normal subgroups and the socle and \
 <i>p</i>-socles for given primes <i>p</i>.",
 
@@ -79,7 +79,7 @@ PackageDoc := rec(
   SixFile := "doc/manual.six",
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
-  LongTitle := "Computing Radicals, Injectors, Projectors of solvable groups",
+  LongTitle := "Computing Radicals, Injectors, Projectors of soluble groups",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload := true

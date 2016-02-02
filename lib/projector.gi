@@ -298,7 +298,7 @@ InstallGlobalFunction(BFUNC_FROM_TEST_FUNC_FAC,
         # now compute primitive image
         nat := NaturalHomomorphismByNormalSubgroupNC(ImagesSource(hom), cent);
         F := ImagesSource(nat);
-        SetIsPrimitiveSolvableGroup(F, true);
+        SetIsPrimitiveSolubleGroup(F, true);
         SetSocle(F, ImagesSet(nat, N));
         SetSocleComplement(F, 
             ImagesSet(nat, ImagesSet(hom, GroupOfPcgs(cpcgs))));
@@ -328,7 +328,7 @@ InstallGlobalFunction(BFUNC_FROM_TEST_FUNC_MOD,
         
         nat := NaturalHomomorphismByNormalSubgroupNC(H, cent);
         F := ImagesSource(nat);
-        SetIsPrimitiveSolvableGroup(F, true);
+        SetIsPrimitiveSolubleGroup(F, true);
         SetSocle(F, ImagesSet(nat, GroupOfPcgs(npcgs)));
         SetSocleComplement(F, ImagesSet(nat, GroupOfPcgs(cpcgs)));
         return data.test(F, data);
@@ -446,7 +446,7 @@ InstallMethod(ProjectorFromExtendedBoundaryFunction, "for pc group",
 ##
 #M  ProjectorFromExtendedBoundaryFunction(<grp>, <rec>, <inonly>) 
 ##
-InstallMethod(ProjectorFromExtendedBoundaryFunction, "for solvable groups",
+InstallMethod(ProjectorFromExtendedBoundaryFunction, "for soluble groups",
     [IsGroup and IsFinite and IsSolvableGroup, IsRecord, IsBool], 0,
     function(grp, r, inonly)
         local pcgs, re;

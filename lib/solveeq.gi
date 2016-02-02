@@ -25,7 +25,7 @@ InstallGlobalFunction(LinearSystem,
             equations := [],
             nrequations := 0,
             solutions := [],
-            solvable := ListWithIdenticalEntries(nrsolutions,true),
+            soluble := ListWithIdenticalEntries(nrsolutions,true),
             conv := conv,
             convsol := convsol,
             nullrow := ListWithIdenticalEntries(nrvars, Zero(field)),
@@ -90,8 +90,8 @@ InstallGlobalFunction(AddEquation,
         
         solv := true;
         for i in [1..sys.nrsolutions] do
-            if sys.solvable[i] and sol[i] <> sys.zero then
-                sys.solvable[i] := false;
+            if sys.soluble[i] and sol[i] <> sys.zero then
+                sys.soluble[i] := false;
                 solv := false;
             fi;
         od;
@@ -106,7 +106,7 @@ InstallGlobalFunction(AddEquation,
 ##
 InstallGlobalFunction(HasSolution, 
     function(sys, n)
-        return sys.solvable[n];
+        return sys.soluble[n];
     end);
 
 
@@ -129,7 +129,7 @@ InstallGlobalFunction(OneSolution,
 
         local s, i;
         
-        if not sys.solvable[n] then
+        if not sys.soluble[n] then
             return fail;
         fi;
         

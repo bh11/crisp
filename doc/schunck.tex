@@ -1,3 +1,4 @@
+
 %!TEX root = manual.tex
 % !TeX TS-program = pdftex
 % !TEX spellcheck =en_GB
@@ -75,22 +76,22 @@ factor groups do. The result is a group class.
 
 \>Basis(<class>) A
 
-The basis of <class> consists of the primitive solvable 
+The basis of <class> consists of the primitive soluble
 groups in <class>. The result is a group class. 
 
 \>Projector(<grp>, <class>) O
 
 This function returns a <class>-projector of <grp>.
 Note that, at present, methods are only available for finite
-solvable groups <grp>, or when <class> has an attribute `ProjectorFunction'.
+soluble groups <grp>, or when <class> has an attribute `ProjectorFunction'.
 
 A subgroup 
 $H$ of the group $G$ is a <class>-projector of $G$ if $H N/N$ is
 <class>-maximal in $G/N$ for all normal subgroups $N$ of~$G$. A subgroup $H$
 of $G$ is <class>-maximal in $G$ if $H$ belongs to <class>, and there is no
 subgroup $L$ of $G$ which contains $H$ and lies in <class>. Note that if
-<class> consists of finite solvable groups, then <class>-projectors exist in
-every finite solvable group if and only if <class> is a Schunck class, and in
+<class> consists of finite soluble groups, then <class>-projectors exist in
+every finite soluble group if and only if <class> is a Schunck class, and in
 this case all <class>-projectors of
 $G$ are conjugate. See \cite{DH92}, III,~3.21.
 
@@ -100,7 +101,7 @@ SchunckClass(bound:=function( G ) ... end)
 gap> Size(Projector(GL(2,3), H)); 
 16 
 gap> # H-projectors coincide with Sylow subgroups
-gap> U := SchunckClass(rec( # class of all supersolvable groups
+gap> U := SchunckClass(rec( # class of all supersoluble groups
 >    bound := G -> not IsPrimeInt( Size(Socle(G)))
 > )); 
 SchunckClass(bound:=function( G ) ... end)
@@ -114,22 +115,22 @@ gap> # the projectors are the point stabilizers
 A subgroup $H$ of $G$ is a <class>-covering subgroup of $G$ if $H$ is a
 <class>-projector of $L$ for every subgroup $L$ with $H \leq L \leq G$.
 Note that projectors and covering subgroups coincide for Schunck classes of
-finite solvable groups. At present, methods are only available for finite
-solvable groups <grp>.
+finite soluble groups. At present, methods are only available for finite
+soluble groups <grp>.
 
 \>BoundaryFunction(<grpclass>) A
 
 If bound, this attribute stores a function <func> which has been set by the 
 user to define <grpclass>. <func> must be a function taking one argument.
-If the argument is a finite primitive solvable group $G$, <func> must  return 
+If the argument is a finite primitive soluble group $G$, <func> must  return
 `true' if $G$ is in the boundary of <grpclass>, and `false' if $G$ belongs to 
 <grpclass>. The behaviour for arguments which are not primitive 
-solvable groups, or which  belong neither to <grpclass> nor to the 
+soluble groups, or which  belong neither to <grpclass> nor to the
 boundary of <grpclass> need not be defined. Note that 
 `BoundaryFunction' should *not* be used to test whether a given group 
 belongs to the boundary of <grpclass>. `Boundary' and/or `Basis' (see 
 "Boundary" and "Basis"), which are defined independently of the way 
-<grpclass> is defined and will work for all finite solvable groups.
+<grpclass> is defined and will work for all finite soluble groups.
 
 
 \>ProjectorFunction(<grpclass>) A
@@ -144,18 +145,20 @@ rather than `ProjectorFunction', should be used by the user to compute
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Additional attributes for primitive solvable groups}\null
+\Section{Additional attributes for primitive soluble groups}\null
 
-\index{primitive solvable group!attributes of}
-\index{attributes!of primitive solvable group}
+\index{primitive soluble group!attributes of}
+\index{attributes!of primitive soluble group}
 
+\>IsPrimitiveSolubleGroup(<grp>) P
+\>IsPrimitiveSoluble(<grp>) P
 \>IsPrimitiveSolvableGroup(<grp>) P
 \>IsPrimitiveSolvable(<grp>) P
 
-returns true if <grp> is primitive and solvable, and false otherwise.
+returns true if <grp> is primitive and soluble, and false otherwise.
 An abstract finite group $G$ is *primitive* if it has a faithful primitive permutation 
 representation, or equivalently, if it has a maximal subgroup $M$ with trivial 
-core. If $G$ is solvable, $M$ complements the unique minimal normal subgroup
+core. If $G$ is soluble, $M$ complements the unique minimal normal subgroup
 $N$ of $G$. Therefore $N$ is the socle as well as the Fitting subgroup of
 $G$. A permutation group may be primitive as an abstract group while it is 
 not primitive as a permutation group (cf. "ref:IsPrimitive").
@@ -165,7 +168,7 @@ not primitive as a permutation group (cf. "ref:IsPrimitive").
 
 If present, this attribute stores a complement of the socle of <grp>.
 Currently, there is only a method available for `SocleComplement'
-if <grp> has the property `IsPrimitiveSolvable'.
+if <grp> has the property `IsPrimitiveSoluble'.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -333,7 +336,7 @@ formations.
 return the <form>-residual (also called <form>-residuum) of the group <grp>.
 This is the smallest normal subgroup <res> of <grp> such that $<grp>/<res>$ belongs to <form>.
 Note that, unless <form> has an attribute `ResidualFunction', there are presently only methods
-available for finite solvable groups.
+available for finite soluble groups.
 
 \>ResidualFunction(<form>) A
 
@@ -376,7 +379,7 @@ $M$ and $N$ are <act>-invariant subgroups with $M \in \cal X$ and $M$
 contained in $N$, then also $N \in \cal X$. Then
 `OneInvariantSubgroupMinWrtQProperty' computes an <act>-invariant subgroup $M \in \cal X$
 such that no <act>-invariant subgroup of <grp> contained in $M$ belongs to $\cal X$. 
-At present, there exist only methods for finite solvable groups <grp>.
+At present, there exist only methods for finite soluble groups <grp>.
 
 The class $\cal X$ is described by two functions, <pretest> and <test>. 
 
@@ -449,12 +452,12 @@ true
 <act>-invariant subgroups in $\cal X$, where $\cal X$ is the class defined by <pretest>,
 <test>, and <data>, as described for `OneInvariantSubgroupMinWrtQProperty' (see
 "OneInvariantSubgroupMinWrtQProperty"). 
-At present, there exist only methods for finite solvable groups <grp>.
+At present, there exist only methods for finite soluble groups <grp>.
 
 \beginexample
 gap> G := GL(2,3);
 GL(2,3)
-gap> normsWithSupersolvableFactorGroups :=
+gap> normsWithSupersolubleFactorGroups :=
 > AllInvariantSubgroupsWithQProperty(G, G, 
 >    function(U, V, R, data)
 >       return IsPrimeInt(Index(U, V));

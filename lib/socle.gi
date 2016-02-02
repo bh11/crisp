@@ -47,12 +47,12 @@ InstallMethod(PSocleComponentsOp,
 #M  PSocleComponentsOp(<G>, <p>) 
 ##
 InstallMethod(PSocleComponentsOp, 
-    "for finite group with SolvableSocleComponents", true, 
-    [IsGroup and IsFinite and HasSolvableSocleComponents, 
+    "for finite group with SolubleSocleComponents", true,
+    [IsGroup and IsFinite and HasSolubleSocleComponents,
         IsPosInt], 
     0,
     function( G, p ) 
-        return Filtered(SolvableSocleComponents(G), L -> PrimePGroup(L) = p);
+        return Filtered(SolubleSocleComponents(G), L -> PrimePGroup(L) = p);
     end);
 
 
@@ -244,9 +244,9 @@ InstallMethod(PSocleOp,
 
 ##############################################################################
 ##
-#M  SolvableSocleComponents(<G>) 
+#M  SolubleSocleComponents(<G>)
 ##
-InstallMethod(SolvableSocleComponents,
+InstallMethod(SolubleSocleComponents,
     "concatenate PSocleComponents",
     true,
     [IsGroup and IsFinite],
@@ -263,9 +263,9 @@ InstallMethod(SolvableSocleComponents,
 
 ##############################################################################
 ##
-#M  SolvableSocleComponents(<G>) 
+#M  SolubleSocleComponents(<G>)
 ##
-InstallMethod(SolvableSocleComponents,
+InstallMethod(SolubleSocleComponents,
     "handled by nice monomorphism",
     true,
     [IsGroup and IsHandledByNiceMonomorphism and IsFinite],
@@ -273,16 +273,16 @@ InstallMethod(SolvableSocleComponents,
     function( grp)
         local hom;
         hom := NiceMonomorphism(grp);
-        return List(SolvableSocleComponents(NiceObject(grp)),
+        return List(SolubleSocleComponents(NiceObject(grp)),
             L -> PreImagesSet(hom, L));
     end);
     
     
 #############################################################################
 ##
-#M  SolvableSocleComponents(<G>) 
+#M  SolubleSocleComponents(<G>)
 ##
-InstallMethod(SolvableSocleComponents,
+InstallMethod(SolubleSocleComponents,
     "via IsomorphismPcGroup",
     true,
     [IsGroup and IsSolvableGroup and IsFinite],
@@ -293,16 +293,16 @@ InstallMethod(SolvableSocleComponents,
             TryNextMethod();
         fi;
         hom := IsomorphismPcGroup(grp);
-        return List(SolvableSocleComponents(ImagesSource(hom)),
+        return List(SolubleSocleComponents(ImagesSource(hom)),
             L -> PreImagesSet(hom, L));
     end);
     
     
 #############################################################################
 ##
-#M  SolvableSocleComponents(<G>) 
+#M  SolubleSocleComponents(<G>)
 ##
-CRISP_RedispatchOnCondition(SolvableSocleComponents,
+CRISP_RedispatchOnCondition(SolubleSocleComponents,
     "redispatch if group is finite",
     true,
     [IsGroup], 
@@ -314,9 +314,9 @@ CRISP_RedispatchOnCondition(SolvableSocleComponents,
 #M  SocleComponents(<G>) 
 ##
 InstallMethod(SocleComponents, 
-    "for solvable group", true, 
+    "for soluble group", true,
     [IsGroup and IsSolvableGroup and IsFinite], 0,
-    SolvableSocleComponents);
+    SolubleSocleComponents);
     
     
 #############################################################################
@@ -335,7 +335,7 @@ CRISP_RedispatchOnCondition(SocleComponents,
 ##
 #M  SocleComponents(<G>) 
 ##
-InstallMethod(SolvableSocleComponents,
+InstallMethod(SolubleSocleComponents,
     "via IsomorphismPcGroup",
     true,
     [IsGroup and IsSolvableGroup and IsFinite],
@@ -370,10 +370,10 @@ InstallMethod(SocleComponents,
     
 #############################################################################
 ##
-#M  SolvableSocle(<G>) 
+#M  SolubleSocle(<G>)
 ##
-InstallMethod(SolvableSocle, 
-    "for solvable group, product of socle components", true,
+InstallMethod(SolubleSocle,
+    "for soluble group, product of socle components", true,
     [IsGroup and CanEasilyComputePcgs and IsFinite], 
     0,
     function( G )
@@ -406,9 +406,9 @@ InstallMethod(SolvableSocle,
 
 #############################################################################
 ##
-#M  SolvableSocle(<G>) 
+#M  SolubleSocle(<G>)
 ##
-InstallMethod(SolvableSocle, 
+InstallMethod(SolubleSocle,
     "for finite group, product of socle components", true,
     [IsGroup and IsFinite], 
     0,
@@ -417,7 +417,7 @@ InstallMethod(SolvableSocle,
         local S, L;
         
         S := TrivialSubgroup(G);
-        for L in SolvableSocleComponents(G) do
+        for L in SolubleSocleComponents(G) do
             S := ClosureGroup(S, L);
         od;
         Assert(1, IsAbelian(S));
@@ -429,23 +429,23 @@ InstallMethod(SolvableSocle,
 
 #############################################################################
 ##
-#M  SolvableSocle(<G>) 
+#M  SolubleSocle(<G>)
 ##
-InstallMethod(SolvableSocle,
+InstallMethod(SolubleSocle,
     "handled by nice monomorphism",
     true,
     [IsGroup and IsHandledByNiceMonomorphism and IsFinite],
     0,
     function( grp )
-        return PreImagesSet(NiceMonomorphism(grp), SolvableSocle(NiceObject(grp)));
+        return PreImagesSet(NiceMonomorphism(grp), SolubleSocle(NiceObject(grp)));
     end);
     
     
 #############################################################################
 ##
-#M  SolvableSocle(<G>) 
+#M  SolubleSocle(<G>)
 ##
-InstallMethod(SolvableSocle,
+InstallMethod(SolubleSocle,
     "via IsomorphismPcGroup",
     true,
     [IsGroup and IsSolvableGroup and IsFinite],
@@ -456,15 +456,15 @@ InstallMethod(SolvableSocle,
             TryNextMethod();
         fi;
         hom := IsomorphismPcGroup(grp);
-        return PreImagesSet(hom, SolvableSocle(ImagesSource(hom)));
+        return PreImagesSet(hom, SolubleSocle(ImagesSource(hom)));
     end);
     
     
 #############################################################################
 ##
-#M  SolvableSocle(<G>) 
+#M  SolubleSocle(<G>)
 ##
-CRISP_RedispatchOnCondition(SolvableSocle,
+CRISP_RedispatchOnCondition(SolubleSocle,
     "redispatch if group is finite",
     true,
     [IsGroup], 
@@ -475,10 +475,10 @@ CRISP_RedispatchOnCondition(SolvableSocle,
 ##
 #M  Socle(<G>) 
 ##
-InstallMethod(Socle, "for finite soluble group, via SolvableSocle", true,
+InstallMethod(Socle, "for finite soluble group, via SolubleSocle", true,
     [IsGroup and IsFinite and IsSolvableGroup],
     0,
-    SolvableSocle);
+    SolubleSocle);
     
     
 #############################################################################
@@ -606,7 +606,7 @@ CRISP_RedispatchOnCondition(AbelianMinimalNormalSubgroups,
 #M  MinimalNormalSubgroups(<G>) 
 ##
 InstallMethod(MinimalNormalSubgroups, 
-	"for solvable groups: use AbelianMinimalNormalSubgroups",
+	"for soluble groups: use AbelianMinimalNormalSubgroups",
 	true, [IsGroup and IsFinite and IsSolvableGroup], 0,
 	AbelianMinimalNormalSubgroups);
 

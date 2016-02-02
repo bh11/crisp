@@ -2,7 +2,7 @@
                           Version 1.4
 
 The GAP package CRISP provides algorithms for computing subgroups of
-finite solvable groups related to a group class C. In particular, it
+finite soluble groups related to a group class C. In particular, it
 allows to compute C-radicals and C-injectors for Fitting classes (and
 Fitting sets) C, C-residuals for formations C, and C-projectors for
 Schunck classes C. In order to carry out these computations, the group
@@ -14,7 +14,7 @@ invariant under a prescribed set of automorphisms and belonging to a given
 group class.
 
 This includes an improved method to compute the set of all normal subgroups 
-of a finite solvable group, its characteristic subgroups, and the socle and 
+of a finite soluble group, its characteristic subgroups, and the socle and 
 p-socles for given primes p.
 
 This version of CRISP requires at least GAP 4.5.

@@ -436,7 +436,7 @@ InstallGlobalFunction("PcgsInvariantComplementsOfElAbModuloPcgs",
 ##
 ##
 InstallMethod(ComplementsOfCentralSectionUnderActionNC,
-     "for section of solvable group",
+     "for section of soluble group",
     function(famact, famG, famN, famL, famall)
         return IsIdenticalObj(famG, famN) and IsIdenticalObj(famN, famL) ;
     end,
@@ -497,7 +497,7 @@ InstallGlobalFunction("ComplementsOfCentralSectionUnderAction",
 ##  induce automorphisms on G/L)
 ##
 InstallMethod(InvariantComplementsOfElAbSection,
-     "for section of finite solvable group",
+     "for section of finite soluble group",
     function(famact, famG, famN, famL, famall)
         return IsIdenticalObj(famG, famN) and IsIdenticalObj(famN, famL);
     end,
