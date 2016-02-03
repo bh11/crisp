@@ -2,9 +2,11 @@ manual.tex version number (major only)
 README   version number (major only), archive name 
 PackageInfo version  number, release date, ArchiveURL,
 index.html version number, archive name (2x), modified date
+Makefile version number
 
 open -a xcode doc/manual.tex 
 open -a xcode README 
 open -a xcode PackageInfo.g
 open -a xcode index.html
+open -a xcode Makefile
 

@@ -72,8 +72,8 @@ PackageWWWHome := "http://www.icm.tu-bs.de/~bhoeflin/crisp/index.html",
 PackageDoc := rec(
   BookName := "CRISP",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
-  ArchiveURLSubset := ["doc", "html"],
-  HTMLStart := "html/chapters.htm",
+  ArchiveURLSubset := ["doc", "htm"],
+  HTMLStart := "htm/chapters.htm",
   PDFFile := "doc/manual.pdf",
   # the path to the .six file used by GAP's help system
   SixFile := "doc/manual.six",
