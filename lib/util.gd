@@ -8,7 +8,7 @@
 
 #############################################################################
 ##
-#A  CRISP_RedispatchOnCondition
+#F  CRISP_RedispatchOnCondition
 ##
 ##  use six argument version of RedispatchOnCondition if it's available,
 ##  otherwise just pass five of the six arguments
@@ -217,6 +217,14 @@ BindGlobal( "InstallMethodByIsomorphismPcGroupForGroupAndClassReturningBool",
             return oper(ImagesSource(IsomorphismPcGroup(grp)), class);
         end);
     end);
+
+#############################################################################
+##
+#A  CRISP_SmallGeneratingSet
+##
+##  version of SmallGeneratingSet which does not try very hard
+##
+DeclareAttribute("CRISP_SmallGeneratingSet", IsGroup);
 
 
 #############################################################################
