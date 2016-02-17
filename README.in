@@ -1,5 +1,6 @@
                        The CRISP package
-                          Version 1.4
+                         Version CRISP_VERSION
+                           CRISP_DATE
 
 The GAP package CRISP provides algorithms for computing subgroups of
 finite soluble groups related to a group class C. In particular, it
@@ -21,7 +22,7 @@ This version of CRISP requires at least GAP 4.5.
 
 In order to install CRISP, you have to get the current package archive file 
 
-`crisp-1r4n1.tar.bz2',
+'crisp-CRISP_VERSION.tar.bz2',
 
 or any other package format suitable for your system.
 
@@ -30,15 +31,15 @@ www.gap-system.org.
 
 To install CRISP, move the downloaded package archive file into the 
 `pkg' directory in which you plan to install CRISP. Usually, this will be 
-the directory `pkg' in the GAP directory. 
+the directory 'pkg' in the GAP directory.
 
-If you already have a previous version of CRISP, that is, there is a 
-directory `crisp' in the `pkg' directory, delete (or rename) this 
-directory first.
+Then decompress the package archive. You should now have a directory
+'crisp-CRISP_VERSION' in the 'pkg' directory. That's all. By default,
+CRISP is automatically loaded when you start GAP, and should be listed
+among the loaded packages.
 
-Then decompress the package archive. You should now have a directory `crisp'
-in the `pkg' directory. That's all. By default, CRISP is automatically loaded 
-when you start GAP, and should be listed among the loaded packages.
+If you already have a previous version of CRISP, you can delete that
+directory.
 
 To load the CRISP package manually, type
 
@@ -49,7 +50,7 @@ at the GAP prompt. If everything is ok, this should return `true'.
 Please do not hesitate to report any bugs or other problems/suggestions 
 to the author:
 
-Burkhard Hšofling
+Burkhard HÃ¶fling
 WWW:    http://www.icm.tu-bs.de/~bhoeflin
 e-mail: b.hoefling@tu-bs.de
 

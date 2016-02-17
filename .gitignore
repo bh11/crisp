@@ -13,6 +13,10 @@ doc/manual.aux
 doc/manual.toc
 doc/manual.six
 doc/manual.lab
+doc/manual.tex
+PackageInfo.g
+README
+index.html
 private
 *tar.bz2
 htm

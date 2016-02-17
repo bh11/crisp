@@ -11,9 +11,9 @@ SetPackageInfo( rec(
 
 PackageName := "CRISP",
 Subtitle := "Computing with Radicals, Injectors, Schunck classes and Projectors",
-Version := "1.4.1",
+Version := "CRISP_VERSION",
 
-Date := "21/12/2015",
+Date := "CRISP_DATE",
 
 BannerString := Concatenation ("\
 ----------------------------------------------------------------------\n\
@@ -22,7 +22,7 @@ BannerString := Concatenation ("\
                          by Burkhard Höfling\n\
 ----------------------------------------------------------------------\n"),
 
-ArchiveURL := "http://www.icm.tu-bs.de/~bhoeflin/crisp/crisp-1r4n1",
+ArchiveURL := "http://www.icm.tu-bs.de/~bhoeflin/crisp/crisp-CRISP_VERSION",
 
 ArchiveFormats := ".tar.bz2", # the others are generated automatically
 BinaryFiles := ["doc/manual.pdf"],

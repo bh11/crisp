@@ -28,7 +28,7 @@ of finite soluble groups
 <DT>Author:
 
 <DD>    <a href="http://www.icm.tu-bs.de/~bhoeflin/">Burkhard H&ouml;fling</A>,
-e-mail: firstinitial.lastname@tu-bs.de replacing &Ouml; by oe
+e-mail: firstinitial.lastname@tu-bs.de replacing &ouml; by oe
 <BR>
 <DT>Language:
 
@@ -39,12 +39,12 @@ e-mail: firstinitial.lastname@tu-bs.de replacing &Ouml; by oe
  <DD>    any <BR>
 
 <DT>Current version:
- <DD>    1.4.1
+ <DD>    CRISP_VERSION
 
 <DT>Download:
 
- <DD>    <A href="crisp-1r4n1.tar.bz2">crisp-1r4n1.tar.bz2</a> in .tar.bz2 format
-     Other formats available from <a href="http://www.gap-system.org/Packages/crisp.html">the CRISP page on the GAP server.</a></EM>
+ <DD>    <A href="crisp-CRISP_VERSION.tar.bz2">crisp-CRISP_VERSION.tar.bz2</a> in .tar.bz2 format <BR>
+     Other formats available from <a href="http://www.gap-system.org/Packages/crisp.html">the CRISP page on the main GAP server.</a></EM>
 
 <DT>Home page:
 
@@ -87,7 +87,7 @@ of a finite soluble group, its characteristic subgroups, and the socle and
 
 <ADDRESS>
 Author: Burkhard H&ouml;fling<BR>
-Last modified: 2015-12-21
+Last modified: CRISP_DATE
 </ADDRESS>
 
 </BODY>

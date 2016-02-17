@@ -1,6 +1,7 @@
 SHELL=/bin/bash
-HTMLDIR="html"
-VERSION=dev
+VERSION=
+DATE=$(shell echo `date "+%d/%m/%Y"`)
+
 libfiles=classes.gd classes.gi compl.gd compl.gi \
 	   fitting.gd fitting.gi form.gd form.gi grpclass.gd grpclass.gi \
 	   injector.gd injector.gi normpro.gd normpro.gi \
@@ -25,6 +26,15 @@ tarfile=crisp/crisp-$(VERSION).tar
 
 taropts=-s /crisp/crisp-$(VERSION)/ -f
 
+default: versions manual tar
+
+versions:
+	( \
+        for file in README index.html PackageInfo.g doc/manual.tex; \
+            do sed -e "s/CRISP_VERSION/$(VERSION)/g" -e "s-CRISP_DATE-$(DATE)-" $$file.in > $$file; \
+        done \
+	)
+
 manual.pdf:
 	( \
 			cd doc; \
@@ -46,7 +56,7 @@ manual.html:
 
 manual: manual.pdf manual.html
 
-tar: manual
+tar:
 	( \
 		if [ "$(tarfile)" = "crisp/crisp-.tar" ]; then\
 		   echo "Version number expected"; \

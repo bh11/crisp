@@ -30,7 +30,7 @@
     \centerline{}
     \centerline{\inchhigh CRISP}
     \baselineskip 36 pt
-    \centerline{\subtitlefont Version 1.4}
+    \centerline{\subtitlefont Version CRISP_VERSION}
     \centerline{}
     \centerline{}
    \centerline{\subtitlefont Computing with Radicals, Injectors}
