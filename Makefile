@@ -1,7 +1,13 @@
 SHELL=/bin/bash
-VERSION=1.dev
+VERSION=dev
 DATE=$(shell echo `date "+%d/%m/%Y"`)
 GAPROOT=../..
+
+ifeq ("$(shell tmp=$(GAPROOT); echo $${tmp:0:1})", "/")
+	TEXROOT="$(GAPROOT)"
+else 
+	TEXROOT="../$(GAPROOT)"
+endif 
 
 libfiles=classes.gd classes.gi compl.gd compl.gi \
 	   fitting.gd fitting.gi form.gd form.gi grpclass.gd grpclass.gi \
@@ -27,69 +33,67 @@ tarfile=crisp/crisp-$(VERSION).tar
 
 taropts=-s /crisp/crisp-$(VERSION)/ -f
 
-default: versions manual
+default: version manual
 
-release: versions manual tar
+dist: testver version manual tar
 
-versions:
-	( \
-        for file in README index.html PackageInfo.g doc/manual.tex; \
-            do sed -e "s/CRISP_VERSION/$(VERSION)/g" -e "s-CRISP_DATE-$(DATE)-" $$file.in > $$file; \
-        done \
-	)
+testver:
+	if [ "$(tarfile)" == "crisp/crisp-dev.tar" ]; \
+		then echo "Please define VERSION in make call"; \
+        exit 1; \
+	fi
+
+version: 
+	for file in README index.html PackageInfo.g doc/manual.tex; \
+	do sed -e "s/CRISP_VERSION/$(VERSION)/g" \
+		-e "s-CRISP_DATE-$(DATE)-" \
+		-e "s-GAPROOT-$(TEXROOT)-" \
+		$$file.in \
+		> $$file; \
+        done 
 
 manual.pdf:
-	( \
-			cd doc; \
-			pdftex manual; \
-			makeindex -s manual.ist manual; \
-			pdftex manual; \
-			pdftex manual \
-	)
+	cd doc; \
+	pdftex manual; \
+	makeindex -s manual.ist manual; \
+	pdftex manual; \
+	pdftex manual 
 
 manual.html:
-	( \
-			rm -f htm/*.htm; \
-			mkdir -p htm; \
-			perl $(GAPROOT)/etc/convert.pl -n CRISP -c -i doc htm; \
-			chmod -R a+r htm \
-	)
+	mkdir -p htm; \
+	rm -f htm/CHAP00?.htm; \
+	perl $(GAPROOT)/etc/convert.pl -n CRISP -c -i doc htm; \
+	chmod -R a+r htm
 
 manual: manual.pdf manual.html
 
-tar:
-	( \
-		if [ "$(tarfile)" = "crisp/crisp-.tar" ]; then\
-		   echo "Version number expected"; \
-		   exit; \
-		fi; \
-		export COPY_EXTENDED_ATTRIBUTES_DISABLE=1; \
-		export COPYFILE_DISABLE=1; \
-		cd ../; \
-		rm -f $(tarfile); \
-		rm -f $(tarfile).bz2; \
-		chmod -R a+rX irredsol; \
-		tar -c $(taropts) $(tarfile) crisp/PackageInfo.g; \
-		tar -r $(taropts) $(tarfile) crisp/init.g; \
-		tar -r $(taropts) $(tarfile) crisp/read.g; \
-		for file in $(libfiles); \
-		   do tar -r $(taropts) $(tarfile) crisp/lib/$$file; \
-		done; \
-		for file in $(docfiles); \
-		   do tar -r $(taropts) $(tarfile) crisp/doc/$$file; \
-		done; \
-		for ext in $(manexts); \
-		   do tar -r $(taropts) $(tarfile) crisp/doc/manual$$ext; \
-		done; \
-		for file in $(testfiles); \
-		   do tar -r $(taropts) $(tarfile) crisp/tst/$$file; \
-		done; \
-		for file in crisp/htm/*.htm; \
-		   do tar -r $(taropts) $(tarfile) $$file; \
-		done; \
-		tar -r $(taropts) $(tarfile) crisp/README; \
-		tar -r $(taropts) $(tarfile) crisp/LICENSE; \
-		bzip2 $(tarfile) \
-	)
+tar: version
+	export COPY_EXTENDED_ATTRIBUTES_DISABLE=1; \
+	export COPYFILE_DISABLE=1; \
+	cd ../; \
+	rm -f $(tarfile); \
+	rm -f $(tarfile).bz2; \
+	chmod -R a+rX irredsol; \
+	tar -c $(taropts) $(tarfile) crisp/PackageInfo.g; \
+	tar -r $(taropts) $(tarfile) crisp/init.g; \
+	tar -r $(taropts) $(tarfile) crisp/read.g; \
+	for file in $(libfiles); \
+		do tar -r $(taropts) $(tarfile) crisp/lib/$$file; \
+	done; \
+	for file in $(docfiles); \
+		do tar -r $(taropts) $(tarfile) crisp/doc/$$file; \
+	done; \
+	for ext in $(manexts); \
+		do tar -r $(taropts) $(tarfile) crisp/doc/manual$$ext; \
+	done; \
+	for file in $(testfiles); \
+		do tar -r $(taropts) $(tarfile) crisp/tst/$$file; \
+	done; \
+	for file in crisp/htm/*.htm; \
+		do tar -r $(taropts) $(tarfile) $$file; \
+	done; \
+	tar -r $(taropts) $(tarfile) crisp/README; \
+	tar -r $(taropts) $(tarfile) crisp/LICENSE; \
+	bzip2 $(tarfile) 
 
 

@@ -9,7 +9,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input ../../../doc/gapmacro.tex
+\input GAPROOT/doc/gapmacro.tex
 % \casesensitivetrue
 \citebookstrue
 \biblitemtrue
@@ -22,7 +22,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \BeginningOfBook{crisp}
-  \UseReferences{../../../doc/ref}
+  \UseReferences{GAPROOT/doc/ref}
   \TitlePage{\unskip{
     \vfill
     \centerline{\subtitlefont Burkhard H{\accent 127 o}fling}
