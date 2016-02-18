@@ -1,6 +1,7 @@
 SHELL=/bin/bash
-VERSION=
+VERSION=1.dev
 DATE=$(shell echo `date "+%d/%m/%Y"`)
+GAPROOT=../..
 
 libfiles=classes.gd classes.gi compl.gd compl.gi \
 	   fitting.gd fitting.gi form.gd form.gi grpclass.gd grpclass.gi \
@@ -26,7 +27,9 @@ tarfile=crisp/crisp-$(VERSION).tar
 
 taropts=-s /crisp/crisp-$(VERSION)/ -f
 
-default: versions manual tar
+default: versions manual
+
+release: versions manual tar
 
 versions:
 	( \
@@ -46,11 +49,9 @@ manual.pdf:
 
 manual.html:
 	( \
-			rm htm/CHAP???.htm; \
-			rm htm/biblio.htm; \
-			rm htm/theindex.htm; \
-			rm htm/chapters.htm; \
-			perl ../../etc/convert.pl -n CRISP -c -i doc htm; \
+			rm -f htm/*.htm; \
+			mkdir -p htm; \
+			perl $(GAPROOT)/etc/convert.pl -n CRISP -c -i doc htm; \
 			chmod -R a+r htm \
 	)
 
