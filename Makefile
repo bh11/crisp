@@ -44,12 +44,16 @@ testver:
 	fi
 
 version: 
-	for file in README index.html PackageInfo.g doc/manual.tex; \
-	do sed -e "s/CRISP_VERSION/$(VERSION)/g" \
-		-e "s-CRISP_DATE-$(DATE)-" \
-		-e "s-GAPROOT-$(TEXROOT)-" \
-		$$file.in \
-		> $$file; \
+	for file in README.in index.in.html PackageInfo.in.g doc/manual.in.tex; \
+	do \
+		outfile=$${file%.in*}$${file#*.in}; \
+		rm -f $$outfile; \
+		sed -e "s/CRISP_VERSION/$(VERSION)/g" \
+			-e "s-CRISP_DATE-$(DATE)-" \
+			-e "s-GAPROOT-$(TEXROOT)-" \
+			$$file \
+			> $$outfile; \
+		chmod a-w $$outfile; \
         done 
 
 manual.pdf:
