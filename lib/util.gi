@@ -527,8 +527,8 @@ InstallMethod(PcgsElementaryAbelianSeries, "for pc group with parent group", tru
 ##
 #M  PcgsElementaryAbelianSeries
 ##
-InstallMethod(PcgsElementaryAbelianSeries, "generic method", true,
-    [IsGroup], 0, 
+InstallMethod(PcgsElementaryAbelianSeries, "finite group", true,
+    [IsGroup and IsFinite], 0,
     function(G) 
         if not IsSolvableGroup(G) then
             Error("The group <G> must be soluble");
