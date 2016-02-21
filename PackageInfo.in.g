@@ -98,7 +98,6 @@ Dependencies := rec(
   ExternalConditions := []
                       
 ),
-
 AvailabilityTest := ReturnTrue,
 
 Autoload := true,
@@ -107,7 +106,12 @@ TestFile := "tst/test.tst",
 
 Keywords := ["radical", "residual", "projector", "injector",
    "formation", "Fitting class", "Fitting set", "Schunck class",
-   "group class", "normal subgropus", "minimal normal subgropus", "socle"]
+   "group class", "normal subgropus", "minimal normal subgropus", "socle"],
+
+SourceRepository := rec(Type := "git",
+                        URL := "https://github.com/bh11/crisp.git"),
+
+IssueTrackerURL := "https://github.com/bh11/crisp/issues"
 
 ));
 
