@@ -8,7 +8,7 @@ NormalSubgroupsSolvableOld := G -> SubgroupsSolvableGroup(G,rec(
         actions:=List(GeneratorsOfGroup(G),i->InnerAutomorphism(G,i)),
         normal:=true));
 
-LoadPackage("crisp");
+LoadPackage("crisp", "", false);
 CRISP_Read("tst/timing_test.g");
 CRISP_Read("tst/timing_samples.g");
 

@@ -4,7 +4,7 @@
 ##
 ##  Copyright © 2000 Burkhard Höfling
 ##
-LoadPackage("crisp");
+LoadPackage("crisp", "", false);
 CRISP_Read("tst/timing_test.g");
 CRISP_Read("tst/timing_samples.g");
 

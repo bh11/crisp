@@ -4,7 +4,9 @@
 ##
 ##  Copyright © 2000, 2015 by Burkhard Höfling
 ##
-LoadPackage("crisp");
+LogTo("test.log");
+START_TEST("crisp");
+LoadPackage("crisp", "", false);
 CRISP_Read("tst/samples.g");
 
 if PRINT_METHODS then
@@ -87,6 +89,7 @@ if PRINT_METHODS then
     UnTraceMethods(PSocleComponentsOp);
     UnTraceMethods(PSocleSeriesOp);
 fi;
+STOP_TEST("crisp", 0);
 
 
 ############################################################################

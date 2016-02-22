@@ -4,7 +4,9 @@
 ##
 ##  Copyright © 2000 Burkhard Höfling
 ##
-LoadPackage("crisp");
+LogTo("test.log");
+START_TEST("normals");
+LoadPackage("crisp", "", false);
 CRISP_Read("tst/samples.g");
 
 if PRINT_METHODS then
@@ -131,6 +133,7 @@ if PRINT_METHODS then
    UnTraceMethods(OneInvariantSubgroupMaxWrtNProperty);
    UnTraceMethods(OneInvariantSubgroupMinWrtQProperty);
 fi;
+STOP_TEST("normals", 0);
 
 
 ############################################################################

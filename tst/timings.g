@@ -4,7 +4,7 @@
 ##
 ##  Copyright © 2000, 2011 Burkhard Höfling
 ##
-LoadPackage("crisp");
+LoadPackage("crisp", "", false);
 
 FAST_TEST := true;
 TIMEOUT := 10^7;

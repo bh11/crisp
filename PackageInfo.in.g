@@ -102,7 +102,7 @@ AvailabilityTest := ReturnTrue,
 
 Autoload := true,
 
-TestFile := "tst/test.tst",
+TestFile := "tst/testall.g",
 
 Keywords := ["radical", "residual", "projector", "injector",
    "formation", "Fitting class", "Fitting set", "Schunck class",

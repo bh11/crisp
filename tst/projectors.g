@@ -4,7 +4,9 @@
 ##
 ##  Copyright © 2000 Burkhard Höfling
 ##
-LoadPackage("crisp");
+LogTo("test.log");
+START_TEST("projectors");
+LoadPackage("crisp", "", false);
 CRISP_Read("tst/samples.g");
 
 
@@ -63,6 +65,7 @@ od;
 if PRINT_METHODS then
     UnTraceMethods(ProjectorOp);
 fi;
+STOP_TEST("projectors", 0);
 
 
 ############################################################################

@@ -4,7 +4,9 @@
 ##
 ##  Copyright © 2000 Burkhard Höfling
 ##
-LoadPackage("crisp");
+LogTo("test.log");
+START_TEST("injectors");
+LoadPackage("crisp", "", false);
 CRISP_Read("tst/samples.g");
 
 if PRINT_METHODS then
@@ -77,6 +79,8 @@ od;
 if PRINT_METHODS then
     UnTraceMethods(IsMemberOp);
 fi;
+STOP_TEST("injectors", 0);
+
 
 ############################################################################
 ##

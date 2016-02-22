@@ -2,8 +2,16 @@
 ##
 ##  samples.g                         CRISP                 Burkhard Höfling
 ##
-##  Copyright © 2000 Burkhard Höfling
+##  Copyright © 2000, 2016 Burkhard Höfling
 ##
+if not IsBound(InfoTest) then
+    DeclareInfoClass("InfoTest");
+fi;
+SetInfoLevel(InfoTest,3);
+if not IsBound(PRINT_METHODS) then
+    PRINT_METHODS := false;
+fi;
+
 groups:= [
     function(  )
         local G;
@@ -84,9 +92,6 @@ insolvgroups:= [ function(  )
   
 25grps := PiGroups([2,5]);
 
-if not IsBound(InfoTest) then
-   DeclareInfoClass("InfoTest");
-fi;
 
 classes := function()
     local cl, C;

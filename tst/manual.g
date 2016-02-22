@@ -1,10 +1,12 @@
 ############################################################################
 ##
-##  manual.g                        CRISP                  BBurkhard Höfling
+##  manual.g                        CRISP                   åœBurkhard Höfling
 ##
 ##  Copyright © 2000 Burkhard Höfling
 ##
-LoadPackage("crisp");
+LogTo("test.log");
+START_TEST("manual");
+LoadPackage("crisp", "", false);
 
 if not IsBound(Test) then
     Test := ReadTest;
@@ -15,6 +17,8 @@ for ch in [2,3,4,5,7] do
     Print("Testing examples in chapter ", ch, ":\n");
     Test(Filename(dir, Concatenation("manual.example-", String(ch),".tst")), rec(compareFunction := "uptowhitespace"));
 od;
+STOP_TEST("manual", 0);
+
 
 ############################################################################
 ##

@@ -4,7 +4,9 @@
 ##
 ##  Copyright © 2000 Burkhard Höfling
 ##
-LoadPackage("crisp");
+LogTo("test.log");
+START_TEST("radicals");
+LoadPackage("crisp", "", false);
 CRISP_Read("tst/samples.g");
 
 if PRINT_METHODS then
@@ -59,6 +61,7 @@ od;
 if PRINT_METHODS then
     UnTraceMethods(RadicalOp);
 fi;
+STOP_TEST("radicals", 0);
 
 
 ############################################################################

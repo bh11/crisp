@@ -4,7 +4,7 @@
 ##
 ##  Copyright © 2000 Burkhard Höfling
 ##
-LoadPackage("format");
+LoadPackage("format", "", false);
 
 groups := [
     ["format","grp/g93.gi", "g93", "31:3"],

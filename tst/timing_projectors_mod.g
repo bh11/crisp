@@ -4,7 +4,7 @@
 ##
 ##  Copyright © 2000 Burkhard Höfling
 ##
-LoadPackage("crisp");
+LoadPackage("crisp", "", false);
 
 MakeReadWriteGlobal("BFUNC_FROM_TEST_FUNC");
 BFUNC_FROM_TEST_FUNC := BFUNC_FROM_TEST_FUNC_MOD;

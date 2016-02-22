@@ -4,7 +4,9 @@
 ##
 ##  Copyright © 2000 Burkhard Höfling
 ##
-LoadPackage("crisp");
+LogTo("test.log");
+START_TEST("classes");
+LoadPackage("crisp", "", false);
 
 25grps := PiGroups([2,5]);
 abab := Intersection(AbelianGroups, AbelianGroups);
@@ -56,6 +58,7 @@ CyclicGroup(2) in C;
 if not ContainsTrivialGroup(C) then
     Error("ContainsTrivialGroup should be true");
 fi;
+STOP_TEST("classes", 0);
 
 
 ############################################################################

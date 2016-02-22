@@ -4,7 +4,9 @@
 ##
 ##  Copyright © 2000 Burkhard Höfling
 ##
-LoadPackage("crisp");
+LogTo("test.log");
+START_TEST("basis");
+LoadPackage("crisp", "", false);
 CRISP_Read("tst/samples.g");
 
 
@@ -69,6 +71,7 @@ od;
 if PRINT_METHODS then
     UnTraceMethods(Basis);
 fi;
+STOP_TEST("basis", 0);
 
 
 ############################################################################
