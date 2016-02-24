@@ -71,7 +71,7 @@ manual.pdf:
 manual.html:
 	mkdir -p htm; \
 	rm -f htm/CHAP00?.htm; \
-	perl $(GAPROOT)/etc/convert.pl -n CRISP -c -i doc htm; \
+	perl $(GAPROOT)/etc/convert.pl -n CRISP -c -i -t doc htm; \
 	chmod -R a+r htm
 
 manual: manual.pdf manual.html
