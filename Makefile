@@ -22,7 +22,7 @@ libfiles=classes.gd classes.gi compl.gd compl.gi \
 docfiles=manual.tex copyright.tex classes.tex examples.tex fitting.tex \
 	   grpclass.tex intro.tex normal.tex schunck.tex
 	
-manexts=.bbl .ind .idx .six .pdf .ist .toc \
+manexts=.bbl .ind .idx .six .pdf .mst .toc \
 	   .example-2.tst .example-3.tst .example-4.tst .example-5.tst .example-7.tst
 
 testsrc=basis boundary char classes in injectors normals print \
@@ -33,6 +33,9 @@ testfiles= Readme-Tests.txt testall.g samples.g \
 	timing_radicals.g timing_residuals.g timing_samples.g timing_socle.g \
 	timing_test.g
 	# plus all files tst/*.tst
+
+version_in=README.in index.in.html PackageInfo.in.g doc/manual.in.tex
+
 
 tarfile=crisp/crisp-$(VERSION).tar
 
@@ -49,7 +52,7 @@ testver:
 	fi
 
 version: 
-	for file in README.in index.in.html PackageInfo.in.g doc/manual.in.tex; \
+	for file in $(version_in); \
 	do \
 		outfile=$${file%.in*}$${file#*.in}; \
 		rm -f $$outfile; \
@@ -64,7 +67,7 @@ version:
 manual.pdf:
 	cd doc; \
 	pdftex manual; \
-	makeindex -s manual.ist manual; \
+	makeindex -s manual.mst manual; \
 	pdftex manual; \
 	pdftex manual 
 
@@ -83,6 +86,11 @@ tar: version
 	rm -f $(tarfile); \
 	rm -f $(tarfile).bz2; \
 	chmod -R a+rX irredsol; \
+	for file in $(version_in); \
+	do \
+		outfile=$${file%.in*}$${file#*.in}; \
+		chmod +w crisp/$$outfile; \
+	done; \
 	tar -c $(taropts) $(tarfile) crisp/PackageInfo.g; \
 	tar -r $(taropts) $(tarfile) crisp/init.g; \
 	tar -r $(taropts) $(tarfile) crisp/read.g; \
@@ -106,11 +114,17 @@ tar: version
 	done; \
 	tar -r $(taropts) $(tarfile) crisp/README; \
 	tar -r $(taropts) $(tarfile) crisp/LICENSE; \
-	bzip2 $(tarfile) 
+	bzip2 $(tarfile); \
+	for file in $(version_in); \
+	do \
+		outfile=$${file%.in*}$${file#*.in}; \
+		chmod -w crisp/$$outfile; \
+	done; 
 
 testfiles:   
 	for file in $(testsrc); \
-		do gap $(TESTOPTS) < tst/$$file.g; \
+	do \
+		gap $(TESTOPTS) < tst/$$file.g; \
 		mv -f test.log tst/$$file.tst; \
 	done;
 
