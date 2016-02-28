@@ -305,8 +305,8 @@ InstallMethod(Complement, "for a class complement", true,
 ##
 #M  Complement(<list>)
 ##
-InstallMethod(Complement, "for a list/collection", true, [IsListOrCollection], 0, 
-    function(list) 
+InstallMethod(Complement, "for a list/collection", true, [IsListOrCollection], 0,
+    function(list)
         return NewClass("class complement fam", IsClassByComplementRep,
             rec(complement := list));
     end);
@@ -504,21 +504,6 @@ InstallMethod(Intersection2, "of small list/coll and class" , true,
 
 #############################################################################
 ##
-#M  Intersection2(<list>, <class>)
-##
-InstallMethod(Intersection2, "of small list and class/list/coll", true, 
-    [IsList and IsFinite, IsListOrCollection], 0, 
-    function(C, D)
-        if Length(C) < INTERSECTION_LIMIT then
-            return Filtered(C, x -> x in D);
-        else
-            TryNextMethod();
-        fi;
-    end);
-
-
-#############################################################################
-##
 #M  Intersection2(<class>, <coll>)
 ##
 InstallMethod(Intersection2, "of class and small list/coll", true, 
@@ -549,6 +534,21 @@ InstallMethod(Intersection2, "of class and small list", true,
 
 #############################################################################
 ##
+#M  Intersection2(<obj>, <list>)
+##
+InstallMethod(Intersection2, "of small list and class", true,
+    [IsList and IsFinite, IsClass], 0,
+    function(D, C)
+        if Length(D) < INTERSECTION_LIMIT then
+            return Filtered(D, x -> x in C);
+        else
+            TryNextMethod();
+        fi;
+    end);
+
+
+#############################################################################
+##
 #M  Intersection2(<class1>, <class2>)
 ##
 InstallMethod(Intersection2, "of two classes", true, 
@@ -561,10 +561,10 @@ InstallMethod(Intersection2, "of two classes", true,
 
 #############################################################################
 ##
-#M  Intersection2(<list/coll>, <ist/coll>)
+#M  Intersection2(<obj>, <class>)
 ##
-InstallMethod(Intersection2, "of list/collection and list/collection", true, 
-    [IsListOrCollection, IsListOrCollection], 0, 
+InstallMethod(Intersection2, "of list/collection and class", true, 
+    [IsListOrCollection, IsClass], 0, 
     function(C, D)
         return NewClass("class intersection fam", IsClassByIntersectionRep,
             rec(intersected := [C,D]));
@@ -575,8 +575,8 @@ InstallMethod(Intersection2, "of list/collection and list/collection", true,
 ##
 #M  Intersection2(<obj>, <class>)
 ##
-InstallMethod(Intersection2, "of list/collection and class", true, 
-    [IsListOrCollection, IsClass], 0, 
+InstallMethod(Intersection2, "of class and list/collection", true,
+    [IsClass, IsListOrCollection], 0,
     function(C, D)
         return NewClass("class intersection fam", IsClassByIntersectionRep,
             rec(intersected := [C,D]));
@@ -686,12 +686,24 @@ InstallMethod(Union2, "for class union and class/list/collection", true,
     end);
 
 
+############################################################################
+##
+#M  Union2(<obj>, <class>)
+##
+InstallMethod(Union2, "for class/list/collection and class", true,
+    [IsListOrCollection, IsClass], 0,
+    function(C, D)
+        return NewClass("class union fam", IsClassByUnionRep,
+            rec(united := [C,D]));
+    end);
+
+
 #############################################################################
 ##
-#M  Union2(<obj1>, <obj2>)
+#M  Union2(<class>, <obj>)
 ##
-InstallMethod(Union2, "for two classes/lists/collections", true, 
-    [IsListOrCollection, IsListOrCollection], 0, 
+InstallMethod(Union2, "for class and class/list/collection", true,
+    [IsClass, IsListOrCollection], 0,
     function(C, D)
         return NewClass("class union fam", IsClassByUnionRep,
             rec(united := [C,D]));
@@ -702,8 +714,19 @@ InstallMethod(Union2, "for two classes/lists/collections", true,
 ##
 #M  Difference(<obj1>, <obj2>)
 ##
-InstallMethod(Difference, "for two classes/lists/collections", true, 
-    [IsListOrCollection, IsListOrCollection], 0, 
+InstallMethod(Difference, "for class/list/collection and class", true,
+    [IsListOrCollection, IsClass], 0,
+    function(C, D)
+        return Intersection2(C, Complement(D));
+    end);
+
+
+#############################################################################
+##
+#M  Difference(<obj1>, <obj2>)
+##
+InstallMethod(Difference, "for class and class/list/collection", true,
+    [IsClass, IsListOrCollection], 0,
     function(C, D)
         return Intersection2(C, Complement(D));
     end);
