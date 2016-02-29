@@ -47,8 +47,12 @@ To load the CRISP package manually, type
 
 at the GAP prompt. If everything is ok, this should return `true'.
 
-Please do not hesitate to report any bugs or other problems/suggestions 
-to the author:
+The development version of CRISP is available via GitHub, at
+https://github.com/bh11/crisp.git.
+
+Please do not hesitate to report any bugs or other problems/suggestions
+via the GitHub issue tracker at https://github.com/bh11/crisp/issues">
+or by e-mail to the author.
 
 Burkhard Höfling
 WWW:    http://www.icm.tu-bs.de/~bhoeflin
