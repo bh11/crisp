@@ -84,11 +84,17 @@ insolvgroups:= [ function(  )
         return GL(2,5);
     end,
     function(  )
-    	return WreathProduct(CyclicGroup(IsPermGroup, 5), SymmetricGroup(5));
+    	local G;
+        G := WreathProduct(CyclicGroup(IsPermGroup, 5), SymmetricGroup(5));
+        SetName(G, "C5 wr S5");
+        return G;
     end,
     function( )
-        return AutomorphismGroup(AbelianGroup([5,5]));
-    end]; 
+        local G;
+        G := AutomorphismGroup(AbelianGroup([5,5]));
+        SetName(G, "Aut(C5xC5)");
+        return G;
+    end];
   
 25grps := PiGroups([2,5]);
 
