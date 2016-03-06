@@ -26,7 +26,7 @@ gap> for G in groups do
 >         elif old <> new then
 >             Error("different results");
 >         fi;
->         for j in [i..Length(cl)] do
+>         for j in [i+1..Length(cl)] do
 >             I := Intersection(cl[i], cl[j]);
 >             if InfoLevel(InfoTest) >= 3 then
 >                 View(I);
@@ -57,7 +57,6 @@ gap> for G in groups do
 > od;
 #I  trivial pc group
 [2,5]-grps by boundary
-Intersection([ [2,5]-grps by boundary, [2,5]-grps by boundary ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by locdef ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by res ])
@@ -65,32 +64,26 @@ Intersection([ [2,5]-grps by boundary, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by proj ])
 [2,5]-grps by locdef
-Intersection([ [2,5]-grps by locdef, [2,5]-grps by locdef ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by proj ])
 [2,5]-grps by membersip
-Intersection([ [2,5]-grps by membersip, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by proj ])
 [2,5]-grps by res
-Intersection([ [2,5]-grps by res, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by proj ])
 [2,5]-grps by rad
-Intersection([ [2,5]-grps by rad, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by rad, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by rad, [2,5]-grps by proj ])
 [2,5]-grps by inj
-Intersection([ [2,5]-grps by inj, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by inj, [2,5]-grps by proj ])
 [2,5]-grps by proj
-Intersection([ [2,5]-grps by proj, [2,5]-grps by proj ])
 [2,5]-grps by boundary"by"[2,5]-grps by boundary
 [2,5]-grps by boundary"by"[2,5]-grps by locdef
 [2,5]-grps by boundary"by"[2,5]-grps by membersip
@@ -142,7 +135,6 @@ Intersection([ [2,5]-grps by proj, [2,5]-grps by proj ])
 [2,5]-grps by proj"by"[2,5]-grps by proj
 #I  trivial perm group
 [2,5]-grps by boundary
-Intersection([ [2,5]-grps by boundary, [2,5]-grps by boundary ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by locdef ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by res ])
@@ -150,32 +142,26 @@ Intersection([ [2,5]-grps by boundary, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by proj ])
 [2,5]-grps by locdef
-Intersection([ [2,5]-grps by locdef, [2,5]-grps by locdef ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by proj ])
 [2,5]-grps by membersip
-Intersection([ [2,5]-grps by membersip, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by proj ])
 [2,5]-grps by res
-Intersection([ [2,5]-grps by res, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by proj ])
 [2,5]-grps by rad
-Intersection([ [2,5]-grps by rad, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by rad, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by rad, [2,5]-grps by proj ])
 [2,5]-grps by inj
-Intersection([ [2,5]-grps by inj, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by inj, [2,5]-grps by proj ])
 [2,5]-grps by proj
-Intersection([ [2,5]-grps by proj, [2,5]-grps by proj ])
 [2,5]-grps by boundary"by"[2,5]-grps by boundary
 [2,5]-grps by boundary"by"[2,5]-grps by locdef
 [2,5]-grps by boundary"by"[2,5]-grps by membersip
@@ -227,7 +213,6 @@ Intersection([ [2,5]-grps by proj, [2,5]-grps by proj ])
 [2,5]-grps by proj"by"[2,5]-grps by proj
 #I  trivial mat group
 [2,5]-grps by boundary
-Intersection([ [2,5]-grps by boundary, [2,5]-grps by boundary ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by locdef ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by res ])
@@ -235,32 +220,26 @@ Intersection([ [2,5]-grps by boundary, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by proj ])
 [2,5]-grps by locdef
-Intersection([ [2,5]-grps by locdef, [2,5]-grps by locdef ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by proj ])
 [2,5]-grps by membersip
-Intersection([ [2,5]-grps by membersip, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by proj ])
 [2,5]-grps by res
-Intersection([ [2,5]-grps by res, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by proj ])
 [2,5]-grps by rad
-Intersection([ [2,5]-grps by rad, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by rad, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by rad, [2,5]-grps by proj ])
 [2,5]-grps by inj
-Intersection([ [2,5]-grps by inj, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by inj, [2,5]-grps by proj ])
 [2,5]-grps by proj
-Intersection([ [2,5]-grps by proj, [2,5]-grps by proj ])
 [2,5]-grps by boundary"by"[2,5]-grps by boundary
 [2,5]-grps by boundary"by"[2,5]-grps by locdef
 [2,5]-grps by boundary"by"[2,5]-grps by membersip
@@ -312,7 +291,6 @@ Intersection([ [2,5]-grps by proj, [2,5]-grps by proj ])
 [2,5]-grps by proj"by"[2,5]-grps by proj
 #I  GL(2,3) as pc group
 [2,5]-grps by boundary
-Intersection([ [2,5]-grps by boundary, [2,5]-grps by boundary ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by locdef ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by res ])
@@ -320,32 +298,26 @@ Intersection([ [2,5]-grps by boundary, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by proj ])
 [2,5]-grps by locdef
-Intersection([ [2,5]-grps by locdef, [2,5]-grps by locdef ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by proj ])
 [2,5]-grps by membersip
-Intersection([ [2,5]-grps by membersip, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by proj ])
 [2,5]-grps by res
-Intersection([ [2,5]-grps by res, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by proj ])
 [2,5]-grps by rad
-Intersection([ [2,5]-grps by rad, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by rad, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by rad, [2,5]-grps by proj ])
 [2,5]-grps by inj
-Intersection([ [2,5]-grps by inj, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by inj, [2,5]-grps by proj ])
 [2,5]-grps by proj
-Intersection([ [2,5]-grps by proj, [2,5]-grps by proj ])
 [2,5]-grps by boundary"by"[2,5]-grps by boundary
 [2,5]-grps by boundary"by"[2,5]-grps by locdef
 [2,5]-grps by boundary"by"[2,5]-grps by membersip
@@ -397,7 +369,6 @@ Intersection([ [2,5]-grps by proj, [2,5]-grps by proj ])
 [2,5]-grps by proj"by"[2,5]-grps by proj
 #I  Sym(4)
 [2,5]-grps by boundary
-Intersection([ [2,5]-grps by boundary, [2,5]-grps by boundary ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by locdef ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by res ])
@@ -405,32 +376,26 @@ Intersection([ [2,5]-grps by boundary, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by proj ])
 [2,5]-grps by locdef
-Intersection([ [2,5]-grps by locdef, [2,5]-grps by locdef ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by proj ])
 [2,5]-grps by membersip
-Intersection([ [2,5]-grps by membersip, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by proj ])
 [2,5]-grps by res
-Intersection([ [2,5]-grps by res, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by proj ])
 [2,5]-grps by rad
-Intersection([ [2,5]-grps by rad, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by rad, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by rad, [2,5]-grps by proj ])
 [2,5]-grps by inj
-Intersection([ [2,5]-grps by inj, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by inj, [2,5]-grps by proj ])
 [2,5]-grps by proj
-Intersection([ [2,5]-grps by proj, [2,5]-grps by proj ])
 [2,5]-grps by boundary"by"[2,5]-grps by boundary
 [2,5]-grps by boundary"by"[2,5]-grps by locdef
 [2,5]-grps by boundary"by"[2,5]-grps by membersip
@@ -482,7 +447,6 @@ Intersection([ [2,5]-grps by proj, [2,5]-grps by proj ])
 [2,5]-grps by proj"by"[2,5]-grps by proj
 #I  Dih(10)
 [2,5]-grps by boundary
-Intersection([ [2,5]-grps by boundary, [2,5]-grps by boundary ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by locdef ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by res ])
@@ -490,32 +454,26 @@ Intersection([ [2,5]-grps by boundary, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by proj ])
 [2,5]-grps by locdef
-Intersection([ [2,5]-grps by locdef, [2,5]-grps by locdef ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by proj ])
 [2,5]-grps by membersip
-Intersection([ [2,5]-grps by membersip, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by proj ])
 [2,5]-grps by res
-Intersection([ [2,5]-grps by res, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by proj ])
 [2,5]-grps by rad
-Intersection([ [2,5]-grps by rad, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by rad, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by rad, [2,5]-grps by proj ])
 [2,5]-grps by inj
-Intersection([ [2,5]-grps by inj, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by inj, [2,5]-grps by proj ])
 [2,5]-grps by proj
-Intersection([ [2,5]-grps by proj, [2,5]-grps by proj ])
 [2,5]-grps by boundary"by"[2,5]-grps by boundary
 [2,5]-grps by boundary"by"[2,5]-grps by locdef
 [2,5]-grps by boundary"by"[2,5]-grps by membersip
@@ -567,7 +525,6 @@ Intersection([ [2,5]-grps by proj, [2,5]-grps by proj ])
 [2,5]-grps by proj"by"[2,5]-grps by proj
 #I  GL(2,3)
 [2,5]-grps by boundary
-Intersection([ [2,5]-grps by boundary, [2,5]-grps by boundary ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by locdef ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by res ])
@@ -575,32 +532,26 @@ Intersection([ [2,5]-grps by boundary, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by boundary, [2,5]-grps by proj ])
 [2,5]-grps by locdef
-Intersection([ [2,5]-grps by locdef, [2,5]-grps by locdef ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by locdef, [2,5]-grps by proj ])
 [2,5]-grps by membersip
-Intersection([ [2,5]-grps by membersip, [2,5]-grps by membersip ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by membersip, [2,5]-grps by proj ])
 [2,5]-grps by res
-Intersection([ [2,5]-grps by res, [2,5]-grps by res ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by res, [2,5]-grps by proj ])
 [2,5]-grps by rad
-Intersection([ [2,5]-grps by rad, [2,5]-grps by rad ])
 Intersection([ [2,5]-grps by rad, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by rad, [2,5]-grps by proj ])
 [2,5]-grps by inj
-Intersection([ [2,5]-grps by inj, [2,5]-grps by inj ])
 Intersection([ [2,5]-grps by inj, [2,5]-grps by proj ])
 [2,5]-grps by proj
-Intersection([ [2,5]-grps by proj, [2,5]-grps by proj ])
 [2,5]-grps by boundary"by"[2,5]-grps by boundary
 [2,5]-grps by boundary"by"[2,5]-grps by locdef
 [2,5]-grps by boundary"by"[2,5]-grps by membersip
@@ -654,7 +605,7 @@ gap>
 gap> if PRINT_METHODS then
 >     UnTraceMethods(Boundary);
 > fi;
-gap> STOP_TEST("boundary", 36300000);
+gap> STOP_TEST("boundary", 37120000);
 boundary
 GAP4stones: 0
 gap> 

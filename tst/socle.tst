@@ -94,7 +94,7 @@ gap> if PRINT_METHODS then
 >     UnTraceMethods(PSocleComponentsOp);
 >     UnTraceMethods(PSocleSeriesOp);
 > fi;
-gap> STOP_TEST("crisp", 13570000);
+gap> STOP_TEST("crisp", 13710000);
 crisp
 GAP4stones: 0
 gap> 

@@ -4,28 +4,13 @@ true
 gap> 
 gap> 25grps := PiGroups([2,5]);
 <class of all [ 2, 5 ]-groups>
-gap> abab := Intersection(AbelianGroups, AbelianGroups);
-Intersection([ <class of all abelian groups>, <class of all abelian groups> ])
-gap> if not KnownTruePropertiesOfObject(abab) 
->     = KnownTruePropertiesOfObject(AbelianGroups) then 
->         Error("properties not preserved by intersection");
-> fi;
 gap> nilab := Intersection(NilpotentGroups, AbelianGroups);
 Intersection([ <class of all nilpotent groups>, <class of all abelian groups> 
  ])
-gap> if not KnownTruePropertiesOfObject(abab) 
+gap> if not KnownTruePropertiesOfObject(nilab)
 >     = KnownTruePropertiesOfObject(AbelianGroups) then 
 >         Error("properties not preserved by intersection");
 > fi;
-gap> nilnil := Intersection(NilpotentGroups, NilpotentGroups);
-Intersection([ <class of all nilpotent groups>, 
-  <class of all nilpotent groups> ])
-gap> if not KnownTruePropertiesOfObject(nilnil) 
->     = KnownTruePropertiesOfObject(NilpotentGroups) then 
->         Error("properties not preserved by intersection");
-> fi;
-gap> nilunil := Union(NilpotentGroups, NilpotentGroups);
-Union([ <class of all nilpotent groups>, <class of all nilpotent groups> ])
 gap> niluab := Union(NilpotentGroups, AbelianGroups);
 Union([ <class of all nilpotent groups>, <class of all abelian groups> ])
 gap> nilu25 := Union(NilpotentGroups, 25grps);
@@ -70,7 +55,7 @@ true
 gap> if not ContainsTrivialGroup(C) then
 >     Error("ContainsTrivialGroup should be true");
 > fi;
-gap> STOP_TEST("classes", 970000);
+gap> STOP_TEST("classes", 1140000);
 classes
 GAP4stones: 0
 gap> 

@@ -302,7 +302,7 @@ gap>
 gap> if PRINT_METHODS then
 >     UnTraceMethods(PrintObj, ViewObj);
 > fi;
-gap> STOP_TEST("print", 1040000);
+gap> STOP_TEST("print", 950000);
 print
 GAP4stones: 0
 gap> 

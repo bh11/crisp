@@ -127,7 +127,7 @@ gap> if PRINT_METHODS then
 >    UnTraceMethods(OneInvariantSubgroupMaxWrtNProperty);
 >    UnTraceMethods(OneInvariantSubgroupMinWrtQProperty);
 > fi;
-gap> STOP_TEST("normals", 51170000);
+gap> STOP_TEST("normals", 52870000);
 normals
 GAP4stones: 0
 gap> 
