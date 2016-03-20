@@ -20,7 +20,7 @@ libfiles=classes.gd classes.gi compl.gd compl.gi \
 	   util.gd util.gi
 
 docfiles=manual.tex copyright.tex classes.tex examples.tex fitting.tex \
-	   grpclass.tex intro.tex normal.tex schunck.tex
+	   grpclass.tex intro.tex normal.tex schunck.tex versions.tex
 	
 manexts=.bbl .ind .idx .six .pdf .mst .toc \
 	   .example-2.tst .example-3.tst .example-4.tst .example-5.tst .example-7.tst
