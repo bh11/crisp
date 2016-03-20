@@ -69,12 +69,8 @@ ReportUnifiedDiff:= function(inp, exp, got, file, line, time)
     Print("########\n");
 end;
 
-if TestDirectory(DirectoriesPackageLibrary("crisp", "tst"),
-        rec(testOptions:= rec(reportDiff := ReportUnifiedDiff))) then
-    Print("#I  No errors detected while testing package CRISP\n");
-else
-    Print("#I  Errors detected while testing package CRISP\n");
-fi;
+TestDirectory(DirectoriesPackageLibrary("crisp", "tst"),
+        rec(exitGAP := true, testOptions:= rec(reportDiff := ReportUnifiedDiff)));
 
 ############################################################################
 ##
