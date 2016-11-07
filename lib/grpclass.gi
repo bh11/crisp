@@ -459,7 +459,8 @@ InstallGlobalFunction(DEFAULT_ISO_FUNC,
 #R  IsGroupClassByListRep
 ##
 DeclareRepresentation("IsGroupClassByListRep", 
-    IsClass and IsGroupClass, ["classId", "list", "isofunc"]);
+    IsClass and IsGroupClass and IsComponentObjectRep and IsAttributeStoringRep,
+        ["classId", "list", "isofunc"]);
 
 
 #############################################################################
