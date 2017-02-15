@@ -15,12 +15,12 @@ Version := "CRISP_VERSION",
 
 Date := "CRISP_DATE",
 
-BannerString := Concatenation ("\
+BannerString := "\
 ----------------------------------------------------------------------\n\
-                        CRISP Version ", ~.Version, "\n\
+                        CRISP Version CRISP_VERSION\n\
   Computing with Radicals, Injectors, Schunck classes and Projectors\n\
                          by Burkhard Höfling\n\
-----------------------------------------------------------------------\n"),
+----------------------------------------------------------------------\n",
 
 ArchiveURL := "http://www.icm.tu-bs.de/~bhoeflin/crisp/crisp-CRISP_VERSION",
 

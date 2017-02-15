@@ -1,5 +1,5 @@
 SHELL=/bin/bash
-VERSION=dev
+VERSION=1.5.dev
 DATE=$(shell echo `date "+%d/%m/%Y"`)
 GAPROOT=../..
 TESTOPTS=-b -m 100m -o 1g -A -q -x 80
