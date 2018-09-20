@@ -41,7 +41,7 @@ tarfile=crisp/crisp-$(VERSION).tar
 
 taropts=-s /crisp/crisp-$(VERSION)/ -f
 
-default: update_in manual
+default: update_in
 
 dist: testver update_in manual tar
 
