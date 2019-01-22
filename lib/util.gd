@@ -13,7 +13,7 @@
 ##  use six argument version of RedispatchOnCondition if it's available,
 ##  otherwise just pass five of the six arguments
 ##
-DeclareGlobalFunction("CRISP_RedispatchOnCondition", IsGroup);
+DeclareGlobalFunction("CRISP_RedispatchOnCondition");
 
 if NumberArgumentsFunction(RedispatchOnCondition) = 5 then
     InstallGlobalFunction(CRISP_RedispatchOnCondition,
