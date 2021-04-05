@@ -12,8 +12,8 @@ SetPackageInfo( rec(
 PackageName := "CRISP",
 Subtitle := "Computing with Radicals, Injectors, Schunck classes and Projectors",
 Version := "CRISP_VERSION",
-
 Date := "CRISP_DATE",
+License := "BSD-2-Clause",
 
 BannerString := "\
 ----------------------------------------------------------------------\n\
