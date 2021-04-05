@@ -1,6 +1,7 @@
 SHELL=/bin/bash
 VERSION=1.5.dev
 DATE=$(shell echo `date "+%d/%m/%Y"`)
+YEAR=$(shell echo `date "+%Y"`)
 GAPROOT=../..
 TESTOPTS=-b -m 100m -o 1g -A -q -x 80
 
@@ -34,7 +35,7 @@ testfiles= Readme-Tests.txt testall.g samples.g \
 	timing_test.g
 	# plus all files tst/*.tst
 
-update_files =README.in index.in.html PackageInfo.in.g doc/manual.in.tex
+update_files =README.in.txt index.in.html PackageInfo.in.g doc/manual.in.tex LICENSE.in.txt
 
 
 tarfile=crisp/crisp-$(VERSION).tar
@@ -58,6 +59,7 @@ update_in:
 		rm -f $$outfile; \
 		sed -e "s/CRISP_VERSION/$(VERSION)/g" \
 			-e "s-CRISP_DATE-$(DATE)-" \
+			-e "s-CRISP_YEAR-$(YEAR)-" \
 			-e "s-GAPROOT-$(TEXROOT)-" \
 			$$file \
 			> $$outfile; \
@@ -112,8 +114,8 @@ tar: update_in
 	for file in crisp/htm/*.htm; \
 		do tar -r $(taropts) $(tarfile) $$file; \
 	done; \
-	tar -r $(taropts) $(tarfile) crisp/README; \
-	tar -r $(taropts) $(tarfile) crisp/LICENSE; \
+	tar -r $(taropts) $(tarfile) crisp/README.txt; \
+	tar -r $(taropts) $(tarfile) crisp/LICENSE.txt; \
 	bzip2 $(tarfile); \
 	for file in $(update_files); \
 	do \
