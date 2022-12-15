@@ -324,7 +324,7 @@ InstallGlobalFunction(BFUNC_FROM_TEST_FUNC_MOD,
         od;
         
         # compute H/C_<cpcgs>(npcgs), which will be the primitive factor group
-        # which either lies in the Schunck class or its boudnary
+        # which either lies in the Schunck class or its boundary
         
         nat := NaturalHomomorphismByNormalSubgroupNC(H, cent);
         F := ImagesSource(nat);

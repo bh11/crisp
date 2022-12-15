@@ -17,7 +17,7 @@
 ##  Initially, the linear system is empty. Equations can be added using
 ##  AddEquation.
 ##  
-##  conv and convsol are booleans. They determine whether the coefficents
+##  conv and convsol are booleans. They determine whether the coefficients
 ##  of the left hand side and the solutions on the right hand side will
 ##  be stored as compressed vectors if possible.
 ##
@@ -29,7 +29,7 @@ DeclareGlobalFunction("LinearSystem");
 #F  AddEquation(sys, row, sol)
 ##
 ##  This function adds a new row to a system of linear equations <sys> 
-##  obtained from LinearSystem. <row> is a vector containing the coefficents
+##  obtained from LinearSystem. <row> is a vector containing the coefficients
 ##  of the variables, <sol> is a vector containing the solutions. 
 ##
 ##  If <sys> has no solution, AddEquation simply returns fail.
