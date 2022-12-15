@@ -44,7 +44,7 @@ InstallGlobalFunction(InvariantSubgroupsCA,
                         # L belongs to class
                         newser[cover-1] := L;
                         for j in [avoid+1..cover-1] do
-                            # ake ser a chief series through L
+                            # make ser a chief series through L
                             newser[j-1] := ClosureGroup(ser[j], L); 
                         od;
                         Add(norms, L);

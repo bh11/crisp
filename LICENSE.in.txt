@@ -1,4 +1,4 @@
-The CRISP package is Copyright © 2000 – 2016 Burkhard Höfling
+The CRISP package is Copyright © 2000 – CRISP_YEAR Burkhard Höfling
 (burkhard@hoefling.name)
 
 Redistribution and use in source and binary forms, with or without
