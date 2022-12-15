@@ -78,6 +78,10 @@ manual.html:
 	rm -f htm/CHAP00?.htm; \
 	perl $(GAPROOT)/etc/convert.pl -n CRISP -c -i -u doc htm; \
 	chmod -R a+r htm
+	# Work around an old bug in the old GAP documentation system which
+	# prevents it from opening HTML versions of appendices in a web browser.
+	# For details, see <https://github.com/gap-system/gap/issues/4430>.
+	cp -f htm/CHAP00A.htm htm/CHAP008.htm
 
 manual: manual.pdf manual.html
 
