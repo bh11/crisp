@@ -22,7 +22,7 @@ fi;
 ##
 #F  SilentRead(g1, g2, g3)
 ##
-##  if g1 is a function, this simply assigns g1(g2) to the global varable g3.
+##  if g1 is a function, this simply assigns g1(g2) to the global variable g3.
 ##  Otherwise, it behaves like ReadPackage(pkg fname), but suppresses anything 
 ##  printed while reading the file
 ##
