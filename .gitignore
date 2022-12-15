@@ -15,7 +15,8 @@ doc/manual.six
 doc/manual.lab
 doc/manual.tex
 PackageInfo.g
-README
+README.txt
+LICENSE.txt
 index.html
 private
 *tar.bz2
