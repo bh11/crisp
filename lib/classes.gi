@@ -734,5 +734,13 @@ InstallMethod(Difference, "for class and class/list/collection", true,
 
 #############################################################################
 ##
+#V  AllPrimes
+##
+BindGlobal("AllPrimes", Class(x -> IsInt(x) and IsPrimeInt(x)));
+SetName(AllPrimes, "<set of all primes>");
+
+
+#############################################################################
+##
 #E
 ##

@@ -8,17 +8,9 @@
 
 #############################################################################
 ##  
-#V  AllPrimes
-##
-InstallValue(AllPrimes, Class(x -> IsInt(x) and IsPrimeInt(x)));
-SetName(AllPrimes, "<set of all primes>");
-
-
-#############################################################################
-##  
 #V  TrivialGroups
 ##
-InstallValue(TrivialGroups, SaturatedFittingFormation( rec(
+BindGlobal("TrivialGroups", SaturatedFittingFormation( rec(
     \in := IsTrivial,
     rad := TrivialSubgroup,
     res := G -> G,
@@ -35,7 +27,7 @@ SetName(TrivialGroups, "<class of all trivial groups>");
 ##  
 #V  NilpotentGroups
 ##
-InstallValue(NilpotentGroups, SaturatedFittingFormation( rec(
+BindGlobal("NilpotentGroups", SaturatedFittingFormation( rec(
     \in := IsNilpotentGroup,
     rad := FittingSubgroup,
     res := G -> NormalClosure(G, 
@@ -88,7 +80,7 @@ CRISP_RedispatchOnCondition(NilpotentProjector,
 ##
 #V  SupersolubleGroups
 ##
-InstallValue(SupersolubleGroups, SaturatedFormation( rec(
+BindGlobal("SupersolubleGroups", SaturatedFormation( rec(
     res := SupersolvableResiduum,
     proj := SupersolubleProjector,
     locdef := function(G, p) 
@@ -107,6 +99,8 @@ InstallValue(SupersolubleGroups, SaturatedFormation( rec(
     )));
 SetIsSubgroupClosed(SupersolubleGroups, true);
 SetName(SupersolubleGroups, "<class of all supersoluble groups>");
+
+DeclareSynonym("SupersolvableGroups", SupersolubleGroups);
 
 
 #############################################################################
@@ -142,7 +136,7 @@ CRISP_RedispatchOnCondition(SupersolubleProjector,
 ##
 #V  AbelianGroups
 ##
-InstallValue(AbelianGroups, OrdinaryFormation( rec(
+BindGlobal("AbelianGroups", OrdinaryFormation( rec(
     res := DerivedSubgroup,
     char := AllPrimes
     )));

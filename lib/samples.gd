@@ -8,20 +8,6 @@
 
 #############################################################################
 ##  
-#V  TrivialGroups
-##
-DeclareGlobalVariable("TrivialGroups");
-
-
-#############################################################################
-##  
-#V  NilpotentGroups
-##
-DeclareGlobalVariable("NilpotentGroups");
-
-
-#############################################################################
-##  
 #A  NilpotentProjector(<grp>)
 ##
 DeclareAttribute("NilpotentProjector", IsGroup);
@@ -29,24 +15,10 @@ DeclareAttribute("NilpotentProjector", IsGroup);
 
 #############################################################################
 ##
-#V  SupersolubleGroups
-##
-DeclareGlobalVariable("SupersolubleGroups");
-DeclareSynonym("SupersolvableGroups", SupersolubleGroups);
-
-#############################################################################
-##
 #A  SupersolubleProjector(<grp>)
 ##
 DeclareAttribute("SupersolubleProjector", IsGroup);
 DeclareSynonymAttr("SupersolvableProjector", SupersolubleProjector);
-
-
-#############################################################################
-##
-#V  AbelianGroups
-##
-DeclareGlobalVariable("AbelianGroups");
 
 
 #############################################################################
@@ -68,13 +40,6 @@ DeclareGlobalFunction("PiGroups");
 #F  PGroups(<p>)
 ##
 DeclareGlobalFunction("PGroups");
-
-
-#############################################################################
-##
-#V  AllPrimes
-##
-DeclareGlobalVariable("AllPrimes");
 
 
 ############################################################################

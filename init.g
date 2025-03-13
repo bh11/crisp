@@ -16,6 +16,7 @@ CRISP_Read("lib/grpclass.gd");
 CRISP_Read("lib/fitting.gd");
 CRISP_Read("lib/schunck.gd");
 CRISP_Read("lib/form.gd");
+CRISP_Read("lib/samples.gd");
 CRISP_Read("lib/projector.gd");
 CRISP_Read("lib/injector.gd");
 CRISP_Read("lib/normpro.gd");
@@ -24,7 +25,6 @@ CRISP_Read("lib/compl.gd");
 CRISP_Read("lib/radical.gd");
 CRISP_Read("lib/residual.gd");
 CRISP_Read("lib/util.gd");
-CRISP_Read("lib/samples.gd");
 CRISP_Read("lib/socle.gd");
 
 
