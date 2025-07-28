@@ -86,7 +86,7 @@ PackageDoc := rec(
 Dependencies := rec(
   # GAP version, use version strings for specifying exact versions,
   # prepend a '>=' for specifying a least version.
-  GAP := ">=4.5",
+  GAP := ">=4.12",
   # NeededOtherPackages := [["GAPDoc", ">= 0.99"]],
   NeededOtherPackages := [],
   SuggestedOtherPackages := [],
