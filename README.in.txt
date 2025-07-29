@@ -55,6 +55,5 @@ via the GitHub issue tracker at https://github.com/bh11/crisp/issues">
 or by e-mail to the author.
 
 Burkhard Höfling
-WWW:    http://www.icm.tu-bs.de/~bhoeflin
-e-mail: b.hoefling@tu-bs.de
+e-mail: burkhard@hoefling.name
 

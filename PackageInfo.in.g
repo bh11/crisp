@@ -22,7 +22,7 @@ BannerString := "\
                          by Burkhard Höfling\n\
 ----------------------------------------------------------------------\n",
 
-ArchiveURL := "http://www.icm.tu-bs.de/~bhoeflin/crisp/crisp-CRISP_VERSION",
+ArchiveURL := "https://github.com/bh11/crisp/releases/latest/download/crisp-CRISP_VERSION",
 
 ArchiveFormats := ".tar.bz2", # the others are generated automatically
 BinaryFiles := ["doc/manual.pdf"],
@@ -33,8 +33,7 @@ Persons := [
   FirstNames := "Burkhard",
   IsAuthor := true,
   IsMaintainer := true,
-  WWWHome := "http://www.icm.tu-bs.de/~bhoeflin",
-  Email := "b.hoefling@tu-bs.de"
+  Email := "burkhard@hoefling.name"
   )
 # provide such a record for each author and/or maintainer ...
   
@@ -44,8 +43,8 @@ Status := "accepted",
 CommunicatedBy := "Joachim Neubüser (Aachen)",
 AcceptDate := "12/2000",
 
-README_URL := "http://www.icm.tu-bs.de/~bhoeflin/crisp/README",
-PackageInfoURL := "http://www.icm.tu-bs.de/~bhoeflin/crisp/PackageInfo.g",
+README_URL := "https://github.com/bh11/crisp/releases/latest/download/README",
+PackageInfoURL := "https://github.com/bh11/crisp/releases/latest/download/PackageInfo.g",
 
 AbstractHTML := "The <span class=\"pkgname\">GAP</span> package <span \
 class=\"pkgname\">CRISP</span> provides algorithms for computing \
