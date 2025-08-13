@@ -43,7 +43,7 @@ Status := "accepted",
 CommunicatedBy := "Joachim Neubüser (Aachen)",
 AcceptDate := "12/2000",
 
-README_URL := "https://github.com/bh11/crisp/releases/latest/download/README",
+README_URL := "https://github.com/bh11/crisp/releases/latest/download/README.txt",
 PackageInfoURL := "https://github.com/bh11/crisp/releases/latest/download/PackageInfo.g",
 
 AbstractHTML := "The <span class=\"pkgname\">GAP</span> package <span \
@@ -66,7 +66,7 @@ normal subgroups of a finite soluble group, its characteristic \
 subgroups, minimal normal subgroups and the socle and \
 <i>p</i>-socles for given primes <i>p</i>.",
 
-PackageWWWHome := "http://www.icm.tu-bs.de/~bhoeflin/crisp/index.html",
+PackageWWWHome := "https://github.com/bh11/crisp/",
                   
 PackageDoc := rec(
   BookName := "CRISP",
