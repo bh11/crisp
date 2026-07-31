@@ -120,7 +120,7 @@ tar: update_in
 	done; \
 	tar -r $(taropts) $(tarfile) crisp/README.txt; \
 	tar -r $(taropts) $(tarfile) crisp/LICENSE.txt; \
-	bzip2 $(tarfile); \
+	gzip -9 $(tarfile); \
 	for file in $(update_files); \
 	do \
 		outfile=$${file%.in*}$${file#*.in}; \

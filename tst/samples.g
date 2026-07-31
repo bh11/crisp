@@ -33,7 +33,7 @@ groups:= [
     end, 
     function(  )
         local G;
-        G := SmallGroup(48,29);
+        G := Image(IsomorphismPcGroup(GL(2,3)));
         SetName(G, "GL(2,3) as pc group");
         return G;
     end,

@@ -24,7 +24,7 @@ BannerString := "\
 
 ArchiveURL := "https://github.com/bh11/crisp/releases/latest/download/crisp-CRISP_VERSION",
 
-ArchiveFormats := ".tar.bz2", # the others are generated automatically
+ArchiveFormats := ".tar.gz", # the others are generated automatically
 BinaryFiles := ["doc/manual.pdf"],
 
 Persons := [

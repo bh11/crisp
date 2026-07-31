@@ -20,5 +20,6 @@ LICENSE.txt
 index.html
 private
 *tar.bz2
+*.gz
 htm
 .DS_Store
