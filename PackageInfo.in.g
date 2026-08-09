@@ -22,7 +22,7 @@ BannerString := "\
                          by Burkhard Höfling\n\
 ----------------------------------------------------------------------\n",
 
-ArchiveURL := "https://github.com/bh11/crisp/releases/latest/download/crisp-CRISP_VERSION",
+ArchiveURL := "https://github.com/bh11/crisp/releases/download/CRISP-CRISP_VERSION/crisp-CRISP_VERSION",
 
 ArchiveFormats := ".tar.gz", # the others are generated automatically
 BinaryFiles := ["doc/manual.pdf"],
