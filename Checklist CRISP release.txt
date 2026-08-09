@@ -3,6 +3,9 @@
 # pull git repo
 # push changes to git repo
 
+# update symlinks to gap doc, etc directories
+
+
 make dist VERSION= …
 
 open https://github.com/bh11/crisp/releases
